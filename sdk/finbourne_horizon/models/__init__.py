@@ -16,11 +16,14 @@
 # import models into model package
 from finbourne_horizon.models.allowed_parameter_value import AllowedParameterValue
 from finbourne_horizon.models.audit_complete_request import AuditCompleteRequest
+from finbourne_horizon.models.audit_complete_response import AuditCompleteResponse
 from finbourne_horizon.models.audit_complete_status import AuditCompleteStatus
 from finbourne_horizon.models.audit_file_details import AuditFileDetails
 from finbourne_horizon.models.audit_file_type import AuditFileType
 from finbourne_horizon.models.audit_update_request import AuditUpdateRequest
+from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
 from finbourne_horizon.models.file_details import FileDetails
+from finbourne_horizon.models.link import Link
 from finbourne_horizon.models.lusid_entity import LusidEntity
 from finbourne_horizon.models.lusid_field import LusidField
 from finbourne_horizon.models.lusid_problem_details import LusidProblemDetails
@@ -36,6 +39,9 @@ from finbourne_horizon.models.open_figi_parameter_option_name import OpenFigiPar
 from finbourne_horizon.models.open_figi_perm_id_result import OpenFigiPermIdResult
 from finbourne_horizon.models.open_figi_search_result import OpenFigiSearchResult
 from finbourne_horizon.models.optionality import Optionality
+from finbourne_horizon.models.paged_resource_list_of_process_information import PagedResourceListOfProcessInformation
+from finbourne_horizon.models.paged_resource_list_of_process_update_result import PagedResourceListOfProcessUpdateResult
+from finbourne_horizon.models.paged_resource_list_of_vendor_product import PagedResourceListOfVendorProduct
 from finbourne_horizon.models.perm_id_data import PermIdData
 from finbourne_horizon.models.process_information import ProcessInformation
 from finbourne_horizon.models.process_summary import ProcessSummary

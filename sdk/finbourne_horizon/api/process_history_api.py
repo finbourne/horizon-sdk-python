@@ -19,12 +19,15 @@ import warnings
 from pydantic import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from finbourne_horizon.models.audit_complete_request import AuditCompleteRequest
+from finbourne_horizon.models.audit_complete_response import AuditCompleteResponse
 from finbourne_horizon.models.audit_update_request import AuditUpdateRequest
+from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
+from finbourne_horizon.models.paged_resource_list_of_process_information import PagedResourceListOfProcessInformation
+from finbourne_horizon.models.paged_resource_list_of_process_update_result import PagedResourceListOfProcessUpdateResult
 from finbourne_horizon.models.process_information import ProcessInformation
-from finbourne_horizon.models.process_update_result import ProcessUpdateResult
 
 from finbourne_horizon.api_client import ApiClient
 from finbourne_horizon.api_response import ApiResponse
@@ -47,15 +50,15 @@ class ProcessHistoryApi:
         self.api_client = api_client
 
     @overload
-    async def create_complete_event(self, audit_complete_request : AuditCompleteRequest, **kwargs) -> ProcessUpdateResult:  # noqa: E501
+    async def create_complete_event(self, audit_complete_request : AuditCompleteRequest, **kwargs) -> AuditCompleteResponse:  # noqa: E501
         ...
 
     @overload
-    def create_complete_event(self, audit_complete_request : AuditCompleteRequest, async_req: Optional[bool]=True, **kwargs) -> ProcessUpdateResult:  # noqa: E501
+    def create_complete_event(self, audit_complete_request : AuditCompleteRequest, async_req: Optional[bool]=True, **kwargs) -> AuditCompleteResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_complete_event(self, audit_complete_request : AuditCompleteRequest, async_req: Optional[bool]=None, **kwargs) -> Union[ProcessUpdateResult, Awaitable[ProcessUpdateResult]]:  # noqa: E501
+    def create_complete_event(self, audit_complete_request : AuditCompleteRequest, async_req: Optional[bool]=None, **kwargs) -> Union[AuditCompleteResponse, Awaitable[AuditCompleteResponse]]:  # noqa: E501
         """[EARLY ACCESS] CreateCompleteEvent: Write a completed event to the Horizon Dashboard  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -75,7 +78,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ProcessUpdateResult
+        :rtype: AuditCompleteResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -119,7 +122,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ProcessUpdateResult, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(AuditCompleteResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -181,7 +184,7 @@ class ProcessHistoryApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '201': "ProcessUpdateResult",
+            '201': "AuditCompleteResponse",
         }
 
         return self.api_client.call_api(
@@ -202,15 +205,15 @@ class ProcessHistoryApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def create_update_event(self, audit_update_request : AuditUpdateRequest, **kwargs) -> ProcessUpdateResult:  # noqa: E501
+    async def create_update_event(self, audit_update_request : AuditUpdateRequest, **kwargs) -> AuditUpdateResponse:  # noqa: E501
         ...
 
     @overload
-    def create_update_event(self, audit_update_request : AuditUpdateRequest, async_req: Optional[bool]=True, **kwargs) -> ProcessUpdateResult:  # noqa: E501
+    def create_update_event(self, audit_update_request : AuditUpdateRequest, async_req: Optional[bool]=True, **kwargs) -> AuditUpdateResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_update_event(self, audit_update_request : AuditUpdateRequest, async_req: Optional[bool]=None, **kwargs) -> Union[ProcessUpdateResult, Awaitable[ProcessUpdateResult]]:  # noqa: E501
+    def create_update_event(self, audit_update_request : AuditUpdateRequest, async_req: Optional[bool]=None, **kwargs) -> Union[AuditUpdateResponse, Awaitable[AuditUpdateResponse]]:  # noqa: E501
         """[EARLY ACCESS] CreateUpdateEvent: Write an update event to the Horizon Dashboard  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -230,7 +233,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ProcessUpdateResult
+        :rtype: AuditUpdateResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -274,7 +277,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ProcessUpdateResult, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(AuditUpdateResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -336,7 +339,7 @@ class ProcessHistoryApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '201': "ProcessUpdateResult",
+            '201': "AuditUpdateResponse",
         }
 
         return self.api_client.call_api(
@@ -357,15 +360,15 @@ class ProcessHistoryApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_latest_runs(self, **kwargs) -> ProcessInformation:  # noqa: E501
+    async def get_latest_runs(self, **kwargs) -> List[ProcessInformation]:  # noqa: E501
         ...
 
     @overload
-    def get_latest_runs(self, async_req: Optional[bool]=True, **kwargs) -> ProcessInformation:  # noqa: E501
+    def get_latest_runs(self, async_req: Optional[bool]=True, **kwargs) -> List[ProcessInformation]:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_latest_runs(self, async_req: Optional[bool]=None, **kwargs) -> Union[ProcessInformation, Awaitable[ProcessInformation]]:  # noqa: E501
+    def get_latest_runs(self, async_req: Optional[bool]=None, **kwargs) -> Union[List[ProcessInformation], Awaitable[List[ProcessInformation]]]:  # noqa: E501
         """[EARLY ACCESS] GetLatestRuns: Get latest run for each process  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -383,7 +386,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ProcessInformation
+        :rtype: List[ProcessInformation]
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -425,7 +428,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ProcessInformation, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(List[ProcessInformation], status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -476,7 +479,7 @@ class ProcessHistoryApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "ProcessInformation",
+            '200': "List[ProcessInformation]",
         }
 
         return self.api_client.call_api(
@@ -497,15 +500,15 @@ class ProcessHistoryApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def process_entry_updates(self, body : Dict[str, Any], **kwargs) -> ProcessUpdateResult:  # noqa: E501
+    async def process_entry_updates(self, body : Dict[str, Any], **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
         ...
 
     @overload
-    def process_entry_updates(self, body : Dict[str, Any], async_req: Optional[bool]=True, **kwargs) -> ProcessUpdateResult:  # noqa: E501
+    def process_entry_updates(self, body : Dict[str, Any], async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
         ...
 
     @validate_arguments
-    def process_entry_updates(self, body : Dict[str, Any], async_req: Optional[bool]=None, **kwargs) -> Union[ProcessUpdateResult, Awaitable[ProcessUpdateResult]]:  # noqa: E501
+    def process_entry_updates(self, body : Dict[str, Any], async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessUpdateResult, Awaitable[PagedResourceListOfProcessUpdateResult]]:  # noqa: E501
         """[EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -525,7 +528,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ProcessUpdateResult
+        :rtype: PagedResourceListOfProcessUpdateResult
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -569,7 +572,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ProcessUpdateResult, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(PagedResourceListOfProcessUpdateResult, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -631,7 +634,7 @@ class ProcessHistoryApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "ProcessUpdateResult",
+            '200': "PagedResourceListOfProcessUpdateResult",
         }
 
         return self.api_client.call_api(
@@ -652,15 +655,15 @@ class ProcessHistoryApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def process_history_entries(self, body : Dict[str, Any], **kwargs) -> ProcessInformation:  # noqa: E501
+    async def process_history_entries(self, body : Dict[str, Any], **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
         ...
 
     @overload
-    def process_history_entries(self, body : Dict[str, Any], async_req: Optional[bool]=True, **kwargs) -> ProcessInformation:  # noqa: E501
+    def process_history_entries(self, body : Dict[str, Any], async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
         ...
 
     @validate_arguments
-    def process_history_entries(self, body : Dict[str, Any], async_req: Optional[bool]=None, **kwargs) -> Union[ProcessInformation, Awaitable[ProcessInformation]]:  # noqa: E501
+    def process_history_entries(self, body : Dict[str, Any], async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessInformation, Awaitable[PagedResourceListOfProcessInformation]]:  # noqa: E501
         """[EARLY ACCESS] ProcessHistoryEntries: Get process history entries  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -680,7 +683,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ProcessInformation
+        :rtype: PagedResourceListOfProcessInformation
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -724,7 +727,7 @@ class ProcessHistoryApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ProcessInformation, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(PagedResourceListOfProcessInformation, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -786,7 +789,7 @@ class ProcessHistoryApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "ProcessInformation",
+            '200': "PagedResourceListOfProcessInformation",
         }
 
         return self.api_client.call_api(

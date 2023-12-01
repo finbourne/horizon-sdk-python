@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **get_core_field_mappings_for_product_entity**
-> LusidField get_core_field_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
+> List[LusidField] get_core_field_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
 
 [EARLY ACCESS] GetCoreFieldMappingsForProductEntity: Get core field mappings for a given vendor product's entity.
 
@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LusidField**](LusidField.md)
+[**List[LusidField]**](LusidField.md)
 
 ### Authorization
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_optional_mappings_for_product_entity**
-> LusidPropertyDefinitionOverrides get_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
+> Dict[str, LusidPropertyDefinitionOverrides] get_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
 
 [EARLY ACCESS] GetOptionalMappingsForProductEntity: Get a user defined LUSID property mappings for the specified vendor / LUSID entity.
 
@@ -194,7 +194,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LusidPropertyDefinitionOverrides**](LusidPropertyDefinitionOverrides.md)
+[**Dict[str, LusidPropertyDefinitionOverrides]**](LusidPropertyDefinitionOverrides.md)
 
 ### Authorization
 
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_property_mappings_for_product_entity**
-> LusidPropertyToVendorFieldMapping get_property_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
+> List[LusidPropertyToVendorFieldMapping] get_property_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
 
 [EARLY ACCESS] GetPropertyMappingsForProductEntity: Gets the property mappings for a given vendor product's entity
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LusidPropertyToVendorFieldMapping**](LusidPropertyToVendorFieldMapping.md)
+[**List[LusidPropertyToVendorFieldMapping]**](LusidPropertyToVendorFieldMapping.md)
 
 ### Authorization
 
@@ -315,7 +315,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **query_vendors**
-> VendorProduct query_vendors(body)
+> PagedResourceListOfVendorProduct query_vendors(body)
 
 [EARLY ACCESS] QueryVendors: Query for vendors and their packages with entities and sub-entities.
 
@@ -328,7 +328,7 @@ import time
 import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
-from finbourne_horizon.models.vendor_product import VendorProduct
+from finbourne_horizon.models.paged_resource_list_of_vendor_product import PagedResourceListOfVendorProduct
 from pprint import pprint
 
 from finbourne_horizon import (
@@ -390,7 +390,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VendorProduct**](VendorProduct.md)
+[**PagedResourceListOfVendorProduct**](PagedResourceListOfVendorProduct.md)
 
 ### Authorization
 
@@ -410,7 +410,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_optional_mappings_for_product_entity**
-> LusidPropertyDefinitionOverridesResponse set_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, request_body, lusid_entity_sub_type=lusid_entity_sub_type)
+> Dict[str, LusidPropertyDefinitionOverridesResponse] set_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, request_body, lusid_entity_sub_type=lusid_entity_sub_type)
 
 [EARLY ACCESS] SetOptionalMappingsForProductEntity: Create a user defined LUSID property mappings for the specified vendor / LUSID entity.
 
@@ -494,7 +494,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LusidPropertyDefinitionOverridesResponse**](LusidPropertyDefinitionOverridesResponse.md)
+[**Dict[str, LusidPropertyDefinitionOverridesResponse]**](LusidPropertyDefinitionOverridesResponse.md)
 
 ### Authorization
 

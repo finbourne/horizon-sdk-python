@@ -21,13 +21,13 @@ from typing import overload, Optional, Union, Awaitable
 
 from pydantic import StrictStr
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from finbourne_horizon.models.lusid_field import LusidField
 from finbourne_horizon.models.lusid_property_definition_overrides import LusidPropertyDefinitionOverrides
 from finbourne_horizon.models.lusid_property_definition_overrides_response import LusidPropertyDefinitionOverridesResponse
 from finbourne_horizon.models.lusid_property_to_vendor_field_mapping import LusidPropertyToVendorFieldMapping
-from finbourne_horizon.models.vendor_product import VendorProduct
+from finbourne_horizon.models.paged_resource_list_of_vendor_product import PagedResourceListOfVendorProduct
 
 from finbourne_horizon.api_client import ApiClient
 from finbourne_horizon.api_response import ApiResponse
@@ -50,15 +50,15 @@ class VendorApi:
         self.api_client = api_client
 
     @overload
-    async def get_core_field_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, **kwargs) -> LusidField:  # noqa: E501
+    async def get_core_field_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, **kwargs) -> List[LusidField]:  # noqa: E501
         ...
 
     @overload
-    def get_core_field_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> LusidField:  # noqa: E501
+    def get_core_field_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> List[LusidField]:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_core_field_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[LusidField, Awaitable[LusidField]]:  # noqa: E501
+    def get_core_field_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[List[LusidField], Awaitable[List[LusidField]]]:  # noqa: E501
         """[EARLY ACCESS] GetCoreFieldMappingsForProductEntity: Get core field mappings for a given vendor product's entity.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -84,7 +84,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: LusidField
+        :rtype: List[LusidField]
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -134,7 +134,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(LusidField, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(List[LusidField], status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -201,7 +201,7 @@ class VendorApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "LusidField",
+            '200': "List[LusidField]",
         }
 
         return self.api_client.call_api(
@@ -222,15 +222,15 @@ class VendorApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, **kwargs) -> LusidPropertyDefinitionOverrides:  # noqa: E501
+    async def get_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, **kwargs) -> Dict[str, LusidPropertyDefinitionOverrides]:  # noqa: E501
         ...
 
     @overload
-    def get_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> LusidPropertyDefinitionOverrides:  # noqa: E501
+    def get_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, LusidPropertyDefinitionOverrides]:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[LusidPropertyDefinitionOverrides, Awaitable[LusidPropertyDefinitionOverrides]]:  # noqa: E501
+    def get_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, LusidPropertyDefinitionOverrides], Awaitable[Dict[str, LusidPropertyDefinitionOverrides]]]:  # noqa: E501
         """[EARLY ACCESS] GetOptionalMappingsForProductEntity: Get a user defined LUSID property mappings for the specified vendor / LUSID entity.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -256,7 +256,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: LusidPropertyDefinitionOverrides
+        :rtype: Dict[str, LusidPropertyDefinitionOverrides]
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -306,7 +306,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(LusidPropertyDefinitionOverrides, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(Dict[str, LusidPropertyDefinitionOverrides], status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -373,7 +373,7 @@ class VendorApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "LusidPropertyDefinitionOverrides",
+            '200': "Dict[str, LusidPropertyDefinitionOverrides]",
         }
 
         return self.api_client.call_api(
@@ -394,15 +394,15 @@ class VendorApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_property_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, **kwargs) -> LusidPropertyToVendorFieldMapping:  # noqa: E501
+    async def get_property_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, **kwargs) -> List[LusidPropertyToVendorFieldMapping]:  # noqa: E501
         ...
 
     @overload
-    def get_property_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> LusidPropertyToVendorFieldMapping:  # noqa: E501
+    def get_property_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> List[LusidPropertyToVendorFieldMapping]:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_property_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[LusidPropertyToVendorFieldMapping, Awaitable[LusidPropertyToVendorFieldMapping]]:  # noqa: E501
+    def get_property_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[List[LusidPropertyToVendorFieldMapping], Awaitable[List[LusidPropertyToVendorFieldMapping]]]:  # noqa: E501
         """[EARLY ACCESS] GetPropertyMappingsForProductEntity: Gets the property mappings for a given vendor product's entity  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -428,7 +428,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: LusidPropertyToVendorFieldMapping
+        :rtype: List[LusidPropertyToVendorFieldMapping]
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -478,7 +478,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(LusidPropertyToVendorFieldMapping, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(List[LusidPropertyToVendorFieldMapping], status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -545,7 +545,7 @@ class VendorApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "LusidPropertyToVendorFieldMapping",
+            '200': "List[LusidPropertyToVendorFieldMapping]",
         }
 
         return self.api_client.call_api(
@@ -566,15 +566,15 @@ class VendorApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def query_vendors(self, body : Dict[str, Any], **kwargs) -> VendorProduct:  # noqa: E501
+    async def query_vendors(self, body : Dict[str, Any], **kwargs) -> PagedResourceListOfVendorProduct:  # noqa: E501
         ...
 
     @overload
-    def query_vendors(self, body : Dict[str, Any], async_req: Optional[bool]=True, **kwargs) -> VendorProduct:  # noqa: E501
+    def query_vendors(self, body : Dict[str, Any], async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfVendorProduct:  # noqa: E501
         ...
 
     @validate_arguments
-    def query_vendors(self, body : Dict[str, Any], async_req: Optional[bool]=None, **kwargs) -> Union[VendorProduct, Awaitable[VendorProduct]]:  # noqa: E501
+    def query_vendors(self, body : Dict[str, Any], async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfVendorProduct, Awaitable[PagedResourceListOfVendorProduct]]:  # noqa: E501
         """[EARLY ACCESS] QueryVendors: Query for vendors and their packages with entities and sub-entities.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -594,7 +594,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: VendorProduct
+        :rtype: PagedResourceListOfVendorProduct
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -638,7 +638,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(VendorProduct, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(PagedResourceListOfVendorProduct, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -700,7 +700,7 @@ class VendorApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "VendorProduct",
+            '200': "PagedResourceListOfVendorProduct",
         }
 
         return self.api_client.call_api(
@@ -721,15 +721,15 @@ class VendorApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def set_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, request_body : Dict[str, LusidPropertyDefinitionOverrides], lusid_entity_sub_type : Optional[StrictStr] = None, **kwargs) -> LusidPropertyDefinitionOverridesResponse:  # noqa: E501
+    async def set_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, request_body : Dict[str, LusidPropertyDefinitionOverrides], lusid_entity_sub_type : Optional[StrictStr] = None, **kwargs) -> Dict[str, LusidPropertyDefinitionOverridesResponse]:  # noqa: E501
         ...
 
     @overload
-    def set_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, request_body : Dict[str, LusidPropertyDefinitionOverrides], lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> LusidPropertyDefinitionOverridesResponse:  # noqa: E501
+    def set_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, request_body : Dict[str, LusidPropertyDefinitionOverrides], lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, LusidPropertyDefinitionOverridesResponse]:  # noqa: E501
         ...
 
     @validate_arguments
-    def set_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, request_body : Dict[str, LusidPropertyDefinitionOverrides], lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[LusidPropertyDefinitionOverridesResponse, Awaitable[LusidPropertyDefinitionOverridesResponse]]:  # noqa: E501
+    def set_optional_mappings_for_product_entity(self, vendor_name : StrictStr, product_name : StrictStr, lusid_entity_type : StrictStr, request_body : Dict[str, LusidPropertyDefinitionOverrides], lusid_entity_sub_type : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, LusidPropertyDefinitionOverridesResponse], Awaitable[Dict[str, LusidPropertyDefinitionOverridesResponse]]]:  # noqa: E501
         """[EARLY ACCESS] SetOptionalMappingsForProductEntity: Create a user defined LUSID property mappings for the specified vendor / LUSID entity.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -757,7 +757,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: LusidPropertyDefinitionOverridesResponse
+        :rtype: Dict[str, LusidPropertyDefinitionOverridesResponse]
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -809,7 +809,7 @@ class VendorApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(LusidPropertyDefinitionOverridesResponse, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(Dict[str, LusidPropertyDefinitionOverridesResponse], status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -887,7 +887,7 @@ class VendorApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "LusidPropertyDefinitionOverridesResponse",
+            '200': "Dict[str, LusidPropertyDefinitionOverridesResponse]",
         }
 
         return self.api_client.call_api(

@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **create_complete_event**
-> ProcessUpdateResult create_complete_event(audit_complete_request)
+> AuditCompleteResponse create_complete_event(audit_complete_request)
 
 [EARLY ACCESS] CreateCompleteEvent: Write a completed event to the Horizon Dashboard
 
@@ -26,7 +26,7 @@ import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.audit_complete_request import AuditCompleteRequest
-from finbourne_horizon.models.process_update_result import ProcessUpdateResult
+from finbourne_horizon.models.audit_complete_response import AuditCompleteResponse
 from pprint import pprint
 
 from finbourne_horizon import (
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProcessUpdateResult**](ProcessUpdateResult.md)
+[**AuditCompleteResponse**](AuditCompleteResponse.md)
 
 ### Authorization
 
@@ -108,7 +108,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_update_event**
-> ProcessUpdateResult create_update_event(audit_update_request)
+> AuditUpdateResponse create_update_event(audit_update_request)
 
 [EARLY ACCESS] CreateUpdateEvent: Write an update event to the Horizon Dashboard
 
@@ -122,7 +122,7 @@ import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.audit_update_request import AuditUpdateRequest
-from finbourne_horizon.models.process_update_result import ProcessUpdateResult
+from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
 from pprint import pprint
 
 from finbourne_horizon import (
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProcessUpdateResult**](ProcessUpdateResult.md)
+[**AuditUpdateResponse**](AuditUpdateResponse.md)
 
 ### Authorization
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_latest_runs**
-> ProcessInformation get_latest_runs()
+> List[ProcessInformation] get_latest_runs()
 
 [EARLY ACCESS] GetLatestRuns: Get latest run for each process
 
@@ -275,7 +275,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ProcessInformation**](ProcessInformation.md)
+[**List[ProcessInformation]**](ProcessInformation.md)
 
 ### Authorization
 
@@ -295,7 +295,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **process_entry_updates**
-> ProcessUpdateResult process_entry_updates(body)
+> PagedResourceListOfProcessUpdateResult process_entry_updates(body)
 
 [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
 
@@ -308,7 +308,7 @@ import time
 import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
-from finbourne_horizon.models.process_update_result import ProcessUpdateResult
+from finbourne_horizon.models.paged_resource_list_of_process_update_result import PagedResourceListOfProcessUpdateResult
 from pprint import pprint
 
 from finbourne_horizon import (
@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProcessUpdateResult**](ProcessUpdateResult.md)
+[**PagedResourceListOfProcessUpdateResult**](PagedResourceListOfProcessUpdateResult.md)
 
 ### Authorization
 
@@ -390,7 +390,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **process_history_entries**
-> ProcessInformation process_history_entries(body)
+> PagedResourceListOfProcessInformation process_history_entries(body)
 
 [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
 
@@ -403,7 +403,7 @@ import time
 import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
-from finbourne_horizon.models.process_information import ProcessInformation
+from finbourne_horizon.models.paged_resource_list_of_process_information import PagedResourceListOfProcessInformation
 from pprint import pprint
 
 from finbourne_horizon import (
@@ -465,7 +465,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProcessInformation**](ProcessInformation.md)
+[**PagedResourceListOfProcessInformation**](PagedResourceListOfProcessInformation.md)
 
 ### Authorization
 
