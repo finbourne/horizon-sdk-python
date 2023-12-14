@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **vendors**
-> List[VendorProduct] vendors(market_sector, security_type)
+> List[VendorProduct] vendors(market_sector, security_type, limit=limit)
 
 [EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.
 
@@ -458,10 +458,11 @@ async with api_client_factory:
     api_instance = api_client_factory.build(finbourne_horizon.InstrumentApi)
     market_sector = 'market_sector_example' # str | 
     security_type = 'security_type_example' # str | 
+    limit = 56 # int |  (optional)
 
     try:
         # [EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.
-        api_response = await api_instance.vendors(market_sector, security_type)
+        api_response = await api_instance.vendors(market_sector, security_type, limit=limit)
         print("The response of InstrumentApi->vendors:\n")
         pprint(api_response)
     except Exception as e:
@@ -475,6 +476,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **market_sector** | **str**|  | 
  **security_type** | **str**|  | 
+ **limit** | **int**|  | [optional] 
 
 ### Return type
 

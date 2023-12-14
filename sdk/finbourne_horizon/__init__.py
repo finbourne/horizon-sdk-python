@@ -62,6 +62,8 @@ from finbourne_horizon.models.perm_id_data import PermIdData
 from finbourne_horizon.models.process_information import ProcessInformation
 from finbourne_horizon.models.process_summary import ProcessSummary
 from finbourne_horizon.models.process_update_result import ProcessUpdateResult
+from finbourne_horizon.models.query_request import QueryRequest
+from finbourne_horizon.models.query_specification import QuerySpecification
 from finbourne_horizon.models.resource_id import ResourceId
 from finbourne_horizon.models.row_details import RowDetails
 from finbourne_horizon.models.vendor_product import VendorProduct

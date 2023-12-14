@@ -677,27 +677,29 @@ class InstrumentApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def vendors(self, market_sector : StrictStr, security_type : StrictStr, **kwargs) -> List[VendorProduct]:  # noqa: E501
+    async def vendors(self, market_sector : StrictStr, security_type : StrictStr, limit : Optional[StrictInt] = None, **kwargs) -> List[VendorProduct]:  # noqa: E501
         ...
 
     @overload
-    def vendors(self, market_sector : StrictStr, security_type : StrictStr, async_req: Optional[bool]=True, **kwargs) -> List[VendorProduct]:  # noqa: E501
+    def vendors(self, market_sector : StrictStr, security_type : StrictStr, limit : Optional[StrictInt] = None, async_req: Optional[bool]=True, **kwargs) -> List[VendorProduct]:  # noqa: E501
         ...
 
     @validate_arguments
-    def vendors(self, market_sector : StrictStr, security_type : StrictStr, async_req: Optional[bool]=None, **kwargs) -> Union[List[VendorProduct], Awaitable[List[VendorProduct]]]:  # noqa: E501
+    def vendors(self, market_sector : StrictStr, security_type : StrictStr, limit : Optional[StrictInt] = None, async_req: Optional[bool]=None, **kwargs) -> Union[List[VendorProduct], Awaitable[List[VendorProduct]]]:  # noqa: E501
         """[EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.vendors(market_sector, security_type, async_req=True)
+        >>> thread = api.vendors(market_sector, security_type, limit, async_req=True)
         >>> result = thread.get()
 
         :param market_sector:  (required)
         :type market_sector: str
         :param security_type:  (required)
         :type security_type: str
+        :param limit: 
+        :type limit: int
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -715,22 +717,24 @@ class InstrumentApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.vendors_with_http_info(market_sector, security_type, **kwargs)  # noqa: E501
+        return self.vendors_with_http_info(market_sector, security_type, limit, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def vendors_with_http_info(self, market_sector : StrictStr, security_type : StrictStr, **kwargs) -> ApiResponse:  # noqa: E501
+    def vendors_with_http_info(self, market_sector : StrictStr, security_type : StrictStr, limit : Optional[StrictInt] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.vendors_with_http_info(market_sector, security_type, async_req=True)
+        >>> thread = api.vendors_with_http_info(market_sector, security_type, limit, async_req=True)
         >>> result = thread.get()
 
         :param market_sector:  (required)
         :type market_sector: str
         :param security_type:  (required)
         :type security_type: str
+        :param limit: 
+        :type limit: int
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -760,7 +764,8 @@ class InstrumentApi:
 
         _all_params = [
             'market_sector',
-            'security_type'
+            'security_type',
+            'limit'
         ]
         _all_params.extend(
             [
@@ -796,6 +801,9 @@ class InstrumentApi:
 
         if _params.get('security_type') is not None:  # noqa: E501
             _query_params.append(('securityType', _params['security_type']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

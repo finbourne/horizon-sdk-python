@@ -295,7 +295,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **process_entry_updates**
-> PagedResourceListOfProcessUpdateResult process_entry_updates(body)
+> PagedResourceListOfProcessUpdateResult process_entry_updates(query_request)
 
 [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
 
@@ -309,6 +309,7 @@ import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.paged_resource_list_of_process_update_result import PagedResourceListOfProcessUpdateResult
+from finbourne_horizon.models.query_request import QueryRequest
 from pprint import pprint
 
 from finbourne_horizon import (
@@ -350,11 +351,11 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
-    body = None # object | 
+    query_request = finbourne_horizon.QueryRequest() # QueryRequest | 
 
     try:
         # [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
-        api_response = await api_instance.process_entry_updates(body)
+        api_response = await api_instance.process_entry_updates(query_request)
         print("The response of ProcessHistoryApi->process_entry_updates:\n")
         pprint(api_response)
     except Exception as e:
@@ -366,7 +367,7 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **object**|  | 
+ **query_request** | [**QueryRequest**](QueryRequest.md)|  | 
 
 ### Return type
 
@@ -390,7 +391,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **process_history_entries**
-> PagedResourceListOfProcessInformation process_history_entries(body)
+> PagedResourceListOfProcessInformation process_history_entries(query_request)
 
 [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
 
@@ -404,6 +405,7 @@ import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.paged_resource_list_of_process_information import PagedResourceListOfProcessInformation
+from finbourne_horizon.models.query_request import QueryRequest
 from pprint import pprint
 
 from finbourne_horizon import (
@@ -445,11 +447,11 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
-    body = None # object | 
+    query_request = finbourne_horizon.QueryRequest() # QueryRequest | 
 
     try:
         # [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
-        api_response = await api_instance.process_history_entries(body)
+        api_response = await api_instance.process_history_entries(query_request)
         print("The response of ProcessHistoryApi->process_history_entries:\n")
         pprint(api_response)
     except Exception as e:
@@ -461,7 +463,7 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **object**|  | 
+ **query_request** | [**QueryRequest**](QueryRequest.md)|  | 
 
 ### Return type
 

@@ -21,13 +21,14 @@ from typing import overload, Optional, Union, Awaitable
 
 from pydantic import StrictStr
 
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 from finbourne_horizon.models.lusid_field import LusidField
 from finbourne_horizon.models.lusid_property_definition_overrides import LusidPropertyDefinitionOverrides
 from finbourne_horizon.models.lusid_property_definition_overrides_response import LusidPropertyDefinitionOverridesResponse
 from finbourne_horizon.models.lusid_property_to_vendor_field_mapping import LusidPropertyToVendorFieldMapping
 from finbourne_horizon.models.paged_resource_list_of_vendor_product import PagedResourceListOfVendorProduct
+from finbourne_horizon.models.query_request import QueryRequest
 
 from finbourne_horizon.api_client import ApiClient
 from finbourne_horizon.api_response import ApiResponse
@@ -566,25 +567,25 @@ class VendorApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def query_vendors(self, body : Dict[str, Any], **kwargs) -> PagedResourceListOfVendorProduct:  # noqa: E501
+    async def query_vendors(self, query_request : QueryRequest, **kwargs) -> PagedResourceListOfVendorProduct:  # noqa: E501
         ...
 
     @overload
-    def query_vendors(self, body : Dict[str, Any], async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfVendorProduct:  # noqa: E501
+    def query_vendors(self, query_request : QueryRequest, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfVendorProduct:  # noqa: E501
         ...
 
     @validate_arguments
-    def query_vendors(self, body : Dict[str, Any], async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfVendorProduct, Awaitable[PagedResourceListOfVendorProduct]]:  # noqa: E501
+    def query_vendors(self, query_request : QueryRequest, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfVendorProduct, Awaitable[PagedResourceListOfVendorProduct]]:  # noqa: E501
         """[EARLY ACCESS] QueryVendors: Query for vendors and their packages with entities and sub-entities.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.query_vendors(body, async_req=True)
+        >>> thread = api.query_vendors(query_request, async_req=True)
         >>> result = thread.get()
 
-        :param body:  (required)
-        :type body: object
+        :param query_request:  (required)
+        :type query_request: QueryRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -602,20 +603,20 @@ class VendorApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.query_vendors_with_http_info(body, **kwargs)  # noqa: E501
+        return self.query_vendors_with_http_info(query_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def query_vendors_with_http_info(self, body : Dict[str, Any], **kwargs) -> ApiResponse:  # noqa: E501
+    def query_vendors_with_http_info(self, query_request : QueryRequest, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] QueryVendors: Query for vendors and their packages with entities and sub-entities.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.query_vendors_with_http_info(body, async_req=True)
+        >>> thread = api.query_vendors_with_http_info(query_request, async_req=True)
         >>> result = thread.get()
 
-        :param body:  (required)
-        :type body: object
+        :param query_request:  (required)
+        :type query_request: QueryRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -644,7 +645,7 @@ class VendorApi:
         _params = locals()
 
         _all_params = [
-            'body'
+            'query_request'
         ]
         _all_params.extend(
             [
@@ -682,8 +683,8 @@ class VendorApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['body'] is not None:
-            _body_params = _params['body']
+        if _params['query_request'] is not None:
+            _body_params = _params['query_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(

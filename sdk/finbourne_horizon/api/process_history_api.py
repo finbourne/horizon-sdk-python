@@ -19,7 +19,7 @@ import warnings
 from pydantic import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing import Any, Dict, List
+from typing import List
 
 from finbourne_horizon.models.audit_complete_request import AuditCompleteRequest
 from finbourne_horizon.models.audit_complete_response import AuditCompleteResponse
@@ -28,6 +28,7 @@ from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
 from finbourne_horizon.models.paged_resource_list_of_process_information import PagedResourceListOfProcessInformation
 from finbourne_horizon.models.paged_resource_list_of_process_update_result import PagedResourceListOfProcessUpdateResult
 from finbourne_horizon.models.process_information import ProcessInformation
+from finbourne_horizon.models.query_request import QueryRequest
 
 from finbourne_horizon.api_client import ApiClient
 from finbourne_horizon.api_response import ApiResponse
@@ -500,25 +501,25 @@ class ProcessHistoryApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def process_entry_updates(self, body : Dict[str, Any], **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
+    async def process_entry_updates(self, query_request : QueryRequest, **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
         ...
 
     @overload
-    def process_entry_updates(self, body : Dict[str, Any], async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
+    def process_entry_updates(self, query_request : QueryRequest, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
         ...
 
     @validate_arguments
-    def process_entry_updates(self, body : Dict[str, Any], async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessUpdateResult, Awaitable[PagedResourceListOfProcessUpdateResult]]:  # noqa: E501
+    def process_entry_updates(self, query_request : QueryRequest, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessUpdateResult, Awaitable[PagedResourceListOfProcessUpdateResult]]:  # noqa: E501
         """[EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.process_entry_updates(body, async_req=True)
+        >>> thread = api.process_entry_updates(query_request, async_req=True)
         >>> result = thread.get()
 
-        :param body: (required)
-        :type body: object
+        :param query_request: (required)
+        :type query_request: QueryRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -536,20 +537,20 @@ class ProcessHistoryApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.process_entry_updates_with_http_info(body, **kwargs)  # noqa: E501
+        return self.process_entry_updates_with_http_info(query_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def process_entry_updates_with_http_info(self, body : Dict[str, Any], **kwargs) -> ApiResponse:  # noqa: E501
+    def process_entry_updates_with_http_info(self, query_request : QueryRequest, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.process_entry_updates_with_http_info(body, async_req=True)
+        >>> thread = api.process_entry_updates_with_http_info(query_request, async_req=True)
         >>> result = thread.get()
 
-        :param body: (required)
-        :type body: object
+        :param query_request: (required)
+        :type query_request: QueryRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -578,7 +579,7 @@ class ProcessHistoryApi:
         _params = locals()
 
         _all_params = [
-            'body'
+            'query_request'
         ]
         _all_params.extend(
             [
@@ -616,8 +617,8 @@ class ProcessHistoryApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['body'] is not None:
-            _body_params = _params['body']
+        if _params['query_request'] is not None:
+            _body_params = _params['query_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
@@ -655,25 +656,25 @@ class ProcessHistoryApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def process_history_entries(self, body : Dict[str, Any], **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
+    async def process_history_entries(self, query_request : QueryRequest, **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
         ...
 
     @overload
-    def process_history_entries(self, body : Dict[str, Any], async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
+    def process_history_entries(self, query_request : QueryRequest, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
         ...
 
     @validate_arguments
-    def process_history_entries(self, body : Dict[str, Any], async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessInformation, Awaitable[PagedResourceListOfProcessInformation]]:  # noqa: E501
+    def process_history_entries(self, query_request : QueryRequest, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessInformation, Awaitable[PagedResourceListOfProcessInformation]]:  # noqa: E501
         """[EARLY ACCESS] ProcessHistoryEntries: Get process history entries  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.process_history_entries(body, async_req=True)
+        >>> thread = api.process_history_entries(query_request, async_req=True)
         >>> result = thread.get()
 
-        :param body: (required)
-        :type body: object
+        :param query_request: (required)
+        :type query_request: QueryRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -691,20 +692,20 @@ class ProcessHistoryApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.process_history_entries_with_http_info(body, **kwargs)  # noqa: E501
+        return self.process_history_entries_with_http_info(query_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def process_history_entries_with_http_info(self, body : Dict[str, Any], **kwargs) -> ApiResponse:  # noqa: E501
+    def process_history_entries_with_http_info(self, query_request : QueryRequest, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ProcessHistoryEntries: Get process history entries  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.process_history_entries_with_http_info(body, async_req=True)
+        >>> thread = api.process_history_entries_with_http_info(query_request, async_req=True)
         >>> result = thread.get()
 
-        :param body: (required)
-        :type body: object
+        :param query_request: (required)
+        :type query_request: QueryRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -733,7 +734,7 @@ class ProcessHistoryApi:
         _params = locals()
 
         _all_params = [
-            'body'
+            'query_request'
         ]
         _all_params.extend(
             [
@@ -771,8 +772,8 @@ class ProcessHistoryApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['body'] is not None:
-            _body_params = _params['body']
+        if _params['query_request'] is not None:
+            _body_params = _params['query_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(

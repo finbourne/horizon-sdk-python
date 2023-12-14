@@ -315,7 +315,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **query_vendors**
-> PagedResourceListOfVendorProduct query_vendors(body)
+> PagedResourceListOfVendorProduct query_vendors(query_request)
 
 [EARLY ACCESS] QueryVendors: Query for vendors and their packages with entities and sub-entities.
 
@@ -329,6 +329,7 @@ import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.paged_resource_list_of_vendor_product import PagedResourceListOfVendorProduct
+from finbourne_horizon.models.query_request import QueryRequest
 from pprint import pprint
 
 from finbourne_horizon import (
@@ -370,11 +371,11 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(finbourne_horizon.VendorApi)
-    body = None # object | 
+    query_request = finbourne_horizon.QueryRequest() # QueryRequest | 
 
     try:
         # [EARLY ACCESS] QueryVendors: Query for vendors and their packages with entities and sub-entities.
-        api_response = await api_instance.query_vendors(body)
+        api_response = await api_instance.query_vendors(query_request)
         print("The response of VendorApi->query_vendors:\n")
         pprint(api_response)
     except Exception as e:
@@ -386,7 +387,7 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **object**|  | 
+ **query_request** | [**QueryRequest**](QueryRequest.md)|  | 
 
 ### Return type
 
