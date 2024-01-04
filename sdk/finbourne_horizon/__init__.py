@@ -38,7 +38,9 @@ from finbourne_horizon.models.audit_file_details import AuditFileDetails
 from finbourne_horizon.models.audit_file_type import AuditFileType
 from finbourne_horizon.models.audit_update_request import AuditUpdateRequest
 from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
+from finbourne_horizon.models.enrichment_response import EnrichmentResponse
 from finbourne_horizon.models.file_details import FileDetails
+from finbourne_horizon.models.identifiers import Identifiers
 from finbourne_horizon.models.link import Link
 from finbourne_horizon.models.lusid_entity import LusidEntity
 from finbourne_horizon.models.lusid_field import LusidField

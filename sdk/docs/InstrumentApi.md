@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/horizon*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_instrument**](InstrumentApi.md#create_instrument) | **POST** /api/instrument/onboarding/create | [EARLY ACCESS] CreateInstrument: Creates and masters instruments with third party vendors.
+[**enrich_instrument**](InstrumentApi.md#enrich_instrument) | **POST** /api/instrument/onboarding/enrich | [EARLY ACCESS] EnrichInstrument: Enriches an existing LUSID instrument using vendor data. Enrichment included identifiers, properties and market data.
 [**get_open_figi_parameter_option**](InstrumentApi.md#get_open_figi_parameter_option) | **GET** /api/instrument/onboarding/search/openfigi/parameterOptions | [EARLY ACCESS] GetOpenFigiParameterOption: Get all supported market sector values for OpenFigi search
 [**retrieve_perm_id_result**](InstrumentApi.md#retrieve_perm_id_result) | **GET** /api/instrument/onboarding/search/permid/{id} | [EARLY ACCESS] RetrievePermIdResult: Retrieve PermId results from a previous query.
 [**search_open_figi**](InstrumentApi.md#search_open_figi) | **GET** /api/instrument/onboarding/search/openfigi | [EARLY ACCESS] SearchOpenFigi: Search OpenFigi for instruments that match the specified terms.
@@ -89,6 +90,105 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OnboardInstrumentResponse**](OnboardInstrumentResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **enrich_instrument**
+> EnrichmentResponse enrich_instrument(vendor_product_key, identifiers)
+
+[EARLY ACCESS] EnrichInstrument: Enriches an existing LUSID instrument using vendor data. Enrichment included identifiers, properties and market data.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import os
+import finbourne_horizon
+from finbourne_horizon.rest import ApiException
+from finbourne_horizon.models.enrichment_response import EnrichmentResponse
+from finbourne_horizon.models.identifiers import Identifiers
+from pprint import pprint
+
+from finbourne_horizon import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
+)
+
+# Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://fbn-prd.lusid.com/horizon"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(finbourne_horizon.InstrumentApi)
+    vendor_product_key = 'vendor_product_key_example' # str | 
+    identifiers = finbourne_horizon.Identifiers() # Identifiers | 
+
+    try:
+        # [EARLY ACCESS] EnrichInstrument: Enriches an existing LUSID instrument using vendor data. Enrichment included identifiers, properties and market data.
+        api_response = await api_instance.enrich_instrument(vendor_product_key, identifiers)
+        print("The response of InstrumentApi->enrich_instrument:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InstrumentApi->enrich_instrument: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **vendor_product_key** | **str**|  | 
+ **identifiers** | [**Identifiers**](Identifiers.md)|  | 
+
+### Return type
+
+[**EnrichmentResponse**](EnrichmentResponse.md)
 
 ### Authorization
 
