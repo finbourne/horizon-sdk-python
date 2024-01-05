@@ -295,7 +295,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **process_entry_updates**
-> PagedResourceListOfProcessUpdateResult process_entry_updates(query_request)
+> PagedResourceListOfProcessUpdateResult process_entry_updates(query_request, run_id=run_id)
 
 [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
 
@@ -352,10 +352,11 @@ async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
     query_request = finbourne_horizon.QueryRequest() # QueryRequest | 
+    run_id = 'run_id_example' # str |  (optional)
 
     try:
         # [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
-        api_response = await api_instance.process_entry_updates(query_request)
+        api_response = await api_instance.process_entry_updates(query_request, run_id=run_id)
         print("The response of ProcessHistoryApi->process_entry_updates:\n")
         pprint(api_response)
     except Exception as e:
@@ -368,6 +369,7 @@ async with api_client_factory:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query_request** | [**QueryRequest**](QueryRequest.md)|  | 
+ **run_id** | **str**|  | [optional] 
 
 ### Return type
 
