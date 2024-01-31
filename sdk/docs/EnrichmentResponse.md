@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **enriched_instruments** | **List[str]** |  | 
 **ignored_instruments** | **List[str]** |  | 
+**error_file_id** | **str** | Error File ID, if one was created | [optional] 
 
 ## Example
 

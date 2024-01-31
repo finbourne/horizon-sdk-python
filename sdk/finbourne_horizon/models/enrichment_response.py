@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist
 
 class EnrichmentResponse(BaseModel):
@@ -27,7 +27,8 @@ class EnrichmentResponse(BaseModel):
     """
     enriched_instruments: conlist(StrictStr) = Field(..., alias="enrichedInstruments")
     ignored_instruments: conlist(StrictStr) = Field(..., alias="ignoredInstruments")
-    __properties = ["enrichedInstruments", "ignoredInstruments"]
+    error_file_id: Optional[StrictStr] = Field(None, alias="errorFileId", description="Error File ID, if one was created")
+    __properties = ["enrichedInstruments", "ignoredInstruments", "errorFileId"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,6 +54,11 @@ class EnrichmentResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if error_file_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.error_file_id is None and "error_file_id" in self.__fields_set__:
+            _dict['errorFileId'] = None
+
         return _dict
 
     @classmethod
@@ -66,6 +72,7 @@ class EnrichmentResponse(BaseModel):
 
         _obj = EnrichmentResponse.parse_obj({
             "enriched_instruments": obj.get("enrichedInstruments"),
-            "ignored_instruments": obj.get("ignoredInstruments")
+            "ignored_instruments": obj.get("ignoredInstruments"),
+            "error_file_id": obj.get("errorFileId")
         })
         return _obj
