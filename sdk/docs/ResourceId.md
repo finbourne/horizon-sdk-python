@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scope** | **str** |  | [optional] 
-**code** | **str** |  | [optional] 
+**scope** | **str** |  | 
+**code** | **str** |  | 
 
 ## Example
 

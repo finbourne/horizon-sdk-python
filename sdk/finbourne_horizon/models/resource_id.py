@@ -18,15 +18,15 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic import BaseModel, StrictStr
+from typing import Any, Dict
+from pydantic import BaseModel, Field, StrictStr
 
 class ResourceId(BaseModel):
     """
     ResourceId
     """
-    scope: Optional[StrictStr] = None
-    code: Optional[StrictStr] = None
+    scope: StrictStr = Field(...)
+    code: StrictStr = Field(...)
     __properties = ["scope", "code"]
 
     class Config:
@@ -53,16 +53,6 @@ class ResourceId(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if scope (nullable) is None
-        # and __fields_set__ contains the field
-        if self.scope is None and "scope" in self.__fields_set__:
-            _dict['scope'] = None
-
-        # set to None if code (nullable) is None
-        # and __fields_set__ contains the field
-        if self.code is None and "code" in self.__fields_set__:
-            _dict['code'] = None
-
         return _dict
 
     @classmethod
