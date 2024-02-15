@@ -393,7 +393,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **process_history_entries**
-> PagedResourceListOfProcessInformation process_history_entries(query_request)
+> PagedResourceListOfProcessInformation process_history_entries(query_request, process_name=process_name)
 
 [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
 
@@ -450,10 +450,11 @@ async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
     query_request = finbourne_horizon.QueryRequest() # QueryRequest | 
+    process_name = 'process_name_example' # str |  (optional)
 
     try:
         # [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
-        api_response = await api_instance.process_history_entries(query_request)
+        api_response = await api_instance.process_history_entries(query_request, process_name=process_name)
         print("The response of ProcessHistoryApi->process_history_entries:\n")
         pprint(api_response)
     except Exception as e:
@@ -466,6 +467,7 @@ async with api_client_factory:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query_request** | [**QueryRequest**](QueryRequest.md)|  | 
+ **process_name** | **str**|  | [optional] 
 
 ### Return type
 

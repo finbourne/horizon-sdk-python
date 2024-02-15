@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_property** | [**LusidPropertyDefinition**](LusidPropertyDefinition.md) |  | 
 **vendor_field** | **str** |  | 
+**vendor_package** | **str** |  | 
+**vendor_namespace** | **str** |  | 
 **optionality** | [**Optionality**](Optionality.md) |  | 
 
 ## Example

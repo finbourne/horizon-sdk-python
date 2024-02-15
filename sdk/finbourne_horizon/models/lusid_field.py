@@ -27,9 +27,11 @@ class LusidField(BaseModel):
     """
     field_name: constr(strict=True, min_length=1) = Field(..., alias="fieldName", description="The name of the LUSID field.")
     default_value: Optional[StrictStr] = Field(None, alias="defaultValue", description="The default value for the field.")
+    vendor_packages: conlist(StrictStr) = Field(..., alias="vendorPackages", description="The vendor package that contributes to this LUSID field.")
+    vendor_namespaces: conlist(StrictStr) = Field(..., alias="vendorNamespaces", description="The vendor namespace that contributes to this LUSID field.")
     vendor_fields: conlist(StrictStr) = Field(..., alias="vendorFields", description="The underlying fields on the vendor package that contribute to this LUSID field")
     transformation_description: Optional[StrictStr] = Field(None, alias="transformationDescription", description="A description of how the vendor package's field(s) get mapped to the LUSID field")
-    __properties = ["fieldName", "defaultValue", "vendorFields", "transformationDescription"]
+    __properties = ["fieldName", "defaultValue", "vendorPackages", "vendorNamespaces", "vendorFields", "transformationDescription"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +81,8 @@ class LusidField(BaseModel):
         _obj = LusidField.parse_obj({
             "field_name": obj.get("fieldName"),
             "default_value": obj.get("defaultValue"),
+            "vendor_packages": obj.get("vendorPackages"),
+            "vendor_namespaces": obj.get("vendorNamespaces"),
             "vendor_fields": obj.get("vendorFields"),
             "transformation_description": obj.get("transformationDescription")
         })

@@ -666,25 +666,27 @@ class ProcessHistoryApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def process_history_entries(self, query_request : QueryRequest, **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
+    async def process_history_entries(self, query_request : QueryRequest, process_name : Optional[StrictStr] = None, **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
         ...
 
     @overload
-    def process_history_entries(self, query_request : QueryRequest, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
+    def process_history_entries(self, query_request : QueryRequest, process_name : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessInformation:  # noqa: E501
         ...
 
     @validate_arguments
-    def process_history_entries(self, query_request : QueryRequest, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessInformation, Awaitable[PagedResourceListOfProcessInformation]]:  # noqa: E501
+    def process_history_entries(self, query_request : QueryRequest, process_name : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessInformation, Awaitable[PagedResourceListOfProcessInformation]]:  # noqa: E501
         """[EARLY ACCESS] ProcessHistoryEntries: Get process history entries  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.process_history_entries(query_request, async_req=True)
+        >>> thread = api.process_history_entries(query_request, process_name, async_req=True)
         >>> result = thread.get()
 
         :param query_request: (required)
         :type query_request: QueryRequest
+        :param process_name:
+        :type process_name: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -702,20 +704,22 @@ class ProcessHistoryApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.process_history_entries_with_http_info(query_request, **kwargs)  # noqa: E501
+        return self.process_history_entries_with_http_info(query_request, process_name, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def process_history_entries_with_http_info(self, query_request : QueryRequest, **kwargs) -> ApiResponse:  # noqa: E501
+    def process_history_entries_with_http_info(self, query_request : QueryRequest, process_name : Optional[StrictStr] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ProcessHistoryEntries: Get process history entries  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.process_history_entries_with_http_info(query_request, async_req=True)
+        >>> thread = api.process_history_entries_with_http_info(query_request, process_name, async_req=True)
         >>> result = thread.get()
 
         :param query_request: (required)
         :type query_request: QueryRequest
+        :param process_name:
+        :type process_name: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -744,7 +748,8 @@ class ProcessHistoryApi:
         _params = locals()
 
         _all_params = [
-            'query_request'
+            'query_request',
+            'process_name'
         ]
         _all_params.extend(
             [
@@ -775,6 +780,9 @@ class ProcessHistoryApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('process_name') is not None:  # noqa: E501
+            _query_params.append(('processName', _params['process_name']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

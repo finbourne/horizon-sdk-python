@@ -29,8 +29,10 @@ class LusidPropertyToVendorFieldMapping(BaseModel):
     """
     var_property: LusidPropertyDefinition = Field(..., alias="property")
     vendor_field: StrictStr = Field(..., alias="vendorField")
+    vendor_package: StrictStr = Field(..., alias="vendorPackage")
+    vendor_namespace: StrictStr = Field(..., alias="vendorNamespace")
     optionality: Optionality = Field(...)
-    __properties = ["property", "vendorField", "optionality"]
+    __properties = ["property", "vendorField", "vendorPackage", "vendorNamespace", "optionality"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +75,8 @@ class LusidPropertyToVendorFieldMapping(BaseModel):
         _obj = LusidPropertyToVendorFieldMapping.parse_obj({
             "var_property": LusidPropertyDefinition.from_dict(obj.get("property")) if obj.get("property") is not None else None,
             "vendor_field": obj.get("vendorField"),
+            "vendor_package": obj.get("vendorPackage"),
+            "vendor_namespace": obj.get("vendorNamespace"),
             "optionality": obj.get("optionality")
         })
         return _obj
