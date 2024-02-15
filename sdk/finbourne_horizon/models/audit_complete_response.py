@@ -25,9 +25,8 @@ class AuditCompleteResponse(BaseModel):
     """
     Response type for Horizon Audit Event  # noqa: E501
     """
-    event_id: StrictStr = Field(..., alias="eventId", description="The GUID of the newly created event")
     process_name: StrictStr = Field(..., alias="processName", description="The name of the Process the events will be visible under")
-    __properties = ["eventId", "processName"]
+    __properties = ["processName"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,7 +64,6 @@ class AuditCompleteResponse(BaseModel):
             return AuditCompleteResponse.parse_obj(obj)
 
         _obj = AuditCompleteResponse.parse_obj({
-            "event_id": obj.get("eventId"),
             "process_name": obj.get("processName")
         })
         return _obj

@@ -5,7 +5,6 @@ Response type for Horizon Audit Event
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**event_id** | **str** | The GUID of the newly created event | 
 **process_name** | **str** | The name of the Process the events will be visible under | 
 
 ## Example
