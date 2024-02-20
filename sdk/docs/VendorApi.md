@@ -22,18 +22,18 @@ Method | HTTP request | Description
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.lusid_field import LusidField
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    VendorApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
@@ -123,18 +123,18 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.lusid_property_definition_overrides import LusidPropertyDefinitionOverrides
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    VendorApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
@@ -224,18 +224,18 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.lusid_property_to_vendor_field_mapping import LusidPropertyToVendorFieldMapping
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    VendorApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
@@ -325,19 +325,19 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.paged_resource_list_of_vendor_product import PagedResourceListOfVendorProduct
 from finbourne_horizon.models.query_request import QueryRequest
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    VendorApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
@@ -421,19 +421,19 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.lusid_property_definition_overrides import LusidPropertyDefinitionOverrides
 from finbourne_horizon.models.lusid_property_definition_overrides_response import LusidPropertyDefinitionOverridesResponse
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    VendorApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client

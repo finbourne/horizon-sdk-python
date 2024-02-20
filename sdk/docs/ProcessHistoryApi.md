@@ -22,19 +22,19 @@ Method | HTTP request | Description
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.audit_complete_request import AuditCompleteRequest
 from finbourne_horizon.models.audit_complete_response import AuditCompleteResponse
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ProcessHistoryApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
@@ -118,19 +118,19 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.audit_update_request import AuditUpdateRequest
 from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ProcessHistoryApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
@@ -214,18 +214,18 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.process_information import ProcessInformation
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ProcessHistoryApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
@@ -305,19 +305,19 @@ This endpoint does not need any parameter.
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.paged_resource_list_of_process_update_result import PagedResourceListOfProcessUpdateResult
 from finbourne_horizon.models.query_request import QueryRequest
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ProcessHistoryApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
@@ -403,19 +403,19 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import finbourne_horizon
 from finbourne_horizon.rest import ApiException
 from finbourne_horizon.models.paged_resource_list_of_process_information import PagedResourceListOfProcessInformation
 from finbourne_horizon.models.query_request import QueryRequest
 from pprint import pprint
 
+import os
 from finbourne_horizon import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ProcessHistoryApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
