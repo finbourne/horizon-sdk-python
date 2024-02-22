@@ -295,7 +295,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **process_entry_updates**
-> PagedResourceListOfProcessUpdateResult process_entry_updates(query_request, run_id=run_id)
+> PagedResourceListOfProcessUpdateResult process_entry_updates(run_id, query_request)
 
 [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
 
@@ -351,12 +351,12 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
+    run_id = 'run_id_example' # str | 
     query_request = finbourne_horizon.QueryRequest() # QueryRequest | 
-    run_id = 'run_id_example' # str |  (optional)
 
     try:
         # [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
-        api_response = await api_instance.process_entry_updates(query_request, run_id=run_id)
+        api_response = await api_instance.process_entry_updates(run_id, query_request)
         print("The response of ProcessHistoryApi->process_entry_updates:\n")
         pprint(api_response)
     except Exception as e:
@@ -368,8 +368,8 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **run_id** | **str**|  | 
  **query_request** | [**QueryRequest**](QueryRequest.md)|  | 
- **run_id** | **str**|  | [optional] 
 
 ### Return type
 

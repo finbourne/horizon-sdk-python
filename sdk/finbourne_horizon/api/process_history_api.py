@@ -503,27 +503,27 @@ class ProcessHistoryApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def process_entry_updates(self, query_request : QueryRequest, run_id : Optional[StrictStr] = None, **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
+    async def process_entry_updates(self, run_id : StrictStr, query_request : QueryRequest, **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
         ...
 
     @overload
-    def process_entry_updates(self, query_request : QueryRequest, run_id : Optional[StrictStr] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
+    def process_entry_updates(self, run_id : StrictStr, query_request : QueryRequest, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfProcessUpdateResult:  # noqa: E501
         ...
 
     @validate_arguments
-    def process_entry_updates(self, query_request : QueryRequest, run_id : Optional[StrictStr] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessUpdateResult, Awaitable[PagedResourceListOfProcessUpdateResult]]:  # noqa: E501
+    def process_entry_updates(self, run_id : StrictStr, query_request : QueryRequest, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfProcessUpdateResult, Awaitable[PagedResourceListOfProcessUpdateResult]]:  # noqa: E501
         """[EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.process_entry_updates(query_request, run_id, async_req=True)
+        >>> thread = api.process_entry_updates(run_id, query_request, async_req=True)
         >>> result = thread.get()
 
+        :param run_id: (required)
+        :type run_id: str
         :param query_request: (required)
         :type query_request: QueryRequest
-        :param run_id:
-        :type run_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -541,22 +541,22 @@ class ProcessHistoryApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.process_entry_updates_with_http_info(query_request, run_id, **kwargs)  # noqa: E501
+        return self.process_entry_updates_with_http_info(run_id, query_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def process_entry_updates_with_http_info(self, query_request : QueryRequest, run_id : Optional[StrictStr] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def process_entry_updates_with_http_info(self, run_id : StrictStr, query_request : QueryRequest, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.process_entry_updates_with_http_info(query_request, run_id, async_req=True)
+        >>> thread = api.process_entry_updates_with_http_info(run_id, query_request, async_req=True)
         >>> result = thread.get()
 
+        :param run_id: (required)
+        :type run_id: str
         :param query_request: (required)
         :type query_request: QueryRequest
-        :param run_id:
-        :type run_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -585,8 +585,8 @@ class ProcessHistoryApi:
         _params = locals()
 
         _all_params = [
-            'query_request',
-            'run_id'
+            'run_id',
+            'query_request'
         ]
         _all_params.extend(
             [
