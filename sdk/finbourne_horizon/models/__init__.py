@@ -22,9 +22,14 @@ from finbourne_horizon.models.audit_file_details import AuditFileDetails
 from finbourne_horizon.models.audit_file_type import AuditFileType
 from finbourne_horizon.models.audit_update_request import AuditUpdateRequest
 from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
+from finbourne_horizon.models.create_instance_request import CreateInstanceRequest
 from finbourne_horizon.models.enrichment_response import EnrichmentResponse
+from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
 from finbourne_horizon.models.file_details import FileDetails
 from finbourne_horizon.models.identifiers import Identifiers
+from finbourne_horizon.models.instance_identifier import InstanceIdentifier
+from finbourne_horizon.models.integration_description import IntegrationDescription
+from finbourne_horizon.models.integration_instance import IntegrationInstance
 from finbourne_horizon.models.link import Link
 from finbourne_horizon.models.lusid_entity import LusidEntity
 from finbourne_horizon.models.lusid_field import LusidField
@@ -52,4 +57,6 @@ from finbourne_horizon.models.query_request import QueryRequest
 from finbourne_horizon.models.query_specification import QuerySpecification
 from finbourne_horizon.models.resource_id import ResourceId
 from finbourne_horizon.models.row_details import RowDetails
+from finbourne_horizon.models.trigger import Trigger
+from finbourne_horizon.models.update_instance_request import UpdateInstanceRequest
 from finbourne_horizon.models.vendor_product import VendorProduct
