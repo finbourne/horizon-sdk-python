@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**create_instance**](IntegrationsApi.md#create_instance) | **POST** /api/integrations/instances | [EXPERIMENTAL] CreateInstance: Create a single integration instance.
 [**delete_instance**](IntegrationsApi.md#delete_instance) | **DELETE** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] DeleteInstance: Delete a single integration instance.
 [**execute_instance**](IntegrationsApi.md#execute_instance) | **POST** /api/integrations/instances/{instanceId}/execute | [EXPERIMENTAL] ExecuteInstance: Execute an integration instance.
+[**get_execution_ids_for_instance**](IntegrationsApi.md#get_execution_ids_for_instance) | **GET** /api/integrations/executions/{instanceId} | [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
 [**get_schema**](IntegrationsApi.md#get_schema) | **GET** /api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
 [**list_instances**](IntegrationsApi.md#list_instances) | **GET** /api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations.
 [**list_integrations**](IntegrationsApi.md#list_integrations) | **GET** /api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations.
@@ -300,6 +301,105 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The execution id |  -  |
+**404** | The integration instance does not exist |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_execution_ids_for_instance**
+> str get_execution_ids_for_instance(instance_id, limit=limit)
+
+[EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
+
+<br>Get the most recent execution ids for an integration instance.  <br />  <br>The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import finbourne_horizon
+from finbourne_horizon.rest import ApiException
+from pprint import pprint
+
+import os
+from finbourne_horizon import (
+    ApiClientFactory,
+    IntegrationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://fbn-prd.lusid.com/horizon"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(finbourne_horizon.IntegrationsApi)
+    instance_id = 'instance_id_example' # str | Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".
+    limit = 56 # int | Maximum number of returned execution ids (optional)
+
+    try:
+        # [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
+        api_response = await api_instance.get_execution_ids_for_instance(instance_id, limit=limit)
+        print("The response of IntegrationsApi->get_execution_ids_for_instance:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling IntegrationsApi->get_execution_ids_for_instance: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_id** | **str**| Instance identifier e.g. \&quot;30dc93c6-a127-46bf-aea8-e466d720b72d\&quot;. | 
+ **limit** | **int**| Maximum number of returned execution ids | [optional] 
+
+### Return type
+
+**str**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The execution ids sorted by start date (descending) |  -  |
 **404** | The integration instance does not exist |  -  |
 **0** | Error response |  -  |
 
