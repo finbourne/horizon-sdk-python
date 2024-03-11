@@ -651,7 +651,7 @@ class IntegrationsApi:
         }
 
         return self.api_client.call_api(
-            '/api/integrations/executions/{instanceId}', 'GET',
+            '/api/integrations/instances/{instanceId}/executions', 'GET',
             _path_params,
             _query_params,
             _header_params,
