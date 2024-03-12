@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictInt, StrictStr, conlist
 from finbourne_horizon.models.audit_complete_status import AuditCompleteStatus
 from finbourne_horizon.models.audit_file_details import AuditFileDetails
@@ -39,7 +39,8 @@ class AuditCompleteRequest(BaseModel):
     rows_failed: StrictInt = Field(..., alias="rowsFailed", description="The number of data rows that failed to be operated on")
     rows_ignored: StrictInt = Field(..., alias="rowsIgnored", description="The number of data rows that had no actions taken")
     audit_files: conlist(AuditFileDetails) = Field(..., alias="auditFiles", description="A list of file details for attaching to the event")
-    __properties = ["id", "userId", "schedulerRunId", "startTime", "endTime", "message", "status", "rowsTotal", "rowsSucceeded", "rowsFailed", "rowsIgnored", "auditFiles"]
+    process_name_override: Optional[StrictStr] = Field(None, alias="processNameOverride", description="Optional Name for how the process appears in Data Feed Monitoring")
+    __properties = ["id", "userId", "schedulerRunId", "startTime", "endTime", "message", "status", "rowsTotal", "rowsSucceeded", "rowsFailed", "rowsIgnored", "auditFiles", "processNameOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +73,11 @@ class AuditCompleteRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['auditFiles'] = _items
+        # set to None if process_name_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.process_name_override is None and "process_name_override" in self.__fields_set__:
+            _dict['processNameOverride'] = None
+
         return _dict
 
     @classmethod
@@ -95,6 +101,7 @@ class AuditCompleteRequest(BaseModel):
             "rows_succeeded": obj.get("rowsSucceeded"),
             "rows_failed": obj.get("rowsFailed"),
             "rows_ignored": obj.get("rowsIgnored"),
-            "audit_files": [AuditFileDetails.from_dict(_item) for _item in obj.get("auditFiles")] if obj.get("auditFiles") is not None else None
+            "audit_files": [AuditFileDetails.from_dict(_item) for _item in obj.get("auditFiles")] if obj.get("auditFiles") is not None else None,
+            "process_name_override": obj.get("processNameOverride")
         })
         return _obj

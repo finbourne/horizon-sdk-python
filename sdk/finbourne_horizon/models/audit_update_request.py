@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field, StrictStr
 
 class AuditUpdateRequest(BaseModel):
@@ -30,7 +30,8 @@ class AuditUpdateRequest(BaseModel):
     scheduler_run_id: StrictStr = Field(..., alias="schedulerRunId", description="The GUID of the schedule run")
     start_time: datetime = Field(..., alias="startTime", description="When the run was started in UTC")
     message: StrictStr = Field(..., description="A descriptive message to accompany the status")
-    __properties = ["id", "userId", "schedulerRunId", "startTime", "message"]
+    process_name_override: Optional[StrictStr] = Field(None, alias="processNameOverride", description="Optional Name for how the process appears in Data Feed Monitoring")
+    __properties = ["id", "userId", "schedulerRunId", "startTime", "message", "processNameOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -56,6 +57,11 @@ class AuditUpdateRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if process_name_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.process_name_override is None and "process_name_override" in self.__fields_set__:
+            _dict['processNameOverride'] = None
+
         return _dict
 
     @classmethod
@@ -72,6 +78,7 @@ class AuditUpdateRequest(BaseModel):
             "user_id": obj.get("userId"),
             "scheduler_run_id": obj.get("schedulerRunId"),
             "start_time": obj.get("startTime"),
-            "message": obj.get("message")
+            "message": obj.get("message"),
+            "process_name_override": obj.get("processNameOverride")
         })
         return _obj

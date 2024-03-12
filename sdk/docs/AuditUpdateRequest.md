@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **scheduler_run_id** | **str** | The GUID of the schedule run | 
 **start_time** | **datetime** | When the run was started in UTC | 
 **message** | **str** | A descriptive message to accompany the status | 
+**process_name_override** | **str** | Optional Name for how the process appears in Data Feed Monitoring | [optional] 
 
 ## Example
 

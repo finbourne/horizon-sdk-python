@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **rows_failed** | **int** | The number of data rows that failed to be operated on | 
 **rows_ignored** | **int** | The number of data rows that had no actions taken | 
 **audit_files** | [**List[AuditFileDetails]**](AuditFileDetails.md) | A list of file details for attaching to the event | 
+**process_name_override** | **str** | Optional Name for how the process appears in Data Feed Monitoring | [optional] 
 
 ## Example
 
