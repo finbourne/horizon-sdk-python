@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr
 from finbourne_horizon.models.audit_file_type import AuditFileType
 
 class AuditFileDetails(BaseModel):

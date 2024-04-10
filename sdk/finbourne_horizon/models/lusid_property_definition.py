@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 from finbourne_horizon.models.resource_id import ResourceId
 
 class LusidPropertyDefinition(BaseModel):

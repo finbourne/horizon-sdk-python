@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
 from finbourne_horizon.models.audit_complete_status import AuditCompleteStatus
 from finbourne_horizon.models.audit_file_details import AuditFileDetails
 
