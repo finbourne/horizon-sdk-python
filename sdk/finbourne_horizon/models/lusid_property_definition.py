@@ -26,7 +26,7 @@ class LusidPropertyDefinition(BaseModel):
     """
     Defines the information in a LUSID Property Definition  # noqa: E501
     """
-    key: StrictStr = Field(..., description="Property key associated with the mapping")
+    key: constr(strict=True, min_length=1) = Field(..., description="Property key associated with the mapping")
     domain: constr(strict=True, min_length=1) = Field(..., description="The domain of this definition.")
     scope: constr(strict=True, min_length=1) = Field(..., description="The scope of this definition.")
     code: constr(strict=True, min_length=1) = Field(..., description="The code of this definition.")
@@ -59,7 +59,6 @@ class LusidPropertyDefinition(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
-                            "key",
                           },
                           exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of data_type_id

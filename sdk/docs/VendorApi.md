@@ -470,7 +470,7 @@ async with api_client_factory:
     vendor_name = 'vendor_name_example' # str | 
     product_name = 'product_name_example' # str | 
     lusid_entity_type = 'lusid_entity_type_example' # str | 
-    request_body = {"Domain/LUSID-Scope/Code1":{"displayNameOverride":"descriptionOverride","descriptionOverride":"displayNameOverride"},"Domain/LUSID-Scope/Code2":{"displayNameOverride":"descriptionOverride","descriptionOverride":"displayNameOverride"}} # Dict[str, LusidPropertyDefinitionOverrides] | 
+    request_body = {"0":{"displayNameOverride":"descriptionOverride","descriptionOverride":"displayNameOverride"},"1":{"displayNameOverride":"descriptionOverride","descriptionOverride":"displayNameOverride"}} # Dict[str, LusidPropertyDefinitionOverrides] | 
     lusid_entity_sub_type = 'lusid_entity_sub_type_example' # str |  (optional)
 
     try:

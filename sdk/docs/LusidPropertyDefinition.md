@@ -5,7 +5,7 @@ Defines the information in a LUSID Property Definition
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | Property key associated with the mapping | [readonly] 
+**key** | **str** | Property key associated with the mapping | 
 **domain** | **str** | The domain of this definition. | 
 **scope** | **str** | The scope of this definition. | 
 **code** | **str** | The code of this definition. | 
