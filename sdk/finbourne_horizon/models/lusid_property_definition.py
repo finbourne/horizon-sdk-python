@@ -26,7 +26,8 @@ class LusidPropertyDefinition(BaseModel):
     """
     Defines the information in a LUSID Property Definition  # noqa: E501
     """
-    key: constr(strict=True, min_length=1) = Field(..., description="Property key associated with the mapping")
+    key: StrictStr = Field(...)
+    product_entity_item_key: constr(strict=True, min_length=1) = Field(..., alias="productEntityItemKey", description="Property key associated with the mapping")
     domain: constr(strict=True, min_length=1) = Field(..., description="The domain of this definition.")
     scope: constr(strict=True, min_length=1) = Field(..., description="The scope of this definition.")
     code: constr(strict=True, min_length=1) = Field(..., description="The code of this definition.")
@@ -35,7 +36,7 @@ class LusidPropertyDefinition(BaseModel):
     description: StrictStr = Field(...)
     lifetime: constr(strict=True, min_length=1) = Field(...)
     constraint_style: constr(strict=True, min_length=1) = Field(..., alias="constraintStyle")
-    __properties = ["key", "domain", "scope", "code", "displayName", "dataTypeId", "description", "lifetime", "constraintStyle"]
+    __properties = ["key", "productEntityItemKey", "domain", "scope", "code", "displayName", "dataTypeId", "description", "lifetime", "constraintStyle"]
 
     class Config:
         """Pydantic configuration"""
@@ -59,6 +60,7 @@ class LusidPropertyDefinition(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "key",
                           },
                           exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of data_type_id
@@ -77,6 +79,7 @@ class LusidPropertyDefinition(BaseModel):
 
         _obj = LusidPropertyDefinition.parse_obj({
             "key": obj.get("key"),
+            "product_entity_item_key": obj.get("productEntityItemKey"),
             "domain": obj.get("domain"),
             "scope": obj.get("scope"),
             "code": obj.get("code"),
