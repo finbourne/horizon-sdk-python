@@ -85,6 +85,7 @@ from finbourne_horizon.extensions import (
     ConfigurationLoader,
     SecretsFileConfigurationLoader,
     EnvironmentVariablesConfigurationLoader,
+    FileTokenConfigurationLoader,
     ArgsConfigurationLoader,
     SyncApiClient
 )
@@ -153,6 +154,8 @@ __all__ = [
     "ConfigurationLoader",
     "SecretsFileConfigurationLoader",
     "EnvironmentVariablesConfigurationLoader",
+    "FileTokenConfigurationLoader",
     "ArgsConfigurationLoader",
     "SyncApiClient"
+    
 ]
