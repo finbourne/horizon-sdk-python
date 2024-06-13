@@ -1,6 +1,8 @@
+![LUSID_by_Finbourne](./resources/Finbourne_Logo_Teal.svg)
+
+
 # LUSID<sup>®</sup> Horizon Python SDK
 
-![LUSID_by_Finbourne](https://content.finbourne.com/LUSID_repo.png)
 
 | branch | status |
 | --- | --- |
