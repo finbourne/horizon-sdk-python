@@ -24,7 +24,7 @@ from finbourne_horizon.models.lusid_entity import LusidEntity
 
 class VendorProduct(BaseModel):
     """
-    Denormalised information about vendors, the products they provide and the LUSID entity types hey can be ued to populate.  # noqa: E501
+    Denormalised information about vendors, the products they provide and the LUSID entity types they can be used to populate.  # noqa: E501
     """
     vendor_name: StrictStr = Field(..., alias="vendorName")
     product_name: StrictStr = Field(..., alias="productName")
