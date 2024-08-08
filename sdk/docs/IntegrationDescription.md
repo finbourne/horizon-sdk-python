@@ -27,6 +27,6 @@ integration_description_dict = integration_description_instance.to_dict()
 # create an instance of IntegrationDescription from a dict
 integration_description_form_dict = integration_description.from_dict(integration_description_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

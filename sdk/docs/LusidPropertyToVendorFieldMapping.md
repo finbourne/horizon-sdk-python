@@ -28,6 +28,6 @@ lusid_property_to_vendor_field_mapping_dict = lusid_property_to_vendor_field_map
 # create an instance of LusidPropertyToVendorFieldMapping from a dict
 lusid_property_to_vendor_field_mapping_form_dict = lusid_property_to_vendor_field_mapping.from_dict(lusid_property_to_vendor_field_mapping_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

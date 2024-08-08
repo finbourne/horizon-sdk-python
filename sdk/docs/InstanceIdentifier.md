@@ -24,6 +24,6 @@ instance_identifier_dict = instance_identifier_instance.to_dict()
 # create an instance of InstanceIdentifier from a dict
 instance_identifier_form_dict = instance_identifier.from_dict(instance_identifier_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

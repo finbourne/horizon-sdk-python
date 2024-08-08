@@ -18,67 +18,57 @@ Method | HTTP request | Description
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import finbourne_horizon
-from finbourne_horizon.rest import ApiException
-from finbourne_horizon.models.audit_complete_request import AuditCompleteRequest
-from finbourne_horizon.models.audit_complete_response import AuditCompleteResponse
+import asyncio
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.models import *
 from pprint import pprint
-
-import os
 from finbourne_horizon import (
     ApiClientFactory,
-    ProcessHistoryApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ProcessHistoryApi
 )
 
-# Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/horizon"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ProcessHistoryApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # audit_complete_request = AuditCompleteRequest()
+        # audit_complete_request = AuditCompleteRequest.from_json("")
+        audit_complete_request = AuditCompleteRequest.from_dict(finbourne_horizon.AuditCompleteRequest()) # AuditCompleteRequest | 
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EARLY ACCESS] CreateCompleteEvent: Write a completed event to the Horizon Dashboard
+            api_response = await api_instance.create_complete_event(audit_complete_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ProcessHistoryApi->create_complete_event: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
-    audit_complete_request = finbourne_horizon.AuditCompleteRequest() # AuditCompleteRequest | 
-
-    try:
-        # [EARLY ACCESS] CreateCompleteEvent: Write a completed event to the Horizon Dashboard
-        api_response = await api_instance.create_complete_event(audit_complete_request)
-        print("The response of ProcessHistoryApi->create_complete_event:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProcessHistoryApi->create_complete_event: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -90,10 +80,6 @@ Name | Type | Description  | Notes
 
 [**AuditCompleteResponse**](AuditCompleteResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -105,7 +91,7 @@ Name | Type | Description  | Notes
 **201** | Created |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_update_event**
 > AuditUpdateResponse create_update_event(audit_update_request)
@@ -114,67 +100,57 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import finbourne_horizon
-from finbourne_horizon.rest import ApiException
-from finbourne_horizon.models.audit_update_request import AuditUpdateRequest
-from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
+import asyncio
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.models import *
 from pprint import pprint
-
-import os
 from finbourne_horizon import (
     ApiClientFactory,
-    ProcessHistoryApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ProcessHistoryApi
 )
 
-# Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/horizon"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ProcessHistoryApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # audit_update_request = AuditUpdateRequest()
+        # audit_update_request = AuditUpdateRequest.from_json("")
+        audit_update_request = AuditUpdateRequest.from_dict(finbourne_horizon.AuditUpdateRequest()) # AuditUpdateRequest | 
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EARLY ACCESS] CreateUpdateEvent: Write an update event to the Horizon Dashboard
+            api_response = await api_instance.create_update_event(audit_update_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ProcessHistoryApi->create_update_event: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
-    audit_update_request = finbourne_horizon.AuditUpdateRequest() # AuditUpdateRequest | 
-
-    try:
-        # [EARLY ACCESS] CreateUpdateEvent: Write an update event to the Horizon Dashboard
-        api_response = await api_instance.create_update_event(audit_update_request)
-        print("The response of ProcessHistoryApi->create_update_event:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProcessHistoryApi->create_update_event: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -186,10 +162,6 @@ Name | Type | Description  | Notes
 
 [**AuditUpdateResponse**](AuditUpdateResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -201,7 +173,7 @@ Name | Type | Description  | Notes
 **201** | Created |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_latest_runs**
 > List[ProcessInformation] get_latest_runs()
@@ -210,65 +182,51 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import finbourne_horizon
-from finbourne_horizon.rest import ApiException
-from finbourne_horizon.models.process_information import ProcessInformation
+import asyncio
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.models import *
 from pprint import pprint
-
-import os
 from finbourne_horizon import (
     ApiClientFactory,
-    ProcessHistoryApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ProcessHistoryApi
 )
 
-# Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/horizon"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ProcessHistoryApi)
 
+        try:
+            # [EARLY ACCESS] GetLatestRuns: Get latest run for each process
+            api_response = await api_instance.get_latest_runs()
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ProcessHistoryApi->get_latest_runs: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
-
-    try:
-        # [EARLY ACCESS] GetLatestRuns: Get latest run for each process
-        api_response = await api_instance.get_latest_runs()
-        print("The response of ProcessHistoryApi->get_latest_runs:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProcessHistoryApi->get_latest_runs: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -276,10 +234,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**List[ProcessInformation]**](ProcessInformation.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -292,7 +246,7 @@ This endpoint does not need any parameter.
 **200** | Success |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **process_entry_updates**
 > PagedResourceListOfProcessUpdateResult process_entry_updates(run_id, query_request)
@@ -301,68 +255,58 @@ This endpoint does not need any parameter.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import finbourne_horizon
-from finbourne_horizon.rest import ApiException
-from finbourne_horizon.models.paged_resource_list_of_process_update_result import PagedResourceListOfProcessUpdateResult
-from finbourne_horizon.models.query_request import QueryRequest
+import asyncio
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.models import *
 from pprint import pprint
-
-import os
 from finbourne_horizon import (
     ApiClientFactory,
-    ProcessHistoryApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ProcessHistoryApi
 )
 
-# Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/horizon"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ProcessHistoryApi)
+        run_id = 'run_id_example' # str | 
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # query_request = QueryRequest()
+        # query_request = QueryRequest.from_json("")
+        query_request = QueryRequest.from_dict(finbourne_horizon.QueryRequest()) # QueryRequest | 
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
+            api_response = await api_instance.process_entry_updates(run_id, query_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ProcessHistoryApi->process_entry_updates: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
-    run_id = 'run_id_example' # str | 
-    query_request = finbourne_horizon.QueryRequest() # QueryRequest | 
-
-    try:
-        # [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
-        api_response = await api_instance.process_entry_updates(run_id, query_request)
-        print("The response of ProcessHistoryApi->process_entry_updates:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProcessHistoryApi->process_entry_updates: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -375,10 +319,6 @@ Name | Type | Description  | Notes
 
 [**PagedResourceListOfProcessUpdateResult**](PagedResourceListOfProcessUpdateResult.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -390,7 +330,7 @@ Name | Type | Description  | Notes
 **200** | Success |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **process_history_entries**
 > PagedResourceListOfProcessInformation process_history_entries(query_request, process_name=process_name)
@@ -399,68 +339,58 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import finbourne_horizon
-from finbourne_horizon.rest import ApiException
-from finbourne_horizon.models.paged_resource_list_of_process_information import PagedResourceListOfProcessInformation
-from finbourne_horizon.models.query_request import QueryRequest
+import asyncio
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.models import *
 from pprint import pprint
-
-import os
 from finbourne_horizon import (
     ApiClientFactory,
-    ProcessHistoryApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ProcessHistoryApi
 )
 
-# Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/horizon"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ProcessHistoryApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # query_request = QueryRequest()
+        # query_request = QueryRequest.from_json("")
+        query_request = QueryRequest.from_dict(finbourne_horizon.QueryRequest()) # QueryRequest | 
+        process_name = 'process_name_example' # str |  (optional)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
+            api_response = await api_instance.process_history_entries(query_request, process_name=process_name)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ProcessHistoryApi->process_history_entries: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(finbourne_horizon.ProcessHistoryApi)
-    query_request = finbourne_horizon.QueryRequest() # QueryRequest | 
-    process_name = 'process_name_example' # str |  (optional)
-
-    try:
-        # [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
-        api_response = await api_instance.process_history_entries(query_request, process_name=process_name)
-        print("The response of ProcessHistoryApi->process_history_entries:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProcessHistoryApi->process_history_entries: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -473,10 +403,6 @@ Name | Type | Description  | Notes
 
 [**PagedResourceListOfProcessInformation**](PagedResourceListOfProcessInformation.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -488,5 +414,5 @@ Name | Type | Description  | Notes
 **200** | Success |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 

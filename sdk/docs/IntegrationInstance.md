@@ -30,6 +30,6 @@ integration_instance_dict = integration_instance_instance.to_dict()
 # create an instance of IntegrationInstance from a dict
 integration_instance_form_dict = integration_instance.from_dict(integration_instance_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

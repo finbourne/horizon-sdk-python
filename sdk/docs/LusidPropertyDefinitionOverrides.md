@@ -25,6 +25,6 @@ lusid_property_definition_overrides_dict = lusid_property_definition_overrides_i
 # create an instance of LusidPropertyDefinitionOverrides from a dict
 lusid_property_definition_overrides_form_dict = lusid_property_definition_overrides.from_dict(lusid_property_definition_overrides_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

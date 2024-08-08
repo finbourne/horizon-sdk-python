@@ -27,6 +27,6 @@ row_details_dict = row_details_instance.to_dict()
 # create an instance of RowDetails from a dict
 row_details_form_dict = row_details.from_dict(row_details_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 
