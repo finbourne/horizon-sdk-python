@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **vendors**
-> List[VendorProduct] vendors(market_sector, security_type, limit=limit)
+> List[VendorProduct] vendors(market_sector, security_type, general_security_type)
 
 [EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.
 
@@ -461,11 +461,11 @@ async def main():
         api_instance = api_client_factory.build(InstrumentApi)
         market_sector = 'market_sector_example' # str | 
         security_type = 'security_type_example' # str | 
-        limit = 56 # int |  (optional)
+        general_security_type = 'general_security_type_example' # str | 
 
         try:
             # [EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.
-            api_response = await api_instance.vendors(market_sector, security_type, limit=limit)
+            api_response = await api_instance.vendors(market_sector, security_type, general_security_type)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling InstrumentApi->vendors: %s\n" % e)
@@ -479,7 +479,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **market_sector** | **str**|  | 
  **security_type** | **str**|  | 
- **limit** | **int**|  | [optional] 
+ **general_security_type** | **str**|  | 
 
 ### Return type
 
