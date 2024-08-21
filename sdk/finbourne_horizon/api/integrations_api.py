@@ -22,13 +22,15 @@ from typing import overload, Optional, Union, Awaitable
 from typing_extensions import Annotated
 from pydantic.v1 import Field, StrictInt, StrictStr, constr, validator
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from finbourne_horizon.models.create_instance_request import CreateInstanceRequest
 from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
 from finbourne_horizon.models.instance_identifier import InstanceIdentifier
 from finbourne_horizon.models.integration_description import IntegrationDescription
 from finbourne_horizon.models.integration_instance import IntegrationInstance
+from finbourne_horizon.models.integration_property_configuration import IntegrationPropertyConfiguration
+from finbourne_horizon.models.lusid_property_definition_overrides import LusidPropertyDefinitionOverrides
 from finbourne_horizon.models.update_instance_request import UpdateInstanceRequest
 
 from finbourne_horizon.api_client import ApiClient
@@ -668,6 +670,316 @@ class IntegrationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], **kwargs) -> Dict[str, LusidPropertyDefinitionOverrides]:  # noqa: E501
+        ...
+
+    @overload
+    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=True, **kwargs) -> Dict[str, LusidPropertyDefinitionOverrides]:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, LusidPropertyDefinitionOverrides], Awaitable[Dict[str, LusidPropertyDefinitionOverrides]]]:  # noqa: E501
+        """[EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance  # noqa: E501
+
+        Will return the full list of optional properties configured for this integration instance and any naming overrides  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_instance_optional_property_mapping(integration, instance_id, async_req=True)
+        >>> result = thread.get()
+
+        :param integration: The type of the integration e.g. \"copp-clark\". (required)
+        :type integration: str
+        :param instance_id: Identifier of the instance (required)
+        :type instance_id: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: Dict[str, LusidPropertyDefinitionOverrides]
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_instance_optional_property_mapping_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_instance_optional_property_mapping_with_http_info(integration, instance_id, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_instance_optional_property_mapping_with_http_info(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance  # noqa: E501
+
+        Will return the full list of optional properties configured for this integration instance and any naming overrides  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_instance_optional_property_mapping_with_http_info(integration, instance_id, async_req=True)
+        >>> result = thread.get()
+
+        :param integration: The type of the integration e.g. \"copp-clark\". (required)
+        :type integration: str
+        :param instance_id: Identifier of the instance (required)
+        :type instance_id: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(Dict[str, LusidPropertyDefinitionOverrides], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'integration',
+            'instance_id'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_instance_optional_property_mapping" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['integration']:
+            _path_params['integration'] = _params['integration']
+
+        if _params['instance_id']:
+            _path_params['instanceId'] = _params['instance_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '404': None,
+            '200': "Dict[str, LusidPropertyDefinitionOverrides]",
+        }
+
+        return self.api_client.call_api(
+            '/api/integrations/instances/configuration/{integration}/{instanceId}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), **kwargs) -> List[IntegrationPropertyConfiguration]:  # noqa: E501
+        ...
+
+    @overload
+    def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), async_req: Optional[bool]=True, **kwargs) -> List[IntegrationPropertyConfiguration]:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), async_req: Optional[bool]=None, **kwargs) -> Union[List[IntegrationPropertyConfiguration], Awaitable[List[IntegrationPropertyConfiguration]]]:  # noqa: E501
+        """[EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration  # noqa: E501
+
+        <br>The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_integration_configuration(integration, async_req=True)
+        >>> result = thread.get()
+
+        :param integration: (required)
+        :type integration: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: List[IntegrationPropertyConfiguration]
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_integration_configuration_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_integration_configuration_with_http_info(integration, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_integration_configuration_with_http_info(self, integration : constr(strict=True, max_length=128, min_length=1), **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration  # noqa: E501
+
+        <br>The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_integration_configuration_with_http_info(integration, async_req=True)
+        >>> result = thread.get()
+
+        :param integration: (required)
+        :type integration: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[IntegrationPropertyConfiguration], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'integration'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_integration_configuration" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['integration']:
+            _path_params['integration'] = _params['integration']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[IntegrationPropertyConfiguration]",
+            '404': None,
+        }
+
+        return self.api_client.call_api(
+            '/api/integrations/configuration/{integration}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def get_schema(self, integration : Annotated[constr(strict=True, max_length=128, min_length=1), Field(..., description="The type of the integration e.g. \"copp-clark\".")], **kwargs) -> str:  # noqa: E501
         ...
 
@@ -1088,6 +1400,180 @@ class IntegrationsApi:
 
         return self.api_client.call_api(
             '/api/integrations', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverrides]], Field(description="Properties to be included and any overrides")] = None, **kwargs) -> Dict[str, LusidPropertyDefinitionOverrides]:  # noqa: E501
+        ...
+
+    @overload
+    def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverrides]], Field(description="Properties to be included and any overrides")] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, LusidPropertyDefinitionOverrides]:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverrides]], Field(description="Properties to be included and any overrides")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, LusidPropertyDefinitionOverrides], Awaitable[Dict[str, LusidPropertyDefinitionOverrides]]]:  # noqa: E501
+        """[EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance  # noqa: E501
+
+        The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instance  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.set_instance_optional_property_mapping(instance_id, integration, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: Identifier of the instance (required)
+        :type instance_id: str
+        :param integration: The type of the integration e.g. \"copp-clark\". (required)
+        :type integration: str
+        :param request_body: Properties to be included and any overrides
+        :type request_body: Dict[str, LusidPropertyDefinitionOverrides]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: Dict[str, LusidPropertyDefinitionOverrides]
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the set_instance_optional_property_mapping_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.set_instance_optional_property_mapping_with_http_info(instance_id, integration, request_body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def set_instance_optional_property_mapping_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverrides]], Field(description="Properties to be included and any overrides")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance  # noqa: E501
+
+        The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instance  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.set_instance_optional_property_mapping_with_http_info(instance_id, integration, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: Identifier of the instance (required)
+        :type instance_id: str
+        :param integration: The type of the integration e.g. \"copp-clark\". (required)
+        :type integration: str
+        :param request_body: Properties to be included and any overrides
+        :type request_body: Dict[str, LusidPropertyDefinitionOverrides]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(Dict[str, LusidPropertyDefinitionOverrides], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'instance_id',
+            'integration',
+            'request_body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_instance_optional_property_mapping" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['instance_id']:
+            _path_params['instanceId'] = _params['instance_id']
+
+        if _params['integration']:
+            _path_params['integration'] = _params['integration']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '404': None,
+            '200': "Dict[str, LusidPropertyDefinitionOverrides]",
+        }
+
+        return self.api_client.call_api(
+            '/api/integrations/instances/configuration/{integration}/{instanceId}', 'PUT',
             _path_params,
             _query_params,
             _header_params,

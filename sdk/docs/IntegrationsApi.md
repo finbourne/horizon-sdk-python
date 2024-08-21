@@ -8,9 +8,12 @@ Method | HTTP request | Description
 [**delete_instance**](IntegrationsApi.md#delete_instance) | **DELETE** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] DeleteInstance: Delete a single integration instance.
 [**execute_instance**](IntegrationsApi.md#execute_instance) | **POST** /api/integrations/instances/{instanceId}/execute | [EXPERIMENTAL] ExecuteInstance: Execute an integration instance.
 [**get_execution_ids_for_instance**](IntegrationsApi.md#get_execution_ids_for_instance) | **GET** /api/integrations/instances/{instanceId}/executions | [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
+[**get_instance_optional_property_mapping**](IntegrationsApi.md#get_instance_optional_property_mapping) | **GET** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
+[**get_integration_configuration**](IntegrationsApi.md#get_integration_configuration) | **GET** /api/integrations/configuration/{integration} | [EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration
 [**get_schema**](IntegrationsApi.md#get_schema) | **GET** /api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
 [**list_instances**](IntegrationsApi.md#list_instances) | **GET** /api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations.
 [**list_integrations**](IntegrationsApi.md#list_integrations) | **GET** /api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations.
+[**set_instance_optional_property_mapping**](IntegrationsApi.md#set_instance_optional_property_mapping) | **PUT** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
 [**update_instance**](IntegrationsApi.md#update_instance) | **PUT** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] UpdateInstance: Update a single integration instance.
 
 
@@ -339,6 +342,168 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_instance_optional_property_mapping**
+> Dict[str, LusidPropertyDefinitionOverrides] get_instance_optional_property_mapping(integration, instance_id)
+
+[EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
+
+Will return the full list of optional properties configured for this integration instance and any naming overrides
+
+### Example
+
+```python
+import asyncio
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    ApiClientFactory,
+    IntegrationsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(IntegrationsApi)
+        integration = 'integration_example' # str | The type of the integration e.g. \"copp-clark\".
+        instance_id = 'instance_id_example' # str | Identifier of the instance
+
+        try:
+            # [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
+            api_response = await api_instance.get_instance_optional_property_mapping(integration, instance_id)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling IntegrationsApi->get_instance_optional_property_mapping: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **integration** | **str**| The type of the integration e.g. \&quot;copp-clark\&quot;. | 
+ **instance_id** | **str**| Identifier of the instance | 
+
+### Return type
+
+[**Dict[str, LusidPropertyDefinitionOverrides]**](LusidPropertyDefinitionOverrides.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**404** | The requested instance(s) do not exist. |  -  |
+**200** | Success |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_integration_configuration**
+> List[IntegrationPropertyConfiguration] get_integration_configuration(integration)
+
+[EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration
+
+<br>The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.
+
+### Example
+
+```python
+import asyncio
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    ApiClientFactory,
+    IntegrationsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(IntegrationsApi)
+        integration = 'integration_example' # str | 
+
+        try:
+            # [EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration
+            api_response = await api_instance.get_integration_configuration(integration)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling IntegrationsApi->get_integration_configuration: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **integration** | **str**|  | 
+
+### Return type
+
+[**List[IntegrationPropertyConfiguration]**](IntegrationPropertyConfiguration.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**404** | The requested integration does not exist. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_schema**
 > str get_schema(integration)
 
@@ -565,6 +730,90 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+**200** | Success |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **set_instance_optional_property_mapping**
+> Dict[str, LusidPropertyDefinitionOverrides] set_instance_optional_property_mapping(instance_id, integration, request_body=request_body)
+
+[EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
+
+The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instance
+
+### Example
+
+```python
+import asyncio
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    ApiClientFactory,
+    IntegrationsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(IntegrationsApi)
+        instance_id = 'instance_id_example' # str | Identifier of the instance
+        integration = 'integration_example' # str | The type of the integration e.g. \"copp-clark\".
+        request_body = {"Instrument/TestVendor/CreditRating":{"displayNameOverride":"Vendor Credit Rating"}} # Dict[str, LusidPropertyDefinitionOverrides] | Properties to be included and any overrides (optional)
+
+        try:
+            # [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
+            api_response = await api_instance.set_instance_optional_property_mapping(instance_id, integration, request_body=request_body)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling IntegrationsApi->set_instance_optional_property_mapping: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_id** | **str**| Identifier of the instance | 
+ **integration** | **str**| The type of the integration e.g. \&quot;copp-clark\&quot;. | 
+ **request_body** | [**Dict[str, LusidPropertyDefinitionOverrides]**](LusidPropertyDefinitionOverrides.md)| Properties to be included and any overrides | [optional] 
+
+### Return type
+
+[**Dict[str, LusidPropertyDefinitionOverrides]**](LusidPropertyDefinitionOverrides.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**404** | The requested instance(s) do not exist. |  -  |
 **200** | Success |  -  |
 **0** | Error response |  -  |
 

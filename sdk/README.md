@@ -15,9 +15,12 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**delete_instance**](docs/IntegrationsApi.md#delete_instance) | **DELETE** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] DeleteInstance: Delete a single integration instance.
 *IntegrationsApi* | [**execute_instance**](docs/IntegrationsApi.md#execute_instance) | **POST** /api/integrations/instances/{instanceId}/execute | [EXPERIMENTAL] ExecuteInstance: Execute an integration instance.
 *IntegrationsApi* | [**get_execution_ids_for_instance**](docs/IntegrationsApi.md#get_execution_ids_for_instance) | **GET** /api/integrations/instances/{instanceId}/executions | [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
+*IntegrationsApi* | [**get_instance_optional_property_mapping**](docs/IntegrationsApi.md#get_instance_optional_property_mapping) | **GET** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
+*IntegrationsApi* | [**get_integration_configuration**](docs/IntegrationsApi.md#get_integration_configuration) | **GET** /api/integrations/configuration/{integration} | [EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration
 *IntegrationsApi* | [**get_schema**](docs/IntegrationsApi.md#get_schema) | **GET** /api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
 *IntegrationsApi* | [**list_instances**](docs/IntegrationsApi.md#list_instances) | **GET** /api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations.
 *IntegrationsApi* | [**list_integrations**](docs/IntegrationsApi.md#list_integrations) | **GET** /api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations.
+*IntegrationsApi* | [**set_instance_optional_property_mapping**](docs/IntegrationsApi.md#set_instance_optional_property_mapping) | **PUT** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
 *IntegrationsApi* | [**update_instance**](docs/IntegrationsApi.md#update_instance) | **PUT** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] UpdateInstance: Update a single integration instance.
 *ProcessHistoryApi* | [**create_complete_event**](docs/ProcessHistoryApi.md#create_complete_event) | **POST** /api/process-history/event/complete | [EARLY ACCESS] CreateCompleteEvent: Write a completed event to the Horizon Dashboard
 *ProcessHistoryApi* | [**create_update_event**](docs/ProcessHistoryApi.md#create_update_event) | **POST** /api/process-history/event/update | [EARLY ACCESS] CreateUpdateEvent: Write an update event to the Horizon Dashboard
@@ -45,11 +48,13 @@ Class | Method | HTTP request | Description
  - [CreateInstanceRequest](docs/CreateInstanceRequest.md)
  - [EnrichmentResponse](docs/EnrichmentResponse.md)
  - [ExecuteInstanceResponse](docs/ExecuteInstanceResponse.md)
+ - [FieldMapping](docs/FieldMapping.md)
  - [FileDetails](docs/FileDetails.md)
  - [Identifiers](docs/Identifiers.md)
  - [InstanceIdentifier](docs/InstanceIdentifier.md)
  - [IntegrationDescription](docs/IntegrationDescription.md)
  - [IntegrationInstance](docs/IntegrationInstance.md)
+ - [IntegrationPropertyConfiguration](docs/IntegrationPropertyConfiguration.md)
  - [Link](docs/Link.md)
  - [LusidEntity](docs/LusidEntity.md)
  - [LusidField](docs/LusidField.md)
@@ -73,11 +78,13 @@ Class | Method | HTTP request | Description
  - [ProcessInformation](docs/ProcessInformation.md)
  - [ProcessSummary](docs/ProcessSummary.md)
  - [ProcessUpdateResult](docs/ProcessUpdateResult.md)
+ - [PropertyMapping](docs/PropertyMapping.md)
  - [QueryRequest](docs/QueryRequest.md)
  - [QuerySpecification](docs/QuerySpecification.md)
  - [ResourceId](docs/ResourceId.md)
  - [RowDetails](docs/RowDetails.md)
  - [Trigger](docs/Trigger.md)
  - [UpdateInstanceRequest](docs/UpdateInstanceRequest.md)
+ - [VendorField](docs/VendorField.md)
  - [VendorProduct](docs/VendorProduct.md)
 

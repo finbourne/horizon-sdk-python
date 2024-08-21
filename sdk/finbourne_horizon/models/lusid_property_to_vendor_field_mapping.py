@@ -25,7 +25,7 @@ from finbourne_horizon.models.optionality import Optionality
 
 class LusidPropertyToVendorFieldMapping(BaseModel):
     """
-    The mapping of a LUSID Property to the Vendor Field that would populate it  # noqa: E501
+    The mapping of a LUSID Property from the Vendor Field that would populate it  # noqa: E501
     """
     var_property: LusidPropertyDefinition = Field(..., alias="property")
     vendor_field: StrictStr = Field(..., alias="vendorField")

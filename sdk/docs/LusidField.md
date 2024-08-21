@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **vendor_namespaces** | **List[str]** | The vendor namespace that contributes to this LUSID field. | 
 **vendor_fields** | **List[str]** | The underlying fields on the vendor package that contribute to this LUSID field | 
 **transformation_description** | **str** | A description of how the vendor package&#39;s field(s) get mapped to the LUSID field | [optional] 
+**entity_type** | **str** | LUSID Entity this refers to (e.g. Instrument) | 
+**entity_sub_type** | **str** | Sub-Entity this field refers to (e.g. Equity) | [optional] 
 
 ## Example
 

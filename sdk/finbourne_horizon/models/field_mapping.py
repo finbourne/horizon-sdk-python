@@ -19,21 +19,21 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from finbourne_horizon.models.vendor_field import VendorField
 
-class LusidField(BaseModel):
+class FieldMapping(BaseModel):
     """
-    A field on a LUSID entity  # noqa: E501
+    Mapping from a set of Vendor Fields to a LUSID core entity field  # noqa: E501
     """
-    field_name: constr(strict=True, min_length=1) = Field(..., alias="fieldName", description="The name of the LUSID field.")
-    default_value: Optional[StrictStr] = Field(None, alias="defaultValue", description="The default value for the field.")
-    vendor_packages: conlist(StrictStr) = Field(..., alias="vendorPackages", description="The vendor package that contributes to this LUSID field.")
-    vendor_namespaces: conlist(StrictStr) = Field(..., alias="vendorNamespaces", description="The vendor namespace that contributes to this LUSID field.")
-    vendor_fields: conlist(StrictStr) = Field(..., alias="vendorFields", description="The underlying fields on the vendor package that contribute to this LUSID field")
-    transformation_description: Optional[StrictStr] = Field(None, alias="transformationDescription", description="A description of how the vendor package's field(s) get mapped to the LUSID field")
-    entity_type: StrictStr = Field(..., alias="entityType", description="LUSID Entity this refers to (e.g. Instrument)")
-    entity_sub_type: Optional[StrictStr] = Field(None, alias="entitySubType", description="Sub-Entity this field refers to (e.g. Equity)")
-    __properties = ["fieldName", "defaultValue", "vendorPackages", "vendorNamespaces", "vendorFields", "transformationDescription", "entityType", "entitySubType"]
+    field_name: StrictStr = Field(..., alias="fieldName", description="The LUSID core entity field")
+    default_value: Optional[StrictStr] = Field(None, alias="defaultValue", description="Default value if needed")
+    vendor_fields: conlist(VendorField) = Field(..., alias="vendorFields", description="Fields that will be used to map to this field")
+    transformation_description: Optional[StrictStr] = Field(None, alias="transformationDescription", description="The transformation, if required, to map from VendorFields to the LUSID Property")
+    entity_type: StrictStr = Field(..., alias="entityType", description="The LUSID Entity this is valid for")
+    entity_sub_type: Optional[StrictStr] = Field(None, alias="entitySubType", description="The LUSID Entity sub type this is valid for")
+    versions: conlist(StrictStr) = Field(..., description="The versions of the Vendor integration this mapping is valid for")
+    __properties = ["fieldName", "defaultValue", "vendorFields", "transformationDescription", "entityType", "entitySubType", "versions"]
 
     class Config:
         """Pydantic configuration"""
@@ -49,8 +49,8 @@ class LusidField(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> LusidField:
-        """Create an instance of LusidField from a JSON string"""
+    def from_json(cls, json_str: str) -> FieldMapping:
+        """Create an instance of FieldMapping from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -59,6 +59,13 @@ class LusidField(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in vendor_fields (list)
+        _items = []
+        if self.vendor_fields:
+            for _item in self.vendor_fields:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['vendorFields'] = _items
         # set to None if default_value (nullable) is None
         # and __fields_set__ contains the field
         if self.default_value is None and "default_value" in self.__fields_set__:
@@ -77,22 +84,21 @@ class LusidField(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> LusidField:
-        """Create an instance of LusidField from a dict"""
+    def from_dict(cls, obj: dict) -> FieldMapping:
+        """Create an instance of FieldMapping from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return LusidField.parse_obj(obj)
+            return FieldMapping.parse_obj(obj)
 
-        _obj = LusidField.parse_obj({
+        _obj = FieldMapping.parse_obj({
             "field_name": obj.get("fieldName"),
             "default_value": obj.get("defaultValue"),
-            "vendor_packages": obj.get("vendorPackages"),
-            "vendor_namespaces": obj.get("vendorNamespaces"),
-            "vendor_fields": obj.get("vendorFields"),
+            "vendor_fields": [VendorField.from_dict(_item) for _item in obj.get("vendorFields")] if obj.get("vendorFields") is not None else None,
             "transformation_description": obj.get("transformationDescription"),
             "entity_type": obj.get("entityType"),
-            "entity_sub_type": obj.get("entitySubType")
+            "entity_sub_type": obj.get("entitySubType"),
+            "versions": obj.get("versions")
         })
         return _obj
