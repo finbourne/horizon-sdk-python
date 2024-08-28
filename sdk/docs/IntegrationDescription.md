@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **type** | **str** | Unique identifier of the integration e.g. \&quot;copp-clark\&quot;. | 
 **name** | **str** | Readable name of the integration e.g. \&quot;Copp Clark\&quot;. | 
 **description** | **str** | Describes the purpose of the integration. | 
+**supported_trigger_types** | **List[str]** | Trigger types (Time, File) the integration supports. | 
 **licensed** | **bool** | True if your domain is licensed to use this integration, otherwise false. | 
 
 ## Example

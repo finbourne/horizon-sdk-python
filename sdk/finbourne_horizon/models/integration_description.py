@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
 
 class IntegrationDescription(BaseModel):
     """
@@ -28,8 +28,9 @@ class IntegrationDescription(BaseModel):
     type: StrictStr = Field(..., description="Unique identifier of the integration e.g. \"copp-clark\".")
     name: StrictStr = Field(..., description="Readable name of the integration e.g. \"Copp Clark\".")
     description: StrictStr = Field(..., description="Describes the purpose of the integration.")
+    supported_trigger_types: conlist(StrictStr) = Field(..., alias="supportedTriggerTypes", description="Trigger types (Time, File) the integration supports.")
     licensed: StrictBool = Field(..., description="True if your domain is licensed to use this integration, otherwise false.")
-    __properties = ["type", "name", "description", "licensed"]
+    __properties = ["type", "name", "description", "supportedTriggerTypes", "licensed"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +71,7 @@ class IntegrationDescription(BaseModel):
             "type": obj.get("type"),
             "name": obj.get("name"),
             "description": obj.get("description"),
+            "supported_trigger_types": obj.get("supportedTriggerTypes"),
             "licensed": obj.get("licensed")
         })
         return _obj
