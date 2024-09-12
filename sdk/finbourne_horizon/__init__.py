@@ -20,6 +20,7 @@ from __future__ import absolute_import
 from finbourne_horizon.api.instrument_api import InstrumentApi
 from finbourne_horizon.api.integrations_api import IntegrationsApi
 from finbourne_horizon.api.process_history_api import ProcessHistoryApi
+from finbourne_horizon.api.runs_api import RunsApi
 from finbourne_horizon.api.vendor_api import VendorApi
 
 # import ApiClient
@@ -49,6 +50,11 @@ from finbourne_horizon.models.instance_identifier import InstanceIdentifier
 from finbourne_horizon.models.integration_description import IntegrationDescription
 from finbourne_horizon.models.integration_instance import IntegrationInstance
 from finbourne_horizon.models.integration_property_configuration import IntegrationPropertyConfiguration
+from finbourne_horizon.models.integration_run_integration import IntegrationRunIntegration
+from finbourne_horizon.models.integration_run_log import IntegrationRunLog
+from finbourne_horizon.models.integration_run_log_link import IntegrationRunLogLink
+from finbourne_horizon.models.integration_run_response import IntegrationRunResponse
+from finbourne_horizon.models.integration_run_version import IntegrationRunVersion
 from finbourne_horizon.models.link import Link
 from finbourne_horizon.models.lusid_entity import LusidEntity
 from finbourne_horizon.models.lusid_field import LusidField
@@ -99,6 +105,7 @@ __all__ = [
     "InstrumentApi",
     "IntegrationsApi",
     "ProcessHistoryApi",
+    "RunsApi",
     "VendorApi",
     "AllowedParameterValue",
     "AuditCompleteRequest",
@@ -118,6 +125,11 @@ __all__ = [
     "IntegrationDescription",
     "IntegrationInstance",
     "IntegrationPropertyConfiguration",
+    "IntegrationRunIntegration",
+    "IntegrationRunLog",
+    "IntegrationRunLogLink",
+    "IntegrationRunResponse",
+    "IntegrationRunVersion",
     "Link",
     "LusidEntity",
     "LusidField",
