@@ -29,6 +29,7 @@ Method | HTTP request | Description
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -55,6 +56,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -69,6 +78,9 @@ async def main():
         create_instance_request = CreateInstanceRequest.from_dict({"integrationType":"copp-clark","name":"Payment Systems","description":"Payment systems calendar for GBP only","enabled":false,"triggers":[{"type":"time","cronExpression":"0 0 2 ? * *","timeZone":"UTC"}],"details":{"paymentSystemsCalendar":{"currencyFilter":["EUR"],"importUnqualified":false}}}) # CreateInstanceRequest | The new integration instance. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_instance(create_instance_request=create_instance_request, opts=opts)
+
             # [EXPERIMENTAL] CreateInstance: Create a single integration instance.
             api_response = await api_instance.create_instance(create_instance_request=create_instance_request)
             pprint(api_response)
@@ -114,6 +126,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -140,6 +153,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -149,6 +170,9 @@ async def main():
         instance_id = 'instance_id_example' # str | Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
 
         try:
+            # uncomment the below to set overrides at the request level
+            # await api_instance.delete_instance(instance_id, opts=opts)
+
             # [EXPERIMENTAL] DeleteInstance: Delete a single integration instance.
             await api_instance.delete_instance(instance_id)        except ApiException as e:
             print("Exception when calling IntegrationsApi->delete_instance: %s\n" % e)
@@ -192,6 +216,7 @@ void (empty response body)
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -218,6 +243,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -227,6 +260,9 @@ async def main():
         instance_id = 'instance_id_example' # str | Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.execute_instance(instance_id, opts=opts)
+
             # [EXPERIMENTAL] ExecuteInstance: Execute an integration instance.
             api_response = await api_instance.execute_instance(instance_id)
             pprint(api_response)
@@ -272,6 +308,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -298,6 +335,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -308,6 +353,9 @@ async def main():
         limit = 56 # int | Maximum number of returned execution ids (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_execution_ids_for_instance(instance_id, limit=limit, opts=opts)
+
             # [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
             api_response = await api_instance.get_execution_ids_for_instance(instance_id, limit=limit)
             pprint(api_response)
@@ -354,6 +402,7 @@ Will return the full list of optional properties configured for this integration
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -380,6 +429,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -390,6 +447,9 @@ async def main():
         instance_id = 'instance_id_example' # str | Identifier of the instance
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_instance_optional_property_mapping(integration, instance_id, opts=opts)
+
             # [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
             api_response = await api_instance.get_instance_optional_property_mapping(integration, instance_id)
             pprint(api_response)
@@ -436,6 +496,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -462,6 +523,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -471,6 +540,9 @@ async def main():
         integration = 'integration_example' # str | 
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_integration_configuration(integration, opts=opts)
+
             # [EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration
             api_response = await api_instance.get_integration_configuration(integration)
             pprint(api_response)
@@ -516,6 +588,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -542,6 +615,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -551,6 +632,9 @@ async def main():
         integration = 'integration_example' # str | The type of the integration e.g. \"copp-clark\".
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_schema(integration, opts=opts)
+
             # [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
             api_response = await api_instance.get_schema(integration)
             pprint(api_response)
@@ -596,6 +680,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -622,6 +707,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -630,6 +723,9 @@ async def main():
         api_instance = api_client_factory.build(IntegrationsApi)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_instances(opts=opts)
+
             # [EXPERIMENTAL] ListInstances: List instances across all integrations.
             api_response = await api_instance.list_instances()
             pprint(api_response)
@@ -672,6 +768,7 @@ This endpoint does not need any parameter.
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -698,6 +795,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -706,6 +811,9 @@ async def main():
         api_instance = api_client_factory.build(IntegrationsApi)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_integrations(opts=opts)
+
             # [EXPERIMENTAL] ListIntegrations: List available integrations.
             api_response = await api_instance.list_integrations()
             pprint(api_response)
@@ -747,6 +855,7 @@ The full list of properties must be supplied, the removal of a property from thi
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -773,6 +882,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -784,6 +901,9 @@ async def main():
         request_body = {"Instrument/TestVendor/CreditRating":{"displayNameOverride":"Vendor Credit Rating"}} # Dict[str, LusidPropertyDefinitionOverrides] | Properties to be included and any overrides (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.set_instance_optional_property_mapping(instance_id, integration, request_body=request_body, opts=opts)
+
             # [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
             api_response = await api_instance.set_instance_optional_property_mapping(instance_id, integration, request_body=request_body)
             pprint(api_response)
@@ -831,6 +951,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -857,6 +978,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -872,6 +1001,9 @@ async def main():
         update_instance_request = UpdateInstanceRequest.from_dict({"id":"b64135e7-98a0-41af-a845-d86167d54cc7","integrationType":"copp-clark","name":"Payment Systems","description":"Payment Systems calendar for EUR only","enabled":false,"triggers":[{"type":"time","cronExpression":"0 0 5 ? * *","timeZone":"UTC"}],"details":{"paymentSystemsCalendar":{"currencyFilter":["EUR"],"importUnqualified":false}}}) # UpdateInstanceRequest | The new integration instance. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # await api_instance.update_instance(instance_id, update_instance_request=update_instance_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateInstance: Update a single integration instance.
             await api_instance.update_instance(instance_id, update_instance_request=update_instance_request)        except ApiException as e:
             print("Exception when calling IntegrationsApi->update_instance: %s\n" % e)

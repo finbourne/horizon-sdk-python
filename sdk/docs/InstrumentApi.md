@@ -22,6 +22,7 @@ Method | HTTP request | Description
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -48,6 +49,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -62,6 +71,9 @@ async def main():
         onboard_instrument_request = OnboardInstrumentRequest.from_dict(finbourne_horizon.OnboardInstrumentRequest()) # OnboardInstrumentRequest | 
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_instrument(onboard_instrument_request, opts=opts)
+
             # [EARLY ACCESS] CreateInstrument: Creates and masters instruments with third party vendors.
             api_response = await api_instance.create_instrument(onboard_instrument_request)
             pprint(api_response)
@@ -105,6 +117,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -131,6 +144,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -146,6 +167,9 @@ async def main():
         identifiers = Identifiers.from_dict(finbourne_horizon.Identifiers()) # Identifiers | 
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.enrich_instrument(vendor_product_key, identifiers, opts=opts)
+
             # [EARLY ACCESS] EnrichInstrument: Enriches an existing LUSID instrument using vendor data. Enrichment included identifiers, properties and market data.
             api_response = await api_instance.enrich_instrument(vendor_product_key, identifiers)
             pprint(api_response)
@@ -190,6 +214,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -216,6 +241,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -225,6 +258,9 @@ async def main():
         parameter_name = finbourne_horizon.OpenFigiParameterOptionName() # OpenFigiParameterOptionName | 
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_open_figi_parameter_option(parameter_name, opts=opts)
+
             # [EARLY ACCESS] GetOpenFigiParameterOption: Get all supported market sector values for OpenFigi search
             api_response = await api_instance.get_open_figi_parameter_option(parameter_name)
             pprint(api_response)
@@ -267,6 +303,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -293,6 +330,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -302,6 +347,9 @@ async def main():
         id = 'id_example' # str | The execution ID returned by a previous query
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.retrieve_perm_id_result(id, opts=opts)
+
             # [EARLY ACCESS] RetrievePermIdResult: Retrieve PermId results from a previous query.
             api_response = await api_instance.retrieve_perm_id_result(id)
             pprint(api_response)
@@ -344,6 +392,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -370,6 +419,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -382,6 +439,9 @@ async def main():
         market_sector = 'All' # str | The market sector to search, defaults to `All`. (optional) (default to 'All')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.search_open_figi(query, use_perm_id, limit=limit, market_sector=market_sector, opts=opts)
+
             # [EARLY ACCESS] SearchOpenFigi: Search OpenFigi for instruments that match the specified terms.
             api_response = await api_instance.search_open_figi(query, use_perm_id, limit=limit, market_sector=market_sector)
             pprint(api_response)
@@ -427,6 +487,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -453,6 +514,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -464,6 +533,9 @@ async def main():
         general_security_type = 'general_security_type_example' # str | 
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.vendors(market_sector, security_type, general_security_type, opts=opts)
+
             # [EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.
             api_response = await api_instance.vendors(market_sector, security_type, general_security_type)
             pprint(api_response)

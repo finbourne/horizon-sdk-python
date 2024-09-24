@@ -19,6 +19,7 @@ Get run results
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -45,6 +46,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -57,6 +66,9 @@ async def main():
         page_token = '' # str |  (optional) (default to '')
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token, opts=opts)
+
             # [EXPERIMENTAL] GetRunResults: 
             api_response = await api_instance.get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
             pprint(api_response)

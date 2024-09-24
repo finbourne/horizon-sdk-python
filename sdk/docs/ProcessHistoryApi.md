@@ -21,6 +21,7 @@ Method | HTTP request | Description
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -47,6 +48,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -61,6 +70,9 @@ async def main():
         audit_complete_request = AuditCompleteRequest.from_dict(finbourne_horizon.AuditCompleteRequest()) # AuditCompleteRequest | 
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_complete_event(audit_complete_request, opts=opts)
+
             # [EARLY ACCESS] CreateCompleteEvent: Write a completed event to the Horizon Dashboard
             api_response = await api_instance.create_complete_event(audit_complete_request)
             pprint(api_response)
@@ -103,6 +115,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -129,6 +142,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -143,6 +164,9 @@ async def main():
         audit_update_request = AuditUpdateRequest.from_dict(finbourne_horizon.AuditUpdateRequest()) # AuditUpdateRequest | 
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_update_event(audit_update_request, opts=opts)
+
             # [EARLY ACCESS] CreateUpdateEvent: Write an update event to the Horizon Dashboard
             api_response = await api_instance.create_update_event(audit_update_request)
             pprint(api_response)
@@ -185,6 +209,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -211,6 +236,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -219,6 +252,9 @@ async def main():
         api_instance = api_client_factory.build(ProcessHistoryApi)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_latest_runs(opts=opts)
+
             # [EARLY ACCESS] GetLatestRuns: Get latest run for each process
             api_response = await api_instance.get_latest_runs()
             pprint(api_response)
@@ -258,6 +294,7 @@ This endpoint does not need any parameter.
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -284,6 +321,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -299,6 +344,9 @@ async def main():
         query_request = QueryRequest.from_dict(finbourne_horizon.QueryRequest()) # QueryRequest | 
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.process_entry_updates(run_id, query_request, opts=opts)
+
             # [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
             api_response = await api_instance.process_entry_updates(run_id, query_request)
             pprint(api_response)
@@ -342,6 +390,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
@@ -368,6 +417,14 @@ async def main():
     # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -383,6 +440,9 @@ async def main():
         process_name = 'process_name_example' # str |  (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.process_history_entries(query_request, process_name=process_name, opts=opts)
+
             # [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
             api_response = await api_instance.process_history_entries(query_request, process_name=process_name)
             pprint(api_response)
