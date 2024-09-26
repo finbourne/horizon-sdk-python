@@ -43,6 +43,7 @@ from finbourne_horizon.models.lusid_field import LusidField
 from finbourne_horizon.models.lusid_problem_details import LusidProblemDetails
 from finbourne_horizon.models.lusid_property_definition import LusidPropertyDefinition
 from finbourne_horizon.models.lusid_property_definition_overrides import LusidPropertyDefinitionOverrides
+from finbourne_horizon.models.lusid_property_definition_overrides_by_type import LusidPropertyDefinitionOverridesByType
 from finbourne_horizon.models.lusid_property_definition_overrides_response import LusidPropertyDefinitionOverridesResponse
 from finbourne_horizon.models.lusid_property_to_vendor_field_mapping import LusidPropertyToVendorFieldMapping
 from finbourne_horizon.models.lusid_validation_problem_details import LusidValidationProblemDetails
@@ -101,6 +102,7 @@ __all__ = [
     "LusidProblemDetails",
     "LusidPropertyDefinition",
     "LusidPropertyDefinitionOverrides",
+    "LusidPropertyDefinitionOverridesByType",
     "LusidPropertyDefinitionOverridesResponse",
     "LusidPropertyToVendorFieldMapping",
     "LusidValidationProblemDetails",

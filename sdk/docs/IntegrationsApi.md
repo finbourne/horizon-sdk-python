@@ -391,7 +391,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_instance_optional_property_mapping**
-> Dict[str, LusidPropertyDefinitionOverrides] get_instance_optional_property_mapping(integration, instance_id)
+> Dict[str, LusidPropertyDefinitionOverridesByType] get_instance_optional_property_mapping(integration, instance_id)
 
 [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
 
@@ -468,7 +468,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Dict[str, LusidPropertyDefinitionOverrides]**](LusidPropertyDefinitionOverrides.md)
+[**Dict[str, LusidPropertyDefinitionOverridesByType]**](LusidPropertyDefinitionOverridesByType.md)
 
 ### HTTP request headers
 
@@ -844,7 +844,7 @@ This endpoint does not need any parameter.
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **set_instance_optional_property_mapping**
-> Dict[str, LusidPropertyDefinitionOverrides] set_instance_optional_property_mapping(instance_id, integration, request_body=request_body)
+> Dict[str, LusidPropertyDefinitionOverridesByType] set_instance_optional_property_mapping(instance_id, integration, request_body=request_body)
 
 [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
 
@@ -898,7 +898,7 @@ async def main():
         api_instance = api_client_factory.build(IntegrationsApi)
         instance_id = 'instance_id_example' # str | Identifier of the instance
         integration = 'integration_example' # str | The type of the integration e.g. \"copp-clark\".
-        request_body = {"Instrument/TestVendor/CreditRating":{"displayNameOverride":"Vendor Credit Rating"}} # Dict[str, LusidPropertyDefinitionOverrides] | Properties to be included and any overrides (optional)
+        request_body = {"Instrument/TestVendor/CreditRating":{"displayNameOverride":"Vendor Credit Rating","entityType":"Instrument","entitySubType":["Equity"]}} # Dict[str, LusidPropertyDefinitionOverridesByType] | Properties to be included and any overrides (optional)
 
         try:
             # uncomment the below to set overrides at the request level
@@ -919,11 +919,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id** | **str**| Identifier of the instance | 
  **integration** | **str**| The type of the integration e.g. \&quot;copp-clark\&quot;. | 
- **request_body** | [**Dict[str, LusidPropertyDefinitionOverrides]**](LusidPropertyDefinitionOverrides.md)| Properties to be included and any overrides | [optional] 
+ **request_body** | [**Dict[str, LusidPropertyDefinitionOverridesByType]**](LusidPropertyDefinitionOverridesByType.md)| Properties to be included and any overrides | [optional] 
 
 ### Return type
 
-[**Dict[str, LusidPropertyDefinitionOverrides]**](LusidPropertyDefinitionOverrides.md)
+[**Dict[str, LusidPropertyDefinitionOverridesByType]**](LusidPropertyDefinitionOverridesByType.md)
 
 ### HTTP request headers
 
