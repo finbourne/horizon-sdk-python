@@ -1,18 +1,18 @@
-# finbourne_horizon.RunsApi
+# finbourne_horizon.LogsApi
 
 All URIs are relative to *https://fbn-prd.lusid.com/horizon*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_run_results**](RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: Get run results
+[**get_integration_log_results**](LogsApi.md#get_integration_log_results) | **GET** /api/logs | [EXPERIMENTAL] GetIntegrationLogResults: Get integration log results
 
 
-# **get_run_results**
-> IntegrationRunResponse get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+# **get_integration_log_results**
+> IIntegrationLogResponse get_integration_log_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
 
-[EXPERIMENTAL] GetRunResults: Get run results
+[EXPERIMENTAL] GetIntegrationLogResults: Get integration log results
 
-Get run results
+Get integration log results
 
 ### Example
 
@@ -24,7 +24,7 @@ from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
     ApiClientFactory,
-    RunsApi
+    LogsApi
 )
 
 async def main():
@@ -59,21 +59,21 @@ async def main():
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
     async with api_client_factory:
         # Create an instance of the API class
-        api_instance = api_client_factory.build(RunsApi)
+        api_instance = api_client_factory.build(LogsApi)
         filter = 'filter_example' # str | Expression to filter the result set. (optional)
         sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-        limit = 10 # int | When paginating, limit the results to this number. (optional) (default to 10)
-        page_token = '' # str | The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request. (optional) (default to '')
+        limit = 100 # int | When paginating, limit the results to this number. (optional) (default to 100)
+        page_token = '' # str | The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. (optional) (default to '')
 
         try:
             # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token, opts=opts)
+            # api_response = await api_instance.get_integration_log_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token, opts=opts)
 
-            # [EXPERIMENTAL] GetRunResults: Get run results
-            api_response = await api_instance.get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+            # [EXPERIMENTAL] GetIntegrationLogResults: Get integration log results
+            api_response = await api_instance.get_integration_log_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
             pprint(api_response)
         except ApiException as e:
-            print("Exception when calling RunsApi->get_run_results: %s\n" % e)
+            print("Exception when calling LogsApi->get_integration_log_results: %s\n" % e)
 
 asyncio.run(main())
 ```
@@ -84,12 +84,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **filter** | **str**| Expression to filter the result set. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
- **limit** | **int**| When paginating, limit the results to this number. | [optional] [default to 10]
- **page_token** | **str**| The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt; and &lt;i&gt;filter&lt;/i&gt; fields must not have changed since the original request. | [optional] [default to &#39;&#39;]
+ **limit** | **int**| When paginating, limit the results to this number. | [optional] [default to 100]
+ **page_token** | **str**| The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt; and &lt;i&gt;filter&lt;/i&gt; fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] [default to &#39;&#39;]
 
 ### Return type
 
-[**IntegrationRunResponse**](IntegrationRunResponse.md)
+[**IIntegrationLogResponse**](IIntegrationLogResponse.md)
 
 ### HTTP request headers
 

@@ -22,12 +22,13 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**list_integrations**](docs/IntegrationsApi.md#list_integrations) | **GET** /api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations.
 *IntegrationsApi* | [**set_instance_optional_property_mapping**](docs/IntegrationsApi.md#set_instance_optional_property_mapping) | **PUT** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
 *IntegrationsApi* | [**update_instance**](docs/IntegrationsApi.md#update_instance) | **PUT** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] UpdateInstance: Update a single integration instance.
+*LogsApi* | [**get_integration_log_results**](docs/LogsApi.md#get_integration_log_results) | **GET** /api/logs | [EXPERIMENTAL] GetIntegrationLogResults: Get integration log results
 *ProcessHistoryApi* | [**create_complete_event**](docs/ProcessHistoryApi.md#create_complete_event) | **POST** /api/process-history/event/complete | [EARLY ACCESS] CreateCompleteEvent: Write a completed event to the Horizon Dashboard
 *ProcessHistoryApi* | [**create_update_event**](docs/ProcessHistoryApi.md#create_update_event) | **POST** /api/process-history/event/update | [EARLY ACCESS] CreateUpdateEvent: Write an update event to the Horizon Dashboard
 *ProcessHistoryApi* | [**get_latest_runs**](docs/ProcessHistoryApi.md#get_latest_runs) | **GET** /api/process-history/$latestRuns | [EARLY ACCESS] GetLatestRuns: Get latest run for each process
 *ProcessHistoryApi* | [**process_entry_updates**](docs/ProcessHistoryApi.md#process_entry_updates) | **POST** /api/process-history/entries/$query | [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
 *ProcessHistoryApi* | [**process_history_entries**](docs/ProcessHistoryApi.md#process_history_entries) | **POST** /api/process-history/$query | [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
-*RunsApi* | [**get_run_results**](docs/RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: 
+*RunsApi* | [**get_run_results**](docs/RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: Get run results
 *VendorApi* | [**get_core_field_mappings_for_product_entity**](docs/VendorApi.md#get_core_field_mappings_for_product_entity) | **GET** /api/vendor/mappings/fields | [EARLY ACCESS] GetCoreFieldMappingsForProductEntity: Get core field mappings for a given vendor product's entity.
 *VendorApi* | [**get_optional_mappings_for_product_entity**](docs/VendorApi.md#get_optional_mappings_for_product_entity) | **GET** /api/vendor/mappings/optional | [EARLY ACCESS] GetOptionalMappingsForProductEntity: Get a user defined LUSID property mappings for the specified vendor / LUSID entity.
 *VendorApi* | [**get_property_mappings_for_product_entity**](docs/VendorApi.md#get_property_mappings_for_product_entity) | **GET** /api/vendor/mappings/properties | [EARLY ACCESS] GetPropertyMappingsForProductEntity: Gets the property mappings for a given vendor product's entity
@@ -51,6 +52,7 @@ Class | Method | HTTP request | Description
  - [ExecuteInstanceResponse](docs/ExecuteInstanceResponse.md)
  - [FieldMapping](docs/FieldMapping.md)
  - [FileDetails](docs/FileDetails.md)
+ - [IIntegrationLogResponse](docs/IIntegrationLogResponse.md)
  - [Identifiers](docs/Identifiers.md)
  - [InstanceIdentifier](docs/InstanceIdentifier.md)
  - [IntegrationDescription](docs/IntegrationDescription.md)

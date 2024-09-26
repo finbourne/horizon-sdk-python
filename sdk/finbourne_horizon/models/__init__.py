@@ -27,6 +27,7 @@ from finbourne_horizon.models.enrichment_response import EnrichmentResponse
 from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
 from finbourne_horizon.models.field_mapping import FieldMapping
 from finbourne_horizon.models.file_details import FileDetails
+from finbourne_horizon.models.i_integration_log_response import IIntegrationLogResponse
 from finbourne_horizon.models.identifiers import Identifiers
 from finbourne_horizon.models.instance_identifier import InstanceIdentifier
 from finbourne_horizon.models.integration_description import IntegrationDescription
@@ -86,6 +87,7 @@ __all__ = [
     "ExecuteInstanceResponse",
     "FieldMapping",
     "FileDetails",
+    "IIntegrationLogResponse",
     "Identifiers",
     "InstanceIdentifier",
     "IntegrationDescription",

@@ -19,6 +19,7 @@ from __future__ import absolute_import
 # import apis into sdk package
 from finbourne_horizon.api.instrument_api import InstrumentApi
 from finbourne_horizon.api.integrations_api import IntegrationsApi
+from finbourne_horizon.api.logs_api import LogsApi
 from finbourne_horizon.api.process_history_api import ProcessHistoryApi
 from finbourne_horizon.api.runs_api import RunsApi
 from finbourne_horizon.api.vendor_api import VendorApi
@@ -45,6 +46,7 @@ from finbourne_horizon.models.enrichment_response import EnrichmentResponse
 from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
 from finbourne_horizon.models.field_mapping import FieldMapping
 from finbourne_horizon.models.file_details import FileDetails
+from finbourne_horizon.models.i_integration_log_response import IIntegrationLogResponse
 from finbourne_horizon.models.identifiers import Identifiers
 from finbourne_horizon.models.instance_identifier import InstanceIdentifier
 from finbourne_horizon.models.integration_description import IntegrationDescription
@@ -105,6 +107,7 @@ from finbourne_horizon.extensions import (
 __all__ = [
     "InstrumentApi",
     "IntegrationsApi",
+    "LogsApi",
     "ProcessHistoryApi",
     "RunsApi",
     "VendorApi",
@@ -121,6 +124,7 @@ __all__ = [
     "ExecuteInstanceResponse",
     "FieldMapping",
     "FileDetails",
+    "IIntegrationLogResponse",
     "Identifiers",
     "InstanceIdentifier",
     "IntegrationDescription",
