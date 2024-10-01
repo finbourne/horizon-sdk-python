@@ -29,6 +29,7 @@ Class | Method | HTTP request | Description
 *ProcessHistoryApi* | [**process_entry_updates**](docs/ProcessHistoryApi.md#process_entry_updates) | **POST** /api/process-history/entries/$query | [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
 *ProcessHistoryApi* | [**process_history_entries**](docs/ProcessHistoryApi.md#process_history_entries) | **POST** /api/process-history/$query | [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
 *RunsApi* | [**get_run_results**](docs/RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: Get run results
+*RunsApi* | [**rerun_instance**](docs/RunsApi.md#rerun_instance) | **PUT** /api/runs/{runId}/rerun | [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
 *VendorApi* | [**get_core_field_mappings_for_product_entity**](docs/VendorApi.md#get_core_field_mappings_for_product_entity) | **GET** /api/vendor/mappings/fields | [EARLY ACCESS] GetCoreFieldMappingsForProductEntity: Get core field mappings for a given vendor product's entity.
 *VendorApi* | [**get_optional_mappings_for_product_entity**](docs/VendorApi.md#get_optional_mappings_for_product_entity) | **GET** /api/vendor/mappings/optional | [EARLY ACCESS] GetOptionalMappingsForProductEntity: Get a user defined LUSID property mappings for the specified vendor / LUSID entity.
 *VendorApi* | [**get_property_mappings_for_product_entity**](docs/VendorApi.md#get_property_mappings_for_product_entity) | **GET** /api/vendor/mappings/properties | [EARLY ACCESS] GetPropertyMappingsForProductEntity: Gets the property mappings for a given vendor product's entity
@@ -54,10 +55,12 @@ Class | Method | HTTP request | Description
  - [FileDetails](docs/FileDetails.md)
  - [IIntegrationLogResponse](docs/IIntegrationLogResponse.md)
  - [Identifiers](docs/Identifiers.md)
+ - [InstanceExecutionReferenceId](docs/InstanceExecutionReferenceId.md)
  - [InstanceIdentifier](docs/InstanceIdentifier.md)
  - [IntegrationDescription](docs/IntegrationDescription.md)
  - [IntegrationInstance](docs/IntegrationInstance.md)
  - [IntegrationPropertyConfiguration](docs/IntegrationPropertyConfiguration.md)
+ - [IntegrationRerunResponse](docs/IntegrationRerunResponse.md)
  - [IntegrationRunIntegration](docs/IntegrationRunIntegration.md)
  - [IntegrationRunLog](docs/IntegrationRunLog.md)
  - [IntegrationRunLogLink](docs/IntegrationRunLogLink.md)

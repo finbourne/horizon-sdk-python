@@ -350,9 +350,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # query_request = QueryRequest()
         # query_request = QueryRequest.from_json("")
-        query_request = QueryRequest.from_dict(finbourne_horizon.QueryRequest()) # QueryRequest | 
+        # query_request = QueryRequest.from_dict({})
+        query_request = QueryRequest()
 
         try:
             # uncomment the below to set overrides at the request level

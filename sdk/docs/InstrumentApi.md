@@ -66,9 +66,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # onboard_instrument_request = OnboardInstrumentRequest()
         # onboard_instrument_request = OnboardInstrumentRequest.from_json("")
-        onboard_instrument_request = OnboardInstrumentRequest.from_dict(finbourne_horizon.OnboardInstrumentRequest()) # OnboardInstrumentRequest | 
+        # onboard_instrument_request = OnboardInstrumentRequest.from_dict({})
+        onboard_instrument_request = OnboardInstrumentRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -162,9 +162,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # identifiers = Identifiers()
         # identifiers = Identifiers.from_json("")
-        identifiers = Identifiers.from_dict(finbourne_horizon.Identifiers()) # Identifiers | 
+        # identifiers = Identifiers.from_dict({})
+        identifiers = Identifiers()
 
         try:
             # uncomment the below to set overrides at the request level

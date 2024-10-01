@@ -73,9 +73,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_instance_request = CreateInstanceRequest()
         # create_instance_request = CreateInstanceRequest.from_json("")
-        create_instance_request = CreateInstanceRequest.from_dict({"integrationType":"copp-clark","name":"Payment Systems","description":"Payment systems calendar for GBP only","enabled":false,"triggers":[{"type":"time","cronExpression":"0 0 2 ? * *","timeZone":"UTC"}],"details":{"paymentSystemsCalendar":{"currencyFilter":["EUR"],"importUnqualified":false}}}) # CreateInstanceRequest | The new integration instance. (optional)
+        # create_instance_request = CreateInstanceRequest.from_dict({})
+        create_instance_request = CreateInstanceRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -996,9 +996,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_instance_request = UpdateInstanceRequest()
         # update_instance_request = UpdateInstanceRequest.from_json("")
-        update_instance_request = UpdateInstanceRequest.from_dict({"id":"b64135e7-98a0-41af-a845-d86167d54cc7","integrationType":"copp-clark","name":"Payment Systems","description":"Payment Systems calendar for EUR only","enabled":false,"triggers":[{"type":"time","cronExpression":"0 0 5 ? * *","timeZone":"UTC"}],"details":{"paymentSystemsCalendar":{"currencyFilter":["EUR"],"importUnqualified":false}}}) # UpdateInstanceRequest | The new integration instance. (optional)
+        # update_instance_request = UpdateInstanceRequest.from_dict({})
+        update_instance_request = UpdateInstanceRequest()
 
         try:
             # uncomment the below to set overrides at the request level

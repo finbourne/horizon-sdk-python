@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/horizon*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_run_results**](RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: Get run results
+[**rerun_instance**](RunsApi.md#rerun_instance) | **PUT** /api/runs/{runId}/rerun | [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
 
 
 # **get_run_results**
@@ -101,6 +102,98 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success |  -  |
 **404** | Not Found |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **rerun_instance**
+> IntegrationRerunResponse rerun_instance(run_id)
+
+[EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
+
+<br>Reruns an execution instance of an integration.  <br />  <br />  <br>The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+
+### Example
+
+```python
+import asyncio
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    ApiClientFactory,
+    RunsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(RunsApi)
+        run_id = 'run_id_example' # str | Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
+
+        try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.rerun_instance(run_id, opts=opts)
+
+            # [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
+            api_response = await api_instance.rerun_instance(run_id)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling RunsApi->rerun_instance: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_id** | **str**| Run identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | 
+
+### Return type
+
+[**IntegrationRerunResponse**](IntegrationRerunResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The instance was rerun. |  -  |
+**404** | The execution does not exist. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
