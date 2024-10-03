@@ -63,7 +63,7 @@ async def main():
         api_instance = api_client_factory.build(RunsApi)
         filter = 'filter_example' # str | Expression to filter the result set. (optional)
         sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-        limit = 10 # int | When paginating, limit the results to this number. (optional) (default to 10)
+        limit = 100 # int | When paginating, limit the results to this number. (optional) (default to 100)
         page_token = '' # str | The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request. (optional) (default to '')
 
         try:
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **filter** | **str**| Expression to filter the result set. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
- **limit** | **int**| When paginating, limit the results to this number. | [optional] [default to 10]
+ **limit** | **int**| When paginating, limit the results to this number. | [optional] [default to 100]
  **page_token** | **str**| The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt; and &lt;i&gt;filter&lt;/i&gt; fields must not have changed since the original request. | [optional] [default to &#39;&#39;]
 
 ### Return type
