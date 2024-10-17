@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **description_override** | **str** |  | [optional] 
 **entity_type** | **str** |  | [optional] 
 **entity_sub_type** | **List[str]** |  | [optional] 
+**vendor_package** | **List[str]** |  | [optional] 
 
 ## Example
 

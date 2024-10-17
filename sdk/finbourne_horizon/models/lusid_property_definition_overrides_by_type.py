@@ -29,7 +29,8 @@ class LusidPropertyDefinitionOverridesByType(BaseModel):
     description_override: Optional[StrictStr] = Field(None, alias="descriptionOverride")
     entity_type: Optional[StrictStr] = Field(None, alias="entityType")
     entity_sub_type: Optional[conlist(StrictStr)] = Field(None, alias="entitySubType")
-    __properties = ["displayNameOverride", "descriptionOverride", "entityType", "entitySubType"]
+    vendor_package: Optional[conlist(StrictStr)] = Field(None, alias="vendorPackage")
+    __properties = ["displayNameOverride", "descriptionOverride", "entityType", "entitySubType", "vendorPackage"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,6 +76,11 @@ class LusidPropertyDefinitionOverridesByType(BaseModel):
         if self.entity_sub_type is None and "entity_sub_type" in self.__fields_set__:
             _dict['entitySubType'] = None
 
+        # set to None if vendor_package (nullable) is None
+        # and __fields_set__ contains the field
+        if self.vendor_package is None and "vendor_package" in self.__fields_set__:
+            _dict['vendorPackage'] = None
+
         return _dict
 
     @classmethod
@@ -90,6 +96,7 @@ class LusidPropertyDefinitionOverridesByType(BaseModel):
             "display_name_override": obj.get("displayNameOverride"),
             "description_override": obj.get("descriptionOverride"),
             "entity_type": obj.get("entityType"),
-            "entity_sub_type": obj.get("entitySubType")
+            "entity_sub_type": obj.get("entitySubType"),
+            "vendor_package": obj.get("vendorPackage")
         })
         return _obj

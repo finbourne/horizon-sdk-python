@@ -898,7 +898,7 @@ async def main():
         api_instance = api_client_factory.build(IntegrationsApi)
         instance_id = 'instance_id_example' # str | Identifier of the instance
         integration = 'integration_example' # str | The type of the integration e.g. \"copp-clark\".
-        request_body = {"Instrument/TestVendor/CreditRating":{"displayNameOverride":"Vendor Credit Rating","entityType":"Instrument","entitySubType":["Equity"]}} # Dict[str, LusidPropertyDefinitionOverridesByType] | Properties to be included and any overrides (optional)
+        request_body = {"Instrument/TestVendor/CreditRating":{"displayNameOverride":"Vendor Credit Rating","entityType":"Instrument","entitySubType":["Equity"],"vendorPackage":["Transaction"]}} # Dict[str, LusidPropertyDefinitionOverridesByType] | Properties to be included and any overrides (optional)
 
         try:
             # uncomment the below to set overrides at the request level
