@@ -485,7 +485,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_integration_configuration**
-> List[IntegrationPropertyConfiguration] get_integration_configuration(integration)
+> IntegrationPropertyConfiguration get_integration_configuration(integration)
 
 [EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration
 
@@ -560,7 +560,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[IntegrationPropertyConfiguration]**](IntegrationPropertyConfiguration.md)
+[**IntegrationPropertyConfiguration**](IntegrationPropertyConfiguration.md)
 
 ### HTTP request headers
 
@@ -669,7 +669,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_instances**
-> IntegrationInstance list_instances()
+> List[IntegrationInstance] list_instances()
 
 [EXPERIMENTAL] ListInstances: List instances across all integrations.
 
@@ -740,7 +740,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**IntegrationInstance**](IntegrationInstance.md)
+[**List[IntegrationInstance]**](IntegrationInstance.md)
 
 ### HTTP request headers
 

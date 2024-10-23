@@ -830,15 +830,15 @@ class IntegrationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), **kwargs) -> List[IntegrationPropertyConfiguration]:  # noqa: E501
+    async def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), **kwargs) -> IntegrationPropertyConfiguration:  # noqa: E501
         ...
 
     @overload
-    def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), async_req: Optional[bool]=True, **kwargs) -> List[IntegrationPropertyConfiguration]:  # noqa: E501
+    def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), async_req: Optional[bool]=True, **kwargs) -> IntegrationPropertyConfiguration:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), async_req: Optional[bool]=None, **kwargs) -> Union[List[IntegrationPropertyConfiguration], Awaitable[List[IntegrationPropertyConfiguration]]]:  # noqa: E501
+    def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), async_req: Optional[bool]=None, **kwargs) -> Union[IntegrationPropertyConfiguration, Awaitable[IntegrationPropertyConfiguration]]:  # noqa: E501
         """[EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration  # noqa: E501
 
         <br>The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.  # noqa: E501
@@ -858,7 +858,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: List[IntegrationPropertyConfiguration]
+        :rtype: IntegrationPropertyConfiguration
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -902,7 +902,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(List[IntegrationPropertyConfiguration], status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(IntegrationPropertyConfiguration, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -958,7 +958,7 @@ class IntegrationsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "List[IntegrationPropertyConfiguration]",
+            '200': "IntegrationPropertyConfiguration",
             '404': None,
         }
 
@@ -1132,15 +1132,15 @@ class IntegrationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def list_instances(self, **kwargs) -> IntegrationInstance:  # noqa: E501
+    async def list_instances(self, **kwargs) -> List[IntegrationInstance]:  # noqa: E501
         ...
 
     @overload
-    def list_instances(self, async_req: Optional[bool]=True, **kwargs) -> IntegrationInstance:  # noqa: E501
+    def list_instances(self, async_req: Optional[bool]=True, **kwargs) -> List[IntegrationInstance]:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_instances(self, async_req: Optional[bool]=None, **kwargs) -> Union[IntegrationInstance, Awaitable[IntegrationInstance]]:  # noqa: E501
+    def list_instances(self, async_req: Optional[bool]=None, **kwargs) -> Union[List[IntegrationInstance], Awaitable[List[IntegrationInstance]]]:  # noqa: E501
         """[EXPERIMENTAL] ListInstances: List instances across all integrations.  # noqa: E501
 
         <br>The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -1158,7 +1158,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: IntegrationInstance
+        :rtype: List[IntegrationInstance]
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -1200,7 +1200,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(IntegrationInstance, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(List[IntegrationInstance], status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -1252,7 +1252,7 @@ class IntegrationsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "IntegrationInstance",
+            '200': "List[IntegrationInstance]",
             '404': None,
         }
 
