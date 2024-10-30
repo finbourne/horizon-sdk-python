@@ -30,11 +30,12 @@ class IntegrationRunResponse(BaseModel):
     """
     run_id: constr(strict=True, max_length=36, min_length=36) = Field(..., alias="runId")
     instance_id: Optional[StrictStr] = Field(None, alias="instanceId")
+    instance_name: Optional[StrictStr] = Field(None, alias="instanceName")
     status: Optional[StrictStr] = None
     integration: IntegrationRunIntegration = Field(...)
     version: IntegrationRunVersion = Field(...)
     integration_logs: Optional[Dict[str, Dict[str, IntegrationRunLog]]] = Field(None, alias="integrationLogs")
-    __properties = ["runId", "instanceId", "status", "integration", "version", "integrationLogs"]
+    __properties = ["runId", "instanceId", "instanceName", "status", "integration", "version", "integrationLogs"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,6 +79,11 @@ class IntegrationRunResponse(BaseModel):
         if self.instance_id is None and "instance_id" in self.__fields_set__:
             _dict['instanceId'] = None
 
+        # set to None if instance_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instance_name is None and "instance_name" in self.__fields_set__:
+            _dict['instanceName'] = None
+
         # set to None if status (nullable) is None
         # and __fields_set__ contains the field
         if self.status is None and "status" in self.__fields_set__:
@@ -102,6 +108,7 @@ class IntegrationRunResponse(BaseModel):
         _obj = IntegrationRunResponse.parse_obj({
             "run_id": obj.get("runId"),
             "instance_id": obj.get("instanceId"),
+            "instance_name": obj.get("instanceName"),
             "status": obj.get("status"),
             "integration": IntegrationRunIntegration.from_dict(obj.get("integration")) if obj.get("integration") is not None else None,
             "version": IntegrationRunVersion.from_dict(obj.get("version")) if obj.get("version") is not None else None,
