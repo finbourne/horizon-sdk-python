@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_integration_log_results**
-> IIntegrationLogResponse get_integration_log_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+> PagedResourceListOfIIntegrationLogResponse get_integration_log_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
 
 [EXPERIMENTAL] GetIntegrationLogResults: Get integration log results
 
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IIntegrationLogResponse**](IIntegrationLogResponse.md)
+[**PagedResourceListOfIIntegrationLogResponse**](PagedResourceListOfIIntegrationLogResponse.md)
 
 ### HTTP request headers
 

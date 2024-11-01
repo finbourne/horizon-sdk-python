@@ -24,7 +24,7 @@ from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
 
 from typing import Optional
 
-from finbourne_horizon.models.i_integration_log_response import IIntegrationLogResponse
+from finbourne_horizon.models.paged_resource_list_of_i_integration_log_response import PagedResourceListOfIIntegrationLogResponse
 
 from finbourne_horizon.api_client import ApiClient
 from finbourne_horizon.api_response import ApiResponse
@@ -48,15 +48,15 @@ class LogsApi:
         self.api_client = api_client
 
     @overload
-    async def get_integration_log_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915.")] = None, **kwargs) -> IIntegrationLogResponse:  # noqa: E501
+    async def get_integration_log_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915.")] = None, **kwargs) -> PagedResourceListOfIIntegrationLogResponse:  # noqa: E501
         ...
 
     @overload
-    def get_integration_log_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915.")] = None, async_req: Optional[bool]=True, **kwargs) -> IIntegrationLogResponse:  # noqa: E501
+    def get_integration_log_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfIIntegrationLogResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_integration_log_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[IIntegrationLogResponse, Awaitable[IIntegrationLogResponse]]:  # noqa: E501
+    def get_integration_log_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfIIntegrationLogResponse, Awaitable[PagedResourceListOfIIntegrationLogResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetIntegrationLogResults: Get integration log results  # noqa: E501
 
         Get integration log results  # noqa: E501
@@ -82,7 +82,7 @@ class LogsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: IIntegrationLogResponse
+        :rtype: PagedResourceListOfIIntegrationLogResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -132,7 +132,7 @@ class LogsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(IIntegrationLogResponse, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(PagedResourceListOfIIntegrationLogResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -201,7 +201,7 @@ class LogsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "IIntegrationLogResponse",
+            '200': "PagedResourceListOfIIntegrationLogResponse",
             '404': None,
         }
 

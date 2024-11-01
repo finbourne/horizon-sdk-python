@@ -76,6 +76,7 @@ from finbourne_horizon.models.open_figi_parameter_option_name import OpenFigiPar
 from finbourne_horizon.models.open_figi_perm_id_result import OpenFigiPermIdResult
 from finbourne_horizon.models.open_figi_search_result import OpenFigiSearchResult
 from finbourne_horizon.models.optionality import Optionality
+from finbourne_horizon.models.paged_resource_list_of_i_integration_log_response import PagedResourceListOfIIntegrationLogResponse
 from finbourne_horizon.models.paged_resource_list_of_process_information import PagedResourceListOfProcessInformation
 from finbourne_horizon.models.paged_resource_list_of_process_update_result import PagedResourceListOfProcessUpdateResult
 from finbourne_horizon.models.paged_resource_list_of_vendor_product import PagedResourceListOfVendorProduct
@@ -156,6 +157,7 @@ __all__ = [
     "OpenFigiPermIdResult",
     "OpenFigiSearchResult",
     "Optionality",
+    "PagedResourceListOfIIntegrationLogResponse",
     "PagedResourceListOfProcessInformation",
     "PagedResourceListOfProcessUpdateResult",
     "PagedResourceListOfVendorProduct",
