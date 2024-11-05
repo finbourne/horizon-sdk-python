@@ -25,7 +25,7 @@ from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
 from typing import Optional
 
 from finbourne_horizon.models.integration_rerun_response import IntegrationRerunResponse
-from finbourne_horizon.models.integration_run_response import IntegrationRunResponse
+from finbourne_horizon.models.paged_resource_list_of_integration_run_response import PagedResourceListOfIntegrationRunResponse
 
 from finbourne_horizon.api_client import ApiClient
 from finbourne_horizon.api_response import ApiResponse
@@ -49,15 +49,15 @@ class RunsApi:
         self.api_client = api_client
 
     @overload
-    async def get_run_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, **kwargs) -> IntegrationRunResponse:  # noqa: E501
+    async def get_run_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfIntegrationRunResponse:  # noqa: E501
         ...
 
     @overload
-    def get_run_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> IntegrationRunResponse:  # noqa: E501
+    def get_run_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfIntegrationRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_run_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[IntegrationRunResponse, Awaitable[IntegrationRunResponse]]:  # noqa: E501
+    def get_run_results(self, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfIntegrationRunResponse, Awaitable[PagedResourceListOfIntegrationRunResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetRunResults: Get run results  # noqa: E501
 
         Get run results  # noqa: E501
@@ -83,7 +83,7 @@ class RunsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: IntegrationRunResponse
+        :rtype: PagedResourceListOfIntegrationRunResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -133,7 +133,7 @@ class RunsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(IntegrationRunResponse, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(PagedResourceListOfIntegrationRunResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -202,7 +202,7 @@ class RunsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "IntegrationRunResponse",
+            '200': "PagedResourceListOfIntegrationRunResponse",
             '404': None,
         }
 

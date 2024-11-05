@@ -30,6 +30,7 @@ from finbourne_horizon.models.instance_identifier import InstanceIdentifier
 from finbourne_horizon.models.integration_description import IntegrationDescription
 from finbourne_horizon.models.integration_instance import IntegrationInstance
 from finbourne_horizon.models.integration_property_configuration import IntegrationPropertyConfiguration
+from finbourne_horizon.models.j_schema import JSchema
 from finbourne_horizon.models.lusid_property_definition_overrides_by_type import LusidPropertyDefinitionOverridesByType
 from finbourne_horizon.models.update_instance_request import UpdateInstanceRequest
 
@@ -512,15 +513,15 @@ class IntegrationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_execution_ids_for_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".")], limit : Annotated[Optional[StrictInt], Field(description="Maximum number of returned execution ids")] = None, **kwargs) -> str:  # noqa: E501
+    async def get_execution_ids_for_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".")], limit : Annotated[Optional[StrictInt], Field(description="Maximum number of returned execution ids")] = None, **kwargs) -> List[str]:  # noqa: E501
         ...
 
     @overload
-    def get_execution_ids_for_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".")], limit : Annotated[Optional[StrictInt], Field(description="Maximum number of returned execution ids")] = None, async_req: Optional[bool]=True, **kwargs) -> str:  # noqa: E501
+    def get_execution_ids_for_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".")], limit : Annotated[Optional[StrictInt], Field(description="Maximum number of returned execution ids")] = None, async_req: Optional[bool]=True, **kwargs) -> List[str]:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_execution_ids_for_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".")], limit : Annotated[Optional[StrictInt], Field(description="Maximum number of returned execution ids")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[str, Awaitable[str]]:  # noqa: E501
+    def get_execution_ids_for_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".")], limit : Annotated[Optional[StrictInt], Field(description="Maximum number of returned execution ids")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[List[str], Awaitable[List[str]]]:  # noqa: E501
         """[EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.  # noqa: E501
 
         <br>Get the most recent execution ids for an integration instance.  <br />  <br>The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -542,7 +543,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: str
+        :rtype: List[str]
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -588,7 +589,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(str, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(List[str], status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -648,7 +649,7 @@ class IntegrationsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "str",
+            '200': "List[str]",
             '404': None,
         }
 
@@ -981,15 +982,15 @@ class IntegrationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_schema(self, integration : Annotated[constr(strict=True, max_length=128, min_length=1), Field(..., description="The type of the integration e.g. \"copp-clark\".")], **kwargs) -> str:  # noqa: E501
+    async def get_schema(self, integration : Annotated[constr(strict=True, max_length=128, min_length=1), Field(..., description="The type of the integration e.g. \"copp-clark\".")], **kwargs) -> JSchema:  # noqa: E501
         ...
 
     @overload
-    def get_schema(self, integration : Annotated[constr(strict=True, max_length=128, min_length=1), Field(..., description="The type of the integration e.g. \"copp-clark\".")], async_req: Optional[bool]=True, **kwargs) -> str:  # noqa: E501
+    def get_schema(self, integration : Annotated[constr(strict=True, max_length=128, min_length=1), Field(..., description="The type of the integration e.g. \"copp-clark\".")], async_req: Optional[bool]=True, **kwargs) -> JSchema:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_schema(self, integration : Annotated[constr(strict=True, max_length=128, min_length=1), Field(..., description="The type of the integration e.g. \"copp-clark\".")], async_req: Optional[bool]=None, **kwargs) -> Union[str, Awaitable[str]]:  # noqa: E501
+    def get_schema(self, integration : Annotated[constr(strict=True, max_length=128, min_length=1), Field(..., description="The type of the integration e.g. \"copp-clark\".")], async_req: Optional[bool]=None, **kwargs) -> Union[JSchema, Awaitable[JSchema]]:  # noqa: E501
         """[EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.  # noqa: E501
 
         <br>The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -1009,7 +1010,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: str
+        :rtype: JSchema
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -1053,7 +1054,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(str, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(JSchema, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -1109,7 +1110,7 @@ class IntegrationsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "str",
+            '200': "JSchema",
             '404': None,
         }
 

@@ -198,7 +198,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | The instance was deleted. |  -  |
+**204** | No Content |  -  |
 **404** | The instance does not exist. |  -  |
 **0** | Error response |  -  |
 
@@ -297,7 +297,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_execution_ids_for_instance**
-> str get_execution_ids_for_instance(instance_id, limit=limit)
+> List[str] get_execution_ids_for_instance(instance_id, limit=limit)
 
 [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
 
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**List[str]**
 
 ### HTTP request headers
 
@@ -577,7 +577,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_schema**
-> str get_schema(integration)
+> JSchema get_schema(integration)
 
 [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
 
@@ -652,7 +652,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+[**JSchema**](JSchema.md)
 
 ### HTTP request headers
 
@@ -1030,7 +1030,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | The instance was updated. |  -  |
+**204** | No Content |  -  |
 **404** | The instance does not exist. |  -  |
 **0** | Error response |  -  |
 

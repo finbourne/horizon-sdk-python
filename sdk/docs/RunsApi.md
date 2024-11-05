@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_run_results**
-> IntegrationRunResponse get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+> PagedResourceListOfIntegrationRunResponse get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
 
 [EXPERIMENTAL] GetRunResults: Get run results
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IntegrationRunResponse**](IntegrationRunResponse.md)
+[**PagedResourceListOfIntegrationRunResponse**](PagedResourceListOfIntegrationRunResponse.md)
 
 ### HTTP request headers
 
