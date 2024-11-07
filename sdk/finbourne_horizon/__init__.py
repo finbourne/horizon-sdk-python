@@ -50,6 +50,7 @@ from finbourne_horizon.models.i_integration_log_response import IIntegrationLogR
 from finbourne_horizon.models.identifiers import Identifiers
 from finbourne_horizon.models.instance_execution_reference_id import InstanceExecutionReferenceId
 from finbourne_horizon.models.instance_identifier import InstanceIdentifier
+from finbourne_horizon.models.instance_property_definition_overrides import InstancePropertyDefinitionOverrides
 from finbourne_horizon.models.integration_description import IntegrationDescription
 from finbourne_horizon.models.integration_instance import IntegrationInstance
 from finbourne_horizon.models.integration_property_configuration import IntegrationPropertyConfiguration
@@ -134,6 +135,7 @@ __all__ = [
     "Identifiers",
     "InstanceExecutionReferenceId",
     "InstanceIdentifier",
+    "InstancePropertyDefinitionOverrides",
     "IntegrationDescription",
     "IntegrationInstance",
     "IntegrationPropertyConfiguration",

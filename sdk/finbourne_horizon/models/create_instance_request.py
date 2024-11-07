@@ -18,21 +18,23 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from finbourne_horizon.models.instance_property_definition_overrides import InstancePropertyDefinitionOverrides
 from finbourne_horizon.models.trigger import Trigger
 
 class CreateInstanceRequest(BaseModel):
     """
     CreateInstanceRequest
     """
+    instance_optional_props: Optional[Dict[str, InstancePropertyDefinitionOverrides]] = Field(None, alias="instanceOptionalProps")
     integration_type: StrictStr = Field(..., alias="integrationType")
     name: StrictStr = Field(...)
     description: StrictStr = Field(...)
     enabled: StrictBool = Field(...)
     triggers: conlist(Trigger) = Field(...)
     details: Dict[str, Any] = Field(...)
-    __properties = ["integrationType", "name", "description", "enabled", "triggers", "details"]
+    __properties = ["instanceOptionalProps", "integrationType", "name", "description", "enabled", "triggers", "details"]
 
     class Config:
         """Pydantic configuration"""
@@ -58,6 +60,13 @@ class CreateInstanceRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each value in instance_optional_props (dict)
+        _field_dict = {}
+        if self.instance_optional_props:
+            for _key in self.instance_optional_props:
+                if self.instance_optional_props[_key]:
+                    _field_dict[_key] = self.instance_optional_props[_key].to_dict()
+            _dict['instanceOptionalProps'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in triggers (list)
         _items = []
         if self.triggers:
@@ -65,6 +74,11 @@ class CreateInstanceRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['triggers'] = _items
+        # set to None if instance_optional_props (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instance_optional_props is None and "instance_optional_props" in self.__fields_set__:
+            _dict['instanceOptionalProps'] = None
+
         return _dict
 
     @classmethod
@@ -77,6 +91,12 @@ class CreateInstanceRequest(BaseModel):
             return CreateInstanceRequest.parse_obj(obj)
 
         _obj = CreateInstanceRequest.parse_obj({
+            "instance_optional_props": dict(
+                (_k, InstancePropertyDefinitionOverrides.from_dict(_v))
+                for _k, _v in obj.get("instanceOptionalProps").items()
+            )
+            if obj.get("instanceOptionalProps") is not None
+            else None,
             "integration_type": obj.get("integrationType"),
             "name": obj.get("name"),
             "description": obj.get("description"),
