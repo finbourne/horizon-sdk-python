@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instance_optional_props** | [**Dict[str, InstancePropertyDefinitionOverrides]**](InstancePropertyDefinitionOverrides.md) |  | [optional] 
+**instance_optional_props** | [**Dict[str, LusidPropertyDefinitionOverridesByType]**](LusidPropertyDefinitionOverridesByType.md) |  | [optional] 
 **integration_type** | **str** |  | 
 **name** | **str** |  | 
 **description** | **str** |  | 
