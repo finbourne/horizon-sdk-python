@@ -19,28 +19,21 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
 from finbourne_horizon.models.trigger import Trigger
 
 class IntegrationInstance(BaseModel):
     """
     Response containing an integration instance.  # noqa: E501
     """
-    id: constr(strict=True, max_length=36, min_length=36) = Field(..., description="Identifies the instance within the integration.")
-    integration_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="integrationType", description="The integration type.")
+    id: StrictStr = Field(..., description="Identifies the instance within the integration.")
+    integration_type: StrictStr = Field(..., alias="integrationType", description="The integration type.")
     name: StrictStr = Field(..., description="Name of the instance.")
     description: StrictStr = Field(..., description="Description of the instance.")
     enabled: StrictBool = Field(..., description="If true the instance will be executed if its trigger is satisfied.")
     triggers: conlist(Trigger) = Field(..., description="Defines what triggers execution of the instance.")
     details: Dict[str, Any] = Field(...)
     __properties = ["id", "integrationType", "name", "description", "enabled", "triggers", "details"]
-
-    @validator('integration_type')
-    def integration_type_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""
