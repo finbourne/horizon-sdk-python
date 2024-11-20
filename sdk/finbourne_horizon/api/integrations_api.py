@@ -192,6 +192,7 @@ class IntegrationsApi:
 
         _response_types_map = {
             '201': "InstanceIdentifier",
+            '400': "LusidValidationProblemDetails",
             '404': None,
         }
 
@@ -491,6 +492,7 @@ class IntegrationsApi:
 
         _response_types_map = {
             '200': "ExecuteInstanceResponse",
+            '400': "LusidValidationProblemDetails",
             '404': None,
         }
 
@@ -650,6 +652,7 @@ class IntegrationsApi:
 
         _response_types_map = {
             '200': "List[str]",
+            '400': "LusidValidationProblemDetails",
             '404': None,
         }
 
@@ -809,6 +812,7 @@ class IntegrationsApi:
 
         _response_types_map = {
             '404': None,
+            '400': "LusidValidationProblemDetails",
             '200': "Dict[str, LusidPropertyDefinitionOverridesByType]",
         }
 
@@ -960,6 +964,7 @@ class IntegrationsApi:
 
         _response_types_map = {
             '200': "IntegrationPropertyConfiguration",
+            '400': "LusidValidationProblemDetails",
             '404': None,
         }
 
@@ -1111,6 +1116,7 @@ class IntegrationsApi:
 
         _response_types_map = {
             '200': "JSchema",
+            '400': "LusidValidationProblemDetails",
             '404': None,
         }
 
@@ -1570,6 +1576,7 @@ class IntegrationsApi:
 
         _response_types_map = {
             '404': None,
+            '400': "LusidValidationProblemDetails",
             '200': "Dict[str, LusidPropertyDefinitionOverridesByType]",
         }
 

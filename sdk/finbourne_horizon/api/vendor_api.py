@@ -203,6 +203,7 @@ class VendorApi:
 
         _response_types_map = {
             '200': "List[LusidField]",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
@@ -375,6 +376,7 @@ class VendorApi:
 
         _response_types_map = {
             '200': "Dict[str, LusidPropertyDefinitionOverrides]",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
@@ -547,6 +549,7 @@ class VendorApi:
 
         _response_types_map = {
             '200': "List[LusidPropertyToVendorFieldMapping]",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
@@ -702,6 +705,7 @@ class VendorApi:
 
         _response_types_map = {
             '200': "PagedResourceListOfVendorProduct",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
@@ -889,6 +893,7 @@ class VendorApi:
 
         _response_types_map = {
             '200': "Dict[str, LusidPropertyDefinitionOverridesResponse]",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(

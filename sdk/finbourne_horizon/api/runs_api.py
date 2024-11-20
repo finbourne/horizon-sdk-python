@@ -203,6 +203,7 @@ class RunsApi:
 
         _response_types_map = {
             '200': "PagedResourceListOfIntegrationRunResponse",
+            '400': "LusidValidationProblemDetails",
             '404': None,
         }
 
@@ -354,6 +355,7 @@ class RunsApi:
 
         _response_types_map = {
             '200': "IntegrationRerunResponse",
+            '400': "LusidValidationProblemDetails",
             '404': None,
         }
 

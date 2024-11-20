@@ -202,6 +202,7 @@ class LogsApi:
 
         _response_types_map = {
             '200': "PagedResourceListOfIIntegrationLogResponse",
+            '400': "LusidValidationProblemDetails",
             '404': None,
         }
 

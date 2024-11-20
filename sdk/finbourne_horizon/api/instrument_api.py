@@ -503,6 +503,7 @@ class InstrumentApi:
 
         _response_types_map = {
             '200': "List[AllowedParameterValue]",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
@@ -651,6 +652,7 @@ class InstrumentApi:
 
         _response_types_map = {
             '200': "List[PermIdData]",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
@@ -823,6 +825,7 @@ class InstrumentApi:
 
         _response_types_map = {
             '200': "OpenFigiSearchResult",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(

@@ -188,6 +188,7 @@ class ProcessHistoryApi:
 
         _response_types_map = {
             '201': "AuditCompleteResponse",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
@@ -343,6 +344,7 @@ class ProcessHistoryApi:
 
         _response_types_map = {
             '201': "AuditUpdateResponse",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
@@ -646,6 +648,7 @@ class ProcessHistoryApi:
 
         _response_types_map = {
             '200': "PagedResourceListOfProcessUpdateResult",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
@@ -809,6 +812,7 @@ class ProcessHistoryApi:
 
         _response_types_map = {
             '200': "PagedResourceListOfProcessInformation",
+            '400': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
