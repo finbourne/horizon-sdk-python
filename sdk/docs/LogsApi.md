@@ -17,33 +17,32 @@ Get integration log results
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     LogsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -52,30 +51,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(LogsApi)
-        filter = 'filter_example' # str | Expression to filter the result set. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-        limit = 100 # int | When paginating, limit the results to this number. (optional) (default to 100)
-        page_token = '' # str | The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. (optional) (default to '')
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(LogsApi)
+    filter = 'filter_example' # str | Expression to filter the result set. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    limit = 100 # int | When paginating, limit the results to this number. (optional) (default to 100)
+    page_token = '' # str | The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. (optional) (default to '')
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_integration_log_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_integration_log_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token, opts=opts)
 
-            # [EXPERIMENTAL] GetIntegrationLogResults: Get integration log results
-            api_response = await api_instance.get_integration_log_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling LogsApi->get_integration_log_results: %s\n" % e)
+        # [EXPERIMENTAL] GetIntegrationLogResults: Get integration log results
+        api_response = api_instance.get_integration_log_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling LogsApi->get_integration_log_results: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

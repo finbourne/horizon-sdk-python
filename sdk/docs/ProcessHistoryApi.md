@@ -19,33 +19,32 @@ Method | HTTP request | Description
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ProcessHistoryApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -54,32 +53,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ProcessHistoryApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ProcessHistoryApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # audit_complete_request = AuditCompleteRequest.from_json("")
-        # audit_complete_request = AuditCompleteRequest.from_dict({})
-        audit_complete_request = AuditCompleteRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # audit_complete_request = AuditCompleteRequest.from_json("")
+    # audit_complete_request = AuditCompleteRequest.from_dict({})
+    audit_complete_request = AuditCompleteRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_complete_event(audit_complete_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_complete_event(audit_complete_request, opts=opts)
 
-            # [EARLY ACCESS] CreateCompleteEvent: Write a completed event to the Horizon Dashboard
-            api_response = await api_instance.create_complete_event(audit_complete_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ProcessHistoryApi->create_complete_event: %s\n" % e)
+        # [EARLY ACCESS] CreateCompleteEvent: Write a completed event to the Horizon Dashboard
+        api_response = api_instance.create_complete_event(audit_complete_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ProcessHistoryApi->create_complete_event: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -114,33 +114,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ProcessHistoryApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -149,32 +148,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ProcessHistoryApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ProcessHistoryApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # audit_update_request = AuditUpdateRequest.from_json("")
-        # audit_update_request = AuditUpdateRequest.from_dict({})
-        audit_update_request = AuditUpdateRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # audit_update_request = AuditUpdateRequest.from_json("")
+    # audit_update_request = AuditUpdateRequest.from_dict({})
+    audit_update_request = AuditUpdateRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_update_event(audit_update_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_update_event(audit_update_request, opts=opts)
 
-            # [EARLY ACCESS] CreateUpdateEvent: Write an update event to the Horizon Dashboard
-            api_response = await api_instance.create_update_event(audit_update_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ProcessHistoryApi->create_update_event: %s\n" % e)
+        # [EARLY ACCESS] CreateUpdateEvent: Write an update event to the Horizon Dashboard
+        api_response = api_instance.create_update_event(audit_update_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ProcessHistoryApi->create_update_event: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -209,33 +209,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ProcessHistoryApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -244,26 +243,27 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ProcessHistoryApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ProcessHistoryApi)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_latest_runs(opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_latest_runs(opts=opts)
 
-            # [EARLY ACCESS] GetLatestRuns: Get latest run for each process
-            api_response = await api_instance.get_latest_runs()
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ProcessHistoryApi->get_latest_runs: %s\n" % e)
+        # [EARLY ACCESS] GetLatestRuns: Get latest run for each process
+        api_response = api_instance.get_latest_runs()
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ProcessHistoryApi->get_latest_runs: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -294,33 +294,32 @@ This endpoint does not need any parameter.
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ProcessHistoryApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -329,33 +328,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ProcessHistoryApi)
-        run_id = 'run_id_example' # str | 
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ProcessHistoryApi)
+    run_id = 'run_id_example' # str | 
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # query_request = QueryRequest.from_json("")
-        # query_request = QueryRequest.from_dict({})
-        query_request = QueryRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # query_request = QueryRequest.from_json("")
+    # query_request = QueryRequest.from_dict({})
+    query_request = QueryRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.process_entry_updates(run_id, query_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.process_entry_updates(run_id, query_request, opts=opts)
 
-            # [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
-            api_response = await api_instance.process_entry_updates(run_id, query_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ProcessHistoryApi->process_entry_updates: %s\n" % e)
+        # [EARLY ACCESS] ProcessEntryUpdates: Get process entry updates for a query
+        api_response = api_instance.process_entry_updates(run_id, query_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ProcessHistoryApi->process_entry_updates: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -391,33 +391,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     ProcessHistoryApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -426,33 +425,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(ProcessHistoryApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ProcessHistoryApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # query_request = QueryRequest.from_json("")
-        # query_request = QueryRequest.from_dict({})
-        query_request = QueryRequest()
-        process_name = 'process_name_example' # str |  (optional)
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # query_request = QueryRequest.from_json("")
+    # query_request = QueryRequest.from_dict({})
+    query_request = QueryRequest()
+    process_name = 'process_name_example' # str |  (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.process_history_entries(query_request, process_name=process_name, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.process_history_entries(query_request, process_name=process_name, opts=opts)
 
-            # [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
-            api_response = await api_instance.process_history_entries(query_request, process_name=process_name)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling ProcessHistoryApi->process_history_entries: %s\n" % e)
+        # [EARLY ACCESS] ProcessHistoryEntries: Get process history entries
+        api_response = api_instance.process_history_entries(query_request, process_name=process_name)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling ProcessHistoryApi->process_history_entries: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

@@ -19,33 +19,32 @@ Method | HTTP request | Description
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     RunsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -54,27 +53,28 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(RunsApi)
-        run_id = 'run_id_example' # str | Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RunsApi)
+    run_id = 'run_id_example' # str | Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.cancel_instance(run_id, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.cancel_instance(run_id, opts=opts)
 
-            # [EXPERIMENTAL] CancelInstance: Cancels a single instance execution.
-            api_response = await api_instance.cancel_instance(run_id)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling RunsApi->cancel_instance: %s\n" % e)
+        # [EXPERIMENTAL] CancelInstance: Cancels a single instance execution.
+        api_response = api_instance.cancel_instance(run_id)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling RunsApi->cancel_instance: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -112,33 +112,32 @@ Get run results
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     RunsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -147,30 +146,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(RunsApi)
-        filter = 'filter_example' # str | Expression to filter the result set. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-        limit = 100 # int | When paginating, limit the results to this number. (optional) (default to 100)
-        page_token = '' # str | The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request. (optional) (default to '')
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RunsApi)
+    filter = 'filter_example' # str | Expression to filter the result set. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    limit = 100 # int | When paginating, limit the results to this number. (optional) (default to 100)
+    page_token = '' # str | The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request. (optional) (default to '')
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token, opts=opts)
 
-            # [EXPERIMENTAL] GetRunResults: Get run results
-            api_response = await api_instance.get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling RunsApi->get_run_results: %s\n" % e)
+        # [EXPERIMENTAL] GetRunResults: Get run results
+        api_response = api_instance.get_run_results(filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling RunsApi->get_run_results: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -211,33 +211,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     RunsApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -246,27 +245,28 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(RunsApi)
-        run_id = 'run_id_example' # str | Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RunsApi)
+    run_id = 'run_id_example' # str | Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.rerun_instance(run_id, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.rerun_instance(run_id, opts=opts)
 
-            # [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
-            api_response = await api_instance.rerun_instance(run_id)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling RunsApi->rerun_instance: %s\n" % e)
+        # [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
+        api_response = api_instance.rerun_instance(run_id)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling RunsApi->rerun_instance: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

@@ -20,33 +20,32 @@ Method | HTTP request | Description
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -55,32 +54,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # onboard_instrument_request = OnboardInstrumentRequest.from_json("")
-        # onboard_instrument_request = OnboardInstrumentRequest.from_dict({})
-        onboard_instrument_request = OnboardInstrumentRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # onboard_instrument_request = OnboardInstrumentRequest.from_json("")
+    # onboard_instrument_request = OnboardInstrumentRequest.from_dict({})
+    onboard_instrument_request = OnboardInstrumentRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_instrument(onboard_instrument_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_instrument(onboard_instrument_request, opts=opts)
 
-            # [EARLY ACCESS] CreateInstrument: Creates and masters instruments with third party vendors.
-            api_response = await api_instance.create_instrument(onboard_instrument_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentApi->create_instrument: %s\n" % e)
+        # [EARLY ACCESS] CreateInstrument: Creates and masters instruments with third party vendors.
+        api_response = api_instance.create_instrument(onboard_instrument_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentApi->create_instrument: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -115,33 +115,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -150,33 +149,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentApi)
-        vendor_product_key = 'vendor_product_key_example' # str | 
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentApi)
+    vendor_product_key = 'vendor_product_key_example' # str | 
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # identifiers = Identifiers.from_json("")
-        # identifiers = Identifiers.from_dict({})
-        identifiers = Identifiers()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # identifiers = Identifiers.from_json("")
+    # identifiers = Identifiers.from_dict({})
+    identifiers = Identifiers()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.enrich_instrument(vendor_product_key, identifiers, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.enrich_instrument(vendor_product_key, identifiers, opts=opts)
 
-            # [EARLY ACCESS] EnrichInstrument: Enriches an existing LUSID instrument using vendor data. Enrichment included identifiers, properties and market data.
-            api_response = await api_instance.enrich_instrument(vendor_product_key, identifiers)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentApi->enrich_instrument: %s\n" % e)
+        # [EARLY ACCESS] EnrichInstrument: Enriches an existing LUSID instrument using vendor data. Enrichment included identifiers, properties and market data.
+        api_response = api_instance.enrich_instrument(vendor_product_key, identifiers)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentApi->enrich_instrument: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -212,33 +212,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -247,27 +246,28 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentApi)
-        parameter_name = finbourne_horizon.OpenFigiParameterOptionName() # OpenFigiParameterOptionName | 
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentApi)
+    parameter_name = finbourne_horizon.OpenFigiParameterOptionName() # OpenFigiParameterOptionName | 
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_open_figi_parameter_option(parameter_name, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_open_figi_parameter_option(parameter_name, opts=opts)
 
-            # [EARLY ACCESS] GetOpenFigiParameterOption: Get all supported market sector values for OpenFigi search
-            api_response = await api_instance.get_open_figi_parameter_option(parameter_name)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentApi->get_open_figi_parameter_option: %s\n" % e)
+        # [EARLY ACCESS] GetOpenFigiParameterOption: Get all supported market sector values for OpenFigi search
+        api_response = api_instance.get_open_figi_parameter_option(parameter_name)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentApi->get_open_figi_parameter_option: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -302,33 +302,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -337,27 +336,28 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentApi)
-        id = 'id_example' # str | The execution ID returned by a previous query
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentApi)
+    id = 'id_example' # str | The execution ID returned by a previous query
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.retrieve_perm_id_result(id, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.retrieve_perm_id_result(id, opts=opts)
 
-            # [EARLY ACCESS] RetrievePermIdResult: Retrieve PermId results from a previous query.
-            api_response = await api_instance.retrieve_perm_id_result(id)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentApi->retrieve_perm_id_result: %s\n" % e)
+        # [EARLY ACCESS] RetrievePermIdResult: Retrieve PermId results from a previous query.
+        api_response = api_instance.retrieve_perm_id_result(id)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentApi->retrieve_perm_id_result: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -392,33 +392,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -427,30 +426,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentApi)
-        query = 'query_example' # str | 
-        use_perm_id = False # bool | Should also search PermId for additional information, defaults to `false`. (default to False)
-        limit = 25 # int | Only affects results rom OpenFigi general text search (optional) (default to 25)
-        market_sector = 'All' # str | The market sector to search, defaults to `All`. (optional) (default to 'All')
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentApi)
+    query = 'query_example' # str | 
+    use_perm_id = False # bool | Should also search PermId for additional information, defaults to `false`. (default to False)
+    limit = 25 # int | Only affects results rom OpenFigi general text search (optional) (default to 25)
+    market_sector = 'All' # str | The market sector to search, defaults to `All`. (optional) (default to 'All')
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.search_open_figi(query, use_perm_id, limit=limit, market_sector=market_sector, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.search_open_figi(query, use_perm_id, limit=limit, market_sector=market_sector, opts=opts)
 
-            # [EARLY ACCESS] SearchOpenFigi: Search OpenFigi for instruments that match the specified terms.
-            api_response = await api_instance.search_open_figi(query, use_perm_id, limit=limit, market_sector=market_sector)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentApi->search_open_figi: %s\n" % e)
+        # [EARLY ACCESS] SearchOpenFigi: Search OpenFigi for instruments that match the specified terms.
+        api_response = api_instance.search_open_figi(query, use_perm_id, limit=limit, market_sector=market_sector)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentApi->search_open_figi: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -488,33 +488,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     InstrumentApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -523,29 +522,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(InstrumentApi)
-        market_sector = 'market_sector_example' # str | 
-        security_type = 'security_type_example' # str | 
-        general_security_type = 'general_security_type_example' # str | 
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(InstrumentApi)
+    market_sector = 'market_sector_example' # str | 
+    security_type = 'security_type_example' # str | 
+    general_security_type = 'general_security_type_example' # str | 
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.vendors(market_sector, security_type, general_security_type, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.vendors(market_sector, security_type, general_security_type, opts=opts)
 
-            # [EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.
-            api_response = await api_instance.vendors(market_sector, security_type, general_security_type)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling InstrumentApi->vendors: %s\n" % e)
+        # [EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.
+        api_response = api_instance.vendors(market_sector, security_type, general_security_type)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling InstrumentApi->vendors: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

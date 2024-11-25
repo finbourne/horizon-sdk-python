@@ -19,33 +19,32 @@ Method | HTTP request | Description
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     VendorApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -54,30 +53,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(VendorApi)
-        vendor_name = 'vendor_name_example' # str | 
-        product_name = 'product_name_example' # str | 
-        lusid_entity_type = 'lusid_entity_type_example' # str | 
-        lusid_entity_sub_type = 'lusid_entity_sub_type_example' # str |  (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(VendorApi)
+    vendor_name = 'vendor_name_example' # str | 
+    product_name = 'product_name_example' # str | 
+    lusid_entity_type = 'lusid_entity_type_example' # str | 
+    lusid_entity_sub_type = 'lusid_entity_sub_type_example' # str |  (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_core_field_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_core_field_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type, opts=opts)
 
-            # [EARLY ACCESS] GetCoreFieldMappingsForProductEntity: Get core field mappings for a given vendor product's entity.
-            api_response = await api_instance.get_core_field_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling VendorApi->get_core_field_mappings_for_product_entity: %s\n" % e)
+        # [EARLY ACCESS] GetCoreFieldMappingsForProductEntity: Get core field mappings for a given vendor product's entity.
+        api_response = api_instance.get_core_field_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling VendorApi->get_core_field_mappings_for_product_entity: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -115,33 +115,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     VendorApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -150,30 +149,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(VendorApi)
-        vendor_name = 'vendor_name_example' # str | 
-        product_name = 'product_name_example' # str | 
-        lusid_entity_type = 'lusid_entity_type_example' # str | 
-        lusid_entity_sub_type = 'lusid_entity_sub_type_example' # str |  (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(VendorApi)
+    vendor_name = 'vendor_name_example' # str | 
+    product_name = 'product_name_example' # str | 
+    lusid_entity_type = 'lusid_entity_type_example' # str | 
+    lusid_entity_sub_type = 'lusid_entity_sub_type_example' # str |  (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type, opts=opts)
 
-            # [EARLY ACCESS] GetOptionalMappingsForProductEntity: Get a user defined LUSID property mappings for the specified vendor / LUSID entity.
-            api_response = await api_instance.get_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling VendorApi->get_optional_mappings_for_product_entity: %s\n" % e)
+        # [EARLY ACCESS] GetOptionalMappingsForProductEntity: Get a user defined LUSID property mappings for the specified vendor / LUSID entity.
+        api_response = api_instance.get_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling VendorApi->get_optional_mappings_for_product_entity: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -211,33 +211,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     VendorApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -246,30 +245,31 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(VendorApi)
-        vendor_name = 'vendor_name_example' # str | 
-        product_name = 'product_name_example' # str | 
-        lusid_entity_type = 'lusid_entity_type_example' # str | 
-        lusid_entity_sub_type = 'lusid_entity_sub_type_example' # str |  (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(VendorApi)
+    vendor_name = 'vendor_name_example' # str | 
+    product_name = 'product_name_example' # str | 
+    lusid_entity_type = 'lusid_entity_type_example' # str | 
+    lusid_entity_sub_type = 'lusid_entity_sub_type_example' # str |  (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_property_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_property_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type, opts=opts)
 
-            # [EARLY ACCESS] GetPropertyMappingsForProductEntity: Gets the property mappings for a given vendor product's entity
-            api_response = await api_instance.get_property_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling VendorApi->get_property_mappings_for_product_entity: %s\n" % e)
+        # [EARLY ACCESS] GetPropertyMappingsForProductEntity: Gets the property mappings for a given vendor product's entity
+        api_response = api_instance.get_property_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, lusid_entity_sub_type=lusid_entity_sub_type)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling VendorApi->get_property_mappings_for_product_entity: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -307,33 +307,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     VendorApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -342,32 +341,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(VendorApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(VendorApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # query_request = QueryRequest.from_json("")
-        # query_request = QueryRequest.from_dict({})
-        query_request = QueryRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # query_request = QueryRequest.from_json("")
+    # query_request = QueryRequest.from_dict({})
+    query_request = QueryRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.query_vendors(query_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.query_vendors(query_request, opts=opts)
 
-            # [EARLY ACCESS] QueryVendors: Query for vendors and their packages with entities and sub-entities.
-            api_response = await api_instance.query_vendors(query_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling VendorApi->query_vendors: %s\n" % e)
+        # [EARLY ACCESS] QueryVendors: Query for vendors and their packages with entities and sub-entities.
+        api_response = api_instance.query_vendors(query_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling VendorApi->query_vendors: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -402,33 +402,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from finbourne_horizon.exceptions import ApiException
 from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
 from finbourne_horizon.models import *
 from pprint import pprint
 from finbourne_horizon import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     VendorApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "horizonUrl":"https://<your-domain>.lusid.com/horizon",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the finbourne_horizon ApiClientFactory to build Api instances with a configured api client
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -437,31 +436,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(VendorApi)
-        vendor_name = 'vendor_name_example' # str | 
-        product_name = 'product_name_example' # str | 
-        lusid_entity_type = 'lusid_entity_type_example' # str | 
-        request_body = {"0":{"displayNameOverride":"descriptionOverride","descriptionOverride":"displayNameOverride"},"1":{"displayNameOverride":"descriptionOverride","descriptionOverride":"displayNameOverride"}} # Dict[str, LusidPropertyDefinitionOverrides] | 
-        lusid_entity_sub_type = 'lusid_entity_sub_type_example' # str |  (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(VendorApi)
+    vendor_name = 'vendor_name_example' # str | 
+    product_name = 'product_name_example' # str | 
+    lusid_entity_type = 'lusid_entity_type_example' # str | 
+    request_body = {"0":{"displayNameOverride":"descriptionOverride","descriptionOverride":"displayNameOverride"},"1":{"displayNameOverride":"descriptionOverride","descriptionOverride":"displayNameOverride"}} # Dict[str, LusidPropertyDefinitionOverrides] | 
+    lusid_entity_sub_type = 'lusid_entity_sub_type_example' # str |  (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.set_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, request_body, lusid_entity_sub_type=lusid_entity_sub_type, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.set_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, request_body, lusid_entity_sub_type=lusid_entity_sub_type, opts=opts)
 
-            # [EARLY ACCESS] SetOptionalMappingsForProductEntity: Create a user defined LUSID property mappings for the specified vendor / LUSID entity.
-            api_response = await api_instance.set_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, request_body, lusid_entity_sub_type=lusid_entity_sub_type)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling VendorApi->set_optional_mappings_for_product_entity: %s\n" % e)
+        # [EARLY ACCESS] SetOptionalMappingsForProductEntity: Create a user defined LUSID property mappings for the specified vendor / LUSID entity.
+        api_response = api_instance.set_optional_mappings_for_product_entity(vendor_name, product_name, lusid_entity_type, request_body, lusid_entity_sub_type=lusid_entity_sub_type)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling VendorApi->set_optional_mappings_for_product_entity: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
