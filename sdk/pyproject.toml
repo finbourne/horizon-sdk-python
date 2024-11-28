@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "finbourne-horizon-sdk"
-version = "2.1.374"
+version = "2.1.375"
 description = "FINBOURNE Horizon API"
 authors = ["FINBOURNE Technology <info@finbourne.com>"]
 license = "MIT"
