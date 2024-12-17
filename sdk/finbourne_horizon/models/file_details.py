@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr, Field
 
 class FileDetails(BaseModel):
     """
     Information associated with files  # noqa: E501
     """
-    file_name: StrictStr = Field(..., alias="fileName")
-    file_type: Optional[StrictStr] = Field(None, alias="fileType")
-    id: StrictStr = Field(...)
+    file_name: constr(strict=True) = Field(...,alias="fileName", description="") 
+    file_type: constr(strict=True) = Field(None,alias="fileType", description="") 
+    id: constr(strict=True) = Field(...,alias="id", description="") 
     __properties = ["fileName", "fileType", "id"]
 
     class Config:

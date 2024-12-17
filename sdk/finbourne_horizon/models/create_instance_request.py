@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, Field
 from finbourne_horizon.models.lusid_property_definition_overrides_by_type import LusidPropertyDefinitionOverridesByType
 from finbourne_horizon.models.trigger import Trigger
 
@@ -28,9 +28,9 @@ class CreateInstanceRequest(BaseModel):
     CreateInstanceRequest
     """
     instance_optional_props: Optional[Dict[str, LusidPropertyDefinitionOverridesByType]] = Field(None, alias="instanceOptionalProps")
-    integration_type: StrictStr = Field(..., alias="integrationType")
-    name: StrictStr = Field(...)
-    description: StrictStr = Field(...)
+    integration_type: constr(strict=True) = Field(...,alias="integrationType") 
+    name: constr(strict=True) = Field(...,alias="name") 
+    description: constr(strict=True) = Field(...,alias="description") 
     enabled: StrictBool = Field(...)
     triggers: conlist(Trigger) = Field(...)
     details: Dict[str, Any] = Field(...)

@@ -19,18 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, Field
 
 class PermIdData(BaseModel):
     """
     PermId Data Structure  # noqa: E501
     """
-    figi: StrictStr = Field(..., description=">FIGI assigned to the instrument.")
-    ticker: StrictStr = Field(..., description="Ticker assigned to the instrument")
-    mic: StrictStr = Field(..., description="ISO market identification code(MIC) of the desired instrument(s)")
-    quote_perm_id: StrictStr = Field(..., alias="quotePermId", description="QuotePermId of the instrument")
+    figi: constr(strict=True) = Field(...,alias="figi", description="&gt;FIGI assigned to the instrument.") 
+    ticker: constr(strict=True) = Field(...,alias="ticker", description="Ticker assigned to the instrument") 
+    mic: constr(strict=True) = Field(...,alias="mic", description="ISO market identification code(MIC) of the desired instrument(s)") 
+    quote_perm_id: constr(strict=True) = Field(...,alias="quotePermId", description="QuotePermId of the instrument") 
     is_primary_quote: StrictBool = Field(..., alias="isPrimaryQuote", description="If the quote is primary")
-    legal_entity_identifier: Optional[StrictStr] = Field(None, alias="legalEntityIdentifier", description="LEI assigned to the instrument")
+    legal_entity_identifier: constr(strict=True) = Field(None,alias="legalEntityIdentifier", description="LEI assigned to the instrument") 
     __properties = ["figi", "ticker", "mic", "quotePermId", "isPrimaryQuote", "legalEntityIdentifier"]
 
     class Config:

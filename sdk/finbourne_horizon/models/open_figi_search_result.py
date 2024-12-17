@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, Field
 from finbourne_horizon.models.open_figi_data import OpenFigiData
 
 class OpenFigiSearchResult(BaseModel):
@@ -27,7 +27,7 @@ class OpenFigiSearchResult(BaseModel):
     Response coming back from a search request to OpenFIGI  # noqa: E501
     """
     results: conlist(OpenFigiData) = Field(..., description="Enumerable list of OpenFIGI results")
-    perm_id_uri: Optional[StrictStr] = Field(None, alias="permIdUri", description="URI of the related PermID response, if requested")
+    perm_id_uri: constr(strict=True) = Field(None,alias="permIdUri", description="URI of the related PermID response, if requested") 
     __properties = ["results", "permIdUri"]
 
     class Config:

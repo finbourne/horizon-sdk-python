@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, Field
 from finbourne_horizon.models.file_details import FileDetails
 from finbourne_horizon.models.row_details import RowDetails
 
@@ -28,9 +28,9 @@ class ProcessSummary(BaseModel):
     Completed event details  # noqa: E501
     """
     end_time: Optional[datetime] = Field(None, alias="endTime")
-    category: Optional[StrictStr] = None
-    status: StrictStr = Field(...)
-    message: StrictStr = Field(...)
+    category: constr(strict=True) = Field(None,alias="category", description="") 
+    status: constr(strict=True) = Field(...,alias="status", description="") 
+    message: constr(strict=True) = Field(...,alias="message", description="") 
     rows: RowDetails = Field(...)
     file_details: Optional[conlist(FileDetails)] = Field(None, alias="fileDetails")
     __properties = ["endTime", "category", "status", "message", "rows", "fileDetails"]

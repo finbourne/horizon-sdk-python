@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr, Field
 
 class LusidPropertyDefinitionOverridesResponse(BaseModel):
     """
     An item that has been updated as a result of setting LusidPropertyDefinitionOverrides.  # noqa: E501
     """
-    action: StrictStr = Field(..., description="The action performed on this property. \"upsert\" for setting values for new and existing              properties. \"delete\" for existing properties that were removed")
-    write_error: Optional[StrictStr] = Field(None, alias="writeError")
-    write_error_detail: Optional[StrictStr] = Field(None, alias="writeErrorDetail")
-    display_name_override: Optional[StrictStr] = Field(None, alias="displayNameOverride")
-    description_override: Optional[StrictStr] = Field(None, alias="descriptionOverride")
+    action: constr(strict=True) = Field(...,alias="action", description="The action performed on this property. \&quot;upsert\&quot; for setting values for new and existing              properties. \&quot;delete\&quot; for existing properties that were removed") 
+    write_error: constr(strict=True) = Field(None,alias="writeError", description="") 
+    write_error_detail: constr(strict=True) = Field(None,alias="writeErrorDetail", description="") 
+    display_name_override: constr(strict=True) = Field(None,alias="displayNameOverride", description="") 
+    description_override: constr(strict=True) = Field(None,alias="descriptionOverride", description="") 
     __properties = ["action", "writeError", "writeErrorDetail", "displayNameOverride", "descriptionOverride"]
 
     class Config:

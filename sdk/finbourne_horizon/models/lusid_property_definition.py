@@ -19,23 +19,23 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, Field
 from finbourne_horizon.models.resource_id import ResourceId
 
 class LusidPropertyDefinition(BaseModel):
     """
     Defines the information in a LUSID Property Definition  # noqa: E501
     """
-    key: StrictStr = Field(...)
-    product_entity_item_key: constr(strict=True, min_length=1) = Field(..., alias="productEntityItemKey", description="Property key associated with the mapping")
-    domain: constr(strict=True, min_length=1) = Field(..., description="The domain of this definition.")
-    scope: constr(strict=True, min_length=1) = Field(..., description="The scope of this definition.")
-    code: constr(strict=True, min_length=1) = Field(..., description="The code of this definition.")
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The name used when this definition is displayed.")
+    key: constr(strict=True) = Field(...,alias="key") 
+    product_entity_item_key: constr(strict=True) = Field(...,alias="productEntityItemKey", description="Property key associated with the mapping") 
+    domain: constr(strict=True) = Field(...,alias="domain", description="The domain of this definition.") 
+    scope: constr(strict=True) = Field(...,alias="scope", description="The scope of this definition.") 
+    code: constr(strict=True) = Field(...,alias="code", description="The code of this definition.") 
+    display_name: constr(strict=True) = Field(...,alias="displayName", description="The name used when this definition is displayed.") 
     data_type_id: ResourceId = Field(..., alias="dataTypeId")
-    description: StrictStr = Field(...)
-    lifetime: constr(strict=True, min_length=1) = Field(...)
-    constraint_style: constr(strict=True, min_length=1) = Field(..., alias="constraintStyle")
+    description: constr(strict=True) = Field(...,alias="description", description="") 
+    lifetime: constr(strict=True) = Field(...,alias="lifetime", description="") 
+    constraint_style: constr(strict=True) = Field(...,alias="constraintStyle", description="") 
     __properties = ["key", "productEntityItemKey", "domain", "scope", "code", "displayName", "dataTypeId", "description", "lifetime", "constraintStyle"]
 
     class Config:

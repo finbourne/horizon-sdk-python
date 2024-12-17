@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr, Field
 
 class ResourceId(BaseModel):
     """
     ResourceId
     """
-    scope: StrictStr = Field(...)
-    code: StrictStr = Field(...)
+    scope: constr(strict=True) = Field(...,alias="scope") 
+    code: constr(strict=True) = Field(...,alias="code") 
     __properties = ["scope", "code"]
 
     class Config:

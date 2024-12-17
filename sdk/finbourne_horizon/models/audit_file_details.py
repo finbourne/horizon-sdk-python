@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr, Field
 from finbourne_horizon.models.audit_file_type import AuditFileType
 
 class AuditFileDetails(BaseModel):
@@ -27,7 +27,7 @@ class AuditFileDetails(BaseModel):
     Holds information about Horizon Audit Files  # noqa: E501
     """
     file_type: AuditFileType = Field(..., alias="fileType")
-    file_path_and_name: StrictStr = Field(..., alias="filePathAndName")
+    file_path_and_name: constr(strict=True) = Field(...,alias="filePathAndName", description="") 
     __properties = ["fileType", "filePathAndName"]
 
     class Config:

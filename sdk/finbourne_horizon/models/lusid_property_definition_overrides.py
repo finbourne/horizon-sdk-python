@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr, Field
 
 class LusidPropertyDefinitionOverrides(BaseModel):
     """
     Override values for property Display Name and Description  # noqa: E501
     """
-    display_name_override: Optional[StrictStr] = Field(None, alias="displayNameOverride")
-    description_override: Optional[StrictStr] = Field(None, alias="descriptionOverride")
+    display_name_override: constr(strict=True) = Field(None,alias="displayNameOverride", description="") 
+    description_override: constr(strict=True) = Field(None,alias="descriptionOverride", description="") 
     __properties = ["displayNameOverride", "descriptionOverride"]
 
     class Config:

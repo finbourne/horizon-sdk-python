@@ -19,28 +19,28 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr, Field
 
 class OpenFigiData(BaseModel):
     """
     OpenFIGI data structure  # noqa: E501
     """
-    figi: StrictStr = Field(..., description="FIGI assigned to the instrument.")
-    name: Optional[StrictStr] = Field(None, description="Various attributes of the instrument")
-    ticker: Optional[StrictStr] = Field(None, description="Various attributes of the instrument")
-    exchange_code: Optional[StrictStr] = Field(None, alias="exchangeCode", description="Exchange code of the desired instrument(s)")
-    mic: Optional[StrictStr] = Field(None, description="ISO market identification code(MIC) of the desired instrument(s)")
-    exchange_name: Optional[StrictStr] = Field(None, alias="exchangeName", description="Exchange name of the desired instrument(s)")
-    market_sector: Optional[StrictStr] = Field(None, alias="marketSector", description="Market sector description of the desired instrument(s)")
-    general_security_type: Optional[StrictStr] = Field(None, alias="generalSecurityType", description="Enum-like attributes of the instrument")
-    security_type: Optional[StrictStr] = Field(None, alias="securityType", description="Enum-like attributes of the instrument")
-    security_description: Optional[StrictStr] = Field(None, alias="securityDescription", description="Various attributes of the instrument")
-    composite_figi: Optional[StrictStr] = Field(None, alias="compositeFigi", description="Various attributes of the instrument")
-    share_class_figi: Optional[StrictStr] = Field(None, alias="shareClassFigi", description="Various attributes of the instrument")
-    match_type: Optional[StrictStr] = Field(None, alias="matchType", description="Type that the instrument matched against")
-    search_input: Optional[StrictStr] = Field(None, alias="searchInput", description="Search input used to generate this response")
-    lusid_instrument_id: Optional[StrictStr] = Field(None, alias="lusidInstrumentId", description="If an instrument with this FIGI exists, the LUID of that instrument in LUSID")
-    lusid_instrument_scope: Optional[StrictStr] = Field(None, alias="lusidInstrumentScope", description="If an instrument with this FIGI exists, the Scope of that instrument in LUSID")
+    figi: constr(strict=True) = Field(...,alias="figi", description="FIGI assigned to the instrument.") 
+    name: constr(strict=True) = Field(None,alias="name", description="Various attributes of the instrument") 
+    ticker: constr(strict=True) = Field(None,alias="ticker", description="Various attributes of the instrument") 
+    exchange_code: constr(strict=True) = Field(None,alias="exchangeCode", description="Exchange code of the desired instrument(s)") 
+    mic: constr(strict=True) = Field(None,alias="mic", description="ISO market identification code(MIC) of the desired instrument(s)") 
+    exchange_name: constr(strict=True) = Field(None,alias="exchangeName", description="Exchange name of the desired instrument(s)") 
+    market_sector: constr(strict=True) = Field(None,alias="marketSector", description="Market sector description of the desired instrument(s)") 
+    general_security_type: constr(strict=True) = Field(None,alias="generalSecurityType", description="Enum-like attributes of the instrument") 
+    security_type: constr(strict=True) = Field(None,alias="securityType", description="Enum-like attributes of the instrument") 
+    security_description: constr(strict=True) = Field(None,alias="securityDescription", description="Various attributes of the instrument") 
+    composite_figi: constr(strict=True) = Field(None,alias="compositeFigi", description="Various attributes of the instrument") 
+    share_class_figi: constr(strict=True) = Field(None,alias="shareClassFigi", description="Various attributes of the instrument") 
+    match_type: constr(strict=True) = Field(None,alias="matchType", description="Type that the instrument matched against") 
+    search_input: constr(strict=True) = Field(None,alias="searchInput", description="Search input used to generate this response") 
+    lusid_instrument_id: constr(strict=True) = Field(None,alias="lusidInstrumentId", description="If an instrument with this FIGI exists, the LUID of that instrument in LUSID") 
+    lusid_instrument_scope: constr(strict=True) = Field(None,alias="lusidInstrumentScope", description="If an instrument with this FIGI exists, the Scope of that instrument in LUSID") 
     __properties = ["figi", "name", "ticker", "exchangeCode", "mic", "exchangeName", "marketSector", "generalSecurityType", "securityType", "securityDescription", "compositeFigi", "shareClassFigi", "matchType", "searchInput", "lusidInstrumentId", "lusidInstrumentScope"]
 
     class Config:

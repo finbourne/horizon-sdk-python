@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictInt
+from pydantic.v1 import BaseModel, Field, StrictInt, Field
 from finbourne_horizon.models.integration_run_log_link import IntegrationRunLogLink
 
 class IntegrationRunLog(BaseModel):
