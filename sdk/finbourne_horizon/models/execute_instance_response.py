@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, Field
+from pydantic.v1 import BaseModel, Field, StrictStr
 
 class ExecuteInstanceResponse(BaseModel):
     """
     Response for executing an instance.  # noqa: E501
     """
-    execution_id: constr(strict=True) = Field(...,alias="executionId", description="Identifier for the execution of the integration instance") 
+    execution_id: StrictStr = Field(..., alias="executionId", description="Identifier for the execution of the integration instance")
     __properties = ["executionId"]
 
     class Config:

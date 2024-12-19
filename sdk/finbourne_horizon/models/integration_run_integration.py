@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, Field
+from pydantic.v1 import BaseModel, Field, StrictStr
 
 class IntegrationRunIntegration(BaseModel):
     """
     IntegrationRunIntegration
     """
-    name: constr(strict=True) = Field(...,alias="name") 
-    type: constr(strict=True) = Field(...,alias="type") 
+    name: StrictStr = Field(...)
+    type: StrictStr = Field(...)
     __properties = ["name", "type"]
 
     class Config:

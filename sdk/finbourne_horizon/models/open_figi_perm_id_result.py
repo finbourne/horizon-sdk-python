@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, Field
+from pydantic.v1 import BaseModel, Field
 from finbourne_horizon.models.open_figi_data import OpenFigiData
 from finbourne_horizon.models.perm_id_data import PermIdData
 

@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, Field
+from pydantic.v1 import BaseModel, Field, StrictStr
 
 class InstanceExecutionReferenceId(BaseModel):
     """
     InstanceExecutionReferenceId
     """
-    value: constr(strict=True) = Field(...,alias="value") 
+    value: StrictStr = Field(...)
     __properties = ["value"]
 
     class Config:

@@ -19,20 +19,20 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, Field
+from pydantic.v1 import BaseModel, Field, StrictStr
 
 class ProcessUpdateResult(BaseModel):
     """
     Shows details relevant to update events for a query  # noqa: E501
     """
-    domain: constr(strict=True) = Field(...,alias="domain", description="") 
-    entry_id: constr(strict=True) = Field(...,alias="entryId", description="") 
-    process_name: constr(strict=True) = Field(...,alias="processName", description="") 
-    run_id: constr(strict=True) = Field(...,alias="runId", description="") 
+    domain: StrictStr = Field(...)
+    entry_id: StrictStr = Field(..., alias="entryId")
+    process_name: StrictStr = Field(..., alias="processName")
+    run_id: StrictStr = Field(..., alias="runId")
     entry_date: datetime = Field(..., alias="entryDate")
-    status: constr(strict=True) = Field(...,alias="status", description="") 
-    message: constr(strict=True) = Field(...,alias="message", description="") 
-    schema_version: constr(strict=True) = Field(None,alias="schemaVersion", description="") 
+    status: StrictStr = Field(...)
+    message: StrictStr = Field(...)
+    schema_version: Optional[StrictStr] = Field(None, alias="schemaVersion")
     __properties = ["domain", "entryId", "processName", "runId", "entryDate", "status", "message", "schemaVersion"]
 
     class Config:

@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, Field
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
 from finbourne_horizon.models.trigger import Trigger
 
 class IntegrationInstance(BaseModel):
     """
     Response containing an integration instance.  # noqa: E501
     """
-    id: constr(strict=True) = Field(...,alias="id", description="Identifies the instance within the integration.") 
-    integration_type: constr(strict=True) = Field(...,alias="integrationType", description="The integration type.") 
-    name: constr(strict=True) = Field(...,alias="name", description="Name of the instance.") 
-    description: constr(strict=True) = Field(...,alias="description", description="Description of the instance.") 
+    id: StrictStr = Field(..., description="Identifies the instance within the integration.")
+    integration_type: StrictStr = Field(..., alias="integrationType", description="The integration type.")
+    name: StrictStr = Field(..., description="Name of the instance.")
+    description: StrictStr = Field(..., description="Description of the instance.")
     enabled: StrictBool = Field(..., description="If true the instance will be executed if its trigger is satisfied.")
     triggers: conlist(Trigger) = Field(..., description="Defines what triggers execution of the instance.")
     details: Dict[str, Any] = Field(...)

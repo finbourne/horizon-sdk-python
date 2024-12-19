@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, Field
+from pydantic.v1 import BaseModel, Field, StrictStr
 
 class VendorField(BaseModel):
     """
     Reference to a specific vendor field  # noqa: E501
     """
-    package: constr(strict=True) = Field(...,alias="package", description="The vendor package it is included in") 
-    field: constr(strict=True) = Field(...,alias="field", description="The name of the field") 
+    package: StrictStr = Field(..., description="The vendor package it is included in")
+    field: StrictStr = Field(..., description="The name of the field")
     __properties = ["package", "field"]
 
     class Config:

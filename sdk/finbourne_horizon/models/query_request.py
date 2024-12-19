@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field
+from pydantic.v1 import BaseModel
 from finbourne_horizon.models.query_specification import QuerySpecification
 
 class QueryRequest(BaseModel):

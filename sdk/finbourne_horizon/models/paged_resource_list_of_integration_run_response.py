@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, Field
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from finbourne_horizon.models.integration_run_response import IntegrationRunResponse
 from finbourne_horizon.models.link import Link
 
@@ -27,10 +27,10 @@ class PagedResourceListOfIntegrationRunResponse(BaseModel):
     """
     PagedResourceListOfIntegrationRunResponse
     """
-    next_page: constr(strict=True) = Field(None,alias="nextPage") 
-    previous_page: constr(strict=True) = Field(None,alias="previousPage") 
+    next_page: Optional[StrictStr] = Field(None, alias="nextPage")
+    previous_page: Optional[StrictStr] = Field(None, alias="previousPage")
     values: conlist(IntegrationRunResponse) = Field(...)
-    href: constr(strict=True) = Field(None,alias="href") 
+    href: Optional[StrictStr] = None
     links: Optional[conlist(Link)] = None
     __properties = ["nextPage", "previousPage", "values", "href", "links"]
 

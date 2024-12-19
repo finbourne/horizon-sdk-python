@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, Field
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from finbourne_horizon.models.lusid_property_definition import LusidPropertyDefinition
 from finbourne_horizon.models.optionality import Optionality
 from finbourne_horizon.models.vendor_field import VendorField
@@ -31,9 +31,9 @@ class PropertyMapping(BaseModel):
     var_property: LusidPropertyDefinition = Field(..., alias="property")
     vendor_fields: conlist(VendorField) = Field(..., alias="vendorFields", description="Fields that will be used to map to this Property Definition")
     optionality: Optionality = Field(...)
-    entity_type: constr(strict=True) = Field(...,alias="entityType", description="The LUSID Entity this is valid for") 
-    entity_sub_type: constr(strict=True) = Field(None,alias="entitySubType", description="The LUSID Entity sub type this is valid for") 
-    transformation_description: constr(strict=True) = Field(None,alias="transformationDescription", description="The transformation, if required, to map from VendorFields to the LUSID Property") 
+    entity_type: StrictStr = Field(..., alias="entityType", description="The LUSID Entity this is valid for")
+    entity_sub_type: Optional[StrictStr] = Field(None, alias="entitySubType", description="The LUSID Entity sub type this is valid for")
+    transformation_description: Optional[StrictStr] = Field(None, alias="transformationDescription", description="The transformation, if required, to map from VendorFields to the LUSID Property")
     versions: conlist(StrictStr) = Field(..., description="The versions of the Vendor integration this mapping is valid for")
     __properties = ["property", "vendorFields", "optionality", "entityType", "entitySubType", "transformationDescription", "versions"]
 

@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, Field
+from pydantic.v1 import BaseModel, Field, StrictStr
 
 class AllowedParameterValue(BaseModel):
     """
     An allowed parameter value for an OpenFigi Parameter Option.  # noqa: E501
     """
-    allowed_value: constr(strict=True) = Field(...,alias="allowedValue", description="") 
+    allowed_value: StrictStr = Field(..., alias="allowedValue")
     __properties = ["allowedValue"]
 
     class Config:
