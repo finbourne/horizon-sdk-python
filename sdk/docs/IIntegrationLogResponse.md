@@ -5,6 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **log_id** | **int** |  | [readonly] 
+**run_id** | **str** |  | [optional] [readonly] 
+**parent_log_id** | **int** |  | [optional] [readonly] 
+**log_type** | **str** |  | [readonly] 
+**first_activity** | **datetime** |  | [optional] [readonly] 
+**last_activity** | **datetime** |  | [optional] [readonly] 
+**status** | **str** |  | [optional] [readonly] 
+**source_record** | [**IntegrationLogRecord**](IntegrationLogRecord.md) |  | [optional] 
+**target_record** | [**IntegrationLogTargetRecord**](IntegrationLogTargetRecord.md) |  | [optional] 
+**activities** | [**List[IntegrationLogActivity]**](IntegrationLogActivity.md) |  | [readonly] 
 
 ## Example
 

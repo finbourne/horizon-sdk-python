@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
+**200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
+**200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -254,7 +254,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentApi)
-    parameter_name = finbourne_horizon.OpenFigiParameterOptionName() # OpenFigiParameterOptionName | 
+    parameter_name = finbourne_horizon.OpenFigiParameterOptionName() # OpenFigiParameterOptionName | OpenFigi API Parameters that have a restricted / permitted range of values.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -274,7 +274,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **parameter_name** | [**OpenFigiParameterOptionName**](.md)|  | 
+ **parameter_name** | [**OpenFigiParameterOptionName**](.md)| OpenFigi API Parameters that have a restricted / permitted range of values. | 
 
 ### Return type
 
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
+**200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -378,7 +378,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
+**200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -474,7 +474,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
+**200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -568,7 +568,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
+**200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

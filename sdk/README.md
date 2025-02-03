@@ -13,7 +13,7 @@ Class | Method | HTTP request | Description
 *InstrumentApi* | [**vendors**](docs/InstrumentApi.md#vendors) | **GET** /api/instrument/onboarding/vendors | [EARLY ACCESS] Vendors: Gets the VendorProducts of any supported and licenced integrations for a given market sector and security type.
 *IntegrationsApi* | [**create_instance**](docs/IntegrationsApi.md#create_instance) | **POST** /api/integrations/instances | [EXPERIMENTAL] CreateInstance: Create a single integration instance.
 *IntegrationsApi* | [**delete_instance**](docs/IntegrationsApi.md#delete_instance) | **DELETE** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] DeleteInstance: Delete a single integration instance.
-*IntegrationsApi* | [**execute_instance**](docs/IntegrationsApi.md#execute_instance) | **POST** /api/integrations/instances/{instanceId}/execute | [EXPERIMENTAL] ExecuteInstance: Execute an integration instance.
+*IntegrationsApi* | [**execute_instance**](docs/IntegrationsApi.md#execute_instance) | **POST** /api/integrations/instances/{instanceId}/execute | [EXPERIMENTAL] ExecuteInstance: 
 *IntegrationsApi* | [**get_execution_ids_for_instance**](docs/IntegrationsApi.md#get_execution_ids_for_instance) | **GET** /api/integrations/instances/{instanceId}/executions | [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
 *IntegrationsApi* | [**get_instance_optional_property_mapping**](docs/IntegrationsApi.md#get_instance_optional_property_mapping) | **GET** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
 *IntegrationsApi* | [**get_integration_configuration**](docs/IntegrationsApi.md#get_integration_configuration) | **GET** /api/integrations/configuration/{integration} | [EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration
@@ -60,6 +60,9 @@ Class | Method | HTTP request | Description
  - [InstanceIdentifier](docs/InstanceIdentifier.md)
  - [IntegrationDescription](docs/IntegrationDescription.md)
  - [IntegrationInstance](docs/IntegrationInstance.md)
+ - [IntegrationLogActivity](docs/IntegrationLogActivity.md)
+ - [IntegrationLogRecord](docs/IntegrationLogRecord.md)
+ - [IntegrationLogTargetRecord](docs/IntegrationLogTargetRecord.md)
  - [IntegrationPropertyConfiguration](docs/IntegrationPropertyConfiguration.md)
  - [IntegrationRerunResponse](docs/IntegrationRerunResponse.md)
  - [IntegrationRunIntegration](docs/IntegrationRunIntegration.md)

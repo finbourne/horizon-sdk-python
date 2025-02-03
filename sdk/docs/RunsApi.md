@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] CancelInstance: Cancels a single instance execution.
 
-<br>Cancels an execution instance of an integration.  <br />  <br />  <br>The execution instance must be queued, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+ Cancels an execution instance of an integration.         The execution instance must be queued, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 
@@ -194,7 +194,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
+**200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | Not Found |  -  |
 **0** | Error response |  -  |
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
 
-<br>Reruns an execution instance of an integration.  <br />  <br />  <br>The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+ Reruns an execution instance of an integration.         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 

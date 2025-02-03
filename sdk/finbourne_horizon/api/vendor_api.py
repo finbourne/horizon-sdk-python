@@ -375,8 +375,8 @@ class VendorApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "Dict[str, LusidPropertyDefinitionOverrides]",
             '400': "LusidValidationProblemDetails",
+            '200': "Dict[str, LusidPropertyDefinitionOverrides]",
         }
 
         return self.api_client.call_api(
@@ -892,8 +892,8 @@ class VendorApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "Dict[str, LusidPropertyDefinitionOverridesResponse]",
             '400': "LusidValidationProblemDetails",
+            '200': "Dict[str, LusidPropertyDefinitionOverridesResponse]",
         }
 
         return self.api_client.call_api(

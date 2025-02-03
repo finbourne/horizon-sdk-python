@@ -33,6 +33,9 @@ from finbourne_horizon.models.instance_execution_reference_id import InstanceExe
 from finbourne_horizon.models.instance_identifier import InstanceIdentifier
 from finbourne_horizon.models.integration_description import IntegrationDescription
 from finbourne_horizon.models.integration_instance import IntegrationInstance
+from finbourne_horizon.models.integration_log_activity import IntegrationLogActivity
+from finbourne_horizon.models.integration_log_record import IntegrationLogRecord
+from finbourne_horizon.models.integration_log_target_record import IntegrationLogTargetRecord
 from finbourne_horizon.models.integration_property_configuration import IntegrationPropertyConfiguration
 from finbourne_horizon.models.integration_rerun_response import IntegrationRerunResponse
 from finbourne_horizon.models.integration_run_integration import IntegrationRunIntegration
@@ -99,6 +102,9 @@ __all__ = [
     "InstanceIdentifier",
     "IntegrationDescription",
     "IntegrationInstance",
+    "IntegrationLogActivity",
+    "IntegrationLogRecord",
+    "IntegrationLogTargetRecord",
     "IntegrationPropertyConfiguration",
     "IntegrationRerunResponse",
     "IntegrationRunIntegration",

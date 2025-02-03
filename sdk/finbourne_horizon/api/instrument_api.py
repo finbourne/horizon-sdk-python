@@ -376,15 +376,15 @@ class InstrumentApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_open_figi_parameter_option(self, parameter_name : OpenFigiParameterOptionName, **kwargs) -> List[AllowedParameterValue]:  # noqa: E501
+    async def get_open_figi_parameter_option(self, parameter_name : Annotated[OpenFigiParameterOptionName, Field(..., description="OpenFigi API Parameters that have a restricted / permitted range of values.")], **kwargs) -> List[AllowedParameterValue]:  # noqa: E501
         ...
 
     @overload
-    def get_open_figi_parameter_option(self, parameter_name : OpenFigiParameterOptionName, async_req: Optional[bool]=True, **kwargs) -> List[AllowedParameterValue]:  # noqa: E501
+    def get_open_figi_parameter_option(self, parameter_name : Annotated[OpenFigiParameterOptionName, Field(..., description="OpenFigi API Parameters that have a restricted / permitted range of values.")], async_req: Optional[bool]=True, **kwargs) -> List[AllowedParameterValue]:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_open_figi_parameter_option(self, parameter_name : OpenFigiParameterOptionName, async_req: Optional[bool]=None, **kwargs) -> Union[List[AllowedParameterValue], Awaitable[List[AllowedParameterValue]]]:  # noqa: E501
+    def get_open_figi_parameter_option(self, parameter_name : Annotated[OpenFigiParameterOptionName, Field(..., description="OpenFigi API Parameters that have a restricted / permitted range of values.")], async_req: Optional[bool]=None, **kwargs) -> Union[List[AllowedParameterValue], Awaitable[List[AllowedParameterValue]]]:  # noqa: E501
         """[EARLY ACCESS] GetOpenFigiParameterOption: Get all supported market sector values for OpenFigi search  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -393,7 +393,7 @@ class InstrumentApi:
         >>> thread = api.get_open_figi_parameter_option(parameter_name, async_req=True)
         >>> result = thread.get()
 
-        :param parameter_name: (required)
+        :param parameter_name: OpenFigi API Parameters that have a restricted / permitted range of values. (required)
         :type parameter_name: OpenFigiParameterOptionName
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -414,7 +414,7 @@ class InstrumentApi:
         return self.get_open_figi_parameter_option_with_http_info(parameter_name, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_open_figi_parameter_option_with_http_info(self, parameter_name : OpenFigiParameterOptionName, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_open_figi_parameter_option_with_http_info(self, parameter_name : Annotated[OpenFigiParameterOptionName, Field(..., description="OpenFigi API Parameters that have a restricted / permitted range of values.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetOpenFigiParameterOption: Get all supported market sector values for OpenFigi search  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -423,7 +423,7 @@ class InstrumentApi:
         >>> thread = api.get_open_figi_parameter_option_with_http_info(parameter_name, async_req=True)
         >>> result = thread.get()
 
-        :param parameter_name: (required)
+        :param parameter_name: OpenFigi API Parameters that have a restricted / permitted range of values. (required)
         :type parameter_name: OpenFigiParameterOptionName
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
