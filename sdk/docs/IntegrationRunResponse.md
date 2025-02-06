@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **instance_id** | **str** |  | [optional] 
 **instance_name** | **str** |  | [optional] 
 **status** | **str** |  | [optional] 
+**message** | **str** |  | [optional] 
 **integration** | [**IntegrationRunIntegration**](IntegrationRunIntegration.md) |  | 
 **version** | [**IntegrationRunVersion**](IntegrationRunVersion.md) |  | 
 **integration_logs** | **Dict[str, Dict[str, IntegrationRunLog]]** |  | [optional] 
