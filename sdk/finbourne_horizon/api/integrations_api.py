@@ -67,7 +67,7 @@ class IntegrationsApi:
     def create_instance(self, create_instance_request : Annotated[Optional[CreateInstanceRequest], Field(description="The new integration instance.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InstanceIdentifier, Awaitable[InstanceIdentifier]]:  # noqa: E501
         """[EXPERIMENTAL] CreateInstance: Create a single integration instance.  # noqa: E501
 
-         Creates a new instance of an integration, returning its identifier.         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Creates a new instance of an integration, returning its identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -98,7 +98,7 @@ class IntegrationsApi:
     def create_instance_with_http_info(self, create_instance_request : Annotated[Optional[CreateInstanceRequest], Field(description="The new integration instance.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateInstance: Create a single integration instance.  # noqa: E501
 
-         Creates a new instance of an integration, returning its identifier.         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Creates a new instance of an integration, returning its identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -226,7 +226,7 @@ class IntegrationsApi:
     def delete_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], async_req: Optional[bool]=None, **kwargs) -> Union[None, Awaitable[None]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteInstance: Delete a single integration instance.  # noqa: E501
 
-         Deletes an existing instance of an integration, returning its identifier.         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Deletes an existing instance of an integration, returning its identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -257,7 +257,7 @@ class IntegrationsApi:
     def delete_instance_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteInstance: Delete a single integration instance.  # noqa: E501
 
-         Deletes an existing instance of an integration, returning its identifier.         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Deletes an existing instance of an integration, returning its identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -363,25 +363,25 @@ class IntegrationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def execute_instance(self, instance_id : StrictStr, **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
+    async def execute_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
         ...
 
     @overload
-    def execute_instance(self, instance_id : StrictStr, async_req: Optional[bool]=True, **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
+    def execute_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], async_req: Optional[bool]=True, **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def execute_instance(self, instance_id : StrictStr, async_req: Optional[bool]=None, **kwargs) -> Union[ExecuteInstanceResponse, Awaitable[ExecuteInstanceResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] ExecuteInstance:   # noqa: E501
+    def execute_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], async_req: Optional[bool]=None, **kwargs) -> Union[ExecuteInstanceResponse, Awaitable[ExecuteInstanceResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] ExecuteInstance: Execute an integration instance.  # noqa: E501
 
-        Starts an execution of an integration instance, returning an execution id. You can check the status of your execution using either the ProcessHistory API or in the Data Feed Monitoring dashboard in the LUSID UI.  # noqa: E501
+        Starts execution of an instance, returning its execution identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.execute_instance(instance_id, async_req=True)
         >>> result = thread.get()
 
-        :param instance_id: (required)
+        :param instance_id: Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
         :type instance_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -402,17 +402,17 @@ class IntegrationsApi:
         return self.execute_instance_with_http_info(instance_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def execute_instance_with_http_info(self, instance_id : StrictStr, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ExecuteInstance:   # noqa: E501
+    def execute_instance_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ExecuteInstance: Execute an integration instance.  # noqa: E501
 
-        Starts an execution of an integration instance, returning an execution id. You can check the status of your execution using either the ProcessHistory API or in the Data Feed Monitoring dashboard in the LUSID UI.  # noqa: E501
+        Starts execution of an instance, returning its execution identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.execute_instance_with_http_info(instance_id, async_req=True)
         >>> result = thread.get()
 
-        :param instance_id: (required)
+        :param instance_id: Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
         :type instance_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -515,6 +515,173 @@ class IntegrationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(..., description="Dictionary(string,string) of runtime parameters passed to the integration instance")], **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
+        ...
+
+    @overload
+    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(..., description="Dictionary(string,string) of runtime parameters passed to the integration instance")], async_req: Optional[bool]=True, **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(..., description="Dictionary(string,string) of runtime parameters passed to the integration instance")], async_req: Optional[bool]=None, **kwargs) -> Union[ExecuteInstanceResponse, Awaitable[ExecuteInstanceResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters  # noqa: E501
+
+        Starts execution of an instance, returning its execution identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.execute_instance_with_params(instance_id, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
+        :type instance_id: str
+        :param request_body: Dictionary(string,string) of runtime parameters passed to the integration instance (required)
+        :type request_body: Dict[str, str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ExecuteInstanceResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the execute_instance_with_params_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.execute_instance_with_params_with_http_info(instance_id, request_body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def execute_instance_with_params_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(..., description="Dictionary(string,string) of runtime parameters passed to the integration instance")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters  # noqa: E501
+
+        Starts execution of an instance, returning its execution identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.execute_instance_with_params_with_http_info(instance_id, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
+        :type instance_id: str
+        :param request_body: Dictionary(string,string) of runtime parameters passed to the integration instance (required)
+        :type request_body: Dict[str, str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ExecuteInstanceResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'instance_id',
+            'request_body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method execute_instance_with_params" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['instance_id']:
+            _path_params['instanceId'] = _params['instance_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ExecuteInstanceResponse",
+            '400': "LusidValidationProblemDetails",
+            '404': None,
+        }
+
+        return self.api_client.call_api(
+            '/api/integrations/instances/{instanceId}/executewithparams', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def get_execution_ids_for_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".")], limit : Annotated[Optional[StrictInt], Field(description="Maximum number of returned execution ids")] = None, **kwargs) -> List[str]:  # noqa: E501
         ...
 
@@ -526,7 +693,7 @@ class IntegrationsApi:
     def get_execution_ids_for_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".")], limit : Annotated[Optional[StrictInt], Field(description="Maximum number of returned execution ids")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[List[str], Awaitable[List[str]]]:  # noqa: E501
         """[EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.  # noqa: E501
 
-         Get the most recent execution ids for an integration instance.      The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Get the most recent execution ids for an integration instance.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -559,7 +726,7 @@ class IntegrationsApi:
     def get_execution_ids_for_instance_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"30dc93c6-a127-46bf-aea8-e466d720b72d\".")], limit : Annotated[Optional[StrictInt], Field(description="Maximum number of returned execution ids")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.  # noqa: E501
 
-         Get the most recent execution ids for an integration instance.      The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Get the most recent execution ids for an integration instance.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -846,7 +1013,7 @@ class IntegrationsApi:
     def get_integration_configuration(self, integration : constr(strict=True, max_length=128, min_length=1), async_req: Optional[bool]=None, **kwargs) -> Union[IntegrationPropertyConfiguration, Awaitable[IntegrationPropertyConfiguration]]:  # noqa: E501
         """[EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration  # noqa: E501
 
-         The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.  # noqa: E501
+        The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -877,7 +1044,7 @@ class IntegrationsApi:
     def get_integration_configuration_with_http_info(self, integration : constr(strict=True, max_length=128, min_length=1), **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration  # noqa: E501
 
-         The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.  # noqa: E501
+        The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -998,7 +1165,7 @@ class IntegrationsApi:
     def get_schema(self, integration : Annotated[constr(strict=True, max_length=128, min_length=1), Field(..., description="The type of the integration e.g. \"copp-clark\".")], async_req: Optional[bool]=None, **kwargs) -> Union[JSchema, Awaitable[JSchema]]:  # noqa: E501
         """[EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.  # noqa: E501
 
-         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1029,7 +1196,7 @@ class IntegrationsApi:
     def get_schema_with_http_info(self, integration : Annotated[constr(strict=True, max_length=128, min_length=1), Field(..., description="The type of the integration e.g. \"copp-clark\".")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.  # noqa: E501
 
-         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1150,7 +1317,7 @@ class IntegrationsApi:
     def list_instances(self, async_req: Optional[bool]=None, **kwargs) -> Union[List[IntegrationInstance], Awaitable[List[IntegrationInstance]]]:  # noqa: E501
         """[EXPERIMENTAL] ListInstances: List instances across all integrations.  # noqa: E501
 
-         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1179,7 +1346,7 @@ class IntegrationsApi:
     def list_instances_with_http_info(self, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListInstances: List instances across all integrations.  # noqa: E501
 
-         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1293,7 +1460,7 @@ class IntegrationsApi:
     def list_integrations(self, async_req: Optional[bool]=None, **kwargs) -> Union[List[IntegrationDescription], Awaitable[List[IntegrationDescription]]]:  # noqa: E501
         """[EXPERIMENTAL] ListIntegrations: List available integrations.  # noqa: E501
 
-         List all available integrations.          ```\"licensed\"``` indicates your domain is licensed to use this integration. To request a licence              contact your [FINBOURNE sales representative](https://www.finbourne.com/contact/).      Any authenticated user can call this method.  # noqa: E501
+        List all available integrations.  ```\"licensed\"``` indicates your domain is licensed to use this integration. To request a licence  contact your [FINBOURNE sales representative](https://www.finbourne.com/contact/).  Any authenticated user can call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1322,7 +1489,7 @@ class IntegrationsApi:
     def list_integrations_with_http_info(self, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListIntegrations: List available integrations.  # noqa: E501
 
-         List all available integrations.          ```\"licensed\"``` indicates your domain is licensed to use this integration. To request a licence              contact your [FINBOURNE sales representative](https://www.finbourne.com/contact/).      Any authenticated user can call this method.  # noqa: E501
+        List all available integrations.  ```\"licensed\"``` indicates your domain is licensed to use this integration. To request a licence  contact your [FINBOURNE sales representative](https://www.finbourne.com/contact/).  Any authenticated user can call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1610,7 +1777,7 @@ class IntegrationsApi:
     def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[Optional[UpdateInstanceRequest], Field(description="The new integration instance.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[None, Awaitable[None]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateInstance: Update a single integration instance.  # noqa: E501
 
-         Updates an existing instance of an integration, returning its identifier.         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Updates an existing instance of an integration, returning its identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1643,7 +1810,7 @@ class IntegrationsApi:
     def update_instance_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[Optional[UpdateInstanceRequest], Field(description="The new integration instance.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateInstance: Update a single integration instance.  # noqa: E501
 
-         Updates an existing instance of an integration, returning its identifier.         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Updates an existing instance of an integration, returning its identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

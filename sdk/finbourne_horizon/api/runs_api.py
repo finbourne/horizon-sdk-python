@@ -60,7 +60,7 @@ class RunsApi:
     def cancel_instance(self, run_id : Annotated[constr(strict=True, max_length=36, min_length=36), Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], async_req: Optional[bool]=None, **kwargs) -> Union[object, Awaitable[object]]:  # noqa: E501
         """[EXPERIMENTAL] CancelInstance: Cancels a single instance execution.  # noqa: E501
 
-         Cancels an execution instance of an integration.         The execution instance must be queued, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Cancels an execution instance of an integration.  The execution instance must be queued, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -91,7 +91,7 @@ class RunsApi:
     def cancel_instance_with_http_info(self, run_id : Annotated[constr(strict=True, max_length=36, min_length=36), Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CancelInstance: Cancels a single instance execution.  # noqa: E501
 
-         Cancels an execution instance of an integration.         The execution instance must be queued, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Cancels an execution instance of an integration.  The execution instance must be queued, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -389,7 +389,7 @@ class RunsApi:
     def rerun_instance(self, run_id : Annotated[constr(strict=True, max_length=36, min_length=36), Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], async_req: Optional[bool]=None, **kwargs) -> Union[IntegrationRerunResponse, Awaitable[IntegrationRerunResponse]]:  # noqa: E501
         """[EXPERIMENTAL] RerunInstance: Reruns a single instance execution.  # noqa: E501
 
-         Reruns an execution instance of an integration.         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Reruns an execution instance of an integration.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -420,7 +420,7 @@ class RunsApi:
     def rerun_instance_with_http_info(self, run_id : Annotated[constr(strict=True, max_length=36, min_length=36), Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] RerunInstance: Reruns a single instance execution.  # noqa: E501
 
-         Reruns an execution instance of an integration.         The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
+        Reruns an execution instance of an integration.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
