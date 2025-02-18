@@ -19,16 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class LusidEntity(BaseModel):
     """
     Information about the LUSID entity this data can be used with  # noqa: E501
     """
-    entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The entity type")
-    entity_type_display_name: constr(strict=True, min_length=1) = Field(..., alias="entityTypeDisplayName", description="The display name for the entity type.")
-    entity_sub_type: Optional[StrictStr] = Field(None, alias="entitySubType", description="The entity sub-type")
-    entity_sub_type_display_name: Optional[StrictStr] = Field(None, alias="entitySubTypeDisplayName", description="Display name for the entity sub-type")
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The entity type") 
+    entity_type_display_name:  StrictStr = Field(...,alias="entityTypeDisplayName", description="The display name for the entity type.") 
+    entity_sub_type:  Optional[StrictStr] = Field(None,alias="entitySubType", description="The entity sub-type") 
+    entity_sub_type_display_name:  Optional[StrictStr] = Field(None,alias="entitySubTypeDisplayName", description="Display name for the entity sub-type") 
     __properties = ["entityType", "entityTypeDisplayName", "entitySubType", "entitySubTypeDisplayName"]
 
     class Config:

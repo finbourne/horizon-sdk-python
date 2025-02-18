@@ -19,21 +19,21 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist 
 from finbourne_horizon.models.j_schema_type import JSchemaType
 
 class JSchema(BaseModel):
     """
     JSchema
     """
-    schema_version: Optional[StrictStr] = Field(None, alias="schemaVersion")
+    schema_version:  Optional[StrictStr] = Field(None,alias="schemaVersion") 
     valid: Optional[StrictBool] = None
-    reference: Optional[StrictStr] = None
+    reference:  Optional[StrictStr] = Field(None,alias="reference") 
     ref: Optional[JSchema] = None
-    recursive_reference: Optional[StrictStr] = Field(None, alias="recursiveReference")
+    recursive_reference:  Optional[StrictStr] = Field(None,alias="recursiveReference") 
     recursive_anchor: Optional[StrictBool] = Field(None, alias="recursiveAnchor")
-    id: Optional[StrictStr] = None
-    anchor: Optional[StrictStr] = None
+    id:  Optional[StrictStr] = Field(None,alias="id") 
+    anchor:  Optional[StrictStr] = Field(None,alias="anchor") 
     type: Optional[JSchemaType] = None
     default: Optional[Any] = None
     properties: Dict[str, JSchema] = Field(...)
@@ -64,15 +64,15 @@ class JSchema(BaseModel):
     maximum_properties: Optional[StrictInt] = Field(None, alias="maximumProperties")
     minimum_contains: Optional[StrictInt] = Field(None, alias="minimumContains")
     maximum_contains: Optional[StrictInt] = Field(None, alias="maximumContains")
-    content_encoding: Optional[StrictStr] = Field(None, alias="contentEncoding")
-    content_media_type: Optional[StrictStr] = Field(None, alias="contentMediaType")
+    content_encoding:  Optional[StrictStr] = Field(None,alias="contentEncoding") 
+    content_media_type:  Optional[StrictStr] = Field(None,alias="contentMediaType") 
     write_only: Optional[StrictBool] = Field(None, alias="writeOnly")
     read_only: Optional[StrictBool] = Field(None, alias="readOnly")
     extension_data: Dict[str, Any] = Field(..., alias="extensionData")
-    title: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
+    title:  Optional[StrictStr] = Field(None,alias="title") 
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     multiple_of: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="multipleOf")
-    pattern: Optional[StrictStr] = None
+    pattern:  Optional[StrictStr] = Field(None,alias="pattern") 
     dependencies: Dict[str, Any] = Field(...)
     dependent_required: Dict[str, conlist(StrictStr)] = Field(..., alias="dependentRequired")
     dependent_schemas: Dict[str, JSchema] = Field(..., alias="dependentSchemas")
@@ -87,7 +87,7 @@ class JSchema(BaseModel):
     allow_additional_items_specified: StrictBool = Field(..., alias="allowAdditionalItemsSpecified")
     unevaluated_items: Optional[JSchema] = Field(None, alias="unevaluatedItems")
     allow_unevaluated_items: Optional[StrictBool] = Field(None, alias="allowUnevaluatedItems")
-    format: Optional[StrictStr] = None
+    format:  Optional[StrictStr] = Field(None,alias="format") 
     validators: conlist(Dict[str, Any]) = Field(...)
     __properties = ["schemaVersion", "valid", "reference", "ref", "recursiveReference", "recursiveAnchor", "id", "anchor", "type", "default", "properties", "items", "itemsPositionValidation", "required", "allOf", "anyOf", "oneOf", "if", "then", "else", "not", "contains", "propertyNames", "enum", "const", "uniqueItems", "minimumLength", "maximumLength", "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum", "minimumItems", "maximumItems", "minimumProperties", "maximumProperties", "minimumContains", "maximumContains", "contentEncoding", "contentMediaType", "writeOnly", "readOnly", "extensionData", "title", "description", "multipleOf", "pattern", "dependencies", "dependentRequired", "dependentSchemas", "patternProperties", "additionalProperties", "allowAdditionalProperties", "allowAdditionalPropertiesSpecified", "unevaluatedProperties", "allowUnevaluatedProperties", "additionalItems", "allowAdditionalItems", "allowAdditionalItemsSpecified", "unevaluatedItems", "allowUnevaluatedItems", "format", "validators"]
 

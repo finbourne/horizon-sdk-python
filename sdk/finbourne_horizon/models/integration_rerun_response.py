@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 from finbourne_horizon.models.instance_execution_reference_id import InstanceExecutionReferenceId
 
 class IntegrationRerunResponse(BaseModel):

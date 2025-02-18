@@ -19,20 +19,20 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from finbourne_horizon.models.process_summary import ProcessSummary
 
 class ProcessInformation(BaseModel):
     """
     Required information for each process  # noqa: E501
     """
-    domain: StrictStr = Field(...)
-    process_name: StrictStr = Field(..., alias="processName")
-    run_id: StrictStr = Field(..., alias="runId")
+    domain:  StrictStr = Field(...,alias="domain", description="") 
+    process_name:  StrictStr = Field(...,alias="processName", description="") 
+    run_id:  StrictStr = Field(...,alias="runId", description="") 
     start_time: datetime = Field(..., alias="startTime")
-    data_action: StrictStr = Field(..., alias="dataAction")
-    schema_version: Optional[StrictStr] = Field(None, alias="schemaVersion")
-    user_id: StrictStr = Field(..., alias="userId")
+    data_action:  StrictStr = Field(...,alias="dataAction", description="") 
+    schema_version:  Optional[StrictStr] = Field(None,alias="schemaVersion", description="") 
+    user_id:  StrictStr = Field(...,alias="userId", description="") 
     process_summary: Optional[ProcessSummary] = Field(None, alias="processSummary")
     __properties = ["domain", "processName", "runId", "startTime", "dataAction", "schemaVersion", "userId", "processSummary"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 
 class EnrichmentResponse(BaseModel):
     """
@@ -27,7 +27,7 @@ class EnrichmentResponse(BaseModel):
     """
     enriched_instruments: conlist(StrictStr) = Field(..., alias="enrichedInstruments")
     ignored_instruments: conlist(StrictStr) = Field(..., alias="ignoredInstruments")
-    error_file_id: Optional[StrictStr] = Field(None, alias="errorFileId", description="Error File ID, if one was created")
+    error_file_id:  Optional[StrictStr] = Field(None,alias="errorFileId", description="Error File ID, if one was created") 
     __properties = ["enrichedInstruments", "ignoredInstruments", "errorFileId"]
 
     class Config:

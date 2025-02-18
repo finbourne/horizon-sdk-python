@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from finbourne_horizon.models.field_mapping import FieldMapping
 from finbourne_horizon.models.property_mapping import PropertyMapping
 
@@ -27,7 +27,7 @@ class IntegrationPropertyConfiguration(BaseModel):
     """
     Response containing the description of an integration.  # noqa: E501
     """
-    type: StrictStr = Field(..., description="The Integration this property configuration applies to")
+    type:  StrictStr = Field(...,alias="type", description="The Integration this property configuration applies to") 
     properties: conlist(PropertyMapping) = Field(..., description="The mandatory and optional properties available in this integration")
     fields: conlist(FieldMapping) = Field(..., description="The fields available in this integration")
     __properties = ["type", "properties", "fields"]

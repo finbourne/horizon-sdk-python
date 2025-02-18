@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 
 class OnboardInstrumentResponse(BaseModel):
     """
     Simplified structure converted from the LUSID UpsertInstrumentReponse  # noqa: E501
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     values: conlist(StrictStr) = Field(..., description="The instruments which have been successfully updated or created.")
     failed: Dict[str, StrictStr] = Field(..., description="The instruments that could not be updated or created or were left unchanged without error along with a reason for their failure.")
     __properties = ["href", "values", "failed"]

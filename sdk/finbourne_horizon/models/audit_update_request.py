@@ -19,18 +19,18 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class AuditUpdateRequest(BaseModel):
     """
     An incoming request for a Horizon Update Event  # noqa: E501
     """
-    id: StrictStr = Field(..., description="A unique ID identifiying the source of the event")
-    user_id: StrictStr = Field(..., alias="userId", description="A unique ID identifiying who owns the schedule")
-    scheduler_run_id: StrictStr = Field(..., alias="schedulerRunId", description="The GUID of the schedule run")
+    id:  StrictStr = Field(...,alias="id", description="A unique ID identifiying the source of the event") 
+    user_id:  StrictStr = Field(...,alias="userId", description="A unique ID identifiying who owns the schedule") 
+    scheduler_run_id:  StrictStr = Field(...,alias="schedulerRunId", description="The GUID of the schedule run") 
     start_time: datetime = Field(..., alias="startTime", description="When the run was started in UTC")
-    message: StrictStr = Field(..., description="A descriptive message to accompany the status")
-    process_name_override: Optional[StrictStr] = Field(None, alias="processNameOverride", description="Optional Name for how the process appears in Data Feed Monitoring")
+    message:  StrictStr = Field(...,alias="message", description="A descriptive message to accompany the status") 
+    process_name_override:  Optional[StrictStr] = Field(None,alias="processNameOverride", description="Optional Name for how the process appears in Data Feed Monitoring") 
     __properties = ["id", "userId", "schedulerRunId", "startTime", "message", "processNameOverride"]
 
     class Config:

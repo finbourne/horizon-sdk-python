@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class InstanceIdentifier(BaseModel):
     """
     Identifies a single instance of an integration.  # noqa: E501
     """
-    id: StrictStr = Field(..., description="Instance identifier.")
+    id:  StrictStr = Field(...,alias="id", description="Instance identifier.") 
     __properties = ["id"]
 
     class Config:

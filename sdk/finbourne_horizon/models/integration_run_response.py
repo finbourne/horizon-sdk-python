@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from finbourne_horizon.models.integration_run_integration import IntegrationRunIntegration
 from finbourne_horizon.models.integration_run_log import IntegrationRunLog
 from finbourne_horizon.models.integration_run_version import IntegrationRunVersion
@@ -28,11 +28,11 @@ class IntegrationRunResponse(BaseModel):
     """
     IntegrationRunResponse
     """
-    run_id: StrictStr = Field(..., alias="runId")
-    instance_id: Optional[StrictStr] = Field(None, alias="instanceId")
-    instance_name: Optional[StrictStr] = Field(None, alias="instanceName")
-    status: Optional[StrictStr] = None
-    message: Optional[StrictStr] = None
+    run_id:  StrictStr = Field(...,alias="runId") 
+    instance_id:  Optional[StrictStr] = Field(None,alias="instanceId") 
+    instance_name:  Optional[StrictStr] = Field(None,alias="instanceName") 
+    status:  Optional[StrictStr] = Field(None,alias="status") 
+    message:  Optional[StrictStr] = Field(None,alias="message") 
     integration: IntegrationRunIntegration = Field(...)
     version: IntegrationRunVersion = Field(...)
     integration_logs: Optional[Dict[str, Dict[str, IntegrationRunLog]]] = Field(None, alias="integrationLogs")

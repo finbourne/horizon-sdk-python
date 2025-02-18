@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
 
 class IntegrationDescription(BaseModel):
     """
     Response containing the description of an integration.  # noqa: E501
     """
-    type: StrictStr = Field(..., description="Unique identifier of the integration e.g. \"copp-clark\".")
-    name: StrictStr = Field(..., description="Readable name of the integration e.g. \"Copp Clark\".")
-    description: StrictStr = Field(..., description="Describes the purpose of the integration.")
+    type:  StrictStr = Field(...,alias="type", description="Unique identifier of the integration e.g. \"copp-clark\".") 
+    name:  StrictStr = Field(...,alias="name", description="Readable name of the integration e.g. \"Copp Clark\".") 
+    description:  StrictStr = Field(...,alias="description", description="Describes the purpose of the integration.") 
     supported_trigger_types: conlist(StrictStr) = Field(..., alias="supportedTriggerTypes", description="Trigger types (Time, File) the integration supports.")
     licensed: StrictBool = Field(..., description="True if your domain is licensed to use this integration, otherwise false.")
     __properties = ["type", "name", "description", "supportedTriggerTypes", "licensed"]

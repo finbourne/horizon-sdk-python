@@ -19,16 +19,16 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class IntegrationLogActivity(BaseModel):
     """
     IntegrationLogActivity
     """
     timestamp: datetime = Field(...)
-    resulting_status: StrictStr = Field(..., alias="resultingStatus")
-    message_type: Optional[StrictStr] = Field(None, alias="messageType")
-    description: Optional[StrictStr] = None
+    resulting_status:  StrictStr = Field(...,alias="resultingStatus") 
+    message_type:  Optional[StrictStr] = Field(None,alias="messageType") 
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     __properties = ["timestamp", "resultingStatus", "messageType", "description"]
 
     class Config:

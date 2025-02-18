@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class Trigger(BaseModel):
     """
     Trigger
     """
-    type: StrictStr = Field(...)
-    cron_expression: StrictStr = Field(..., alias="cronExpression")
-    time_zone: StrictStr = Field(..., alias="timeZone")
+    type:  StrictStr = Field(...,alias="type") 
+    cron_expression:  StrictStr = Field(...,alias="cronExpression") 
+    time_zone:  StrictStr = Field(...,alias="timeZone") 
     __properties = ["type", "cronExpression", "timeZone"]
 
     class Config:

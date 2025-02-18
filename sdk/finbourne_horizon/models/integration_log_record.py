@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class IntegrationLogRecord(BaseModel):
     """
     IntegrationLogRecord
     """
-    record_type: Optional[StrictStr] = Field(None, alias="recordType")
-    id_type: Optional[StrictStr] = Field(None, alias="idType")
-    id_value: Optional[StrictStr] = Field(None, alias="idValue")
-    attribute_name: Optional[StrictStr] = Field(None, alias="attributeName")
-    attribute_value: Optional[StrictStr] = Field(None, alias="attributeValue")
+    record_type:  Optional[StrictStr] = Field(None,alias="recordType") 
+    id_type:  Optional[StrictStr] = Field(None,alias="idType") 
+    id_value:  Optional[StrictStr] = Field(None,alias="idValue") 
+    attribute_name:  Optional[StrictStr] = Field(None,alias="attributeName") 
+    attribute_value:  Optional[StrictStr] = Field(None,alias="attributeValue") 
     __properties = ["recordType", "idType", "idValue", "attributeName", "attributeValue"]
 
     class Config:

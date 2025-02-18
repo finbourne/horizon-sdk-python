@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
 from finbourne_horizon.models.trigger import Trigger
 
 class UpdateInstanceRequest(BaseModel):
     """
     UpdateInstanceRequest
     """
-    id: StrictStr = Field(...)
-    integration_type: StrictStr = Field(..., alias="integrationType")
-    name: StrictStr = Field(...)
-    description: StrictStr = Field(...)
+    id:  StrictStr = Field(...,alias="id") 
+    integration_type:  StrictStr = Field(...,alias="integrationType") 
+    name:  StrictStr = Field(...,alias="name") 
+    description:  StrictStr = Field(...,alias="description") 
     enabled: StrictBool = Field(...)
     triggers: conlist(Trigger) = Field(...)
     details: Dict[str, Any] = Field(...)

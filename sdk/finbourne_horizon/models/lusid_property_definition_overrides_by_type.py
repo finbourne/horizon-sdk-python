@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 
 class LusidPropertyDefinitionOverridesByType(BaseModel):
     """
     LusidPropertyDefinitionOverridesByType
     """
-    display_name_override: Optional[StrictStr] = Field(None, alias="displayNameOverride")
-    description_override: Optional[StrictStr] = Field(None, alias="descriptionOverride")
-    entity_type: Optional[StrictStr] = Field(None, alias="entityType")
+    display_name_override:  Optional[StrictStr] = Field(None,alias="displayNameOverride") 
+    description_override:  Optional[StrictStr] = Field(None,alias="descriptionOverride") 
+    entity_type:  Optional[StrictStr] = Field(None,alias="entityType") 
     entity_sub_type: Optional[conlist(StrictStr)] = Field(None, alias="entitySubType")
     vendor_package: Optional[conlist(StrictStr)] = Field(None, alias="vendorPackage")
     __properties = ["displayNameOverride", "descriptionOverride", "entityType", "entitySubType", "vendorPackage"]

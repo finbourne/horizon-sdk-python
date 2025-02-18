@@ -19,19 +19,19 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from finbourne_horizon.models.vendor_field import VendorField
 
 class FieldMapping(BaseModel):
     """
     Mapping from a set of Vendor Fields to a LUSID core entity field  # noqa: E501
     """
-    field_name: StrictStr = Field(..., alias="fieldName", description="The LUSID core entity field")
-    default_value: Optional[StrictStr] = Field(None, alias="defaultValue", description="Default value if needed")
+    field_name:  StrictStr = Field(...,alias="fieldName", description="The LUSID core entity field") 
+    default_value:  Optional[StrictStr] = Field(None,alias="defaultValue", description="Default value if needed") 
     vendor_fields: conlist(VendorField) = Field(..., alias="vendorFields", description="Fields that will be used to map to this field")
-    transformation_description: Optional[StrictStr] = Field(None, alias="transformationDescription", description="The transformation, if required, to map from VendorFields to the LUSID Property")
-    entity_type: StrictStr = Field(..., alias="entityType", description="The LUSID Entity this is valid for")
-    entity_sub_type: Optional[StrictStr] = Field(None, alias="entitySubType", description="The LUSID Entity sub type this is valid for")
+    transformation_description:  Optional[StrictStr] = Field(None,alias="transformationDescription", description="The transformation, if required, to map from VendorFields to the LUSID Property") 
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The LUSID Entity this is valid for") 
+    entity_sub_type:  Optional[StrictStr] = Field(None,alias="entitySubType", description="The LUSID Entity sub type this is valid for") 
     versions: conlist(StrictStr) = Field(..., description="The versions of the Vendor integration this mapping is valid for")
     __properties = ["fieldName", "defaultValue", "vendorFields", "transformationDescription", "entityType", "entitySubType", "versions"]
 

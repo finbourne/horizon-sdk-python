@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist 
 from finbourne_horizon.models.integration_log_activity import IntegrationLogActivity
 from finbourne_horizon.models.integration_log_record import IntegrationLogRecord
 from finbourne_horizon.models.integration_log_target_record import IntegrationLogTargetRecord
@@ -29,12 +29,12 @@ class IIntegrationLogResponse(BaseModel):
     IIntegrationLogResponse
     """
     log_id: StrictInt = Field(..., alias="logId")
-    run_id: Optional[StrictStr] = Field(None, alias="runId")
+    run_id:  Optional[StrictStr] = Field(None,alias="runId") 
     parent_log_id: Optional[StrictInt] = Field(None, alias="parentLogId")
-    log_type: StrictStr = Field(..., alias="logType")
+    log_type:  StrictStr = Field(...,alias="logType") 
     first_activity: Optional[datetime] = Field(None, alias="firstActivity")
     last_activity: Optional[datetime] = Field(None, alias="lastActivity")
-    status: Optional[StrictStr] = None
+    status:  Optional[StrictStr] = Field(None,alias="status") 
     source_record: Optional[IntegrationLogRecord] = Field(None, alias="sourceRecord")
     target_record: Optional[IntegrationLogTargetRecord] = Field(None, alias="targetRecord")
     activities: conlist(IntegrationLogActivity) = Field(...)

@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class IntegrationRunLogLink(BaseModel):
     """
     IntegrationRunLogLink
     """
-    href: StrictStr = Field(...)
-    description: StrictStr = Field(...)
+    href:  StrictStr = Field(...,alias="href") 
+    description:  StrictStr = Field(...,alias="description") 
     __properties = ["href", "description"]
 
     class Config:
