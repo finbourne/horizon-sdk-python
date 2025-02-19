@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, conlist, constr, validator 
 from finbourne_horizon.models.trigger import Trigger
 
 class UpdateInstanceRequest(BaseModel):

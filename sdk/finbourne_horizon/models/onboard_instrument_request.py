@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from finbourne_horizon.models.open_figi_perm_id_result import OpenFigiPermIdResult
 
 class OnboardInstrumentRequest(BaseModel):
