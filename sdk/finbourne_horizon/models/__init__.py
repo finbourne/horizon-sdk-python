@@ -25,6 +25,8 @@ from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
 from finbourne_horizon.models.create_instance_request import CreateInstanceRequest
 from finbourne_horizon.models.enrichment_response import EnrichmentResponse
 from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
+from finbourne_horizon.models.external_log_insertion_request import ExternalLogInsertionRequest
+from finbourne_horizon.models.external_log_record import ExternalLogRecord
 from finbourne_horizon.models.field_mapping import FieldMapping
 from finbourne_horizon.models.file_details import FileDetails
 from finbourne_horizon.models.i_integration_log_response import IIntegrationLogResponse
@@ -94,6 +96,8 @@ __all__ = [
     "CreateInstanceRequest",
     "EnrichmentResponse",
     "ExecuteInstanceResponse",
+    "ExternalLogInsertionRequest",
+    "ExternalLogRecord",
     "FieldMapping",
     "FileDetails",
     "IIntegrationLogResponse",
