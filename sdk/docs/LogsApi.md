@@ -5,7 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/horizon*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_integration_log_results**](LogsApi.md#get_integration_log_results) | **GET** /api/logs | [EXPERIMENTAL] GetIntegrationLogResults: Get integration log results
-[**insert_external_logs**](LogsApi.md#insert_external_logs) | **POST** /api/logs/runid | [EXPERIMENTAL] InsertExternalLogs: Inserts external logs into the specified ExternalApp Integration instance execution
+[**insert_external_logs**](LogsApi.md#insert_external_logs) | **POST** /api/logs/{instanceid}/{runid} | [EXPERIMENTAL] InsertExternalLogs: Inserts external logs into the specified ExternalApp Integration instance execution
 
 
 # **get_integration_log_results**
@@ -108,7 +108,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **insert_external_logs**
-> object insert_external_logs(runid, external_log_insertion_request)
+> object insert_external_logs(instanceid, runid, external_log_insertion_request)
 
 [EXPERIMENTAL] InsertExternalLogs: Inserts external logs into the specified ExternalApp Integration instance execution
 
@@ -157,6 +157,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(LogsApi)
+    instanceid = 'instanceid_example' # str | 
     runid = 'runid_example' # str | 
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
@@ -167,10 +168,10 @@ def main():
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.insert_external_logs(runid, external_log_insertion_request, opts=opts)
+        # api_response =  api_instance.insert_external_logs(instanceid, runid, external_log_insertion_request, opts=opts)
 
         # [EXPERIMENTAL] InsertExternalLogs: Inserts external logs into the specified ExternalApp Integration instance execution
-        api_response = api_instance.insert_external_logs(runid, external_log_insertion_request)
+        api_response = api_instance.insert_external_logs(instanceid, runid, external_log_insertion_request)
         pprint(api_response)
 
     except ApiException as e:
@@ -183,6 +184,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **instanceid** | **str**|  | 
  **runid** | **str**|  | 
  **external_log_insertion_request** | [**ExternalLogInsertionRequest**](ExternalLogInsertionRequest.md)|  | 
 

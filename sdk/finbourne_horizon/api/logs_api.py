@@ -232,23 +232,25 @@ class LogsApi:
 
 
     @overload
-    async def insert_external_logs(self, runid : Annotated[StrictStr, Field(..., description="")], external_log_insertion_request : ExternalLogInsertionRequest, **kwargs) -> object:  # noqa: E501
+    async def insert_external_logs(self, instanceid : Annotated[StrictStr, Field(..., description="")], runid : Annotated[StrictStr, Field(..., description="")], external_log_insertion_request : ExternalLogInsertionRequest, **kwargs) -> object:  # noqa: E501
         ...
 
     @overload
-    def insert_external_logs(self, runid : Annotated[StrictStr, Field(..., description="")], external_log_insertion_request : ExternalLogInsertionRequest, async_req: Optional[bool]=True, **kwargs) -> object:  # noqa: E501
+    def insert_external_logs(self, instanceid : Annotated[StrictStr, Field(..., description="")], runid : Annotated[StrictStr, Field(..., description="")], external_log_insertion_request : ExternalLogInsertionRequest, async_req: Optional[bool]=True, **kwargs) -> object:  # noqa: E501
         ...
 
     @validate_arguments
-    def insert_external_logs(self, runid : Annotated[StrictStr, Field(..., description="")], external_log_insertion_request : ExternalLogInsertionRequest, async_req: Optional[bool]=None, **kwargs) -> Union[object, Awaitable[object]]:  # noqa: E501
+    def insert_external_logs(self, instanceid : Annotated[StrictStr, Field(..., description="")], runid : Annotated[StrictStr, Field(..., description="")], external_log_insertion_request : ExternalLogInsertionRequest, async_req: Optional[bool]=None, **kwargs) -> Union[object, Awaitable[object]]:  # noqa: E501
         """[EXPERIMENTAL] InsertExternalLogs: Inserts external logs into the specified ExternalApp Integration instance execution  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.insert_external_logs(runid, external_log_insertion_request, async_req=True)
+        >>> thread = api.insert_external_logs(instanceid, runid, external_log_insertion_request, async_req=True)
         >>> result = thread.get()
 
+        :param instanceid:  (required)
+        :type instanceid: str
         :param runid:  (required)
         :type runid: str
         :param external_log_insertion_request:  (required)
@@ -269,18 +271,20 @@ class LogsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.insert_external_logs_with_http_info(runid, external_log_insertion_request, **kwargs)  # noqa: E501
+        return self.insert_external_logs_with_http_info(instanceid, runid, external_log_insertion_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def insert_external_logs_with_http_info(self, runid : Annotated[StrictStr, Field(..., description="")], external_log_insertion_request : ExternalLogInsertionRequest, **kwargs) -> ApiResponse:  # noqa: E501
+    def insert_external_logs_with_http_info(self, instanceid : Annotated[StrictStr, Field(..., description="")], runid : Annotated[StrictStr, Field(..., description="")], external_log_insertion_request : ExternalLogInsertionRequest, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] InsertExternalLogs: Inserts external logs into the specified ExternalApp Integration instance execution  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.insert_external_logs_with_http_info(runid, external_log_insertion_request, async_req=True)
+        >>> thread = api.insert_external_logs_with_http_info(instanceid, runid, external_log_insertion_request, async_req=True)
         >>> result = thread.get()
 
+        :param instanceid:  (required)
+        :type instanceid: str
         :param runid:  (required)
         :type runid: str
         :param external_log_insertion_request:  (required)
@@ -312,6 +316,7 @@ class LogsApi:
         _params = locals()
 
         _all_params = [
+            'instanceid',
             'runid',
             'external_log_insertion_request'
         ]
@@ -342,6 +347,9 @@ class LogsApi:
 
         # process the path parameters
         _path_params = {}
+        if _params['instanceid']:
+            _path_params['instanceid'] = _params['instanceid']
+
         if _params['runid']:
             _path_params['runid'] = _params['runid']
 
@@ -378,7 +386,7 @@ class LogsApi:
         }
 
         return self.api_client.call_api(
-            '/api/logs/runid', 'POST',
+            '/api/logs/{instanceid}/{runid}', 'POST',
             _path_params,
             _query_params,
             _header_params,
