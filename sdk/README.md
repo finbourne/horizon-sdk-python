@@ -33,7 +33,7 @@ Class | Method | HTTP request | Description
 *RunsApi* | [**cancel_instance**](docs/RunsApi.md#cancel_instance) | **PUT** /api/runs/{runId}/cancel | [EXPERIMENTAL] CancelInstance: Cancels a single instance execution.
 *RunsApi* | [**get_run_results**](docs/RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: Get run results
 *RunsApi* | [**rerun_instance**](docs/RunsApi.md#rerun_instance) | **PUT** /api/runs/{runId}/rerun | [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
-*RunsApi* | [**stop_instance_execution**](docs/RunsApi.md#stop_instance_execution) | **PUT** /api/runs/{runId}/stop | [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
+*RunsApi* | [**stop_instance_execution**](docs/RunsApi.md#stop_instance_execution) | **PUT** /api/runs/{instanceId}/{runId}/stop | [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
 *VendorApi* | [**get_core_field_mappings_for_product_entity**](docs/VendorApi.md#get_core_field_mappings_for_product_entity) | **GET** /api/vendor/mappings/fields | [EARLY ACCESS] GetCoreFieldMappingsForProductEntity: Get core field mappings for a given vendor product's entity.
 *VendorApi* | [**get_optional_mappings_for_product_entity**](docs/VendorApi.md#get_optional_mappings_for_product_entity) | **GET** /api/vendor/mappings/optional | [EARLY ACCESS] GetOptionalMappingsForProductEntity: Get a user defined LUSID property mappings for the specified vendor / LUSID entity.
 *VendorApi* | [**get_property_mappings_for_product_entity**](docs/VendorApi.md#get_property_mappings_for_product_entity) | **GET** /api/vendor/mappings/properties | [EARLY ACCESS] GetPropertyMappingsForProductEntity: Gets the property mappings for a given vendor product's entity

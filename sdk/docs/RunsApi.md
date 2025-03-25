@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**cancel_instance**](RunsApi.md#cancel_instance) | **PUT** /api/runs/{runId}/cancel | [EXPERIMENTAL] CancelInstance: Cancels a single instance execution.
 [**get_run_results**](RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: Get run results
 [**rerun_instance**](RunsApi.md#rerun_instance) | **PUT** /api/runs/{runId}/rerun | [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
-[**stop_instance_execution**](RunsApi.md#stop_instance_execution) | **PUT** /api/runs/{runId}/stop | [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
+[**stop_instance_execution**](RunsApi.md#stop_instance_execution) | **PUT** /api/runs/{instanceId}/{runId}/stop | [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
 
 
 # **cancel_instance**
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **stop_instance_execution**
-> object stop_instance_execution(run_id)
+> object stop_instance_execution(instance_id, run_id)
 
 [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
 
@@ -347,14 +347,15 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(RunsApi)
+    instance_id = 'instance_id_example' # str | 
     run_id = 'run_id_example' # str | Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.stop_instance_execution(run_id, opts=opts)
+        # api_response =  api_instance.stop_instance_execution(instance_id, run_id, opts=opts)
 
         # [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
-        api_response = api_instance.stop_instance_execution(run_id)
+        api_response = api_instance.stop_instance_execution(instance_id, run_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -367,6 +368,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **instance_id** | **str**|  | 
  **run_id** | **str**| Run identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | 
 
 ### Return type

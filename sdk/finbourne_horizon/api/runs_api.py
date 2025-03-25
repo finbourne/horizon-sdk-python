@@ -538,24 +538,26 @@ class RunsApi:
 
 
     @overload
-    async def stop_instance_execution(self, run_id : Annotated[StrictStr, Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], **kwargs) -> object:  # noqa: E501
+    async def stop_instance_execution(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], **kwargs) -> object:  # noqa: E501
         ...
 
     @overload
-    def stop_instance_execution(self, run_id : Annotated[StrictStr, Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], async_req: Optional[bool]=True, **kwargs) -> object:  # noqa: E501
+    def stop_instance_execution(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], async_req: Optional[bool]=True, **kwargs) -> object:  # noqa: E501
         ...
 
     @validate_arguments
-    def stop_instance_execution(self, run_id : Annotated[StrictStr, Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], async_req: Optional[bool]=None, **kwargs) -> Union[object, Awaitable[object]]:  # noqa: E501
+    def stop_instance_execution(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], async_req: Optional[bool]=None, **kwargs) -> Union[object, Awaitable[object]]:  # noqa: E501
         """[EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.  # noqa: E501
 
         Stops an execution instance of an External Client Application integration type.  The execution instance must be started, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_instance_execution(run_id, async_req=True)
+        >>> thread = api.stop_instance_execution(instance_id, run_id, async_req=True)
         >>> result = thread.get()
 
+        :param instance_id: (required)
+        :type instance_id: str
         :param run_id: Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
         :type run_id: str
         :param async_req: Whether to execute the request asynchronously.
@@ -574,19 +576,21 @@ class RunsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.stop_instance_execution_with_http_info(run_id, **kwargs)  # noqa: E501
+        return self.stop_instance_execution_with_http_info(instance_id, run_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def stop_instance_execution_with_http_info(self, run_id : Annotated[StrictStr, Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], **kwargs) -> ApiResponse:  # noqa: E501
+    def stop_instance_execution_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(..., description="Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.  # noqa: E501
 
         Stops an execution instance of an External Client Application integration type.  The execution instance must be started, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_instance_execution_with_http_info(run_id, async_req=True)
+        >>> thread = api.stop_instance_execution_with_http_info(instance_id, run_id, async_req=True)
         >>> result = thread.get()
 
+        :param instance_id: (required)
+        :type instance_id: str
         :param run_id: Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
         :type run_id: str
         :param async_req: Whether to execute the request asynchronously.
@@ -616,6 +620,7 @@ class RunsApi:
         _params = locals()
 
         _all_params = [
+            'instance_id',
             'run_id'
         ]
         _all_params.extend(
@@ -645,6 +650,9 @@ class RunsApi:
 
         # process the path parameters
         _path_params = {}
+        if _params['instance_id']:
+            _path_params['instanceId'] = _params['instance_id']
+
         if _params['run_id']:
             _path_params['runId'] = _params['run_id']
 
@@ -672,7 +680,7 @@ class RunsApi:
         }
 
         return self.api_client.call_api(
-            '/api/runs/{runId}/stop', 'PUT',
+            '/api/runs/{instanceId}/{runId}/stop', 'PUT',
             _path_params,
             _query_params,
             _header_params,
