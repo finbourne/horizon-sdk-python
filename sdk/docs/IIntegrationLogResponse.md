@@ -1,6 +1,5 @@
 # IIntegrationLogResponse
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **source_record** | [**IntegrationLogRecord**](IntegrationLogRecord.md) |  | [optional] 
 **target_record** | [**IntegrationLogTargetRecord**](IntegrationLogTargetRecord.md) |  | [optional] 
 **activities** | [**List[IntegrationLogActivity]**](IntegrationLogActivity.md) |  | [readonly] 
-
 ## Example
 
 ```python
 from finbourne_horizon.models.i_integration_log_response import IIntegrationLogResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from datetime import datetime
+log_id: StrictInt = # Replace with your value
+run_id: Optional[StrictStr] = "example_run_id"
+parent_log_id: Optional[StrictInt] = # Replace with your value
+log_type: StrictStr = "example_log_type"
+first_activity: Optional[datetime] = # Replace with your value
+last_activity: Optional[datetime] = # Replace with your value
+status: Optional[StrictStr] = "example_status"
+source_record: Optional[IntegrationLogRecord] = # Replace with your value
+target_record: Optional[IntegrationLogTargetRecord] = # Replace with your value
+activities: conlist(IntegrationLogActivity) = # Replace with your value
+i_integration_log_response_instance = IIntegrationLogResponse(log_id=log_id, run_id=run_id, parent_log_id=parent_log_id, log_type=log_type, first_activity=first_activity, last_activity=last_activity, status=status, source_record=source_record, target_record=target_record, activities=activities)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of IIntegrationLogResponse from a JSON string
-i_integration_log_response_instance = IIntegrationLogResponse.from_json(json)
-# print the JSON string representation of the object
-print IIntegrationLogResponse.to_json()
-
-# convert the object into a dict
-i_integration_log_response_dict = i_integration_log_response_instance.to_dict()
-# create an instance of IIntegrationLogResponse from a dict
-i_integration_log_response_form_dict = i_integration_log_response.from_dict(i_integration_log_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

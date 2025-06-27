@@ -1,7 +1,6 @@
 # RowDetails
 
 Information about the nuber of rows processed.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,24 @@ Name | Type | Description | Notes
 **rows_succeeded** | **int** | The number of rows that were successfully processed. | [optional] 
 **rows_ignored** | **int** | The number of rows that were not processed. | [optional] 
 **rows_failed** | **int** | The number of rows that failed when being processed. | [optional] 
-
 ## Example
 
 ```python
 from finbourne_horizon.models.row_details import RowDetails
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of RowDetails from a JSON string
-row_details_instance = RowDetails.from_json(json)
-# print the JSON string representation of the object
-print RowDetails.to_json()
+rows_total: Optional[StrictInt] = # Replace with your value
+rows_total: Optional[StrictInt] = None
+rows_succeeded: Optional[StrictInt] = # Replace with your value
+rows_succeeded: Optional[StrictInt] = None
+rows_ignored: Optional[StrictInt] = # Replace with your value
+rows_ignored: Optional[StrictInt] = None
+rows_failed: Optional[StrictInt] = # Replace with your value
+rows_failed: Optional[StrictInt] = None
+row_details_instance = RowDetails(rows_total=rows_total, rows_succeeded=rows_succeeded, rows_ignored=rows_ignored, rows_failed=rows_failed)
 
-# convert the object into a dict
-row_details_dict = row_details_instance.to_dict()
-# create an instance of RowDetails from a dict
-row_details_form_dict = row_details.from_dict(row_details_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # LusidPropertyDefinitionOverridesResponse
 
 An item that has been updated as a result of setting LusidPropertyDefinitionOverrides.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **write_error_detail** | **str** |  | [optional] 
 **display_name_override** | **str** |  | [optional] 
 **description_override** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from finbourne_horizon.models.lusid_property_definition_overrides_response import LusidPropertyDefinitionOverridesResponse
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of LusidPropertyDefinitionOverridesResponse from a JSON string
-lusid_property_definition_overrides_response_instance = LusidPropertyDefinitionOverridesResponse.from_json(json)
-# print the JSON string representation of the object
-print LusidPropertyDefinitionOverridesResponse.to_json()
+action: StrictStr = "example_action"
+write_error: Optional[StrictStr] = "example_write_error"
+write_error_detail: Optional[StrictStr] = "example_write_error_detail"
+display_name_override: Optional[StrictStr] = "example_display_name_override"
+description_override: Optional[StrictStr] = "example_description_override"
+lusid_property_definition_overrides_response_instance = LusidPropertyDefinitionOverridesResponse(action=action, write_error=write_error, write_error_detail=write_error_detail, display_name_override=display_name_override, description_override=description_override)
 
-# convert the object into a dict
-lusid_property_definition_overrides_response_dict = lusid_property_definition_overrides_response_instance.to_dict()
-# create an instance of LusidPropertyDefinitionOverridesResponse from a dict
-lusid_property_definition_overrides_response_form_dict = lusid_property_definition_overrides_response.from_dict(lusid_property_definition_overrides_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

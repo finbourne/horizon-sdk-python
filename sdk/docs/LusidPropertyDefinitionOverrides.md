@@ -1,30 +1,23 @@
 # LusidPropertyDefinitionOverrides
 
 Override values for property Display Name and Description
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name_override** | **str** |  | [optional] 
 **description_override** | **str** |  | [optional] 
-
 ## Example
 
 ```python
 from finbourne_horizon.models.lusid_property_definition_overrides import LusidPropertyDefinitionOverrides
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of LusidPropertyDefinitionOverrides from a JSON string
-lusid_property_definition_overrides_instance = LusidPropertyDefinitionOverrides.from_json(json)
-# print the JSON string representation of the object
-print LusidPropertyDefinitionOverrides.to_json()
+display_name_override: Optional[StrictStr] = "example_display_name_override"
+description_override: Optional[StrictStr] = "example_description_override"
+lusid_property_definition_overrides_instance = LusidPropertyDefinitionOverrides(display_name_override=display_name_override, description_override=description_override)
 
-# convert the object into a dict
-lusid_property_definition_overrides_dict = lusid_property_definition_overrides_instance.to_dict()
-# create an instance of LusidPropertyDefinitionOverrides from a dict
-lusid_property_definition_overrides_form_dict = lusid_property_definition_overrides.from_dict(lusid_property_definition_overrides_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

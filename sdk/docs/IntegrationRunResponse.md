@@ -1,6 +1,5 @@
 # IntegrationRunResponse
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,24 +11,24 @@ Name | Type | Description | Notes
 **integration** | [**IntegrationRunIntegration**](IntegrationRunIntegration.md) |  | 
 **version** | [**IntegrationRunVersion**](IntegrationRunVersion.md) |  | 
 **integration_logs** | **Dict[str, Dict[str, IntegrationRunLog]]** |  | [optional] 
-
 ## Example
 
 ```python
 from finbourne_horizon.models.integration_run_response import IntegrationRunResponse
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of IntegrationRunResponse from a JSON string
-integration_run_response_instance = IntegrationRunResponse.from_json(json)
-# print the JSON string representation of the object
-print IntegrationRunResponse.to_json()
+run_id: StrictStr = "example_run_id"
+instance_id: Optional[StrictStr] = "example_instance_id"
+instance_name: Optional[StrictStr] = "example_instance_name"
+status: Optional[StrictStr] = "example_status"
+message: Optional[StrictStr] = "example_message"
+integration: IntegrationRunIntegration = # Replace with your value
+version: IntegrationRunVersion = # Replace with your value
+integration_logs: Optional[Dict[str, Dict[str, IntegrationRunLog]]] = # Replace with your value
+integration_run_response_instance = IntegrationRunResponse(run_id=run_id, instance_id=instance_id, instance_name=instance_name, status=status, message=message, integration=integration, version=version, integration_logs=integration_logs)
 
-# convert the object into a dict
-integration_run_response_dict = integration_run_response_instance.to_dict()
-# create an instance of IntegrationRunResponse from a dict
-integration_run_response_form_dict = integration_run_response.from_dict(integration_run_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

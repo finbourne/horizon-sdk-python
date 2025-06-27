@@ -1,7 +1,6 @@
 # LusidField
 
 A field on a LUSID entity
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **transformation_description** | **str** | A description of how the vendor package&#39;s field(s) get mapped to the LUSID field | [optional] 
 **entity_type** | **str** | LUSID Entity this refers to (e.g. Instrument) | 
 **entity_sub_type** | **str** | Sub-Entity this field refers to (e.g. Equity) | [optional] 
-
 ## Example
 
 ```python
 from finbourne_horizon.models.lusid_field import LusidField
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of LusidField from a JSON string
-lusid_field_instance = LusidField.from_json(json)
-# print the JSON string representation of the object
-print LusidField.to_json()
+field_name: StrictStr = "example_field_name"
+default_value: Optional[StrictStr] = "example_default_value"
+vendor_packages: conlist(StrictStr) = # Replace with your value
+vendor_namespaces: conlist(StrictStr) = # Replace with your value
+vendor_fields: conlist(StrictStr) = # Replace with your value
+transformation_description: Optional[StrictStr] = "example_transformation_description"
+entity_type: StrictStr = "example_entity_type"
+entity_sub_type: Optional[StrictStr] = "example_entity_sub_type"
+lusid_field_instance = LusidField(field_name=field_name, default_value=default_value, vendor_packages=vendor_packages, vendor_namespaces=vendor_namespaces, vendor_fields=vendor_fields, transformation_description=transformation_description, entity_type=entity_type, entity_sub_type=entity_sub_type)
 
-# convert the object into a dict
-lusid_field_dict = lusid_field_instance.to_dict()
-# create an instance of LusidField from a dict
-lusid_field_form_dict = lusid_field.from_dict(lusid_field_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

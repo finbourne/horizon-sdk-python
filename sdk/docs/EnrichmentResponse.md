@@ -1,31 +1,25 @@
 # EnrichmentResponse
 
 Collated enrichment result information
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **enriched_instruments** | **List[str]** |  | 
 **ignored_instruments** | **List[str]** |  | 
 **error_file_id** | **str** | Error File ID, if one was created | [optional] 
-
 ## Example
 
 ```python
 from finbourne_horizon.models.enrichment_response import EnrichmentResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of EnrichmentResponse from a JSON string
-enrichment_response_instance = EnrichmentResponse.from_json(json)
-# print the JSON string representation of the object
-print EnrichmentResponse.to_json()
+enriched_instruments: conlist(StrictStr) = # Replace with your value
+ignored_instruments: conlist(StrictStr) = # Replace with your value
+error_file_id: Optional[StrictStr] = "example_error_file_id"
+enrichment_response_instance = EnrichmentResponse(enriched_instruments=enriched_instruments, ignored_instruments=ignored_instruments, error_file_id=error_file_id)
 
-# convert the object into a dict
-enrichment_response_dict = enrichment_response_instance.to_dict()
-# create an instance of EnrichmentResponse from a dict
-enrichment_response_form_dict = enrichment_response.from_dict(enrichment_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

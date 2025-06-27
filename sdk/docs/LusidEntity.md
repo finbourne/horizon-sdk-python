@@ -1,7 +1,6 @@
 # LusidEntity
 
 Information about the LUSID entity this data can be used with
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,20 @@ Name | Type | Description | Notes
 **entity_type_display_name** | **str** | The display name for the entity type. | 
 **entity_sub_type** | **str** | The entity sub-type | [optional] 
 **entity_sub_type_display_name** | **str** | Display name for the entity sub-type | [optional] 
-
 ## Example
 
 ```python
 from finbourne_horizon.models.lusid_entity import LusidEntity
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of LusidEntity from a JSON string
-lusid_entity_instance = LusidEntity.from_json(json)
-# print the JSON string representation of the object
-print LusidEntity.to_json()
+entity_type: StrictStr = "example_entity_type"
+entity_type_display_name: StrictStr = "example_entity_type_display_name"
+entity_sub_type: Optional[StrictStr] = "example_entity_sub_type"
+entity_sub_type_display_name: Optional[StrictStr] = "example_entity_sub_type_display_name"
+lusid_entity_instance = LusidEntity(entity_type=entity_type, entity_type_display_name=entity_type_display_name, entity_sub_type=entity_sub_type, entity_sub_type_display_name=entity_sub_type_display_name)
 
-# convert the object into a dict
-lusid_entity_dict = lusid_entity_instance.to_dict()
-# create an instance of LusidEntity from a dict
-lusid_entity_form_dict = lusid_entity.from_dict(lusid_entity_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,6 +1,5 @@
 # ExternalLogRecord
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -18,24 +17,30 @@ Name | Type | Description | Notes
 **message** | **str** |  | [optional] 
 **messagetype** | **str** |  | [optional] 
 **timestamp** | **str** |  | 
-
 ## Example
 
 ```python
 from finbourne_horizon.models.external_log_record import ExternalLogRecord
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ExternalLogRecord from a JSON string
-external_log_record_instance = ExternalLogRecord.from_json(json)
-# print the JSON string representation of the object
-print ExternalLogRecord.to_json()
+logid: StrictInt = # Replace with your value
+parentlogid: Optional[StrictInt] = None
+loglevel: StrictStr = "example_loglevel"
+logstatus: StrictStr = "example_logstatus"
+sourcerecordtype: Optional[StrictStr] = "example_sourcerecordtype"
+sourceprimaryidtype: Optional[StrictStr] = "example_sourceprimaryidtype"
+sourceprimaryidvalue: Optional[StrictStr] = "example_sourceprimaryidvalue"
+targetrecordtype: Optional[StrictStr] = "example_targetrecordtype"
+targetrecordaction: Optional[StrictStr] = "example_targetrecordaction"
+targetprimaryidtype: Optional[StrictStr] = "example_targetprimaryidtype"
+targetprimaryidvalue: Optional[StrictStr] = "example_targetprimaryidvalue"
+message: Optional[StrictStr] = "example_message"
+messagetype: Optional[StrictStr] = "example_messagetype"
+timestamp: StrictStr = "example_timestamp"
+external_log_record_instance = ExternalLogRecord(logid=logid, parentlogid=parentlogid, loglevel=loglevel, logstatus=logstatus, sourcerecordtype=sourcerecordtype, sourceprimaryidtype=sourceprimaryidtype, sourceprimaryidvalue=sourceprimaryidvalue, targetrecordtype=targetrecordtype, targetrecordaction=targetrecordaction, targetprimaryidtype=targetprimaryidtype, targetprimaryidvalue=targetprimaryidvalue, message=message, messagetype=messagetype, timestamp=timestamp)
 
-# convert the object into a dict
-external_log_record_dict = external_log_record_instance.to_dict()
-# create an instance of ExternalLogRecord from a dict
-external_log_record_form_dict = external_log_record.from_dict(external_log_record_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
