@@ -4,7 +4,7 @@ PermId Data Structure
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**figi** | **str** | &gt;FIGI assigned to the instrument. | 
+**figi** | **str** | FIGI assigned to the instrument. | 
 **ticker** | **str** | Ticker assigned to the instrument | 
 **mic** | **str** | ISO market identification code(MIC) of the desired instrument(s) | 
 **quote_perm_id** | **str** | QuotePermId of the instrument | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ```python
 from finbourne_horizon.models.perm_id_data import PermIdData
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictBool, constr
 
 figi: StrictStr = "example_figi"
 ticker: StrictStr = "example_ticker"

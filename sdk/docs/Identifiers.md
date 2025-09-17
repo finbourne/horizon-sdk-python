@@ -4,7 +4,7 @@ A list of lusid instrument ids
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lusid_instrument_ids** | **List[str]** |  | 
+**lusid_instrument_ids** | **List[str]** | The collection of LUSID instrument identifiers | 
 ## Example
 
 ```python

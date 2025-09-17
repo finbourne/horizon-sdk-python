@@ -5,13 +5,13 @@ Holds information about Horizon Audit Files
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **file_type** | [**AuditFileType**](AuditFileType.md) |  | 
-**file_path_and_name** | **str** |  | 
+**file_path_and_name** | **str** | The file path and name | 
 ## Example
 
 ```python
 from finbourne_horizon.models.audit_file_details import AuditFileDetails
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, constr
 
 file_type: AuditFileType = # Replace with your value
 file_path_and_name: StrictStr = "example_file_path_and_name"

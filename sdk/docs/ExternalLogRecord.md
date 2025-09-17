@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ```python
 from finbourne_horizon.models.external_log_record import ExternalLogRecord
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictInt, constr
 
 logid: StrictInt = # Replace with your value
 parentlogid: Optional[StrictInt] = None
