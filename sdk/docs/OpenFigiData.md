@@ -24,8 +24,10 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.open_figi_data import OpenFigiData
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 figi: StrictStr = "example_figi"
 name: Optional[StrictStr] = "example_name"

@@ -15,16 +15,18 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.property_mapping import PropertyMapping
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 var_property: LusidPropertyDefinition = # Replace with your value
-vendor_fields: conlist(VendorField) = # Replace with your value
-optionality: Optionality = # Replace with your value
+vendor_fields: List[VendorField] = # Replace with your value
+optionality: Optionality
 entity_type: StrictStr = "example_entity_type"
 entity_sub_type: Optional[StrictStr] = "example_entity_sub_type"
 transformation_description: Optional[StrictStr] = "example_transformation_description"
-versions: conlist(StrictStr) = # Replace with your value
+versions: List[StrictStr] = # Replace with your value
 property_mapping_instance = PropertyMapping(var_property=var_property, vendor_fields=vendor_fields, optionality=optionality, entity_type=entity_type, entity_sub_type=entity_sub_type, transformation_description=transformation_description, versions=versions)
 
 ```

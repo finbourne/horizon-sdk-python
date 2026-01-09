@@ -14,15 +14,17 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.process_summary import ProcessSummary
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 end_time: Optional[datetime] = # Replace with your value
 category: Optional[StrictStr] = "example_category"
 status: StrictStr = "example_status"
 message: StrictStr = "example_message"
-rows: RowDetails = # Replace with your value
-file_details: Optional[conlist(FileDetails)] = # Replace with your value
+rows: RowDetails
+file_details: Optional[List[FileDetails]] = # Replace with your value
 process_summary_instance = ProcessSummary(end_time=end_time, category=category, status=status, message=message, rows=rows, file_details=file_details)
 
 ```

@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.query_request import QueryRequest
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 specification: Optional[QuerySpecification] = None
 query_request_instance = QueryRequest(specification=specification)

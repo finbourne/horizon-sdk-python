@@ -19,11 +19,9 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
-from pydantic.v1 import Field, StrictInt, StrictStr, constr, validator
-
+from pydantic.v1 import Field, StrictInt, StrictStr
 from typing import Dict, List, Optional
-
+from typing_extensions import Annotated
 from finbourne_horizon.models.create_instance_request import CreateInstanceRequest
 from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
 from finbourne_horizon.models.instance_identifier import InstanceIdentifier
@@ -523,15 +521,15 @@ class IntegrationsApi:
 
 
     @overload
-    async def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(..., description="Dictionary(string,string) of runtime parameters passed to the integration instance")], **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
+    async def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(description="Dictionary(string,string) of runtime parameters passed to the integration instance")], **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
         ...
 
     @overload
-    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(..., description="Dictionary(string,string) of runtime parameters passed to the integration instance")], async_req: Optional[bool]=True, **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
+    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(description="Dictionary(string,string) of runtime parameters passed to the integration instance")], async_req: Optional[bool]=True, **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(..., description="Dictionary(string,string) of runtime parameters passed to the integration instance")], async_req: Optional[bool]=None, **kwargs) -> Union[ExecuteInstanceResponse, Awaitable[ExecuteInstanceResponse]]:  # noqa: E501
+    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(description="Dictionary(string,string) of runtime parameters passed to the integration instance")], async_req: Optional[bool]=None, **kwargs) -> Union[ExecuteInstanceResponse, Awaitable[ExecuteInstanceResponse]]:  # noqa: E501
         """[EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters  # noqa: E501
 
         Starts execution of an instance, returning its execution identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -564,7 +562,7 @@ class IntegrationsApi:
         return self.execute_instance_with_params_with_http_info(instance_id, request_body, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def execute_instance_with_params_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(..., description="Dictionary(string,string) of runtime parameters passed to the integration instance")], **kwargs) -> ApiResponse:  # noqa: E501
+    def execute_instance_with_params_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(description="Dictionary(string,string) of runtime parameters passed to the integration instance")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters  # noqa: E501
 
         Starts execution of an instance, returning its execution identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501

@@ -19,11 +19,9 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
+from pydantic.v1 import Field, StrictInt, StrictStr
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
-from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
-
-from typing import Any, Dict, Optional
-
 from finbourne_horizon.models.integration_rerun_response import IntegrationRerunResponse
 from finbourne_horizon.models.paged_resource_list_of_integration_run_response import PagedResourceListOfIntegrationRunResponse
 
@@ -207,15 +205,15 @@ class RunsApi:
 
 
     @overload
-    async def get_run_results(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfIntegrationRunResponse:  # noqa: E501
+    async def get_run_results(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfIntegrationRunResponse:  # noqa: E501
         ...
 
     @overload
-    def get_run_results(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfIntegrationRunResponse:  # noqa: E501
+    def get_run_results(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfIntegrationRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_run_results(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfIntegrationRunResponse, Awaitable[PagedResourceListOfIntegrationRunResponse]]:  # noqa: E501
+    def get_run_results(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfIntegrationRunResponse, Awaitable[PagedResourceListOfIntegrationRunResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetRunResults: Get run results  # noqa: E501
 
         Get run results  # noqa: E501
@@ -252,7 +250,7 @@ class RunsApi:
         return self.get_run_results_with_http_info(filter, sort_by, limit, page_token, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_run_results_with_http_info(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True)], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_run_results_with_http_info(self, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number.")] = None, page_token : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetRunResults: Get run results  # noqa: E501
 
         Get run results  # noqa: E501

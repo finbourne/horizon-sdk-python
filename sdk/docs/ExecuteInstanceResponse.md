@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 execution_id: StrictStr = "example_execution_id"
 execute_instance_response_instance = ExecuteInstanceResponse(execution_id=execution_id)

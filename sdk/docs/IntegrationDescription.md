@@ -13,13 +13,15 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.integration_description import IntegrationDescription
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 type: StrictStr = "example_type"
 name: StrictStr = "example_name"
 description: StrictStr = "example_description"
-supported_trigger_types: conlist(StrictStr) = # Replace with your value
+supported_trigger_types: List[StrictStr] = # Replace with your value
 licensed: StrictBool = # Replace with your value
 licensed:StrictBool = True
 integration_description_instance = IntegrationDescription(type=type, name=name, description=description, supported_trigger_types=supported_trigger_types, licensed=licensed)

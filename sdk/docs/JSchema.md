@@ -31,8 +31,6 @@ Name | Type | Description | Notes
 **unique_items** | **bool** |  | 
 **minimum_length** | **int** |  | [optional] 
 **maximum_length** | **int** |  | [optional] 
-**minimum** | **float** |  | [optional] 
-**maximum** | **float** |  | [optional] 
 **exclusive_minimum** | **bool** |  | 
 **exclusive_maximum** | **bool** |  | 
 **minimum_items** | **int** |  | [optional] 
@@ -70,8 +68,10 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.j_schema import JSchema
-from typing import Any, Dict, List, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 schema_version: Optional[StrictStr] = "example_schema_version"
 valid: Optional[StrictBool] = None
@@ -85,28 +85,26 @@ id: Optional[StrictStr] = "example_id"
 anchor: Optional[StrictStr] = "example_anchor"
 type: Optional[JSchemaType] = None
 default: Optional[Any] = None
-properties: Dict[str, JSchema] = # Replace with your value
-items: conlist(JSchema) = # Replace with your value
+properties: Dict[str, JSchema]
+items: List[JSchema]
 items_position_validation: StrictBool = # Replace with your value
 items_position_validation:StrictBool = True
-required: conlist(StrictStr) = # Replace with your value
-all_of: conlist(JSchema) = # Replace with your value
-any_of: conlist(JSchema) = # Replace with your value
-one_of: conlist(JSchema) = # Replace with your value
+required: List[StrictStr]
+all_of: List[JSchema] = # Replace with your value
+any_of: List[JSchema] = # Replace with your value
+one_of: List[JSchema] = # Replace with your value
 var_if: Optional[JSchema] = # Replace with your value
 then: Optional[JSchema] = None
 var_else: Optional[JSchema] = # Replace with your value
 var_not: Optional[JSchema] = # Replace with your value
 contains: Optional[JSchema] = None
 property_names: Optional[JSchema] = # Replace with your value
-enum: conlist(Any) = # Replace with your value
+enum: List[Any]
 const: Optional[Any] = None
 unique_items: StrictBool = # Replace with your value
 unique_items:StrictBool = True
 minimum_length: Optional[StrictInt] = # Replace with your value
 maximum_length: Optional[StrictInt] = # Replace with your value
-minimum: Optional[Union[StrictFloat, StrictInt]] = None
-maximum: Optional[Union[StrictFloat, StrictInt]] = None
 exclusive_minimum: StrictBool = # Replace with your value
 exclusive_minimum:StrictBool = True
 exclusive_maximum: StrictBool = # Replace with your value
@@ -128,8 +126,8 @@ title: Optional[StrictStr] = "example_title"
 description: Optional[StrictStr] = "example_description"
 multiple_of: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 pattern: Optional[StrictStr] = "example_pattern"
-dependencies: Dict[str, Any] = # Replace with your value
-dependent_required: Dict[str, conlist(StrictStr)] = # Replace with your value
+dependencies: Dict[str, Any]
+dependent_required: Dict[str, List[StrictStr]] = # Replace with your value
 dependent_schemas: Dict[str, JSchema] = # Replace with your value
 pattern_properties: Dict[str, JSchema] = # Replace with your value
 additional_properties: Optional[JSchema] = # Replace with your value
@@ -149,8 +147,8 @@ unevaluated_items: Optional[JSchema] = # Replace with your value
 allow_unevaluated_items: Optional[StrictBool] = # Replace with your value
 allow_unevaluated_items:Optional[StrictBool] = None
 format: Optional[StrictStr] = "example_format"
-validators: conlist(Dict[str, Any]) = # Replace with your value
-j_schema_instance = JSchema(schema_version=schema_version, valid=valid, reference=reference, ref=ref, recursive_reference=recursive_reference, recursive_anchor=recursive_anchor, id=id, anchor=anchor, type=type, default=default, properties=properties, items=items, items_position_validation=items_position_validation, required=required, all_of=all_of, any_of=any_of, one_of=one_of, var_if=var_if, then=then, var_else=var_else, var_not=var_not, contains=contains, property_names=property_names, enum=enum, const=const, unique_items=unique_items, minimum_length=minimum_length, maximum_length=maximum_length, minimum=minimum, maximum=maximum, exclusive_minimum=exclusive_minimum, exclusive_maximum=exclusive_maximum, minimum_items=minimum_items, maximum_items=maximum_items, minimum_properties=minimum_properties, maximum_properties=maximum_properties, minimum_contains=minimum_contains, maximum_contains=maximum_contains, content_encoding=content_encoding, content_media_type=content_media_type, write_only=write_only, read_only=read_only, extension_data=extension_data, title=title, description=description, multiple_of=multiple_of, pattern=pattern, dependencies=dependencies, dependent_required=dependent_required, dependent_schemas=dependent_schemas, pattern_properties=pattern_properties, additional_properties=additional_properties, allow_additional_properties=allow_additional_properties, allow_additional_properties_specified=allow_additional_properties_specified, unevaluated_properties=unevaluated_properties, allow_unevaluated_properties=allow_unevaluated_properties, additional_items=additional_items, allow_additional_items=allow_additional_items, allow_additional_items_specified=allow_additional_items_specified, unevaluated_items=unevaluated_items, allow_unevaluated_items=allow_unevaluated_items, format=format, validators=validators)
+validators: List[Dict[str, Any]]
+j_schema_instance = JSchema(schema_version=schema_version, valid=valid, reference=reference, ref=ref, recursive_reference=recursive_reference, recursive_anchor=recursive_anchor, id=id, anchor=anchor, type=type, default=default, properties=properties, items=items, items_position_validation=items_position_validation, required=required, all_of=all_of, any_of=any_of, one_of=one_of, var_if=var_if, then=then, var_else=var_else, var_not=var_not, contains=contains, property_names=property_names, enum=enum, const=const, unique_items=unique_items, minimum_length=minimum_length, maximum_length=maximum_length, exclusive_minimum=exclusive_minimum, exclusive_maximum=exclusive_maximum, minimum_items=minimum_items, maximum_items=maximum_items, minimum_properties=minimum_properties, maximum_properties=maximum_properties, minimum_contains=minimum_contains, maximum_contains=maximum_contains, content_encoding=content_encoding, content_media_type=content_media_type, write_only=write_only, read_only=read_only, extension_data=extension_data, title=title, description=description, multiple_of=multiple_of, pattern=pattern, dependencies=dependencies, dependent_required=dependent_required, dependent_schemas=dependent_schemas, pattern_properties=pattern_properties, additional_properties=additional_properties, allow_additional_properties=allow_additional_properties, allow_additional_properties_specified=allow_additional_properties_specified, unevaluated_properties=unevaluated_properties, allow_unevaluated_properties=allow_unevaluated_properties, additional_items=additional_items, allow_additional_items=allow_additional_items, allow_additional_items_specified=allow_additional_items_specified, unevaluated_items=unevaluated_items, allow_unevaluated_items=allow_unevaluated_items, format=format, validators=validators)
 
 ```
 

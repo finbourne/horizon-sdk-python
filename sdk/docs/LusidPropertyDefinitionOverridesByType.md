@@ -12,14 +12,16 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.lusid_property_definition_overrides_by_type import LusidPropertyDefinitionOverridesByType
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 display_name_override: Optional[StrictStr] = "example_display_name_override"
 description_override: Optional[StrictStr] = "example_description_override"
 entity_type: Optional[StrictStr] = "example_entity_type"
-entity_sub_type: Optional[conlist(StrictStr)] = # Replace with your value
-vendor_package: Optional[conlist(StrictStr)] = # Replace with your value
+entity_sub_type: Optional[List[StrictStr]] = # Replace with your value
+vendor_package: Optional[List[StrictStr]] = # Replace with your value
 lusid_property_definition_overrides_by_type_instance = LusidPropertyDefinitionOverridesByType(display_name_override=display_name_override, description_override=description_override, entity_type=entity_type, entity_sub_type=entity_sub_type, vendor_package=vendor_package)
 
 ```

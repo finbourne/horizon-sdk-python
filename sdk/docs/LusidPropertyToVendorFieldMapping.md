@@ -13,14 +13,16 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.lusid_property_to_vendor_field_mapping import LusidPropertyToVendorFieldMapping
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 var_property: LusidPropertyDefinition = # Replace with your value
 vendor_field: StrictStr = "example_vendor_field"
 vendor_package: StrictStr = "example_vendor_package"
 vendor_namespace: StrictStr = "example_vendor_namespace"
-optionality: Optionality = # Replace with your value
+optionality: Optionality
 lusid_property_to_vendor_field_mapping_instance = LusidPropertyToVendorFieldMapping(var_property=var_property, vendor_field=vendor_field, vendor_package=vendor_package, vendor_namespace=vendor_namespace, optionality=optionality)
 
 ```

@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.audit_complete_response import AuditCompleteResponse
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 process_name: StrictStr = "example_process_name"
 audit_complete_response_instance = AuditCompleteResponse(process_name=process_name)

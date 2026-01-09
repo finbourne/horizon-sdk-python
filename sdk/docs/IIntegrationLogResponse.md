@@ -17,9 +17,11 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.i_integration_log_response import IIntegrationLogResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 log_id: StrictInt = # Replace with your value
 run_id: Optional[StrictStr] = "example_run_id"
 parent_log_id: Optional[StrictInt] = # Replace with your value
@@ -29,7 +31,7 @@ last_activity: Optional[datetime] = # Replace with your value
 status: Optional[StrictStr] = "example_status"
 source_record: Optional[IntegrationLogRecord] = # Replace with your value
 target_record: Optional[IntegrationLogTargetRecord] = # Replace with your value
-activities: conlist(IntegrationLogActivity) = # Replace with your value
+activities: List[IntegrationLogActivity]
 i_integration_log_response_instance = IIntegrationLogResponse(log_id=log_id, run_id=run_id, parent_log_id=parent_log_id, log_type=log_type, first_activity=first_activity, last_activity=last_activity, status=status, source_record=source_record, target_record=target_record, activities=activities)
 
 ```

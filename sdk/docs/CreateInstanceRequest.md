@@ -14,17 +14,19 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.create_instance_request import CreateInstanceRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 instance_optional_props: Optional[Dict[str, LusidPropertyDefinitionOverridesByType]] = # Replace with your value
 integration_type: StrictStr = "example_integration_type"
 name: StrictStr = "example_name"
 description: StrictStr = "example_description"
-enabled: StrictBool = # Replace with your value
+enabled: StrictBool
 enabled:StrictBool = True
-triggers: conlist(Trigger) = # Replace with your value
-details: Dict[str, Any] = # Replace with your value
+triggers: List[Trigger]
+details: Dict[str, Any]
 create_instance_request_instance = CreateInstanceRequest(instance_optional_props=instance_optional_props, integration_type=integration_type, name=name, description=description, enabled=enabled, triggers=triggers, details=details)
 
 ```

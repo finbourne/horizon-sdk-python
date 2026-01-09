@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.integration_run_log import IntegrationRunLog
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictInt
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-count: StrictInt = # Replace with your value
-link: IntegrationRunLogLink = # Replace with your value
+count: StrictInt
+link: IntegrationRunLogLink
 integration_run_log_instance = IntegrationRunLog(count=count, link=link)
 
 ```

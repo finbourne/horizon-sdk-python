@@ -11,11 +11,13 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.enrichment_response import EnrichmentResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-enriched_instruments: conlist(StrictStr) = # Replace with your value
-ignored_instruments: conlist(StrictStr) = # Replace with your value
+enriched_instruments: List[StrictStr] = # Replace with your value
+ignored_instruments: List[StrictStr] = # Replace with your value
 error_file_id: Optional[StrictStr] = "example_error_file_id"
 enrichment_response_instance = EnrichmentResponse(enriched_instruments=enriched_instruments, ignored_instruments=ignored_instruments, error_file_id=error_file_id)
 

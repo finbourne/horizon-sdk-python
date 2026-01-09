@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.integration_property_configuration import IntegrationPropertyConfiguration
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 type: StrictStr = "example_type"
-properties: conlist(PropertyMapping) = # Replace with your value
-fields: conlist(FieldMapping) = # Replace with your value
+properties: List[PropertyMapping] = # Replace with your value
+fields: List[FieldMapping] = # Replace with your value
 integration_property_configuration_instance = IntegrationPropertyConfiguration(type=type, properties=properties, fields=fields)
 
 ```

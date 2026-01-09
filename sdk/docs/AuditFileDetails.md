@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.audit_file_details import AuditFileDetails
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 file_type: AuditFileType = # Replace with your value
 file_path_and_name: StrictStr = "example_file_path_and_name"

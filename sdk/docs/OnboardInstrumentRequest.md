@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.onboard_instrument_request import OnboardInstrumentRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-data_results: conlist(OpenFigiPermIdResult) = # Replace with your value
+data_results: List[OpenFigiPermIdResult] = # Replace with your value
 primary_vendor_key: Optional[StrictStr] = "example_primary_vendor_key"
-secondary_vendor_keys: Optional[conlist(StrictStr)] = # Replace with your value
+secondary_vendor_keys: Optional[List[StrictStr]] = # Replace with your value
 onboard_instrument_request_instance = OnboardInstrumentRequest(data_results=data_results, primary_vendor_key=primary_vendor_key, secondary_vendor_keys=secondary_vendor_keys)
 
 ```

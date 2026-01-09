@@ -16,14 +16,16 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.lusid_field import LusidField
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 field_name: StrictStr = "example_field_name"
 default_value: Optional[StrictStr] = "example_default_value"
-vendor_packages: conlist(StrictStr) = # Replace with your value
-vendor_namespaces: conlist(StrictStr) = # Replace with your value
-vendor_fields: conlist(StrictStr) = # Replace with your value
+vendor_packages: List[StrictStr] = # Replace with your value
+vendor_namespaces: List[StrictStr] = # Replace with your value
+vendor_fields: List[StrictStr] = # Replace with your value
 transformation_description: Optional[StrictStr] = "example_transformation_description"
 entity_type: StrictStr = "example_entity_type"
 entity_sub_type: Optional[StrictStr] = "example_entity_sub_type"

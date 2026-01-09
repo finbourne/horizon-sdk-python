@@ -15,8 +15,10 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.integration_instance import IntegrationInstance
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 id: StrictStr = "example_id"
 integration_type: StrictStr = "example_integration_type"
@@ -24,8 +26,8 @@ name: StrictStr = "example_name"
 description: StrictStr = "example_description"
 enabled: StrictBool = # Replace with your value
 enabled:StrictBool = True
-triggers: conlist(Trigger) = # Replace with your value
-details: Dict[str, Any] = # Replace with your value
+triggers: List[Trigger] = # Replace with your value
+details: Dict[str, Any]
 integration_instance_instance = IntegrationInstance(id=id, integration_type=integration_type, name=name, description=description, enabled=enabled, triggers=triggers, details=details)
 
 ```

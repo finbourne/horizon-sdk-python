@@ -12,8 +12,10 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.lusid_entity import LusidEntity
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 entity_type: StrictStr = "example_entity_type"
 entity_type_display_name: StrictStr = "example_entity_type_display_name"

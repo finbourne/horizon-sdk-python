@@ -11,11 +11,13 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.onboard_instrument_response import OnboardInstrumentResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
-values: conlist(StrictStr) = # Replace with your value
+values: List[StrictStr] = # Replace with your value
 failed: Dict[str, StrictStr] = # Replace with your value
 onboard_instrument_response_instance = OnboardInstrumentResponse(href=href, values=values, failed=failed)
 

@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 
 ```python
 from finbourne_horizon.models.external_log_insertion_request import ExternalLogInsertionRequest
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-logs: conlist(ExternalLogRecord) = # Replace with your value
+logs: List[ExternalLogRecord]
 external_log_insertion_request_instance = ExternalLogInsertionRequest(logs=logs)
 
 ```
