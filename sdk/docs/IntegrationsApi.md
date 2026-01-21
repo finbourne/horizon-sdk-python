@@ -9,8 +9,11 @@ Method | HTTP request | Description
 [**execute_instance**](IntegrationsApi.md#execute_instance) | **POST** /api/integrations/instances/{instanceId}/execute | [EXPERIMENTAL] ExecuteInstance: Execute an integration instance.
 [**execute_instance_with_params**](IntegrationsApi.md#execute_instance_with_params) | **POST** /api/integrations/instances/{instanceId}/executewithparams | [EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters
 [**get_execution_ids_for_instance**](IntegrationsApi.md#get_execution_ids_for_instance) | **GET** /api/integrations/instances/{instanceId}/executions | [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
+[**get_instance**](IntegrationsApi.md#get_instance) | **GET** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration.
 [**get_instance_optional_property_mapping**](IntegrationsApi.md#get_instance_optional_property_mapping) | **GET** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
 [**get_integration_configuration**](IntegrationsApi.md#get_integration_configuration) | **GET** /api/integrations/configuration/{integration} | [EXPERIMENTAL] GetIntegrationConfiguration: Get the Field and Property Mapping configuration for a given integration
+[**get_integration_configuration_fields**](IntegrationsApi.md#get_integration_configuration_fields) | **GET** /api/integrations/configuration/{integration}/fields | [EXPERIMENTAL] GetIntegrationConfigurationFields: Get the Field Mapping configuration for a given integration
+[**get_integration_configuration_properties**](IntegrationsApi.md#get_integration_configuration_properties) | **GET** /api/integrations/configuration/{integration}/properties | [EXPERIMENTAL] GetIntegrationConfigurationProperties: Get the Property Mapping configuration for a given integration
 [**get_schema**](IntegrationsApi.md#get_schema) | **GET** /api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
 [**list_instances**](IntegrationsApi.md#list_instances) | **GET** /api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations.
 [**list_integrations**](IntegrationsApi.md#list_integrations) | **GET** /api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations.
@@ -23,7 +26,7 @@ Method | HTTP request | Description
 
 [EXPERIMENTAL] CreateInstance: Create a single integration instance.
 
-Creates a new instance of an integration, returning its identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+Creates a new instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 
@@ -121,7 +124,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DeleteInstance: Delete a single integration instance.
 
-Deletes an existing instance of an integration, returning its identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+Deletes an existing instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 
@@ -212,7 +215,7 @@ void (empty response body)
 
 [EXPERIMENTAL] ExecuteInstance: Execute an integration instance.
 
-Starts execution of an instance, returning its execution identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+Starts execution of an instance, returning its execution identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 
@@ -305,7 +308,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters
 
-Starts execution of an instance, returning its execution identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+Starts execution of an instance, returning its execution identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 
@@ -400,7 +403,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
 
-Get the most recent execution ids for an integration instance.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+Get the most recent execution ids for an integration instance. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 
@@ -486,6 +489,99 @@ Name | Type | Description  | Notes
 **200** | The execution ids sorted by start date (descending) |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | The integration instance does not exist |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_instance**
+> IntegrationInstanceResponse get_instance(instance_id)
+
+[EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration.
+
+The user must be authenticated to call this method.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    IntegrationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(IntegrationsApi)
+    instance_id = 'instance_id_example' # str | 
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_instance(instance_id, opts=opts)
+
+        # [EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration.
+        api_response = api_instance.get_instance(instance_id)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling IntegrationsApi->get_instance: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_id** | **str**|  | 
+
+### Return type
+
+[**IntegrationInstanceResponse**](IntegrationInstanceResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | The requested instance does not exist. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
@@ -678,6 +774,208 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_integration_configuration_fields**
+> PagedResourceListOfIFieldMapping get_integration_configuration_fields(integration, filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+
+[EXPERIMENTAL] GetIntegrationConfigurationFields: Get the Field Mapping configuration for a given integration
+
+The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    IntegrationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(IntegrationsApi)
+    integration = 'integration_example' # str | 
+    filter = 'filter_example' # str |  (optional)
+    sort_by = ['sort_by_example'] # List[str] |  (optional)
+    limit = 100 # int |  (optional) (default to 100)
+    page_token = '' # str |  (optional) (default to '')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_integration_configuration_fields(integration, filter=filter, sort_by=sort_by, limit=limit, page_token=page_token, opts=opts)
+
+        # [EXPERIMENTAL] GetIntegrationConfigurationFields: Get the Field Mapping configuration for a given integration
+        api_response = api_instance.get_integration_configuration_fields(integration, filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling IntegrationsApi->get_integration_configuration_fields: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **integration** | **str**|  | 
+ **filter** | **str**|  | [optional] 
+ **sort_by** | [**List[str]**](str.md)|  | [optional] 
+ **limit** | **int**|  | [optional] [default to 100]
+ **page_token** | **str**|  | [optional] [default to &#39;&#39;]
+
+### Return type
+
+[**PagedResourceListOfIFieldMapping**](PagedResourceListOfIFieldMapping.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | The requested integration does not exist. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_integration_configuration_properties**
+> PagedResourceListOfIPropertyMapping get_integration_configuration_properties(integration, filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+
+[EXPERIMENTAL] GetIntegrationConfigurationProperties: Get the Property Mapping configuration for a given integration
+
+The user must be authenticated, entitled to call this method, but the user's domain does not need to be licensed for the integration.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    IntegrationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(IntegrationsApi)
+    integration = 'integration_example' # str | 
+    filter = 'filter_example' # str |  (optional)
+    sort_by = ['sort_by_example'] # List[str] |  (optional)
+    limit = 100 # int |  (optional) (default to 100)
+    page_token = '' # str |  (optional) (default to '')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_integration_configuration_properties(integration, filter=filter, sort_by=sort_by, limit=limit, page_token=page_token, opts=opts)
+
+        # [EXPERIMENTAL] GetIntegrationConfigurationProperties: Get the Property Mapping configuration for a given integration
+        api_response = api_instance.get_integration_configuration_properties(integration, filter=filter, sort_by=sort_by, limit=limit, page_token=page_token)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling IntegrationsApi->get_integration_configuration_properties: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **integration** | **str**|  | 
+ **filter** | **str**|  | [optional] 
+ **sort_by** | [**List[str]**](str.md)|  | [optional] 
+ **limit** | **int**|  | [optional] [default to 100]
+ **page_token** | **str**|  | [optional] [default to &#39;&#39;]
+
+### Return type
+
+[**PagedResourceListOfIPropertyMapping**](PagedResourceListOfIPropertyMapping.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | The requested integration does not exist. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_schema**
 > JSchema get_schema(integration)
 
@@ -776,7 +1074,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] ListInstances: List instances across all integrations.
 
-The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+The user must be authenticated to call this method.
 
 ### Example
 
@@ -864,7 +1162,7 @@ This endpoint does not need any parameter.
 
 [EXPERIMENTAL] ListIntegrations: List available integrations.
 
-List all available integrations.  ```\"licensed\"``` indicates your domain is licensed to use this integration. To request a licence  contact your [FINBOURNE sales representative](https://www.finbourne.com/contact/).  Any authenticated user can call this method.
+List all available integrations. ```\"licensed\"``` indicates your domain is licensed to use this integration. To request a licence contact your [FINBOURNE sales representative](https://www.finbourne.com/contact/). Any authenticated user can call this method.
 
 ### Example
 
@@ -1048,7 +1346,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpdateInstance: Update a single integration instance.
 
-Updates an existing instance of an integration, returning its identifier.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+Updates an existing instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 

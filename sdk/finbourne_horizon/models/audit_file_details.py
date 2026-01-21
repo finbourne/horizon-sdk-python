@@ -22,13 +22,12 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from finbourne_horizon.models.audit_file_type import AuditFileType
 
 class AuditFileDetails(BaseModel):
     """
     Holds information about Horizon Audit Files  # noqa: E501
     """
-    file_type: AuditFileType = Field(alias="fileType")
+    file_type:  StrictStr = Field(...,alias="fileType", description="The type of the audit file") 
     file_path_and_name:  StrictStr = Field(...,alias="filePathAndName", description="The file path and name") 
     __properties = ["fileType", "filePathAndName"]
 

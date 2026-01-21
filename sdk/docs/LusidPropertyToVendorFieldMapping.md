@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **vendor_field** | **str** |  | 
 **vendor_package** | **str** |  | 
 **vendor_namespace** | **str** |  | 
-**optionality** | [**Optionality**](Optionality.md) |  | 
+**optionality** | **str** |  | 
 ## Example
 
 ```python
@@ -22,7 +22,7 @@ var_property: LusidPropertyDefinition = # Replace with your value
 vendor_field: StrictStr = "example_vendor_field"
 vendor_package: StrictStr = "example_vendor_package"
 vendor_namespace: StrictStr = "example_vendor_namespace"
-optionality: Optionality
+optionality: StrictStr = "example_optionality"
 lusid_property_to_vendor_field_mapping_instance = LusidPropertyToVendorFieldMapping(var_property=var_property, vendor_field=vendor_field, vendor_package=vendor_package, vendor_namespace=vendor_namespace, optionality=optionality)
 
 ```

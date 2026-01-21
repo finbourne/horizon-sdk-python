@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_property** | [**LusidPropertyDefinition**](LusidPropertyDefinition.md) |  | 
 **vendor_fields** | [**List[VendorField]**](VendorField.md) | Fields that will be used to map to this Property Definition | 
-**optionality** | [**Optionality**](Optionality.md) |  | 
+**optionality** | **str** | Whether the Property is Mandatory, Suggested or Optional | 
 **entity_type** | **str** | The LUSID Entity this is valid for | 
 **entity_sub_type** | **str** | The LUSID Entity sub type this is valid for | [optional] 
 **transformation_description** | **str** | The transformation, if required, to map from VendorFields to the LUSID Property | [optional] 
@@ -22,7 +22,7 @@ from datetime import datetime
 
 var_property: LusidPropertyDefinition = # Replace with your value
 vendor_fields: List[VendorField] = # Replace with your value
-optionality: Optionality
+optionality: StrictStr = "example_optionality"
 entity_type: StrictStr = "example_entity_type"
 entity_sub_type: Optional[StrictStr] = "example_entity_sub_type"
 transformation_description: Optional[StrictStr] = "example_transformation_description"

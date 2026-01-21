@@ -1,23 +1,20 @@
-# AuditFileDetails
+# IntegrationCancellationResponse
 
-Holds information about Horizon Audit Files
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_type** | **str** | The type of the audit file | 
-**file_path_and_name** | **str** | The file path and name | 
+**response** | **Dict[str, str]** |  | 
 ## Example
 
 ```python
-from finbourne_horizon.models.audit_file_details import AuditFileDetails
+from finbourne_horizon.models.integration_cancellation_response import IntegrationCancellationResponse
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-file_type: StrictStr = "example_file_type"
-file_path_and_name: StrictStr = "example_file_path_and_name"
-audit_file_details_instance = AuditFileDetails(file_type=file_type, file_path_and_name=file_path_and_name)
+response: Dict[str, StrictStr]
+integration_cancellation_response_instance = IntegrationCancellationResponse(response=response)
 
 ```
 

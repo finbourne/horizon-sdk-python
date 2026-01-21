@@ -22,18 +22,13 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from finbourne_horizon.models.lusid_property_definition import LusidPropertyDefinition
 
-class LusidPropertyToVendorFieldMapping(BaseModel):
+class IntegrationCancellationResponse(BaseModel):
     """
-    The mapping of a LUSID Property from the Vendor Field that would populate it  # noqa: E501
+    IntegrationCancellationResponse
     """
-    var_property: LusidPropertyDefinition = Field(alias="property")
-    vendor_field:  StrictStr = Field(...,alias="vendorField") 
-    vendor_package:  StrictStr = Field(...,alias="vendorPackage") 
-    vendor_namespace:  StrictStr = Field(...,alias="vendorNamespace") 
-    optionality:  StrictStr = Field(...,alias="optionality") 
-    __properties = ["property", "vendorField", "vendorPackage", "vendorNamespace", "optionality"]
+    response: Dict[str, StrictStr]
+    __properties = ["response"]
 
     class Config:
         """Pydantic configuration"""
@@ -57,8 +52,8 @@ class LusidPropertyToVendorFieldMapping(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> LusidPropertyToVendorFieldMapping:
-        """Create an instance of LusidPropertyToVendorFieldMapping from a JSON string"""
+    def from_json(cls, json_str: str) -> IntegrationCancellationResponse:
+        """Create an instance of IntegrationCancellationResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,27 +62,20 @@ class LusidPropertyToVendorFieldMapping(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of var_property
-        if self.var_property:
-            _dict['property'] = self.var_property.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> LusidPropertyToVendorFieldMapping:
-        """Create an instance of LusidPropertyToVendorFieldMapping from a dict"""
+    def from_dict(cls, obj: dict) -> IntegrationCancellationResponse:
+        """Create an instance of IntegrationCancellationResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return LusidPropertyToVendorFieldMapping.parse_obj(obj)
+            return IntegrationCancellationResponse.parse_obj(obj)
 
-        _obj = LusidPropertyToVendorFieldMapping.parse_obj({
-            "var_property": LusidPropertyDefinition.from_dict(obj.get("property")) if obj.get("property") is not None else None,
-            "vendor_field": obj.get("vendorField"),
-            "vendor_package": obj.get("vendorPackage"),
-            "vendor_namespace": obj.get("vendorNamespace"),
-            "optionality": obj.get("optionality")
+        _obj = IntegrationCancellationResponse.parse_obj({
+            "response": obj.get("response")
         })
         return _obj
 
-LusidPropertyToVendorFieldMapping.update_forward_refs()
+IntegrationCancellationResponse.update_forward_refs()

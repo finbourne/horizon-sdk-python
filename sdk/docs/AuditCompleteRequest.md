@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **start_time** | **datetime** | When the run was started in UTC | 
 **end_time** | **datetime** | When the run finished in UTC | 
 **message** | **str** | A descriptive message to accompany the status | 
-**status** | [**AuditCompleteStatus**](AuditCompleteStatus.md) |  | 
+**status** | **str** | The final status of the run | 
 **rows_total** | **int** | The number of data rows operated on | 
 **rows_succeeded** | **int** | The number of data rows successfully operated on | 
 **rows_failed** | **int** | The number of data rows that failed to be operated on | 
@@ -32,7 +32,7 @@ scheduler_run_id: StrictStr = "example_scheduler_run_id"
 start_time: datetime = # Replace with your value
 end_time: datetime = # Replace with your value
 message: StrictStr = "example_message"
-status: AuditCompleteStatus
+status: StrictStr = "example_status"
 rows_total: StrictInt = # Replace with your value
 rows_total: StrictInt = 42
 rows_succeeded: StrictInt = # Replace with your value

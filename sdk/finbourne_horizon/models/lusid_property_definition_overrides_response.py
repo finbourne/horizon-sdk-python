@@ -27,7 +27,7 @@ class LusidPropertyDefinitionOverridesResponse(BaseModel):
     """
     An item that has been updated as a result of setting LusidPropertyDefinitionOverrides.  # noqa: E501
     """
-    action:  StrictStr = Field(...,alias="action", description="The action performed on this property. \"upsert\" for setting values for new and existing              properties. \"delete\" for existing properties that were removed") 
+    action:  StrictStr = Field(...,alias="action", description="The action performed on this property. \"upsert\" for setting values for new and existing             properties. \"delete\" for existing properties that were removed") 
     write_error:  Optional[StrictStr] = Field(None,alias="writeError", description="") 
     write_error_detail:  Optional[StrictStr] = Field(None,alias="writeErrorDetail", description="") 
     display_name_override:  Optional[StrictStr] = Field(None,alias="displayNameOverride", description="") 

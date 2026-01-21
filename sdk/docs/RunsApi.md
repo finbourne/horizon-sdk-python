@@ -4,18 +4,18 @@ All URIs are relative to *https://fbn-prd.lusid.com/horizon*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancel_instance**](RunsApi.md#cancel_instance) | **PUT** /api/runs/{runId}/cancel | [EXPERIMENTAL] CancelInstance: Cancels a single instance execution.
+[**cancel_instance**](RunsApi.md#cancel_instance) | **PUT** /api/runs/cancel | [EXPERIMENTAL] CancelInstance: Cancels multiple instance executions.
 [**get_run_results**](RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: Get run results
 [**rerun_instance**](RunsApi.md#rerun_instance) | **PUT** /api/runs/{runId}/rerun | [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
 [**stop_instance_execution**](RunsApi.md#stop_instance_execution) | **PUT** /api/runs/{instanceId}/{runId}/stop | [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
 
 
 # **cancel_instance**
-> object cancel_instance(run_id)
+> IntegrationCancellationResponse cancel_instance(cancel_run_request)
 
-[EXPERIMENTAL] CancelInstance: Cancels a single instance execution.
+[EXPERIMENTAL] CancelInstance: Cancels multiple instance executions.
 
-Cancels an execution instance of an integration.  The execution instance must be queued, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+Cancels multiple execution instances of an integration. The execution instance must be queued, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 
@@ -62,14 +62,19 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(RunsApi)
-    run_id = 'run_id_example' # str | Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # cancel_run_request = CancelRunRequest.from_json("")
+    # cancel_run_request = CancelRunRequest.from_dict({})
+    cancel_run_request = CancelRunRequest()
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.cancel_instance(run_id, opts=opts)
+        # api_response =  api_instance.cancel_instance(cancel_run_request, opts=opts)
 
-        # [EXPERIMENTAL] CancelInstance: Cancels a single instance execution.
-        api_response = api_instance.cancel_instance(run_id)
+        # [EXPERIMENTAL] CancelInstance: Cancels multiple instance executions.
+        api_response = api_instance.cancel_instance(cancel_run_request)
         pprint(api_response)
 
     except ApiException as e:
@@ -82,23 +87,23 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **run_id** | **str**| Run identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | 
+ **cancel_run_request** | [**CancelRunRequest**](CancelRunRequest.md)| Contains the run identifiers and a message to be set e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | 
 
 ### Return type
 
-**object**
+[**IntegrationCancellationResponse**](IntegrationCancellationResponse.md)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The instance was cancelled. |  -  |
+**200** | Some or all of the instances requested were cancelled. |  -  |
 **400** | The details of the input related failure |  -  |
-**404** | The execution does not exist. |  -  |
+**404** | None of the executions does not exist. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
@@ -158,7 +163,7 @@ def main():
     filter = 'filter_example' # str | Expression to filter the result set. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
     limit = 100 # int | When paginating, limit the results to this number. (optional) (default to 100)
-    page_token = '' # str | The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request. (optional) (default to '')
+    page_token = '' # str | The pagination token to use to continue listing integration runs; this value is returned from             the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request. (optional) (default to '')
 
     try:
         # uncomment the below to set overrides at the request level
@@ -181,7 +186,7 @@ Name | Type | Description  | Notes
  **filter** | **str**| Expression to filter the result set. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. | [optional] [default to 100]
- **page_token** | **str**| The pagination token to use to continue listing integration runs; this value is returned from              the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt; and &lt;i&gt;filter&lt;/i&gt; fields must not have changed since the original request. | [optional] [default to &#39;&#39;]
+ **page_token** | **str**| The pagination token to use to continue listing integration runs; this value is returned from             the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt; and &lt;i&gt;filter&lt;/i&gt; fields must not have changed since the original request. | [optional] [default to &#39;&#39;]
 
 ### Return type
 
@@ -207,7 +212,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
 
-Reruns an execution instance of an integration.  The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+Reruns an execution instance of an integration. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 
@@ -300,7 +305,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
 
-Stops an execution instance of an External Client Application integration type.  The execution instance must be started, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+Stops an execution instance of an External Client Application integration type. The execution instance must be started, the user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
 
 ### Example
 

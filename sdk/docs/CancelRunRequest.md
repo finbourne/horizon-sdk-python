@@ -1,23 +1,22 @@
-# AuditFileDetails
+# CancelRunRequest
 
-Holds information about Horizon Audit Files
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_type** | **str** | The type of the audit file | 
-**file_path_and_name** | **str** | The file path and name | 
+**run_ids** | **List[str]** |  | 
+**message** | **str** |  | [optional] 
 ## Example
 
 ```python
-from finbourne_horizon.models.audit_file_details import AuditFileDetails
+from finbourne_horizon.models.cancel_run_request import CancelRunRequest
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-file_type: StrictStr = "example_file_type"
-file_path_and_name: StrictStr = "example_file_path_and_name"
-audit_file_details_instance = AuditFileDetails(file_type=file_type, file_path_and_name=file_path_and_name)
+run_ids: List[StrictStr] = # Replace with your value
+message: Optional[StrictStr] = "example_message"
+cancel_run_request_instance = CancelRunRequest(run_ids=run_ids, message=message)
 
 ```
 

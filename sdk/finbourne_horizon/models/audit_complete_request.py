@@ -22,7 +22,6 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from finbourne_horizon.models.audit_complete_status import AuditCompleteStatus
 from finbourne_horizon.models.audit_file_details import AuditFileDetails
 
 class AuditCompleteRequest(BaseModel):
@@ -35,7 +34,7 @@ class AuditCompleteRequest(BaseModel):
     start_time: datetime = Field(description="When the run was started in UTC", alias="startTime")
     end_time: datetime = Field(description="When the run finished in UTC", alias="endTime")
     message:  StrictStr = Field(...,alias="message", description="A descriptive message to accompany the status") 
-    status: AuditCompleteStatus
+    status:  StrictStr = Field(...,alias="status", description="The final status of the run") 
     rows_total: StrictInt = Field(description="The number of data rows operated on", alias="rowsTotal")
     rows_succeeded: StrictInt = Field(description="The number of data rows successfully operated on", alias="rowsSucceeded")
     rows_failed: StrictInt = Field(description="The number of data rows that failed to be operated on", alias="rowsFailed")

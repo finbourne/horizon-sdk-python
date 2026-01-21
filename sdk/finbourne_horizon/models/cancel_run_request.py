@@ -22,18 +22,14 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from finbourne_horizon.models.lusid_property_definition import LusidPropertyDefinition
 
-class LusidPropertyToVendorFieldMapping(BaseModel):
+class CancelRunRequest(BaseModel):
     """
-    The mapping of a LUSID Property from the Vendor Field that would populate it  # noqa: E501
+    CancelRunRequest
     """
-    var_property: LusidPropertyDefinition = Field(alias="property")
-    vendor_field:  StrictStr = Field(...,alias="vendorField") 
-    vendor_package:  StrictStr = Field(...,alias="vendorPackage") 
-    vendor_namespace:  StrictStr = Field(...,alias="vendorNamespace") 
-    optionality:  StrictStr = Field(...,alias="optionality") 
-    __properties = ["property", "vendorField", "vendorPackage", "vendorNamespace", "optionality"]
+    run_ids: List[StrictStr] = Field(alias="runIds")
+    message:  Optional[StrictStr] = Field(None,alias="message") 
+    __properties = ["runIds", "message"]
 
     class Config:
         """Pydantic configuration"""
@@ -57,8 +53,8 @@ class LusidPropertyToVendorFieldMapping(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> LusidPropertyToVendorFieldMapping:
-        """Create an instance of LusidPropertyToVendorFieldMapping from a JSON string"""
+    def from_json(cls, json_str: str) -> CancelRunRequest:
+        """Create an instance of CancelRunRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,27 +63,26 @@ class LusidPropertyToVendorFieldMapping(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of var_property
-        if self.var_property:
-            _dict['property'] = self.var_property.to_dict()
+        # set to None if message (nullable) is None
+        # and __fields_set__ contains the field
+        if self.message is None and "message" in self.__fields_set__:
+            _dict['message'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> LusidPropertyToVendorFieldMapping:
-        """Create an instance of LusidPropertyToVendorFieldMapping from a dict"""
+    def from_dict(cls, obj: dict) -> CancelRunRequest:
+        """Create an instance of CancelRunRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return LusidPropertyToVendorFieldMapping.parse_obj(obj)
+            return CancelRunRequest.parse_obj(obj)
 
-        _obj = LusidPropertyToVendorFieldMapping.parse_obj({
-            "var_property": LusidPropertyDefinition.from_dict(obj.get("property")) if obj.get("property") is not None else None,
-            "vendor_field": obj.get("vendorField"),
-            "vendor_package": obj.get("vendorPackage"),
-            "vendor_namespace": obj.get("vendorNamespace"),
-            "optionality": obj.get("optionality")
+        _obj = CancelRunRequest.parse_obj({
+            "run_ids": obj.get("runIds"),
+            "message": obj.get("message")
         })
         return _obj
 
-LusidPropertyToVendorFieldMapping.update_forward_refs()
+CancelRunRequest.update_forward_refs()

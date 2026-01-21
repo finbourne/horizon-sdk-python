@@ -25,18 +25,18 @@ from datetime import datetime
 from finbourne_horizon.models.lusid_property_definition import LusidPropertyDefinition
 from finbourne_horizon.models.vendor_field import VendorField
 
-class PropertyMapping(BaseModel):
+class IPropertyMapping(BaseModel):
     """
-    Mapping from a set of VendorFields to a LUSID Property  # noqa: E501
+    IPropertyMapping
     """
+    entity_sub_type:  Optional[StrictStr] = Field(None,alias="entitySubType") 
+    entity_type:  StrictStr = Field(...,alias="entityType") 
+    optionality:  StrictStr = Field(...,alias="optionality") 
     var_property: LusidPropertyDefinition = Field(alias="property")
-    vendor_fields: List[VendorField] = Field(description="Fields that will be used to map to this Property Definition", alias="vendorFields")
-    optionality:  StrictStr = Field(...,alias="optionality", description="Whether the Property is Mandatory, Suggested or Optional") 
-    entity_type:  StrictStr = Field(...,alias="entityType", description="The LUSID Entity this is valid for") 
-    entity_sub_type:  Optional[StrictStr] = Field(None,alias="entitySubType", description="The LUSID Entity sub type this is valid for") 
-    transformation_description:  Optional[StrictStr] = Field(None,alias="transformationDescription", description="The transformation, if required, to map from VendorFields to the LUSID Property") 
-    versions: List[StrictStr] = Field(description="The versions of the Vendor integration this mapping is valid for")
-    __properties = ["property", "vendorFields", "optionality", "entityType", "entitySubType", "transformationDescription", "versions"]
+    transformation_description:  Optional[StrictStr] = Field(None,alias="transformationDescription") 
+    vendor_fields: List[VendorField] = Field(alias="vendorFields")
+    versions: List[StrictStr]
+    __properties = ["entitySubType", "entityType", "optionality", "property", "transformationDescription", "vendorFields", "versions"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,8 +60,8 @@ class PropertyMapping(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PropertyMapping:
-        """Create an instance of PropertyMapping from a JSON string"""
+    def from_json(cls, json_str: str) -> IPropertyMapping:
+        """Create an instance of IPropertyMapping from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -93,23 +93,23 @@ class PropertyMapping(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PropertyMapping:
-        """Create an instance of PropertyMapping from a dict"""
+    def from_dict(cls, obj: dict) -> IPropertyMapping:
+        """Create an instance of IPropertyMapping from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PropertyMapping.parse_obj(obj)
+            return IPropertyMapping.parse_obj(obj)
 
-        _obj = PropertyMapping.parse_obj({
-            "var_property": LusidPropertyDefinition.from_dict(obj.get("property")) if obj.get("property") is not None else None,
-            "vendor_fields": [VendorField.from_dict(_item) for _item in obj.get("vendorFields")] if obj.get("vendorFields") is not None else None,
-            "optionality": obj.get("optionality"),
-            "entity_type": obj.get("entityType"),
+        _obj = IPropertyMapping.parse_obj({
             "entity_sub_type": obj.get("entitySubType"),
+            "entity_type": obj.get("entityType"),
+            "optionality": obj.get("optionality"),
+            "var_property": LusidPropertyDefinition.from_dict(obj.get("property")) if obj.get("property") is not None else None,
             "transformation_description": obj.get("transformationDescription"),
+            "vendor_fields": [VendorField.from_dict(_item) for _item in obj.get("vendorFields")] if obj.get("vendorFields") is not None else None,
             "versions": obj.get("versions")
         })
         return _obj
 
-PropertyMapping.update_forward_refs()
+IPropertyMapping.update_forward_refs()

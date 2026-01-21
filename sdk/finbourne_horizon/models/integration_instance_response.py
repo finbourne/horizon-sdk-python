@@ -22,18 +22,20 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from finbourne_horizon.models.lusid_property_definition import LusidPropertyDefinition
+from finbourne_horizon.models.trigger import Trigger
 
-class LusidPropertyToVendorFieldMapping(BaseModel):
+class IntegrationInstanceResponse(BaseModel):
     """
-    The mapping of a LUSID Property from the Vendor Field that would populate it  # noqa: E501
+    IntegrationInstanceResponse
     """
-    var_property: LusidPropertyDefinition = Field(alias="property")
-    vendor_field:  StrictStr = Field(...,alias="vendorField") 
-    vendor_package:  StrictStr = Field(...,alias="vendorPackage") 
-    vendor_namespace:  StrictStr = Field(...,alias="vendorNamespace") 
-    optionality:  StrictStr = Field(...,alias="optionality") 
-    __properties = ["property", "vendorField", "vendorPackage", "vendorNamespace", "optionality"]
+    id:  StrictStr = Field(...,alias="id") 
+    integration_type:  StrictStr = Field(...,alias="integrationType") 
+    name:  StrictStr = Field(...,alias="name") 
+    description:  StrictStr = Field(...,alias="description") 
+    enabled: StrictBool
+    triggers: List[Trigger]
+    details: Dict[str, Any]
+    __properties = ["id", "integrationType", "name", "description", "enabled", "triggers", "details"]
 
     class Config:
         """Pydantic configuration"""
@@ -57,8 +59,8 @@ class LusidPropertyToVendorFieldMapping(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> LusidPropertyToVendorFieldMapping:
-        """Create an instance of LusidPropertyToVendorFieldMapping from a JSON string"""
+    def from_json(cls, json_str: str) -> IntegrationInstanceResponse:
+        """Create an instance of IntegrationInstanceResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,27 +69,33 @@ class LusidPropertyToVendorFieldMapping(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of var_property
-        if self.var_property:
-            _dict['property'] = self.var_property.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in triggers (list)
+        _items = []
+        if self.triggers:
+            for _item in self.triggers:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['triggers'] = _items
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> LusidPropertyToVendorFieldMapping:
-        """Create an instance of LusidPropertyToVendorFieldMapping from a dict"""
+    def from_dict(cls, obj: dict) -> IntegrationInstanceResponse:
+        """Create an instance of IntegrationInstanceResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return LusidPropertyToVendorFieldMapping.parse_obj(obj)
+            return IntegrationInstanceResponse.parse_obj(obj)
 
-        _obj = LusidPropertyToVendorFieldMapping.parse_obj({
-            "var_property": LusidPropertyDefinition.from_dict(obj.get("property")) if obj.get("property") is not None else None,
-            "vendor_field": obj.get("vendorField"),
-            "vendor_package": obj.get("vendorPackage"),
-            "vendor_namespace": obj.get("vendorNamespace"),
-            "optionality": obj.get("optionality")
+        _obj = IntegrationInstanceResponse.parse_obj({
+            "id": obj.get("id"),
+            "integration_type": obj.get("integrationType"),
+            "name": obj.get("name"),
+            "description": obj.get("description"),
+            "enabled": obj.get("enabled"),
+            "triggers": [Trigger.from_dict(_item) for _item in obj.get("triggers")] if obj.get("triggers") is not None else None,
+            "details": obj.get("details")
         })
         return _obj
 
-LusidPropertyToVendorFieldMapping.update_forward_refs()
+IntegrationInstanceResponse.update_forward_refs()

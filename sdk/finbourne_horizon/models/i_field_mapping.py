@@ -22,21 +22,20 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from finbourne_horizon.models.lusid_property_definition import LusidPropertyDefinition
 from finbourne_horizon.models.vendor_field import VendorField
 
-class PropertyMapping(BaseModel):
+class IFieldMapping(BaseModel):
     """
-    Mapping from a set of VendorFields to a LUSID Property  # noqa: E501
+    IFieldMapping
     """
-    var_property: LusidPropertyDefinition = Field(alias="property")
-    vendor_fields: List[VendorField] = Field(description="Fields that will be used to map to this Property Definition", alias="vendorFields")
-    optionality:  StrictStr = Field(...,alias="optionality", description="Whether the Property is Mandatory, Suggested or Optional") 
-    entity_type:  StrictStr = Field(...,alias="entityType", description="The LUSID Entity this is valid for") 
-    entity_sub_type:  Optional[StrictStr] = Field(None,alias="entitySubType", description="The LUSID Entity sub type this is valid for") 
-    transformation_description:  Optional[StrictStr] = Field(None,alias="transformationDescription", description="The transformation, if required, to map from VendorFields to the LUSID Property") 
-    versions: List[StrictStr] = Field(description="The versions of the Vendor integration this mapping is valid for")
-    __properties = ["property", "vendorFields", "optionality", "entityType", "entitySubType", "transformationDescription", "versions"]
+    default_value:  Optional[StrictStr] = Field(None,alias="defaultValue") 
+    entity_sub_type:  Optional[StrictStr] = Field(None,alias="entitySubType") 
+    entity_type:  StrictStr = Field(...,alias="entityType") 
+    field_name:  StrictStr = Field(...,alias="fieldName") 
+    transformation_description:  Optional[StrictStr] = Field(None,alias="transformationDescription") 
+    vendor_fields: List[VendorField] = Field(alias="vendorFields")
+    versions: List[StrictStr]
+    __properties = ["defaultValue", "entitySubType", "entityType", "fieldName", "transformationDescription", "vendorFields", "versions"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,8 +59,8 @@ class PropertyMapping(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PropertyMapping:
-        """Create an instance of PropertyMapping from a JSON string"""
+    def from_json(cls, json_str: str) -> IFieldMapping:
+        """Create an instance of IFieldMapping from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -70,9 +69,6 @@ class PropertyMapping(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of var_property
-        if self.var_property:
-            _dict['property'] = self.var_property.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in vendor_fields (list)
         _items = []
         if self.vendor_fields:
@@ -80,6 +76,11 @@ class PropertyMapping(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['vendorFields'] = _items
+        # set to None if default_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.default_value is None and "default_value" in self.__fields_set__:
+            _dict['defaultValue'] = None
+
         # set to None if entity_sub_type (nullable) is None
         # and __fields_set__ contains the field
         if self.entity_sub_type is None and "entity_sub_type" in self.__fields_set__:
@@ -93,23 +94,23 @@ class PropertyMapping(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PropertyMapping:
-        """Create an instance of PropertyMapping from a dict"""
+    def from_dict(cls, obj: dict) -> IFieldMapping:
+        """Create an instance of IFieldMapping from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PropertyMapping.parse_obj(obj)
+            return IFieldMapping.parse_obj(obj)
 
-        _obj = PropertyMapping.parse_obj({
-            "var_property": LusidPropertyDefinition.from_dict(obj.get("property")) if obj.get("property") is not None else None,
-            "vendor_fields": [VendorField.from_dict(_item) for _item in obj.get("vendorFields")] if obj.get("vendorFields") is not None else None,
-            "optionality": obj.get("optionality"),
-            "entity_type": obj.get("entityType"),
+        _obj = IFieldMapping.parse_obj({
+            "default_value": obj.get("defaultValue"),
             "entity_sub_type": obj.get("entitySubType"),
+            "entity_type": obj.get("entityType"),
+            "field_name": obj.get("fieldName"),
             "transformation_description": obj.get("transformationDescription"),
+            "vendor_fields": [VendorField.from_dict(_item) for _item in obj.get("vendorFields")] if obj.get("vendorFields") is not None else None,
             "versions": obj.get("versions")
         })
         return _obj
 
-PropertyMapping.update_forward_refs()
+IFieldMapping.update_forward_refs()

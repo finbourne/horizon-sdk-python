@@ -63,7 +63,7 @@ def main():
     filter = 'filter_example' # str | Expression to filter the result set. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
     limit = 100 # int | When paginating, limit the results to this number. (optional) (default to 100)
-    page_token = '' # str | The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. (optional) (default to '')
+    page_token = '' # str | The pagination token to use to continue listing integration logs; this value is returned from             the previous call. If a pagination token is provided, the <i>sortBy</i> and <i>filter</i> fields must not have changed since the original request.             For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. (optional) (default to '')
 
     try:
         # uncomment the below to set overrides at the request level
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
  **filter** | **str**| Expression to filter the result set. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. | [optional] [default to 100]
- **page_token** | **str**| The pagination token to use to continue listing integration logs; this value is returned from              the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt; and &lt;i&gt;filter&lt;/i&gt; fields must not have changed since the original request.              For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] [default to &#39;&#39;]
+ **page_token** | **str**| The pagination token to use to continue listing integration logs; this value is returned from             the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt; and &lt;i&gt;filter&lt;/i&gt; fields must not have changed since the original request.             For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] [default to &#39;&#39;]
 
 ### Return type
 
