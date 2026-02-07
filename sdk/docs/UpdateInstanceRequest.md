@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **enabled** | **bool** |  | 
 **triggers** | [**List[Trigger]**](Trigger.md) |  | 
 **details** | **object** |  | 
+**post_process_tasks** | [**List[PostProcessTask]**](PostProcessTask.md) |  | 
 ## Example
 
 ```python
@@ -27,7 +28,8 @@ enabled: StrictBool
 enabled:StrictBool = True
 triggers: List[Trigger]
 details: Dict[str, Any]
-update_instance_request_instance = UpdateInstanceRequest(id=id, integration_type=integration_type, name=name, description=description, enabled=enabled, triggers=triggers, details=details)
+post_process_tasks: List[PostProcessTask] = # Replace with your value
+update_instance_request_instance = UpdateInstanceRequest(id=id, integration_type=integration_type, name=name, description=description, enabled=enabled, triggers=triggers, details=details, post_process_tasks=post_process_tasks)
 
 ```
 

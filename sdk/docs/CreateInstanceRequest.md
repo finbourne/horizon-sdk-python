@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **enabled** | **bool** |  | 
 **triggers** | [**List[Trigger]**](Trigger.md) |  | 
 **details** | **object** |  | 
+**post_process_tasks** | [**List[PostProcessTask]**](PostProcessTask.md) |  | 
 ## Example
 
 ```python
@@ -27,7 +28,8 @@ enabled: StrictBool
 enabled:StrictBool = True
 triggers: List[Trigger]
 details: Dict[str, Any]
-create_instance_request_instance = CreateInstanceRequest(instance_optional_props=instance_optional_props, integration_type=integration_type, name=name, description=description, enabled=enabled, triggers=triggers, details=details)
+post_process_tasks: List[PostProcessTask] = # Replace with your value
+create_instance_request_instance = CreateInstanceRequest(instance_optional_props=instance_optional_props, integration_type=integration_type, name=name, description=description, enabled=enabled, triggers=triggers, details=details, post_process_tasks=post_process_tasks)
 
 ```
 
