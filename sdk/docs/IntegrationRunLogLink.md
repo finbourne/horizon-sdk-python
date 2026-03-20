@@ -1,5 +1,6 @@
 # IntegrationRunLogLink
 
+Integration run log link
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

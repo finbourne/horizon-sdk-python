@@ -1,5 +1,6 @@
 # Trigger
 
+Response defining a trigger for an instance.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

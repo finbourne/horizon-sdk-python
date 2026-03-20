@@ -26,7 +26,7 @@ from finbourne_horizon.models.integration_run_log_link import IntegrationRunLogL
 
 class IntegrationRunLog(BaseModel):
     """
-    IntegrationRunLog
+    Integration run log  # noqa: E501
     """
     count: StrictInt
     link: IntegrationRunLogLink

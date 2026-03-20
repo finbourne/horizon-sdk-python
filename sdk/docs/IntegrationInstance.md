@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **description** | **str** | Description of the instance. | 
 **enabled** | **bool** | If true the instance will be executed if its trigger is satisfied. | 
 **triggers** | [**List[Trigger]**](Trigger.md) | Defines what triggers execution of the instance. | 
-**details** | **object** |  | 
+**details** | **object** | Base DTO type of an integration configuration specific to the integration type.              N.B. ASP.NET Core model validation is normally applied automatically when [ApiController] is added to a controller, however it doesn&#39;t work here with the polymorphic integration subtypes of this class (see https://github.com/dotnet/aspnetcore/issues/27882). The workaround here is to implement the IValidatableObject interface and each subtype must call Validate() or ValidateContents() on its properties (the validation is not recursive).  Located in Horizon.Integrations.Web so both specific integration projects and Horizon.WebApi can reference it. | 
 ## Example
 
 ```python
@@ -27,7 +27,7 @@ description: StrictStr = "example_description"
 enabled: StrictBool = # Replace with your value
 enabled:StrictBool = True
 triggers: List[Trigger] = # Replace with your value
-details: Dict[str, Any]
+details: Dict[str, Any] = # Replace with your value
 integration_instance_instance = IntegrationInstance(id=id, integration_type=integration_type, name=name, description=description, enabled=enabled, triggers=triggers, details=details)
 
 ```

@@ -25,7 +25,7 @@ from datetime import datetime
 
 class IntegrationRunVersion(BaseModel):
     """
-    IntegrationRunVersion
+    Integration Run Version  # noqa: E501
     """
     as_at_created: Optional[datetime] = Field(default=None, alias="asAtCreated")
     as_at_modified: Optional[datetime] = Field(default=None, alias="asAtModified")

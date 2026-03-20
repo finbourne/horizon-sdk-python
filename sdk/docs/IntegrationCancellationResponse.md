@@ -1,5 +1,6 @@
 # IntegrationCancellationResponse
 
+No content is returned when an instance is cancelled.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,9 +1,10 @@
 # ExternalLogInsertionRequest
 
+A request to insert external log records.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**logs** | [**List[ExternalLogRecord]**](ExternalLogRecord.md) |  | 
+**logs** | [**List[ExternalLogRecord]**](ExternalLogRecord.md) | The collection of external log records to insert. | 
 ## Example
 
 ```python
@@ -13,7 +14,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-logs: List[ExternalLogRecord]
+logs: List[ExternalLogRecord] = # Replace with your value
 external_log_insertion_request_instance = ExternalLogInsertionRequest(logs=logs)
 
 ```

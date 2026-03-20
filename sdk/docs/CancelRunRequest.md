@@ -1,10 +1,11 @@
 # CancelRunRequest
 
+A request to cancel the specified instance execution.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**run_ids** | **List[str]** |  | 
-**message** | **str** |  | [optional] 
+**run_ids** | **List[str]** | The instance run ids to be cancelled. | 
+**message** | **str** | The user provided message as to why the instance executions were cancelled. | [optional] 
 ## Example
 
 ```python

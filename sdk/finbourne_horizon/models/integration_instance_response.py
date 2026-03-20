@@ -27,16 +27,16 @@ from finbourne_horizon.models.trigger import Trigger
 
 class IntegrationInstanceResponse(BaseModel):
     """
-    IntegrationInstanceResponse
+    Response representing an integration instance.  # noqa: E501
     """
-    id:  StrictStr = Field(...,alias="id") 
-    integration_type:  StrictStr = Field(...,alias="integrationType") 
-    name:  StrictStr = Field(...,alias="name") 
-    description:  StrictStr = Field(...,alias="description") 
-    enabled: StrictBool
-    triggers: List[Trigger]
-    details: Dict[str, Any]
-    post_process_tasks: List[PostProcessTask] = Field(alias="postProcessTasks")
+    id:  StrictStr = Field(...,alias="id", description="The unique identifier of the integration instance.") 
+    integration_type:  StrictStr = Field(...,alias="integrationType", description="The type of the integration.") 
+    name:  StrictStr = Field(...,alias="name", description="The name of the integration instance.") 
+    description:  StrictStr = Field(...,alias="description", description="The description of the integration instance.") 
+    enabled: StrictBool = Field(description="Whether the integration instance is enabled.")
+    triggers: List[Trigger] = Field(description="The triggers associated with the integration instance.")
+    details: Dict[str, Any] = Field(description="Base DTO type of an integration configuration specific to the integration type.              N.B. ASP.NET Core model validation is normally applied automatically when [ApiController] is added to a controller, however it doesn't work here with the polymorphic integration subtypes of this class (see https://github.com/dotnet/aspnetcore/issues/27882). The workaround here is to implement the IValidatableObject interface and each subtype must call Validate() or ValidateContents() on its properties (the validation is not recursive).  Located in Horizon.Integrations.Web so both specific integration projects and Horizon.WebApi can reference it.")
+    post_process_tasks: List[PostProcessTask] = Field(description="The post process tasks associated with the integration instance.", alias="postProcessTasks")
     __properties = ["id", "integrationType", "name", "description", "enabled", "triggers", "details", "postProcessTasks"]
 
     class Config:

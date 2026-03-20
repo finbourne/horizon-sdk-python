@@ -26,7 +26,7 @@ from finbourne_horizon.models.instance_execution_reference_id import InstanceExe
 
 class IntegrationRerunResponse(BaseModel):
     """
-    IntegrationRerunResponse
+    No content is returned when an instance is rerun.  # noqa: E501
     """
     run_id: InstanceExecutionReferenceId = Field(alias="runId")
     __properties = ["runId"]

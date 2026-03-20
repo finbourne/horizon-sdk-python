@@ -1,5 +1,6 @@
 # IntegrationRunResponse
 
+Integration run response
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

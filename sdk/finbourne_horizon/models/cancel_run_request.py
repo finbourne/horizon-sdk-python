@@ -25,10 +25,10 @@ from datetime import datetime
 
 class CancelRunRequest(BaseModel):
     """
-    CancelRunRequest
+    A request to cancel the specified instance execution.  # noqa: E501
     """
-    run_ids: List[StrictStr] = Field(alias="runIds")
-    message:  Optional[StrictStr] = Field(None,alias="message") 
+    run_ids: List[StrictStr] = Field(description="The instance run ids to be cancelled.", alias="runIds")
+    message:  Optional[StrictStr] = Field(None,alias="message", description="The user provided message as to why the instance executions were cancelled.") 
     __properties = ["runIds", "message"]
 
     class Config:

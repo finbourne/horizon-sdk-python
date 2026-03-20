@@ -1,5 +1,6 @@
 # IntegrationRunLog
 
+Integration run log
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

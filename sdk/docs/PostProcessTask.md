@@ -1,12 +1,13 @@
 # PostProcessTask
 
+Request defining a post-processing task for an instance.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | **str** |  | 
-**target_instance** | **str** |  | [optional] 
-**trigger_on** | **str** |  | 
-**parameters** | **object** |  | [optional] 
+**action** | **str** | The type of action to perform (Allowed: RunIntegration, RunWorkflow, TriggerEmail) | 
+**target_instance** | **str** | The instance identifier to trigger (for TriggerIntegration action). | [optional] 
+**trigger_on** | **str** | When the task should be triggered (Allowed: OnSuccess, OnFailure, Always) | 
+**parameters** | **object** | JSON parameters specific to the action type. | [optional] 
 ## Example
 
 ```python
@@ -19,7 +20,7 @@ from datetime import datetime
 action: StrictStr = "example_action"
 target_instance: Optional[StrictStr] = "example_target_instance"
 trigger_on: StrictStr = "example_trigger_on"
-parameters: Optional[Any] = None
+parameters: Optional[Any] = # Replace with your value
 post_process_task_instance = PostProcessTask(action=action, target_instance=target_instance, trigger_on=trigger_on, parameters=parameters)
 
 ```

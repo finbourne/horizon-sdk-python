@@ -1,22 +1,23 @@
 # ExternalLogRecord
 
+Represents an external log record.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**logid** | **int** |  | 
-**parentlogid** | **int** |  | [optional] 
-**loglevel** | **str** |  | 
-**logstatus** | **str** |  | 
-**sourcerecordtype** | **str** |  | [optional] 
-**sourceprimaryidtype** | **str** |  | [optional] 
-**sourceprimaryidvalue** | **str** |  | [optional] 
-**targetrecordtype** | **str** |  | [optional] 
-**targetrecordaction** | **str** |  | [optional] 
-**targetprimaryidtype** | **str** |  | [optional] 
-**targetprimaryidvalue** | **str** |  | [optional] 
-**message** | **str** |  | [optional] 
-**messagetype** | **str** |  | [optional] 
-**timestamp** | **str** |  | 
+**logid** | **int** | The unique log identifier. | 
+**parentlogid** | **int** | The parent log identifier (null is allowed). | [optional] 
+**loglevel** | **str** | The log level. | 
+**logstatus** | **str** | The log status. | 
+**sourcerecordtype** | **str** | The source record type. | [optional] 
+**sourceprimaryidtype** | **str** | The source primary ID type. | [optional] 
+**sourceprimaryidvalue** | **str** | The source primary ID value. | [optional] 
+**targetrecordtype** | **str** | The target record type. | [optional] 
+**targetrecordaction** | **str** | The target record action. | [optional] 
+**targetprimaryidtype** | **str** | The target primary ID type. | [optional] 
+**targetprimaryidvalue** | **str** | The target primary ID value. | [optional] 
+**message** | **str** | The log message. | [optional] 
+**messagetype** | **str** | The message type. | [optional] 
+**timestamp** | **str** | The timestamp of the log record. | 
 ## Example
 
 ```python
@@ -26,8 +27,8 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-logid: StrictInt
-parentlogid: Optional[StrictInt] = None
+logid: StrictInt = # Replace with your value
+parentlogid: Optional[StrictInt] = # Replace with your value
 loglevel: StrictStr = "example_loglevel"
 logstatus: StrictStr = "example_logstatus"
 sourcerecordtype: Optional[StrictStr] = "example_sourcerecordtype"

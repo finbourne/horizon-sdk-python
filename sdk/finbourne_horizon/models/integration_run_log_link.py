@@ -25,10 +25,10 @@ from datetime import datetime
 
 class IntegrationRunLogLink(BaseModel):
     """
-    IntegrationRunLogLink
+    Integration run log link  # noqa: E501
     """
-    href:  StrictStr = Field(...,alias="href") 
-    description:  StrictStr = Field(...,alias="description") 
+    href:  StrictStr = Field(...,alias="href", description="") 
+    description:  StrictStr = Field(...,alias="description", description="") 
     __properties = ["href", "description"]
 
     class Config:
