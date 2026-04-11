@@ -5,6 +5,11 @@ All URIs are relative to *https://fbn-prd.lusid.com/horizon*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*ClientConfigurationsApi* | [**create_client_configuration_draft**](docs/ClientConfigurationsApi.md#create_client_configuration_draft) | **POST** /api/clientconfiguration/{configType}/{name}/draft | [EXPERIMENTAL] CreateClientConfigurationDraft: Create a draft client configuration.
+*ClientConfigurationsApi* | [**get_client_configuration**](docs/ClientConfigurationsApi.md#get_client_configuration) | **GET** /api/clientconfiguration/{configType}/{name} | [EXPERIMENTAL] GetClientConfiguration: Get a client configuration.
+*ClientConfigurationsApi* | [**list_client_configurations**](docs/ClientConfigurationsApi.md#list_client_configurations) | **GET** /api/clientconfiguration/{configType} | [EXPERIMENTAL] ListClientConfigurations: List client configurations.
+*ClientConfigurationsApi* | [**lock_client_configuration_version**](docs/ClientConfigurationsApi.md#lock_client_configuration_version) | **POST** /api/clientconfiguration/{configType}/{name}/{majorVersion}/{minorVersion}/lock | [EXPERIMENTAL] LockClientConfigurationVersion: Lock a client configuration version.
+*ClientConfigurationsApi* | [**update_client_configuration_draft**](docs/ClientConfigurationsApi.md#update_client_configuration_draft) | **PUT** /api/clientconfiguration/{configType}/{name}/{majorVersion}/{minorVersion}/draft | [EXPERIMENTAL] UpdateClientConfigurationDraft: Update a draft client configuration.
 *InstrumentApi* | [**create_instrument**](docs/InstrumentApi.md#create_instrument) | **POST** /api/instrument/onboarding/create | [EARLY ACCESS] CreateInstrument: Creates and masters instruments with third party vendors.
 *InstrumentApi* | [**enrich_instrument**](docs/InstrumentApi.md#enrich_instrument) | **POST** /api/instrument/onboarding/enrich | [EARLY ACCESS] EnrichInstrument: Enriches an existing LUSID instrument using vendor data. Enrichment included identifiers, properties and market data.
 *InstrumentApi* | [**get_open_figi_parameter_option**](docs/InstrumentApi.md#get_open_figi_parameter_option) | **GET** /api/instrument/onboarding/search/openfigi/parameterOptions | [EARLY ACCESS] GetOpenFigiParameterOption: Get all supported market sector values for OpenFigi search
@@ -22,6 +27,7 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**get_integration_configuration_fields**](docs/IntegrationsApi.md#get_integration_configuration_fields) | **GET** /api/integrations/configuration/{integration}/fields | [EXPERIMENTAL] GetIntegrationConfigurationFields: Get the Field Mapping configuration for a given integration
 *IntegrationsApi* | [**get_integration_configuration_properties**](docs/IntegrationsApi.md#get_integration_configuration_properties) | **GET** /api/integrations/configuration/{integration}/properties | [EXPERIMENTAL] GetIntegrationConfigurationProperties: Get the Property Mapping configuration for a given integration
 *IntegrationsApi* | [**get_schema**](docs/IntegrationsApi.md#get_schema) | **GET** /api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
+*IntegrationsApi* | [**list_dataflow_processors**](docs/IntegrationsApi.md#list_dataflow_processors) | **GET** /api/integrations/dataflow/processors | [EXPERIMENTAL] ListDataflowProcessors: List processor types.
 *IntegrationsApi* | [**list_instances**](docs/IntegrationsApi.md#list_instances) | **GET** /api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations.
 *IntegrationsApi* | [**list_integrations**](docs/IntegrationsApi.md#list_integrations) | **GET** /api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations.
 *IntegrationsApi* | [**set_instance_optional_property_mapping**](docs/IntegrationsApi.md#set_instance_optional_property_mapping) | **PUT** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
@@ -54,6 +60,8 @@ Class | Method | HTTP request | Description
  - [AuditUpdateRequest](docs/AuditUpdateRequest.md)
  - [AuditUpdateResponse](docs/AuditUpdateResponse.md)
  - [CancelRunRequest](docs/CancelRunRequest.md)
+ - [ClientConfigurationResponse](docs/ClientConfigurationResponse.md)
+ - [CreateClientConfigurationDraftRequest](docs/CreateClientConfigurationDraftRequest.md)
  - [CreateInstanceRequest](docs/CreateInstanceRequest.md)
  - [EnrichmentResponse](docs/EnrichmentResponse.md)
  - [ExecuteInstanceResponse](docs/ExecuteInstanceResponse.md)
@@ -111,12 +119,14 @@ Class | Method | HTTP request | Description
  - [ProcessInformation](docs/ProcessInformation.md)
  - [ProcessSummary](docs/ProcessSummary.md)
  - [ProcessUpdateResult](docs/ProcessUpdateResult.md)
+ - [ProcessorDescription](docs/ProcessorDescription.md)
  - [PropertyMapping](docs/PropertyMapping.md)
  - [QueryRequest](docs/QueryRequest.md)
  - [QuerySpecification](docs/QuerySpecification.md)
  - [ResourceId](docs/ResourceId.md)
  - [RowDetails](docs/RowDetails.md)
  - [Trigger](docs/Trigger.md)
+ - [UpdateClientConfigurationDraftRequest](docs/UpdateClientConfigurationDraftRequest.md)
  - [UpdateInstanceRequest](docs/UpdateInstanceRequest.md)
  - [VendorField](docs/VendorField.md)
  - [VendorProduct](docs/VendorProduct.md)

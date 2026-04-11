@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**get_integration_configuration_fields**](IntegrationsApi.md#get_integration_configuration_fields) | **GET** /api/integrations/configuration/{integration}/fields | [EXPERIMENTAL] GetIntegrationConfigurationFields: Get the Field Mapping configuration for a given integration
 [**get_integration_configuration_properties**](IntegrationsApi.md#get_integration_configuration_properties) | **GET** /api/integrations/configuration/{integration}/properties | [EXPERIMENTAL] GetIntegrationConfigurationProperties: Get the Property Mapping configuration for a given integration
 [**get_schema**](IntegrationsApi.md#get_schema) | **GET** /api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
+[**list_dataflow_processors**](IntegrationsApi.md#list_dataflow_processors) | **GET** /api/integrations/dataflow/processors | [EXPERIMENTAL] ListDataflowProcessors: List processor types.
 [**list_instances**](IntegrationsApi.md#list_instances) | **GET** /api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations.
 [**list_integrations**](IntegrationsApi.md#list_integrations) | **GET** /api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations.
 [**set_instance_optional_property_mapping**](IntegrationsApi.md#set_instance_optional_property_mapping) | **PUT** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance
@@ -22,7 +23,7 @@ Method | HTTP request | Description
 
 
 # **create_instance**
-> InstanceIdentifier create_instance(create_instance_request=create_instance_request)
+> InstanceIdentifier create_instance(create_instance_request)
 
 [EXPERIMENTAL] CreateInstance: Create a single integration instance.
 
@@ -82,10 +83,10 @@ def main():
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.create_instance(create_instance_request=create_instance_request, opts=opts)
+        # api_response =  api_instance.create_instance(create_instance_request, opts=opts)
 
         # [EXPERIMENTAL] CreateInstance: Create a single integration instance.
-        api_response = api_instance.create_instance(create_instance_request=create_instance_request)
+        api_response = api_instance.create_instance(create_instance_request)
         pprint(api_response)
 
     except ApiException as e:
@@ -98,7 +99,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_instance_request** | [**CreateInstanceRequest**](CreateInstanceRequest.md)| The new integration instance. | [optional] 
+ **create_instance_request** | [**CreateInstanceRequest**](CreateInstanceRequest.md)| The new integration instance. | 
 
 ### Return type
 
@@ -1069,6 +1070,94 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **list_dataflow_processors**
+> List[ProcessorDescription] list_dataflow_processors()
+
+[EXPERIMENTAL] ListDataflowProcessors: List processor types.
+
+The user must be authenticated to call this method.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    IntegrationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(IntegrationsApi)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_dataflow_processors(opts=opts)
+
+        # [EXPERIMENTAL] ListDataflowProcessors: List processor types.
+        api_response = api_instance.list_dataflow_processors()
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling IntegrationsApi->list_dataflow_processors: %s\n" % e)
+
+main()
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[ProcessorDescription]**](ProcessorDescription.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**404** | The requested processors do not exist. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **list_instances**
 > List[IntegrationInstance] list_instances()
 
@@ -1342,7 +1431,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_instance**
-> update_instance(instance_id, update_instance_request=update_instance_request)
+> update_instance(instance_id, update_instance_request)
 
 [EXPERIMENTAL] UpdateInstance: Update a single integration instance.
 
@@ -1403,10 +1492,10 @@ def main():
 
     try:
         # uncomment the below to set overrides at the request level
-        #  api_instance.update_instance(instance_id, update_instance_request=update_instance_request, opts=opts)
+        #  api_instance.update_instance(instance_id, update_instance_request, opts=opts)
 
         # [EXPERIMENTAL] UpdateInstance: Update a single integration instance.
-        api_instance.update_instance(instance_id, update_instance_request=update_instance_request)
+        api_instance.update_instance(instance_id, update_instance_request)
     except ApiException as e:
         print("Exception when calling IntegrationsApi->update_instance: %s\n" % e)
 
@@ -1418,7 +1507,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id** | **str**| Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | 
- **update_instance_request** | [**UpdateInstanceRequest**](UpdateInstanceRequest.md)| The new integration instance. | [optional] 
+ **update_instance_request** | [**UpdateInstanceRequest**](UpdateInstanceRequest.md)| The new integration instance. | 
 
 ### Return type
 

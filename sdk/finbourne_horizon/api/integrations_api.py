@@ -33,6 +33,7 @@ from finbourne_horizon.models.j_schema import JSchema
 from finbourne_horizon.models.lusid_property_definition_overrides_by_type import LusidPropertyDefinitionOverridesByType
 from finbourne_horizon.models.paged_resource_list_of_i_field_mapping import PagedResourceListOfIFieldMapping
 from finbourne_horizon.models.paged_resource_list_of_i_property_mapping import PagedResourceListOfIPropertyMapping
+from finbourne_horizon.models.processor_description import ProcessorDescription
 from finbourne_horizon.models.update_instance_request import UpdateInstanceRequest
 
 from finbourne_horizon.api_client import ApiClient
@@ -62,15 +63,15 @@ class IntegrationsApi:
 
 
     @overload
-    async def create_instance(self, create_instance_request : Annotated[Optional[CreateInstanceRequest], Field(description="The new integration instance.")] = None, **kwargs) -> InstanceIdentifier:  # noqa: E501
+    async def create_instance(self, create_instance_request : Annotated[CreateInstanceRequest, Field(description="The new integration instance.")], **kwargs) -> InstanceIdentifier:  # noqa: E501
         ...
 
     @overload
-    def create_instance(self, create_instance_request : Annotated[Optional[CreateInstanceRequest], Field(description="The new integration instance.")] = None, async_req: Optional[bool]=True, **kwargs) -> InstanceIdentifier:  # noqa: E501
+    def create_instance(self, create_instance_request : Annotated[CreateInstanceRequest, Field(description="The new integration instance.")], async_req: Optional[bool]=True, **kwargs) -> InstanceIdentifier:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_instance(self, create_instance_request : Annotated[Optional[CreateInstanceRequest], Field(description="The new integration instance.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InstanceIdentifier, Awaitable[InstanceIdentifier]]:  # noqa: E501
+    def create_instance(self, create_instance_request : Annotated[CreateInstanceRequest, Field(description="The new integration instance.")], async_req: Optional[bool]=None, **kwargs) -> Union[InstanceIdentifier, Awaitable[InstanceIdentifier]]:  # noqa: E501
         """[EXPERIMENTAL] CreateInstance: Create a single integration instance.  # noqa: E501
 
         Creates a new instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -80,7 +81,7 @@ class IntegrationsApi:
         >>> thread = api.create_instance(create_instance_request, async_req=True)
         >>> result = thread.get()
 
-        :param create_instance_request: The new integration instance.
+        :param create_instance_request: The new integration instance. (required)
         :type create_instance_request: CreateInstanceRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -101,7 +102,7 @@ class IntegrationsApi:
         return self.create_instance_with_http_info(create_instance_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_instance_with_http_info(self, create_instance_request : Annotated[Optional[CreateInstanceRequest], Field(description="The new integration instance.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def create_instance_with_http_info(self, create_instance_request : Annotated[CreateInstanceRequest, Field(description="The new integration instance.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateInstance: Create a single integration instance.  # noqa: E501
 
         Creates a new instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -111,7 +112,7 @@ class IntegrationsApi:
         >>> thread = api.create_instance_with_http_info(create_instance_request, async_req=True)
         >>> result = thread.get()
 
-        :param create_instance_request: The new integration instance.
+        :param create_instance_request: The new integration instance. (required)
         :type create_instance_request: CreateInstanceRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1845,6 +1846,150 @@ class IntegrationsApi:
 
 
     @overload
+    async def list_dataflow_processors(self, **kwargs) -> List[ProcessorDescription]:  # noqa: E501
+        ...
+
+    @overload
+    def list_dataflow_processors(self, async_req: Optional[bool]=True, **kwargs) -> List[ProcessorDescription]:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_dataflow_processors(self, async_req: Optional[bool]=None, **kwargs) -> Union[List[ProcessorDescription], Awaitable[List[ProcessorDescription]]]:  # noqa: E501
+        """[EXPERIMENTAL] ListDataflowProcessors: List processor types.  # noqa: E501
+
+        The user must be authenticated to call this method.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_dataflow_processors(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: List[ProcessorDescription]
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_dataflow_processors_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_dataflow_processors_with_http_info(**kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_dataflow_processors_with_http_info(self, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListDataflowProcessors: List processor types.  # noqa: E501
+
+        The user must be authenticated to call this method.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_dataflow_processors_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[ProcessorDescription], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_dataflow_processors" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[ProcessorDescription]",
+            '404': None,
+        }
+
+        return self.api_client.call_api(
+            '/api/integrations/dataflow/processors', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def list_instances(self, **kwargs) -> List[IntegrationInstance]:  # noqa: E501
         ...
 
@@ -2308,15 +2453,15 @@ class IntegrationsApi:
 
 
     @overload
-    async def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[Optional[UpdateInstanceRequest], Field(description="The new integration instance.")] = None, **kwargs) -> None:  # noqa: E501
+    async def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], **kwargs) -> None:  # noqa: E501
         ...
 
     @overload
-    def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[Optional[UpdateInstanceRequest], Field(description="The new integration instance.")] = None, async_req: Optional[bool]=True, **kwargs) -> None:  # noqa: E501
+    def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], async_req: Optional[bool]=True, **kwargs) -> None:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[Optional[UpdateInstanceRequest], Field(description="The new integration instance.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[None, Awaitable[None]]:  # noqa: E501
+    def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], async_req: Optional[bool]=None, **kwargs) -> Union[None, Awaitable[None]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateInstance: Update a single integration instance.  # noqa: E501
 
         Updates an existing instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -2328,7 +2473,7 @@ class IntegrationsApi:
 
         :param instance_id: Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
         :type instance_id: str
-        :param update_instance_request: The new integration instance.
+        :param update_instance_request: The new integration instance. (required)
         :type update_instance_request: UpdateInstanceRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2349,7 +2494,7 @@ class IntegrationsApi:
         return self.update_instance_with_http_info(instance_id, update_instance_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_instance_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[Optional[UpdateInstanceRequest], Field(description="The new integration instance.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_instance_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateInstance: Update a single integration instance.  # noqa: E501
 
         Updates an existing instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -2361,7 +2506,7 @@ class IntegrationsApi:
 
         :param instance_id: Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
         :type instance_id: str
-        :param update_instance_request: The new integration instance.
+        :param update_instance_request: The new integration instance. (required)
         :type update_instance_request: UpdateInstanceRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

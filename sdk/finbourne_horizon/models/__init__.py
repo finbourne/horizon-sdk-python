@@ -21,6 +21,8 @@ from finbourne_horizon.models.audit_file_details import AuditFileDetails
 from finbourne_horizon.models.audit_update_request import AuditUpdateRequest
 from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
 from finbourne_horizon.models.cancel_run_request import CancelRunRequest
+from finbourne_horizon.models.client_configuration_response import ClientConfigurationResponse
+from finbourne_horizon.models.create_client_configuration_draft_request import CreateClientConfigurationDraftRequest
 from finbourne_horizon.models.create_instance_request import CreateInstanceRequest
 from finbourne_horizon.models.enrichment_response import EnrichmentResponse
 from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
@@ -78,12 +80,14 @@ from finbourne_horizon.models.post_process_task import PostProcessTask
 from finbourne_horizon.models.process_information import ProcessInformation
 from finbourne_horizon.models.process_summary import ProcessSummary
 from finbourne_horizon.models.process_update_result import ProcessUpdateResult
+from finbourne_horizon.models.processor_description import ProcessorDescription
 from finbourne_horizon.models.property_mapping import PropertyMapping
 from finbourne_horizon.models.query_request import QueryRequest
 from finbourne_horizon.models.query_specification import QuerySpecification
 from finbourne_horizon.models.resource_id import ResourceId
 from finbourne_horizon.models.row_details import RowDetails
 from finbourne_horizon.models.trigger import Trigger
+from finbourne_horizon.models.update_client_configuration_draft_request import UpdateClientConfigurationDraftRequest
 from finbourne_horizon.models.update_instance_request import UpdateInstanceRequest
 from finbourne_horizon.models.vendor_field import VendorField
 from finbourne_horizon.models.vendor_product import VendorProduct
@@ -97,6 +101,8 @@ __all__ = [
     "AuditUpdateRequest",
     "AuditUpdateResponse",
     "CancelRunRequest",
+    "ClientConfigurationResponse",
+    "CreateClientConfigurationDraftRequest",
     "CreateInstanceRequest",
     "EnrichmentResponse",
     "ExecuteInstanceResponse",
@@ -154,12 +160,14 @@ __all__ = [
     "ProcessInformation",
     "ProcessSummary",
     "ProcessUpdateResult",
+    "ProcessorDescription",
     "PropertyMapping",
     "QueryRequest",
     "QuerySpecification",
     "ResourceId",
     "RowDetails",
     "Trigger",
+    "UpdateClientConfigurationDraftRequest",
     "UpdateInstanceRequest",
     "VendorField",
     "VendorProduct"
