@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_instance**](IntegrationsApi.md#delete_instance) | **DELETE** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] DeleteInstance: Delete a single integration instance.
 [**execute_instance**](IntegrationsApi.md#execute_instance) | **POST** /api/integrations/instances/{instanceId}/execute | [EXPERIMENTAL] ExecuteInstance: Execute an integration instance.
 [**execute_instance_with_params**](IntegrationsApi.md#execute_instance_with_params) | **POST** /api/integrations/instances/{instanceId}/executewithparams | [EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters
+[**get_dataflow_processor_schema**](IntegrationsApi.md#get_dataflow_processor_schema) | **GET** /api/integrations/dataflow/processors/{processorType}/schema | [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
 [**get_execution_ids_for_instance**](IntegrationsApi.md#get_execution_ids_for_instance) | **GET** /api/integrations/instances/{instanceId}/executions | [EXPERIMENTAL] GetExecutionIdsForInstance: Get integration instance execution ids.
 [**get_instance**](IntegrationsApi.md#get_instance) | **GET** /api/integrations/instances/{instanceId} | [EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration.
 [**get_instance_optional_property_mapping**](IntegrationsApi.md#get_instance_optional_property_mapping) | **GET** /api/integrations/instances/configuration/{integration}/{instanceId} | [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance
@@ -395,6 +396,97 @@ Name | Type | Description  | Notes
 **200** | The execution id |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | The integration instance does not exist |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_dataflow_processor_schema**
+> ProcessorSchemaResponse get_dataflow_processor_schema(processor_type)
+
+[EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    IntegrationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(IntegrationsApi)
+    processor_type = 'processor_type_example' # str | 
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_dataflow_processor_schema(processor_type, opts=opts)
+
+        # [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
+        api_response = api_instance.get_dataflow_processor_schema(processor_type)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling IntegrationsApi->get_dataflow_processor_schema: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **processor_type** | **str**|  | 
+
+### Return type
+
+[**ProcessorSchemaResponse**](ProcessorSchemaResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**400** | The details of the input related failure |  -  |
+**200** | OK |  -  |
+**404** | The requested processors do not exist. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

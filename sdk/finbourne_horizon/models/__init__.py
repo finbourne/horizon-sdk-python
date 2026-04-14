@@ -81,6 +81,7 @@ from finbourne_horizon.models.process_information import ProcessInformation
 from finbourne_horizon.models.process_summary import ProcessSummary
 from finbourne_horizon.models.process_update_result import ProcessUpdateResult
 from finbourne_horizon.models.processor_description import ProcessorDescription
+from finbourne_horizon.models.processor_schema_response import ProcessorSchemaResponse
 from finbourne_horizon.models.property_mapping import PropertyMapping
 from finbourne_horizon.models.query_request import QueryRequest
 from finbourne_horizon.models.query_specification import QuerySpecification
@@ -161,6 +162,7 @@ __all__ = [
     "ProcessSummary",
     "ProcessUpdateResult",
     "ProcessorDescription",
+    "ProcessorSchemaResponse",
     "PropertyMapping",
     "QueryRequest",
     "QuerySpecification",
