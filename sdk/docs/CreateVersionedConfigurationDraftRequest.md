@@ -1,6 +1,6 @@
-# CreateClientConfigurationDraftRequest
+# CreateVersionedConfigurationDraftRequest
 
-Request to create a new draft client configuration.
+Request to create a new draft versioned configuration.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from finbourne_horizon.models.create_client_configuration_draft_request import CreateClientConfigurationDraftRequest
+from finbourne_horizon.models.create_versioned_configuration_draft_request import CreateVersionedConfigurationDraftRequest
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
@@ -25,7 +25,7 @@ source_major_version: Optional[StrictInt] = # Replace with your value
 source_major_version: Optional[StrictInt] = None
 source_minor_version: Optional[StrictInt] = # Replace with your value
 source_minor_version: Optional[StrictInt] = None
-create_client_configuration_draft_request_instance = CreateClientConfigurationDraftRequest(major_version=major_version, minor_version=minor_version, source_major_version=source_major_version, source_minor_version=source_minor_version)
+create_versioned_configuration_draft_request_instance = CreateVersionedConfigurationDraftRequest(major_version=major_version, minor_version=minor_version, source_major_version=source_major_version, source_minor_version=source_minor_version)
 
 ```
 

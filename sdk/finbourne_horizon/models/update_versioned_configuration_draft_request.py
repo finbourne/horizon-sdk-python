@@ -23,17 +23,12 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class ClientConfigurationResponse(BaseModel):
+class UpdateVersionedConfigurationDraftRequest(BaseModel):
     """
-    Represents a versioned client configuration record.  # noqa: E501
+    Request to update the value of an existing draft versioned configuration.  # noqa: E501
     """
-    name:  StrictStr = Field(...,alias="name", description="The logical name of the configuration.") 
-    config_type:  StrictStr = Field(...,alias="configType", description="The category of configuration.") 
-    major_version: StrictInt = Field(description="The major version number.", alias="majorVersion")
-    minor_version: StrictInt = Field(description="The minor version number.", alias="minorVersion")
-    value:  StrictStr = Field(...,alias="value", description="The JSON configuration value.") 
-    is_draft: StrictBool = Field(description="Whether this version is still in draft state. Draft versions can be edited; locked versions cannot.", alias="isDraft")
-    __properties = ["name", "configType", "majorVersion", "minorVersion", "value", "isDraft"]
+    value:  StrictStr = Field(...,alias="value", description="The new JSON value to store. Must be valid JSON.") 
+    __properties = ["value"]
 
     class Config:
         """Pydantic configuration"""
@@ -57,8 +52,8 @@ class ClientConfigurationResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ClientConfigurationResponse:
-        """Create an instance of ClientConfigurationResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> UpdateVersionedConfigurationDraftRequest:
+        """Create an instance of UpdateVersionedConfigurationDraftRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -70,22 +65,17 @@ class ClientConfigurationResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ClientConfigurationResponse:
-        """Create an instance of ClientConfigurationResponse from a dict"""
+    def from_dict(cls, obj: dict) -> UpdateVersionedConfigurationDraftRequest:
+        """Create an instance of UpdateVersionedConfigurationDraftRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ClientConfigurationResponse.parse_obj(obj)
+            return UpdateVersionedConfigurationDraftRequest.parse_obj(obj)
 
-        _obj = ClientConfigurationResponse.parse_obj({
-            "name": obj.get("name"),
-            "config_type": obj.get("configType"),
-            "major_version": obj.get("majorVersion"),
-            "minor_version": obj.get("minorVersion"),
-            "value": obj.get("value"),
-            "is_draft": obj.get("isDraft")
+        _obj = UpdateVersionedConfigurationDraftRequest.parse_obj({
+            "value": obj.get("value")
         })
         return _obj
 
-ClientConfigurationResponse.update_forward_refs()
+UpdateVersionedConfigurationDraftRequest.update_forward_refs()

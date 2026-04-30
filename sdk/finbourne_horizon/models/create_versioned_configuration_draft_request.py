@@ -23,9 +23,9 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class CreateClientConfigurationDraftRequest(BaseModel):
+class CreateVersionedConfigurationDraftRequest(BaseModel):
     """
-    Request to create a new draft client configuration.  # noqa: E501
+    Request to create a new draft versioned configuration.  # noqa: E501
     """
     major_version: Optional[StrictInt] = Field(default=None, description="The major version for the new draft. Must be supplied together with minorVersion, or both omitted to auto-assign the next version.", alias="majorVersion")
     minor_version: Optional[StrictInt] = Field(default=None, description="The minor version for the new draft. Must be supplied together with MajorVersion, or both omitted to auto-assign the next version.", alias="minorVersion")
@@ -55,8 +55,8 @@ class CreateClientConfigurationDraftRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CreateClientConfigurationDraftRequest:
-        """Create an instance of CreateClientConfigurationDraftRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> CreateVersionedConfigurationDraftRequest:
+        """Create an instance of CreateVersionedConfigurationDraftRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -88,15 +88,15 @@ class CreateClientConfigurationDraftRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CreateClientConfigurationDraftRequest:
-        """Create an instance of CreateClientConfigurationDraftRequest from a dict"""
+    def from_dict(cls, obj: dict) -> CreateVersionedConfigurationDraftRequest:
+        """Create an instance of CreateVersionedConfigurationDraftRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CreateClientConfigurationDraftRequest.parse_obj(obj)
+            return CreateVersionedConfigurationDraftRequest.parse_obj(obj)
 
-        _obj = CreateClientConfigurationDraftRequest.parse_obj({
+        _obj = CreateVersionedConfigurationDraftRequest.parse_obj({
             "major_version": obj.get("majorVersion"),
             "minor_version": obj.get("minorVersion"),
             "source_major_version": obj.get("sourceMajorVersion"),
@@ -104,4 +104,4 @@ class CreateClientConfigurationDraftRequest(BaseModel):
         })
         return _obj
 
-CreateClientConfigurationDraftRequest.update_forward_refs()
+CreateVersionedConfigurationDraftRequest.update_forward_refs()

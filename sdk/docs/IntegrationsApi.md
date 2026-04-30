@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**get_integration_configuration_fields**](IntegrationsApi.md#get_integration_configuration_fields) | **GET** /api/integrations/configuration/{integration}/fields | [EXPERIMENTAL] GetIntegrationConfigurationFields: Get the Field Mapping configuration for a given integration
 [**get_integration_configuration_properties**](IntegrationsApi.md#get_integration_configuration_properties) | **GET** /api/integrations/configuration/{integration}/properties | [EXPERIMENTAL] GetIntegrationConfigurationProperties: Get the Property Mapping configuration for a given integration
 [**get_schema**](IntegrationsApi.md#get_schema) | **GET** /api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
+[**get_tpf_transaction_history_search**](IntegrationsApi.md#get_tpf_transaction_history_search) | **GET** /api/integrations/trade-publication-framework/transactions/search | [EARLY ACCESS] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
 [**list_dataflow_processors**](IntegrationsApi.md#list_dataflow_processors) | **GET** /api/integrations/dataflow/processors | [EXPERIMENTAL] ListDataflowProcessors: List processor types.
 [**list_instances**](IntegrationsApi.md#list_instances) | **GET** /api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations.
 [**list_integrations**](IntegrationsApi.md#list_integrations) | **GET** /api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations.
@@ -1158,6 +1159,110 @@ Name | Type | Description  | Notes
 **200** | The system defined JSON schema for the details of a specified integration. |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | The integration type does not exist or is not enabled. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_tpf_transaction_history_search**
+> PagedResourceListOfTpfTransactionSearchResponse get_tpf_transaction_history_search(transaction_id=transaction_id, instrument_id=instrument_id, date_from=date_from, date_to=date_to, status=status, instance_id=instance_id, page_size=page_size, page_token=page_token)
+
+[EARLY ACCESS] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    IntegrationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(IntegrationsApi)
+    transaction_id = 'transaction_id_example' # str |  (optional)
+    instrument_id = 'instrument_id_example' # str |  (optional)
+    date_from = 'date_from_example' # str |  (optional)
+    date_to = 'date_to_example' # str |  (optional)
+    status = 'status_example' # str |  (optional)
+    instance_id = 'instance_id_example' # str |  (optional)
+    page_size = 400 # int |  (optional) (default to 400)
+    page_token = '' # str |  (optional) (default to '')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_tpf_transaction_history_search(transaction_id=transaction_id, instrument_id=instrument_id, date_from=date_from, date_to=date_to, status=status, instance_id=instance_id, page_size=page_size, page_token=page_token, opts=opts)
+
+        # [EARLY ACCESS] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
+        api_response = api_instance.get_tpf_transaction_history_search(transaction_id=transaction_id, instrument_id=instrument_id, date_from=date_from, date_to=date_to, status=status, instance_id=instance_id, page_size=page_size, page_token=page_token)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling IntegrationsApi->get_tpf_transaction_history_search: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transaction_id** | **str**|  | [optional] 
+ **instrument_id** | **str**|  | [optional] 
+ **date_from** | **str**|  | [optional] 
+ **date_to** | **str**|  | [optional] 
+ **status** | **str**|  | [optional] 
+ **instance_id** | **str**|  | [optional] 
+ **page_size** | **int**|  | [optional] [default to 400]
+ **page_token** | **str**|  | [optional] [default to &#39;&#39;]
+
+### Return type
+
+[**PagedResourceListOfTpfTransactionSearchResponse**](PagedResourceListOfTpfTransactionSearchResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

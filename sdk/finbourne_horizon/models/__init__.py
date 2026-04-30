@@ -21,9 +21,8 @@ from finbourne_horizon.models.audit_file_details import AuditFileDetails
 from finbourne_horizon.models.audit_update_request import AuditUpdateRequest
 from finbourne_horizon.models.audit_update_response import AuditUpdateResponse
 from finbourne_horizon.models.cancel_run_request import CancelRunRequest
-from finbourne_horizon.models.client_configuration_response import ClientConfigurationResponse
-from finbourne_horizon.models.create_client_configuration_draft_request import CreateClientConfigurationDraftRequest
 from finbourne_horizon.models.create_instance_request import CreateInstanceRequest
+from finbourne_horizon.models.create_versioned_configuration_draft_request import CreateVersionedConfigurationDraftRequest
 from finbourne_horizon.models.enrichment_response import EnrichmentResponse
 from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
 from finbourne_horizon.models.external_log_insertion_request import ExternalLogInsertionRequest
@@ -74,6 +73,7 @@ from finbourne_horizon.models.paged_resource_list_of_i_property_mapping import P
 from finbourne_horizon.models.paged_resource_list_of_integration_run_response import PagedResourceListOfIntegrationRunResponse
 from finbourne_horizon.models.paged_resource_list_of_process_information import PagedResourceListOfProcessInformation
 from finbourne_horizon.models.paged_resource_list_of_process_update_result import PagedResourceListOfProcessUpdateResult
+from finbourne_horizon.models.paged_resource_list_of_tpf_transaction_search_response import PagedResourceListOfTpfTransactionSearchResponse
 from finbourne_horizon.models.paged_resource_list_of_vendor_product import PagedResourceListOfVendorProduct
 from finbourne_horizon.models.perm_id_data import PermIdData
 from finbourne_horizon.models.post_process_task import PostProcessTask
@@ -87,11 +87,13 @@ from finbourne_horizon.models.query_request import QueryRequest
 from finbourne_horizon.models.query_specification import QuerySpecification
 from finbourne_horizon.models.resource_id import ResourceId
 from finbourne_horizon.models.row_details import RowDetails
+from finbourne_horizon.models.tpf_transaction_search_response import TpfTransactionSearchResponse
 from finbourne_horizon.models.trigger import Trigger
-from finbourne_horizon.models.update_client_configuration_draft_request import UpdateClientConfigurationDraftRequest
 from finbourne_horizon.models.update_instance_request import UpdateInstanceRequest
+from finbourne_horizon.models.update_versioned_configuration_draft_request import UpdateVersionedConfigurationDraftRequest
 from finbourne_horizon.models.vendor_field import VendorField
 from finbourne_horizon.models.vendor_product import VendorProduct
+from finbourne_horizon.models.versioned_configuration_response import VersionedConfigurationResponse
 
 
 __all__ = [
@@ -102,9 +104,8 @@ __all__ = [
     "AuditUpdateRequest",
     "AuditUpdateResponse",
     "CancelRunRequest",
-    "ClientConfigurationResponse",
-    "CreateClientConfigurationDraftRequest",
     "CreateInstanceRequest",
+    "CreateVersionedConfigurationDraftRequest",
     "EnrichmentResponse",
     "ExecuteInstanceResponse",
     "ExternalLogInsertionRequest",
@@ -155,6 +156,7 @@ __all__ = [
     "PagedResourceListOfIntegrationRunResponse",
     "PagedResourceListOfProcessInformation",
     "PagedResourceListOfProcessUpdateResult",
+    "PagedResourceListOfTpfTransactionSearchResponse",
     "PagedResourceListOfVendorProduct",
     "PermIdData",
     "PostProcessTask",
@@ -168,9 +170,11 @@ __all__ = [
     "QuerySpecification",
     "ResourceId",
     "RowDetails",
+    "TpfTransactionSearchResponse",
     "Trigger",
-    "UpdateClientConfigurationDraftRequest",
     "UpdateInstanceRequest",
+    "UpdateVersionedConfigurationDraftRequest",
     "VendorField",
-    "VendorProduct"
+    "VendorProduct",
+    "VersionedConfigurationResponse"
 ]

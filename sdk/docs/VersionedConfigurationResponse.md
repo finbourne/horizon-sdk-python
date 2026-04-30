@@ -1,6 +1,6 @@
-# ClientConfigurationResponse
+# VersionedConfigurationResponse
 
-Represents a versioned client configuration record.
+Represents a versioned configuration record.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from finbourne_horizon.models.client_configuration_response import ClientConfigurationResponse
+from finbourne_horizon.models.versioned_configuration_response import VersionedConfigurationResponse
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
@@ -28,7 +28,7 @@ minor_version: StrictInt = 42
 value: StrictStr = "example_value"
 is_draft: StrictBool = # Replace with your value
 is_draft:StrictBool = True
-client_configuration_response_instance = ClientConfigurationResponse(name=name, config_type=config_type, major_version=major_version, minor_version=minor_version, value=value, is_draft=is_draft)
+versioned_configuration_response_instance = VersionedConfigurationResponse(name=name, config_type=config_type, major_version=major_version, minor_version=minor_version, value=value, is_draft=is_draft)
 
 ```
 
