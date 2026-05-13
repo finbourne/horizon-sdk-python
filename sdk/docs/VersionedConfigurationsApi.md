@@ -5,8 +5,11 @@ All URIs are relative to *https://fbn-prd.lusid.com/horizon*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_versioned_configuration_draft**](VersionedConfigurationsApi.md#create_versioned_configuration_draft) | **POST** /api/versionedconfiguration/{configType}/{name}/draft | [EXPERIMENTAL] CreateVersionedConfigurationDraft: Create a draft versioned configuration.
+[**delete_versioned_configuration_version**](VersionedConfigurationsApi.md#delete_versioned_configuration_version) | **DELETE** /api/versionedconfiguration/{configType}/{name}/{majorVersion}/{minorVersion} | [EXPERIMENTAL] DeleteVersionedConfigurationVersion: Delete a versioned configuration version.
 [**get_versioned_configuration**](VersionedConfigurationsApi.md#get_versioned_configuration) | **GET** /api/versionedconfiguration/{configType}/{name} | [EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration.
-[**list_versioned_configurations**](VersionedConfigurationsApi.md#list_versioned_configurations) | **GET** /api/versionedconfiguration/{configType} | [EXPERIMENTAL] ListVersionedConfigurations: List versioned configurations.
+[**get_versioned_configuration_types**](VersionedConfigurationsApi.md#get_versioned_configuration_types) | **GET** /api/versionedconfiguration/config-types | [EXPERIMENTAL] GetVersionedConfigurationTypes: List available versioned configuration types.
+[**list_all_versioned_configurations**](VersionedConfigurationsApi.md#list_all_versioned_configurations) | **GET** /api/versionedconfiguration/all | [EXPERIMENTAL] ListAllVersionedConfigurations: List all versioned configurations.
+[**list_versioned_configurations**](VersionedConfigurationsApi.md#list_versioned_configurations) | **GET** /api/versionedconfiguration/{configType} | [EXPERIMENTAL] ListVersionedConfigurations: List versioned configurations for a config type.
 [**lock_versioned_configuration_version**](VersionedConfigurationsApi.md#lock_versioned_configuration_version) | **POST** /api/versionedconfiguration/{configType}/{name}/{majorVersion}/{minorVersion}/lock | [EXPERIMENTAL] LockVersionedConfigurationVersion: Lock a versioned configuration version.
 [**update_versioned_configuration_draft**](VersionedConfigurationsApi.md#update_versioned_configuration_draft) | **PUT** /api/versionedconfiguration/{configType}/{name}/{majorVersion}/{minorVersion}/draft | [EXPERIMENTAL] UpdateVersionedConfigurationDraft: Update a draft versioned configuration.
 
@@ -114,6 +117,105 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **delete_versioned_configuration_version**
+> VersionedConfigurationResponse delete_versioned_configuration_version(config_type, name, major_version, minor_version)
+
+[EXPERIMENTAL] DeleteVersionedConfigurationVersion: Delete a versioned configuration version.
+
+Permanently deletes the specified configuration version regardless of whether it is locked. Returns the deleted record. The user must be authenticated and entitled to call this method.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    VersionedConfigurationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(VersionedConfigurationsApi)
+    config_type = 'config_type_example' # str | The category of configuration.
+    name = 'name_example' # str | The logical name of the configuration.
+    major_version = 56 # int | The major version to delete.
+    minor_version = 56 # int | The minor version to delete.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_versioned_configuration_version(config_type, name, major_version, minor_version, opts=opts)
+
+        # [EXPERIMENTAL] DeleteVersionedConfigurationVersion: Delete a versioned configuration version.
+        api_response = api_instance.delete_versioned_configuration_version(config_type, name, major_version, minor_version)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling VersionedConfigurationsApi->delete_versioned_configuration_version: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **config_type** | **str**| The category of configuration. | 
+ **name** | **str**| The logical name of the configuration. | 
+ **major_version** | **int**| The major version to delete. | 
+ **minor_version** | **int**| The minor version to delete. | 
+
+### Return type
+
+[**VersionedConfigurationResponse**](VersionedConfigurationResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | The client or configuration version does not exist. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_versioned_configuration**
 > VersionedConfigurationResponse get_versioned_configuration(config_type, name, major_version=major_version, minor_version=minor_version)
 
@@ -213,10 +315,186 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_versioned_configuration_types**
+> List[VersionedConfigurationTypeResponse] get_versioned_configuration_types()
+
+[EXPERIMENTAL] GetVersionedConfigurationTypes: List available versioned configuration types.
+
+Returns all registered configuration types with their display names. The user must be authenticated and entitled to call this method.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    VersionedConfigurationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(VersionedConfigurationsApi)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_versioned_configuration_types(opts=opts)
+
+        # [EXPERIMENTAL] GetVersionedConfigurationTypes: List available versioned configuration types.
+        api_response = api_instance.get_versioned_configuration_types()
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling VersionedConfigurationsApi->get_versioned_configuration_types: %s\n" % e)
+
+main()
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[VersionedConfigurationTypeResponse]**](VersionedConfigurationTypeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**404** | The client does not exist. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_all_versioned_configurations**
+> List[VersionedConfigurationResponse] list_all_versioned_configurations()
+
+[EXPERIMENTAL] ListAllVersionedConfigurations: List all versioned configurations.
+
+Returns all configuration records across all config types, versions and states (both draft and locked), ordered by version descending. The user must be authenticated and entitled to call this method.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    VersionedConfigurationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(VersionedConfigurationsApi)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_all_versioned_configurations(opts=opts)
+
+        # [EXPERIMENTAL] ListAllVersionedConfigurations: List all versioned configurations.
+        api_response = api_instance.list_all_versioned_configurations()
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling VersionedConfigurationsApi->list_all_versioned_configurations: %s\n" % e)
+
+main()
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[VersionedConfigurationResponse]**](VersionedConfigurationResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**404** | The client does not exist. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **list_versioned_configurations**
 > List[VersionedConfigurationResponse] list_versioned_configurations(config_type)
 
-[EXPERIMENTAL] ListVersionedConfigurations: List versioned configurations.
+[EXPERIMENTAL] ListVersionedConfigurations: List versioned configurations for a config type.
 
 Returns all configuration records for the given config type, across all versions and states (both draft and locked), ordered by version descending. The user must be authenticated and entitled to call this method.
 
@@ -271,7 +549,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_versioned_configurations(config_type, opts=opts)
 
-        # [EXPERIMENTAL] ListVersionedConfigurations: List versioned configurations.
+        # [EXPERIMENTAL] ListVersionedConfigurations: List versioned configurations for a config type.
         api_response = api_instance.list_versioned_configurations(config_type)
         pprint(api_response)
 
