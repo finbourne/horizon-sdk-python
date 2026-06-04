@@ -46,6 +46,7 @@ Class | Method | HTTP request | Description
 *TradePublicationFrameworkApi* | [**list_run_files**](docs/TradePublicationFrameworkApi.md#list_run_files) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/files | [EXPERIMENTAL] ListRunFiles: List Files in a run
 *TradePublicationFrameworkApi* | [**list_run_transactions**](docs/TradePublicationFrameworkApi.md#list_run_transactions) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions | [EXPERIMENTAL] ListRunTransactions: List Transactions in a run.
 *TradePublicationFrameworkApi* | [**replay_transactions**](docs/TradePublicationFrameworkApi.md#replay_transactions) | **POST** /api/trade-publication-framework/instances/{instanceId}/replay | [EXPERIMENTAL] ReplayTransactions: Replay one or more transactions through a TPF instance
+*TradePublicationFrameworkApi* | [**retry_tpf_sftp_delivery**](docs/TradePublicationFrameworkApi.md#retry_tpf_sftp_delivery) | **POST** /api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
 *VendorApi* | [**get_core_field_mappings_for_product_entity**](docs/VendorApi.md#get_core_field_mappings_for_product_entity) | **GET** /api/vendor/mappings/fields | [EARLY ACCESS] GetCoreFieldMappingsForProductEntity: Get core field mappings for a given vendor product's entity.
 *VendorApi* | [**get_optional_mappings_for_product_entity**](docs/VendorApi.md#get_optional_mappings_for_product_entity) | **GET** /api/vendor/mappings/optional | [EARLY ACCESS] GetOptionalMappingsForProductEntity: Get a user defined LUSID property mappings for the specified vendor / LUSID entity.
 *VendorApi* | [**get_property_mappings_for_product_entity**](docs/VendorApi.md#get_property_mappings_for_product_entity) | **GET** /api/vendor/mappings/properties | [EARLY ACCESS] GetPropertyMappingsForProductEntity: Gets the property mappings for a given vendor product's entity
@@ -150,7 +151,9 @@ Class | Method | HTTP request | Description
  - [ResourceId](docs/ResourceId.md)
  - [RowDetails](docs/RowDetails.md)
  - [RunFileResponse](docs/RunFileResponse.md)
+ - [TpfFileDeliveryInfo](docs/TpfFileDeliveryInfo.md)
  - [TpfPortfolio](docs/TpfPortfolio.md)
+ - [TpfRetrySftpResponse](docs/TpfRetrySftpResponse.md)
  - [TpfTransactionSearchResponse](docs/TpfTransactionSearchResponse.md)
  - [TransactionPayloadResponse](docs/TransactionPayloadResponse.md)
  - [TransactionResponse](docs/TransactionResponse.md)
