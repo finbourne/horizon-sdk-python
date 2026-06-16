@@ -4,15 +4,120 @@ All URIs are relative to *https://fbn-prd.lusid.com/horizon*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_tpf_file_deliveries**](TradePublicationFrameworkApi.md#get_tpf_file_deliveries) | **GET** /api/trade-publication-framework/instances/{instanceId}/deliveries | [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
 [**get_tpf_transaction_history_search**](TradePublicationFrameworkApi.md#get_tpf_transaction_history_search) | **GET** /api/trade-publication-framework/transactions/search | [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
 [**get_transaction_payload**](TradePublicationFrameworkApi.md#get_transaction_payload) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/{transactionId}/payload | [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail
+[**list_failed_deliveries**](TradePublicationFrameworkApi.md#list_failed_deliveries) | **GET** /api/trade-publication-framework/instances/{instanceId}/failed | [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
 [**list_instance_run_history**](TradePublicationFrameworkApi.md#list_instance_run_history) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs | [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.
 [**list_instances_with_status**](TradePublicationFrameworkApi.md#list_instances_with_status) | **GET** /api/trade-publication-framework/instances | [EXPERIMENTAL] ListInstancesWithStatus: Lists all instances of the Trade Publication Framework (TPF).
 [**list_run_files**](TradePublicationFrameworkApi.md#list_run_files) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/files | [EXPERIMENTAL] ListRunFiles: List Files in a run
 [**list_run_transactions**](TradePublicationFrameworkApi.md#list_run_transactions) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions | [EXPERIMENTAL] ListRunTransactions: List Transactions in a run.
 [**replay_transactions**](TradePublicationFrameworkApi.md#replay_transactions) | **POST** /api/trade-publication-framework/instances/{instanceId}/replay | [EXPERIMENTAL] ReplayTransactions: Replay one or more transactions through a TPF instance
+[**resolve_failed_delivery**](TradePublicationFrameworkApi.md#resolve_failed_delivery) | **PUT** /api/trade-publication-framework/instances/{instanceId}/failed/{batchReferenceId}/resolve | [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
 [**retry_tpf_sftp_delivery**](TradePublicationFrameworkApi.md#retry_tpf_sftp_delivery) | **POST** /api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
 
+
+# **get_tpf_file_deliveries**
+> PagedResourceListOfTpfFileDeliveryResponse get_tpf_file_deliveries(instance_id, status=status, date_from=date_from, date_to=date_to, limit=limit, page=page)
+
+[EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
+
+Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    TradePublicationFrameworkApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TradePublicationFrameworkApi)
+    instance_id = 'instance_id_example' # str | Integration instance ID
+    status = finbourne_horizon.FileDeliveryStatus() # FileDeliveryStatus | Filter by delivery status (Completed, Error, Pending) (optional)
+    date_from = '2013-10-20T19:20:30+01:00' # datetime | Filter deliveries from this time (inclusive) (optional)
+    date_to = '2013-10-20T19:20:30+01:00' # datetime | Filter deliveries to this time (inclusive) (optional)
+    limit = 50 # int | Page size for pagination (default 50, max 500) (optional) (default to 50)
+    page = '' # str | Pagination token from previous response (optional) (default to '')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_tpf_file_deliveries(instance_id, status=status, date_from=date_from, date_to=date_to, limit=limit, page=page, opts=opts)
+
+        # [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
+        api_response = api_instance.get_tpf_file_deliveries(instance_id, status=status, date_from=date_from, date_to=date_to, limit=limit, page=page)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TradePublicationFrameworkApi->get_tpf_file_deliveries: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_id** | **str**| Integration instance ID | 
+ **status** | [**FileDeliveryStatus**](.md)| Filter by delivery status (Completed, Error, Pending) | [optional] 
+ **date_from** | **datetime**| Filter deliveries from this time (inclusive) | [optional] 
+ **date_to** | **datetime**| Filter deliveries to this time (inclusive) | [optional] 
+ **limit** | **int**| Page size for pagination (default 50, max 500) | [optional] [default to 50]
+ **page** | **str**| Pagination token from previous response | [optional] [default to &#39;&#39;]
+
+### Return type
+
+[**PagedResourceListOfTpfFileDeliveryResponse**](PagedResourceListOfTpfFileDeliveryResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_tpf_transaction_history_search**
 > PagedResourceListOfTpfTransactionSearchResponse get_tpf_transaction_history_search(transaction_id=transaction_id, instrument_id=instrument_id, date_from=date_from, date_to=date_to, status=status, instance_id=instance_id, page_size=page_size, page_token=page_token)
@@ -209,6 +314,103 @@ Name | Type | Description  | Notes
 **200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | The requested TPF instance, run, or transaction payload does not exist. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_failed_deliveries**
+> PagedResourceListOfFailedDeliveryResponse list_failed_deliveries(instance_id, resolved=resolved, page=page, page_size=page_size)
+
+[EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    TradePublicationFrameworkApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TradePublicationFrameworkApi)
+    instance_id = 'instance_id_example' # str | 
+    resolved = False # bool |  (optional) (default to False)
+    page = '' # str |  (optional) (default to '')
+    page_size = 100 # int |  (optional) (default to 100)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_failed_deliveries(instance_id, resolved=resolved, page=page, page_size=page_size, opts=opts)
+
+        # [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
+        api_response = api_instance.list_failed_deliveries(instance_id, resolved=resolved, page=page, page_size=page_size)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TradePublicationFrameworkApi->list_failed_deliveries: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_id** | **str**|  | 
+ **resolved** | **bool**|  | [optional] [default to False]
+ **page** | **str**|  | [optional] [default to &#39;&#39;]
+ **page_size** | **int**|  | [optional] [default to 100]
+
+### Return type
+
+[**PagedResourceListOfFailedDeliveryResponse**](PagedResourceListOfFailedDeliveryResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | The requested TPF instance does not exist. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
@@ -490,7 +692,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_run_transactions**
-> PagedResourceListOfTransactionResponse list_run_transactions(instance_id, run_id, status, page=page, page_size=page_size)
+> PagedResourceListOfTransactionResponse list_run_transactions(instance_id, run_id, status=status, page=page, page_size=page_size)
 
 [EXPERIMENTAL] ListRunTransactions: List Transactions in a run.
 
@@ -541,16 +743,16 @@ def main():
     api_instance = api_client_factory.build(TradePublicationFrameworkApi)
     instance_id = 'instance_id_example' # str | 
     run_id = 'run_id_example' # str | 
-    status = 'status_example' # str | 
+    status = 'status_example' # str |  (optional)
     page = '' # str |  (optional) (default to '')
     page_size = 100 # int |  (optional) (default to 100)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_run_transactions(instance_id, run_id, status, page=page, page_size=page_size, opts=opts)
+        # api_response =  api_instance.list_run_transactions(instance_id, run_id, status=status, page=page, page_size=page_size, opts=opts)
 
         # [EXPERIMENTAL] ListRunTransactions: List Transactions in a run.
-        api_response = api_instance.list_run_transactions(instance_id, run_id, status, page=page, page_size=page_size)
+        api_response = api_instance.list_run_transactions(instance_id, run_id, status=status, page=page, page_size=page_size)
         pprint(api_response)
 
     except ApiException as e:
@@ -565,7 +767,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id** | **str**|  | 
  **run_id** | **str**|  | 
- **status** | **str**|  | 
+ **status** | **str**|  | [optional] 
  **page** | **str**|  | [optional] [default to &#39;&#39;]
  **page_size** | **int**|  | [optional] [default to 100]
 
@@ -682,6 +884,107 @@ Name | Type | Description  | Notes
 **200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | The requested TPF instance does not exist. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **resolve_failed_delivery**
+> ResolveFailedDeliveryResponse resolve_failed_delivery(instance_id, batch_reference_id, resolve_failed_delivery_request)
+
+[EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    TradePublicationFrameworkApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TradePublicationFrameworkApi)
+    instance_id = 'instance_id_example' # str | 
+    batch_reference_id = 'batch_reference_id_example' # str | 
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # resolve_failed_delivery_request = ResolveFailedDeliveryRequest.from_json("")
+    # resolve_failed_delivery_request = ResolveFailedDeliveryRequest.from_dict({})
+    resolve_failed_delivery_request = ResolveFailedDeliveryRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.resolve_failed_delivery(instance_id, batch_reference_id, resolve_failed_delivery_request, opts=opts)
+
+        # [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
+        api_response = api_instance.resolve_failed_delivery(instance_id, batch_reference_id, resolve_failed_delivery_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TradePublicationFrameworkApi->resolve_failed_delivery: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_id** | **str**|  | 
+ **batch_reference_id** | **str**|  | 
+ **resolve_failed_delivery_request** | [**ResolveFailedDeliveryRequest**](ResolveFailedDeliveryRequest.md)|  | 
+
+### Return type
+
+[**ResolveFailedDeliveryResponse**](ResolveFailedDeliveryResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | No failed delivery was found for the batch. |  -  |
+**409** | The failed deliveries for the batch have already been resolved. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

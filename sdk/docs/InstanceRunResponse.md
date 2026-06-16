@@ -5,7 +5,7 @@ Response containing details of a single run for an instance.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **run_id** | **str** |  | 
-**batch_reference_id** | **str** |  | [optional] 
+**batch_reference_id** | **str** |  | 
 **attempt** | **int** |  | [optional] 
 **start_time** | **datetime** |  | 
 **end_time** | **datetime** |  | [optional] 
@@ -27,7 +27,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 run_id: StrictStr = "example_run_id"
-batch_reference_id: Optional[StrictStr] = "example_batch_reference_id"
+batch_reference_id: StrictStr = "example_batch_reference_id"
 attempt: Optional[StrictInt] = None
 attempt: Optional[StrictInt] = None
 start_time: datetime = # Replace with your value

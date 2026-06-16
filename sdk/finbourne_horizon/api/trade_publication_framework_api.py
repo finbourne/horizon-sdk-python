@@ -19,16 +19,22 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from pydantic.v1 import Field, StrictInt, StrictStr
+from datetime import datetime
+from pydantic.v1 import Field, StrictBool, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from finbourne_horizon.models.file_delivery_status import FileDeliveryStatus
 from finbourne_horizon.models.instances_response import InstancesResponse
+from finbourne_horizon.models.paged_resource_list_of_failed_delivery_response import PagedResourceListOfFailedDeliveryResponse
 from finbourne_horizon.models.paged_resource_list_of_instance_run_response import PagedResourceListOfInstanceRunResponse
 from finbourne_horizon.models.paged_resource_list_of_run_file_response import PagedResourceListOfRunFileResponse
+from finbourne_horizon.models.paged_resource_list_of_tpf_file_delivery_response import PagedResourceListOfTpfFileDeliveryResponse
 from finbourne_horizon.models.paged_resource_list_of_tpf_transaction_search_response import PagedResourceListOfTpfTransactionSearchResponse
 from finbourne_horizon.models.paged_resource_list_of_transaction_response import PagedResourceListOfTransactionResponse
 from finbourne_horizon.models.replay_transactions_request import ReplayTransactionsRequest
 from finbourne_horizon.models.replay_transactions_response import ReplayTransactionsResponse
+from finbourne_horizon.models.resolve_failed_delivery_request import ResolveFailedDeliveryRequest
+from finbourne_horizon.models.resolve_failed_delivery_response import ResolveFailedDeliveryResponse
 from finbourne_horizon.models.tpf_retry_sftp_response import TpfRetrySftpResponse
 from finbourne_horizon.models.transaction_payload_response import TransactionPayloadResponse
 
@@ -56,6 +62,204 @@ class TradePublicationFrameworkApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @overload
+    async def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery status (Completed, Error, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery status (Completed, Error, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery status (Completed, Error, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTpfFileDeliveryResponse, Awaitable[PagedResourceListOfTpfFileDeliveryResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance  # noqa: E501
+
+        Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tpf_file_deliveries(instance_id, status, date_from, date_to, limit, page, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: Integration instance ID (required)
+        :type instance_id: str
+        :param status: Filter by delivery status (Completed, Error, Pending)
+        :type status: FileDeliveryStatus
+        :param date_from: Filter deliveries from this time (inclusive)
+        :type date_from: datetime
+        :param date_to: Filter deliveries to this time (inclusive)
+        :type date_to: datetime
+        :param limit: Page size for pagination (default 50, max 500)
+        :type limit: int
+        :param page: Pagination token from previous response
+        :type page: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfTpfFileDeliveryResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_tpf_file_deliveries_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_tpf_file_deliveries_with_http_info(instance_id, status, date_from, date_to, limit, page, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_tpf_file_deliveries_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery status (Completed, Error, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance  # noqa: E501
+
+        Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tpf_file_deliveries_with_http_info(instance_id, status, date_from, date_to, limit, page, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: Integration instance ID (required)
+        :type instance_id: str
+        :param status: Filter by delivery status (Completed, Error, Pending)
+        :type status: FileDeliveryStatus
+        :param date_from: Filter deliveries from this time (inclusive)
+        :type date_from: datetime
+        :param date_to: Filter deliveries to this time (inclusive)
+        :type date_to: datetime
+        :param limit: Page size for pagination (default 50, max 500)
+        :type limit: int
+        :param page: Pagination token from previous response
+        :type page: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfTpfFileDeliveryResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'instance_id',
+            'status',
+            'date_from',
+            'date_to',
+            'limit',
+            'page'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tpf_file_deliveries" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['instance_id']:
+            _path_params['instanceId'] = _params['instance_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('status') is not None:  # noqa: E501
+            _query_params.append(('status', _params['status']))
+
+        if _params.get('date_from') is not None:  # noqa: E501
+            if isinstance(_params['date_from'], datetime):
+                _query_params.append(('dateFrom', _params['date_from'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('dateFrom', _params['date_from']))
+
+        if _params.get('date_to') is not None:  # noqa: E501
+            if isinstance(_params['date_to'], datetime):
+                _query_params.append(('dateTo', _params['date_to'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('dateTo', _params['date_to']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfTpfFileDeliveryResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/trade-publication-framework/instances/{instanceId}/deliveries', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
 
 
     @overload
@@ -414,6 +618,181 @@ class TradePublicationFrameworkApi:
 
         return self.api_client.call_api(
             '/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/{transactionId}/payload', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def list_failed_deliveries(self, instance_id : Annotated[StrictStr, Field(...)], resolved : Optional[StrictBool] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> PagedResourceListOfFailedDeliveryResponse:  # noqa: E501
+        ...
+
+    @overload
+    def list_failed_deliveries(self, instance_id : Annotated[StrictStr, Field(...)], resolved : Optional[StrictBool] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfFailedDeliveryResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_failed_deliveries(self, instance_id : Annotated[StrictStr, Field(...)], resolved : Optional[StrictBool] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFailedDeliveryResponse, Awaitable[PagedResourceListOfFailedDeliveryResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_failed_deliveries(instance_id, resolved, page, page_size, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: (required)
+        :type instance_id: str
+        :param resolved:
+        :type resolved: bool
+        :param page:
+        :type page: str
+        :param page_size:
+        :type page_size: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfFailedDeliveryResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_failed_deliveries_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_failed_deliveries_with_http_info(instance_id, resolved, page, page_size, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_failed_deliveries_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], resolved : Optional[StrictBool] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_failed_deliveries_with_http_info(instance_id, resolved, page, page_size, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: (required)
+        :type instance_id: str
+        :param resolved:
+        :type resolved: bool
+        :param page:
+        :type page: str
+        :param page_size:
+        :type page_size: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfFailedDeliveryResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'instance_id',
+            'resolved',
+            'page',
+            'page_size'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_failed_deliveries" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['instance_id']:
+            _path_params['instanceId'] = _params['instance_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('resolved') is not None:  # noqa: E501
+            _query_params.append(('resolved', _params['resolved']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('page_size') is not None:  # noqa: E501
+            _query_params.append(('pageSize', _params['page_size']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfFailedDeliveryResponse",
+            '400': "LusidValidationProblemDetails",
+            '404': None,
+        }
+
+        return self.api_client.call_api(
+            '/api/trade-publication-framework/instances/{instanceId}/failed', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -914,15 +1293,15 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> PagedResourceListOfTransactionResponse:  # noqa: E501
+    async def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> PagedResourceListOfTransactionResponse:  # noqa: E501
         ...
 
     @overload
-    def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionResponse:  # noqa: E501
+    def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionResponse, Awaitable[PagedResourceListOfTransactionResponse]]:  # noqa: E501
+    def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionResponse, Awaitable[PagedResourceListOfTransactionResponse]]:  # noqa: E501
         """[EXPERIMENTAL] ListRunTransactions: List Transactions in a run.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -935,7 +1314,7 @@ class TradePublicationFrameworkApi:
         :type instance_id: str
         :param run_id: (required)
         :type run_id: str
-        :param status: (required)
+        :param status:
         :type status: str
         :param page:
         :type page: str
@@ -960,7 +1339,7 @@ class TradePublicationFrameworkApi:
         return self.list_run_transactions_with_http_info(instance_id, run_id, status, page, page_size, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_run_transactions_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_run_transactions_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListRunTransactions: List Transactions in a run.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -973,7 +1352,7 @@ class TradePublicationFrameworkApi:
         :type instance_id: str
         :param run_id: (required)
         :type run_id: str
-        :param status: (required)
+        :param status:
         :type status: str
         :param page:
         :type page: str
@@ -1245,6 +1624,181 @@ class TradePublicationFrameworkApi:
 
         return self.api_client.call_api(
             '/api/trade-publication-framework/instances/{instanceId}/replay', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def resolve_failed_delivery(self, instance_id : Annotated[StrictStr, Field(...)], batch_reference_id : Annotated[StrictStr, Field(...)], resolve_failed_delivery_request : ResolveFailedDeliveryRequest, **kwargs) -> ResolveFailedDeliveryResponse:  # noqa: E501
+        ...
+
+    @overload
+    def resolve_failed_delivery(self, instance_id : Annotated[StrictStr, Field(...)], batch_reference_id : Annotated[StrictStr, Field(...)], resolve_failed_delivery_request : ResolveFailedDeliveryRequest, async_req: Optional[bool]=True, **kwargs) -> ResolveFailedDeliveryResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def resolve_failed_delivery(self, instance_id : Annotated[StrictStr, Field(...)], batch_reference_id : Annotated[StrictStr, Field(...)], resolve_failed_delivery_request : ResolveFailedDeliveryRequest, async_req: Optional[bool]=None, **kwargs) -> Union[ResolveFailedDeliveryResponse, Awaitable[ResolveFailedDeliveryResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.resolve_failed_delivery(instance_id, batch_reference_id, resolve_failed_delivery_request, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: (required)
+        :type instance_id: str
+        :param batch_reference_id: (required)
+        :type batch_reference_id: str
+        :param resolve_failed_delivery_request: (required)
+        :type resolve_failed_delivery_request: ResolveFailedDeliveryRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResolveFailedDeliveryResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the resolve_failed_delivery_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.resolve_failed_delivery_with_http_info(instance_id, batch_reference_id, resolve_failed_delivery_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def resolve_failed_delivery_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], batch_reference_id : Annotated[StrictStr, Field(...)], resolve_failed_delivery_request : ResolveFailedDeliveryRequest, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.resolve_failed_delivery_with_http_info(instance_id, batch_reference_id, resolve_failed_delivery_request, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: (required)
+        :type instance_id: str
+        :param batch_reference_id: (required)
+        :type batch_reference_id: str
+        :param resolve_failed_delivery_request: (required)
+        :type resolve_failed_delivery_request: ResolveFailedDeliveryRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResolveFailedDeliveryResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'instance_id',
+            'batch_reference_id',
+            'resolve_failed_delivery_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method resolve_failed_delivery" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['instance_id']:
+            _path_params['instanceId'] = _params['instance_id']
+
+        if _params['batch_reference_id']:
+            _path_params['batchReferenceId'] = _params['batch_reference_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['resolve_failed_delivery_request'] is not None:
+            _body_params = _params['resolve_failed_delivery_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResolveFailedDeliveryResponse",
+            '400': "LusidValidationProblemDetails",
+            '404': None,
+            '409': None,
+        }
+
+        return self.api_client.call_api(
+            '/api/trade-publication-framework/instances/{instanceId}/failed/{batchReferenceId}/resolve', 'PUT',
             _path_params,
             _query_params,
             _header_params,

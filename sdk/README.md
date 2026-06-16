@@ -39,13 +39,16 @@ Class | Method | HTTP request | Description
 *RunsApi* | [**get_run_results**](docs/RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: Get run results
 *RunsApi* | [**rerun_instance**](docs/RunsApi.md#rerun_instance) | **PUT** /api/runs/{runId}/rerun | [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
 *RunsApi* | [**stop_instance_execution**](docs/RunsApi.md#stop_instance_execution) | **PUT** /api/runs/{instanceId}/{runId}/stop | [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
+*TradePublicationFrameworkApi* | [**get_tpf_file_deliveries**](docs/TradePublicationFrameworkApi.md#get_tpf_file_deliveries) | **GET** /api/trade-publication-framework/instances/{instanceId}/deliveries | [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
 *TradePublicationFrameworkApi* | [**get_tpf_transaction_history_search**](docs/TradePublicationFrameworkApi.md#get_tpf_transaction_history_search) | **GET** /api/trade-publication-framework/transactions/search | [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
 *TradePublicationFrameworkApi* | [**get_transaction_payload**](docs/TradePublicationFrameworkApi.md#get_transaction_payload) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/{transactionId}/payload | [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail
+*TradePublicationFrameworkApi* | [**list_failed_deliveries**](docs/TradePublicationFrameworkApi.md#list_failed_deliveries) | **GET** /api/trade-publication-framework/instances/{instanceId}/failed | [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
 *TradePublicationFrameworkApi* | [**list_instance_run_history**](docs/TradePublicationFrameworkApi.md#list_instance_run_history) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs | [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.
 *TradePublicationFrameworkApi* | [**list_instances_with_status**](docs/TradePublicationFrameworkApi.md#list_instances_with_status) | **GET** /api/trade-publication-framework/instances | [EXPERIMENTAL] ListInstancesWithStatus: Lists all instances of the Trade Publication Framework (TPF).
 *TradePublicationFrameworkApi* | [**list_run_files**](docs/TradePublicationFrameworkApi.md#list_run_files) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/files | [EXPERIMENTAL] ListRunFiles: List Files in a run
 *TradePublicationFrameworkApi* | [**list_run_transactions**](docs/TradePublicationFrameworkApi.md#list_run_transactions) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions | [EXPERIMENTAL] ListRunTransactions: List Transactions in a run.
 *TradePublicationFrameworkApi* | [**replay_transactions**](docs/TradePublicationFrameworkApi.md#replay_transactions) | **POST** /api/trade-publication-framework/instances/{instanceId}/replay | [EXPERIMENTAL] ReplayTransactions: Replay one or more transactions through a TPF instance
+*TradePublicationFrameworkApi* | [**resolve_failed_delivery**](docs/TradePublicationFrameworkApi.md#resolve_failed_delivery) | **PUT** /api/trade-publication-framework/instances/{instanceId}/failed/{batchReferenceId}/resolve | [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
 *TradePublicationFrameworkApi* | [**retry_tpf_sftp_delivery**](docs/TradePublicationFrameworkApi.md#retry_tpf_sftp_delivery) | **POST** /api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
 *VendorApi* | [**get_core_field_mappings_for_product_entity**](docs/VendorApi.md#get_core_field_mappings_for_product_entity) | **GET** /api/vendor/mappings/fields | [EARLY ACCESS] GetCoreFieldMappingsForProductEntity: Get core field mappings for a given vendor product's entity.
 *VendorApi* | [**get_optional_mappings_for_product_entity**](docs/VendorApi.md#get_optional_mappings_for_product_entity) | **GET** /api/vendor/mappings/optional | [EARLY ACCESS] GetOptionalMappingsForProductEntity: Get a user defined LUSID property mappings for the specified vendor / LUSID entity.
@@ -79,7 +82,9 @@ Class | Method | HTTP request | Description
  - [ExecuteInstanceResponse](docs/ExecuteInstanceResponse.md)
  - [ExternalLogInsertionRequest](docs/ExternalLogInsertionRequest.md)
  - [ExternalLogRecord](docs/ExternalLogRecord.md)
+ - [FailedDeliveryResponse](docs/FailedDeliveryResponse.md)
  - [FieldMapping](docs/FieldMapping.md)
+ - [FileDeliveryStatus](docs/FileDeliveryStatus.md)
  - [FileDestinationResponse](docs/FileDestinationResponse.md)
  - [FileDetails](docs/FileDetails.md)
  - [IFieldMapping](docs/IFieldMapping.md)
@@ -124,6 +129,7 @@ Class | Method | HTTP request | Description
  - [OpenFigiParameterOptionName](docs/OpenFigiParameterOptionName.md)
  - [OpenFigiPermIdResult](docs/OpenFigiPermIdResult.md)
  - [OpenFigiSearchResult](docs/OpenFigiSearchResult.md)
+ - [PagedResourceListOfFailedDeliveryResponse](docs/PagedResourceListOfFailedDeliveryResponse.md)
  - [PagedResourceListOfIFieldMapping](docs/PagedResourceListOfIFieldMapping.md)
  - [PagedResourceListOfIIntegrationLogResponse](docs/PagedResourceListOfIIntegrationLogResponse.md)
  - [PagedResourceListOfIPropertyMapping](docs/PagedResourceListOfIPropertyMapping.md)
@@ -132,6 +138,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfProcessInformation](docs/PagedResourceListOfProcessInformation.md)
  - [PagedResourceListOfProcessUpdateResult](docs/PagedResourceListOfProcessUpdateResult.md)
  - [PagedResourceListOfRunFileResponse](docs/PagedResourceListOfRunFileResponse.md)
+ - [PagedResourceListOfTpfFileDeliveryResponse](docs/PagedResourceListOfTpfFileDeliveryResponse.md)
  - [PagedResourceListOfTpfTransactionSearchResponse](docs/PagedResourceListOfTpfTransactionSearchResponse.md)
  - [PagedResourceListOfTransactionResponse](docs/PagedResourceListOfTransactionResponse.md)
  - [PagedResourceListOfVendorProduct](docs/PagedResourceListOfVendorProduct.md)
@@ -148,10 +155,13 @@ Class | Method | HTTP request | Description
  - [ReplayOptions](docs/ReplayOptions.md)
  - [ReplayTransactionsRequest](docs/ReplayTransactionsRequest.md)
  - [ReplayTransactionsResponse](docs/ReplayTransactionsResponse.md)
+ - [ResolveFailedDeliveryRequest](docs/ResolveFailedDeliveryRequest.md)
+ - [ResolveFailedDeliveryResponse](docs/ResolveFailedDeliveryResponse.md)
  - [ResourceId](docs/ResourceId.md)
  - [RowDetails](docs/RowDetails.md)
  - [RunFileResponse](docs/RunFileResponse.md)
  - [TpfFileDeliveryInfo](docs/TpfFileDeliveryInfo.md)
+ - [TpfFileDeliveryResponse](docs/TpfFileDeliveryResponse.md)
  - [TpfPortfolio](docs/TpfPortfolio.md)
  - [TpfRetrySftpResponse](docs/TpfRetrySftpResponse.md)
  - [TpfTransactionSearchResponse](docs/TpfTransactionSearchResponse.md)
