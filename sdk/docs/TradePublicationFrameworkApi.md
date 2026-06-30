@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**list_run_transactions**](TradePublicationFrameworkApi.md#list_run_transactions) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions | [EXPERIMENTAL] ListRunTransactions: List Transactions in a run.
 [**replay_transactions**](TradePublicationFrameworkApi.md#replay_transactions) | **POST** /api/trade-publication-framework/instances/{instanceId}/replay | [EXPERIMENTAL] ReplayTransactions: Replay one or more transactions through a TPF instance
 [**resolve_failed_delivery**](TradePublicationFrameworkApi.md#resolve_failed_delivery) | **PUT** /api/trade-publication-framework/instances/{instanceId}/failed/{batchReferenceId}/resolve | [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
+[**retry_failed_delivery**](TradePublicationFrameworkApi.md#retry_failed_delivery) | **POST** /api/trade-publication-framework/instances/{instanceId}/failed/retry | [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework
 [**retry_tpf_sftp_delivery**](TradePublicationFrameworkApi.md#retry_tpf_sftp_delivery) | **POST** /api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
 
 
@@ -985,6 +986,106 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **404** | No failed delivery was found for the batch. |  -  |
 **409** | The failed deliveries for the batch have already been resolved. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **retry_failed_delivery**
+> TpfFailedDeliveryResponse retry_failed_delivery(instance_id, tpf_retry_failed_delivery_request)
+
+[EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework
+
+Re-runs the delivery task only (payload already built - skips build task). Always committed - no preview mode. Increments attempt count on failure, sets resolved to true on success. Uses existing ReplayBatchElement on ITradeTrackingRepository. Requires entitlement to execute integrations.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    TradePublicationFrameworkApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TradePublicationFrameworkApi)
+    instance_id = 'instance_id_example' # str | Integration instance identifier
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # tpf_retry_failed_delivery_request = TpfRetryFailedDeliveryRequest.from_json("")
+    # tpf_retry_failed_delivery_request = TpfRetryFailedDeliveryRequest.from_dict({})
+    tpf_retry_failed_delivery_request = TpfRetryFailedDeliveryRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.retry_failed_delivery(instance_id, tpf_retry_failed_delivery_request, opts=opts)
+
+        # [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework
+        api_response = api_instance.retry_failed_delivery(instance_id, tpf_retry_failed_delivery_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TradePublicationFrameworkApi->retry_failed_delivery: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_id** | **str**| Integration instance identifier | 
+ **tpf_retry_failed_delivery_request** | [**TpfRetryFailedDeliveryRequest**](TpfRetryFailedDeliveryRequest.md)| Request containing batch element reference identifiers to retry | 
+
+### Return type
+
+[**TpfFailedDeliveryResponse**](TpfFailedDeliveryResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | The requested instance does not exist. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

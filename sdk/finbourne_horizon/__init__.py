@@ -127,9 +127,12 @@ from finbourne_horizon.models.resolve_failed_delivery_response import ResolveFai
 from finbourne_horizon.models.resource_id import ResourceId
 from finbourne_horizon.models.row_details import RowDetails
 from finbourne_horizon.models.run_file_response import RunFileResponse
+from finbourne_horizon.models.tpf_failed_delivery_response import TpfFailedDeliveryResponse
 from finbourne_horizon.models.tpf_file_delivery_info import TpfFileDeliveryInfo
 from finbourne_horizon.models.tpf_file_delivery_response import TpfFileDeliveryResponse
 from finbourne_horizon.models.tpf_portfolio import TpfPortfolio
+from finbourne_horizon.models.tpf_retry_element_result import TpfRetryElementResult
+from finbourne_horizon.models.tpf_retry_failed_delivery_request import TpfRetryFailedDeliveryRequest
 from finbourne_horizon.models.tpf_retry_sftp_response import TpfRetrySftpResponse
 from finbourne_horizon.models.tpf_transaction_search_response import TpfTransactionSearchResponse
 from finbourne_horizon.models.transaction_payload_response import TransactionPayloadResponse
@@ -256,9 +259,12 @@ __all__ = [
     "ResourceId",
     "RowDetails",
     "RunFileResponse",
+    "TpfFailedDeliveryResponse",
     "TpfFileDeliveryInfo",
     "TpfFileDeliveryResponse",
     "TpfPortfolio",
+    "TpfRetryElementResult",
+    "TpfRetryFailedDeliveryRequest",
     "TpfRetrySftpResponse",
     "TpfTransactionSearchResponse",
     "TransactionPayloadResponse",
