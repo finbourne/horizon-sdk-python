@@ -1015,7 +1015,7 @@ class IntegrationsApi:
 
     @validate_arguments
     def get_instance(self, instance_id : Annotated[StrictStr, Field(...)], async_req: Optional[bool]=None, **kwargs) -> Union[IntegrationInstanceResponse, Awaitable[IntegrationInstanceResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration.  # noqa: E501
+        """[EXPERIMENTAL] GetInstance: Get a specified instance for a given integration.  # noqa: E501
 
         The user must be authenticated to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1046,7 +1046,7 @@ class IntegrationsApi:
 
     @validate_arguments
     def get_instance_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetInstance: Get a specified Instance for a given integration.  # noqa: E501
+        """[EXPERIMENTAL] GetInstance: Get a specified instance for a given integration.  # noqa: E501
 
         The user must be authenticated to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1168,7 +1168,7 @@ class IntegrationsApi:
 
     @validate_arguments
     def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, LusidPropertyDefinitionOverridesByType], Awaitable[Dict[str, LusidPropertyDefinitionOverridesByType]]]:  # noqa: E501
-        """[EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance  # noqa: E501
+        """[EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance  # noqa: E501
 
         Will return the full list of optional properties configured for this integration instance and any naming overrides  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1201,7 +1201,7 @@ class IntegrationsApi:
 
     @validate_arguments
     def get_instance_optional_property_mapping_with_http_info(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an Integration Instance  # noqa: E501
+        """[EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance  # noqa: E501
 
         Will return the full list of optional properties configured for this integration instance and any naming overrides  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2438,7 +2438,7 @@ class IntegrationsApi:
 
     @validate_arguments
     def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverridesByType]], Field(description="Properties to be included and any overrides")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, LusidPropertyDefinitionOverridesByType], Awaitable[Dict[str, LusidPropertyDefinitionOverridesByType]]]:  # noqa: E501
-        """[EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance  # noqa: E501
+        """[EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an integration instance  # noqa: E501
 
         The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2473,7 +2473,7 @@ class IntegrationsApi:
 
     @validate_arguments
     def set_instance_optional_property_mapping_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverridesByType]], Field(description="Properties to be included and any overrides")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an Integration Instance  # noqa: E501
+        """[EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an integration instance  # noqa: E501
 
         The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

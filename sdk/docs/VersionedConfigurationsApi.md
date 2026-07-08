@@ -217,11 +217,11 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_versioned_configuration**
-> VersionedConfigurationResponse get_versioned_configuration(config_type, name, major_version=major_version, minor_version=minor_version)
+> VersionedConfigurationResponse get_versioned_configuration(config_type, name, major_version=major_version, minor_version=minor_version, include_drafts=include_drafts)
 
 [EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration.
 
-Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available version is returned. Both must be supplied together or both omitted. The user must be authenticated and entitled to call this method.
+Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available locked version is returned. Both must be supplied together or both omitted. When includeDrafts is true and no version is specified, the highest available version regardless of draft state is returned. When an explicit version is supplied via majorVersion and minorVersion, includeDrafts is ignored and the exact version is returned regardless of its draft state. The user must be authenticated and entitled to call this method.
 
 ### Example
 
@@ -272,13 +272,14 @@ def main():
     name = 'name_example' # str | The logical name of the configuration.
     major_version = 56 # int | The major version to retrieve. Must be supplied together with minorVersion, or both omitted. (optional)
     minor_version = 56 # int | The minor version to retrieve. Must be supplied together with majorVersion, or both omitted. (optional)
+    include_drafts = False # bool | When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_versioned_configuration(config_type, name, major_version=major_version, minor_version=minor_version, opts=opts)
+        # api_response =  api_instance.get_versioned_configuration(config_type, name, major_version=major_version, minor_version=minor_version, include_drafts=include_drafts, opts=opts)
 
         # [EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration.
-        api_response = api_instance.get_versioned_configuration(config_type, name, major_version=major_version, minor_version=minor_version)
+        api_response = api_instance.get_versioned_configuration(config_type, name, major_version=major_version, minor_version=minor_version, include_drafts=include_drafts)
         pprint(api_response)
 
     except ApiException as e:
@@ -295,6 +296,7 @@ Name | Type | Description  | Notes
  **name** | **str**| The logical name of the configuration. | 
  **major_version** | **int**| The major version to retrieve. Must be supplied together with minorVersion, or both omitted. | [optional] 
  **minor_version** | **int**| The minor version to retrieve. Must be supplied together with majorVersion, or both omitted. | [optional] 
+ **include_drafts** | **bool**| When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false. | [optional] [default to False]
 
 ### Return type
 

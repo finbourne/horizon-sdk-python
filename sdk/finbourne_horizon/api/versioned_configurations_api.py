@@ -19,7 +19,7 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from pydantic.v1 import Field, StrictInt
+from pydantic.v1 import Field, StrictBool, StrictInt
 from typing import List, Optional
 from typing_extensions import Annotated
 from finbourne_horizon.models.create_versioned_configuration_draft_request import CreateVersionedConfigurationDraftRequest
@@ -408,22 +408,22 @@ class VersionedConfigurationsApi:
 
 
     @overload
-    async def get_versioned_configuration(self, config_type : Annotated[StrictStr, Field(..., description="The category of configuration.")], name : Annotated[StrictStr, Field(..., description="The logical name of the configuration.")], major_version : Annotated[Optional[StrictInt], Field(description="The major version to retrieve. Must be supplied together with minorVersion, or both omitted.")] = None, minor_version : Annotated[Optional[StrictInt], Field(description="The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.")] = None, **kwargs) -> VersionedConfigurationResponse:  # noqa: E501
+    async def get_versioned_configuration(self, config_type : Annotated[StrictStr, Field(..., description="The category of configuration.")], name : Annotated[StrictStr, Field(..., description="The logical name of the configuration.")], major_version : Annotated[Optional[StrictInt], Field(description="The major version to retrieve. Must be supplied together with minorVersion, or both omitted.")] = None, minor_version : Annotated[Optional[StrictInt], Field(description="The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.")] = None, include_drafts : Annotated[Optional[StrictBool], Field(description="When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false.")] = None, **kwargs) -> VersionedConfigurationResponse:  # noqa: E501
         ...
 
     @overload
-    def get_versioned_configuration(self, config_type : Annotated[StrictStr, Field(..., description="The category of configuration.")], name : Annotated[StrictStr, Field(..., description="The logical name of the configuration.")], major_version : Annotated[Optional[StrictInt], Field(description="The major version to retrieve. Must be supplied together with minorVersion, or both omitted.")] = None, minor_version : Annotated[Optional[StrictInt], Field(description="The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.")] = None, async_req: Optional[bool]=True, **kwargs) -> VersionedConfigurationResponse:  # noqa: E501
+    def get_versioned_configuration(self, config_type : Annotated[StrictStr, Field(..., description="The category of configuration.")], name : Annotated[StrictStr, Field(..., description="The logical name of the configuration.")], major_version : Annotated[Optional[StrictInt], Field(description="The major version to retrieve. Must be supplied together with minorVersion, or both omitted.")] = None, minor_version : Annotated[Optional[StrictInt], Field(description="The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.")] = None, include_drafts : Annotated[Optional[StrictBool], Field(description="When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false.")] = None, async_req: Optional[bool]=True, **kwargs) -> VersionedConfigurationResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_versioned_configuration(self, config_type : Annotated[StrictStr, Field(..., description="The category of configuration.")], name : Annotated[StrictStr, Field(..., description="The logical name of the configuration.")], major_version : Annotated[Optional[StrictInt], Field(description="The major version to retrieve. Must be supplied together with minorVersion, or both omitted.")] = None, minor_version : Annotated[Optional[StrictInt], Field(description="The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedConfigurationResponse, Awaitable[VersionedConfigurationResponse]]:  # noqa: E501
+    def get_versioned_configuration(self, config_type : Annotated[StrictStr, Field(..., description="The category of configuration.")], name : Annotated[StrictStr, Field(..., description="The logical name of the configuration.")], major_version : Annotated[Optional[StrictInt], Field(description="The major version to retrieve. Must be supplied together with minorVersion, or both omitted.")] = None, minor_version : Annotated[Optional[StrictInt], Field(description="The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.")] = None, include_drafts : Annotated[Optional[StrictBool], Field(description="When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedConfigurationResponse, Awaitable[VersionedConfigurationResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration.  # noqa: E501
 
-        Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available version is returned. Both must be supplied together or both omitted. The user must be authenticated and entitled to call this method.  # noqa: E501
+        Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available locked version is returned. Both must be supplied together or both omitted. When includeDrafts is true and no version is specified, the highest available version regardless of draft state is returned. When an explicit version is supplied via majorVersion and minorVersion, includeDrafts is ignored and the exact version is returned regardless of its draft state. The user must be authenticated and entitled to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_versioned_configuration(config_type, name, major_version, minor_version, async_req=True)
+        >>> thread = api.get_versioned_configuration(config_type, name, major_version, minor_version, include_drafts, async_req=True)
         >>> result = thread.get()
 
         :param config_type: The category of configuration. (required)
@@ -434,6 +434,8 @@ class VersionedConfigurationsApi:
         :type major_version: int
         :param minor_version: The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.
         :type minor_version: int
+        :param include_drafts: When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false.
+        :type include_drafts: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -450,17 +452,17 @@ class VersionedConfigurationsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_versioned_configuration_with_http_info(config_type, name, major_version, minor_version, **kwargs)  # noqa: E501
+        return self.get_versioned_configuration_with_http_info(config_type, name, major_version, minor_version, include_drafts, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_versioned_configuration_with_http_info(self, config_type : Annotated[StrictStr, Field(..., description="The category of configuration.")], name : Annotated[StrictStr, Field(..., description="The logical name of the configuration.")], major_version : Annotated[Optional[StrictInt], Field(description="The major version to retrieve. Must be supplied together with minorVersion, or both omitted.")] = None, minor_version : Annotated[Optional[StrictInt], Field(description="The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_versioned_configuration_with_http_info(self, config_type : Annotated[StrictStr, Field(..., description="The category of configuration.")], name : Annotated[StrictStr, Field(..., description="The logical name of the configuration.")], major_version : Annotated[Optional[StrictInt], Field(description="The major version to retrieve. Must be supplied together with minorVersion, or both omitted.")] = None, minor_version : Annotated[Optional[StrictInt], Field(description="The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.")] = None, include_drafts : Annotated[Optional[StrictBool], Field(description="When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetVersionedConfiguration: Get a versioned configuration.  # noqa: E501
 
-        Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available version is returned. Both must be supplied together or both omitted. The user must be authenticated and entitled to call this method.  # noqa: E501
+        Returns a specific configuration record. When both majorVersion and minorVersion are omitted, the highest available locked version is returned. Both must be supplied together or both omitted. When includeDrafts is true and no version is specified, the highest available version regardless of draft state is returned. When an explicit version is supplied via majorVersion and minorVersion, includeDrafts is ignored and the exact version is returned regardless of its draft state. The user must be authenticated and entitled to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_versioned_configuration_with_http_info(config_type, name, major_version, minor_version, async_req=True)
+        >>> thread = api.get_versioned_configuration_with_http_info(config_type, name, major_version, minor_version, include_drafts, async_req=True)
         >>> result = thread.get()
 
         :param config_type: The category of configuration. (required)
@@ -471,6 +473,8 @@ class VersionedConfigurationsApi:
         :type major_version: int
         :param minor_version: The minor version to retrieve. Must be supplied together with majorVersion, or both omitted.
         :type minor_version: int
+        :param include_drafts: When true and no explicit version is supplied, includes draft versions when determining the highest available version. Defaults to false.
+        :type include_drafts: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -501,7 +505,8 @@ class VersionedConfigurationsApi:
             'config_type',
             'name',
             'major_version',
-            'minor_version'
+            'minor_version',
+            'include_drafts'
         ]
         _all_params.extend(
             [
@@ -544,6 +549,9 @@ class VersionedConfigurationsApi:
 
         if _params.get('minor_version') is not None:  # noqa: E501
             _query_params.append(('minorVersion', _params['minor_version']))
+
+        if _params.get('include_drafts') is not None:  # noqa: E501
+            _query_params.append(('includeDrafts', _params['include_drafts']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
