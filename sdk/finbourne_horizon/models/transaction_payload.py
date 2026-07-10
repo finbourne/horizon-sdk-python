@@ -23,14 +23,15 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class TransactionPayloadResponse(BaseModel):
+class TransactionPayload(BaseModel):
     """
-    record containing details of a transaction payload.  # noqa: E501
+    record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result.  # noqa: E501
     """
+    transaction_id:  StrictStr = Field(...,alias="transactionId") 
     columns: List[StrictStr]
     values: Dict[str, StrictStr]
     raw_csv_row:  StrictStr = Field(...,alias="rawCsvRow") 
-    __properties = ["columns", "values", "rawCsvRow"]
+    __properties = ["transactionId", "columns", "values", "rawCsvRow"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,8 +55,8 @@ class TransactionPayloadResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> TransactionPayloadResponse:
-        """Create an instance of TransactionPayloadResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> TransactionPayload:
+        """Create an instance of TransactionPayload from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,19 +68,20 @@ class TransactionPayloadResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> TransactionPayloadResponse:
-        """Create an instance of TransactionPayloadResponse from a dict"""
+    def from_dict(cls, obj: dict) -> TransactionPayload:
+        """Create an instance of TransactionPayload from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return TransactionPayloadResponse.parse_obj(obj)
+            return TransactionPayload.parse_obj(obj)
 
-        _obj = TransactionPayloadResponse.parse_obj({
+        _obj = TransactionPayload.parse_obj({
+            "transaction_id": obj.get("transactionId"),
             "columns": obj.get("columns"),
             "values": obj.get("values"),
             "raw_csv_row": obj.get("rawCsvRow")
         })
         return _obj
 
-TransactionPayloadResponse.update_forward_refs()
+TransactionPayload.update_forward_refs()

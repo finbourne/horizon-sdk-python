@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_tpf_file_deliveries**](TradePublicationFrameworkApi.md#get_tpf_file_deliveries) | **GET** /api/trade-publication-framework/instances/{instanceId}/deliveries | [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
 [**get_tpf_transaction_history_search**](TradePublicationFrameworkApi.md#get_tpf_transaction_history_search) | **GET** /api/trade-publication-framework/transactions/search | [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
-[**get_transaction_payload**](TradePublicationFrameworkApi.md#get_transaction_payload) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/{transactionId}/payload | [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail
+[**get_transaction_payload**](TradePublicationFrameworkApi.md#get_transaction_payload) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/payload | [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
 [**list_failed_deliveries**](TradePublicationFrameworkApi.md#list_failed_deliveries) | **GET** /api/trade-publication-framework/instances/{instanceId}/failed | [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
 [**list_instance_run_history**](TradePublicationFrameworkApi.md#list_instance_run_history) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs | [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.
 [**list_instances_with_status**](TradePublicationFrameworkApi.md#list_instances_with_status) | **GET** /api/trade-publication-framework/instances | [EXPERIMENTAL] ListInstancesWithStatus: Lists all instances of the Trade Publication Framework (TPF).
@@ -225,9 +225,9 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_transaction_payload**
-> TransactionPayloadResponse get_transaction_payload(instance_id, run_id, transaction_id)
+> PagedResourceListOfTransactionPayload get_transaction_payload(instance_id, run_id, transaction_id=transaction_id, page=page, page_size=page_size)
 
-[EXPERIMENTAL] GetTransactionPayload: Transaction payload detail
+[EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
 
 ### Example
 
@@ -276,14 +276,16 @@ def main():
     api_instance = api_client_factory.build(TradePublicationFrameworkApi)
     instance_id = 'instance_id_example' # str | 
     run_id = 'run_id_example' # str | 
-    transaction_id = 'transaction_id_example' # str | 
+    transaction_id = 'transaction_id_example' # str |  (optional)
+    page = '' # str |  (optional) (default to '')
+    page_size = 100 # int |  (optional) (default to 100)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_transaction_payload(instance_id, run_id, transaction_id, opts=opts)
+        # api_response =  api_instance.get_transaction_payload(instance_id, run_id, transaction_id=transaction_id, page=page, page_size=page_size, opts=opts)
 
-        # [EXPERIMENTAL] GetTransactionPayload: Transaction payload detail
-        api_response = api_instance.get_transaction_payload(instance_id, run_id, transaction_id)
+        # [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
+        api_response = api_instance.get_transaction_payload(instance_id, run_id, transaction_id=transaction_id, page=page, page_size=page_size)
         pprint(api_response)
 
     except ApiException as e:
@@ -298,11 +300,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id** | **str**|  | 
  **run_id** | **str**|  | 
- **transaction_id** | **str**|  | 
+ **transaction_id** | **str**|  | [optional] 
+ **page** | **str**|  | [optional] [default to &#39;&#39;]
+ **page_size** | **int**|  | [optional] [default to 100]
 
 ### Return type
 
-[**TransactionPayloadResponse**](TransactionPayloadResponse.md)
+[**PagedResourceListOfTransactionPayload**](PagedResourceListOfTransactionPayload.md)
 
 ### HTTP request headers
 
@@ -314,7 +318,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
-**404** | The requested TPF instance, run, or transaction payload does not exist. |  -  |
+**404** | The requested TPF instance or run does not exist. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
