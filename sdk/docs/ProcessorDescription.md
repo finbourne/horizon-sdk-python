@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **description** | **str** |  | 
 **category** | **str** |  | 
 **is_active** | **bool** |  | 
+**is_connection_required** | **bool** |  | 
+**relationships** | **List[str]** |  | 
 ## Example
 
 ```python
@@ -24,7 +26,10 @@ description: StrictStr = "example_description"
 category: StrictStr = "example_category"
 is_active: StrictBool = # Replace with your value
 is_active:StrictBool = True
-processor_description_instance = ProcessorDescription(name=name, display_name=display_name, description=description, category=category, is_active=is_active)
+is_connection_required: StrictBool = # Replace with your value
+is_connection_required:StrictBool = True
+relationships: List[StrictStr]
+processor_description_instance = ProcessorDescription(name=name, display_name=display_name, description=description, category=category, is_active=is_active, is_connection_required=is_connection_required, relationships=relationships)
 
 ```
 

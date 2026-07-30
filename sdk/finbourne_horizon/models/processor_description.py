@@ -32,7 +32,9 @@ class ProcessorDescription(BaseModel):
     description:  StrictStr = Field(...,alias="description") 
     category:  StrictStr = Field(...,alias="category") 
     is_active: StrictBool = Field(alias="isActive")
-    __properties = ["name", "displayName", "description", "category", "isActive"]
+    is_connection_required: StrictBool = Field(alias="isConnectionRequired")
+    relationships: List[StrictStr]
+    __properties = ["name", "displayName", "description", "category", "isActive", "isConnectionRequired", "relationships"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,7 +84,9 @@ class ProcessorDescription(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "category": obj.get("category"),
-            "is_active": obj.get("isActive")
+            "is_active": obj.get("isActive"),
+            "is_connection_required": obj.get("isConnectionRequired"),
+            "relationships": obj.get("relationships")
         })
         return _obj
 
