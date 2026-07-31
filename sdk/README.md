@@ -40,7 +40,7 @@ Class | Method | HTTP request | Description
 *RunsApi* | [**rerun_instance**](docs/RunsApi.md#rerun_instance) | **PUT** /api/runs/{runId}/rerun | [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
 *RunsApi* | [**stop_instance_execution**](docs/RunsApi.md#stop_instance_execution) | **PUT** /api/runs/{instanceId}/{runId}/stop | [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
 *TradePublicationFrameworkApi* | [**get_tpf_file_deliveries**](docs/TradePublicationFrameworkApi.md#get_tpf_file_deliveries) | **GET** /api/trade-publication-framework/instances/{instanceId}/deliveries | [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
-*TradePublicationFrameworkApi* | [**get_tpf_transaction_history_search**](docs/TradePublicationFrameworkApi.md#get_tpf_transaction_history_search) | **GET** /api/trade-publication-framework/transactions/search | [EXPERIMENTAL] GetTpfTransactionHistorySearch: Endpoint to search TPF transaction by transaction ID and/or instrument identifier, with filtering by instance and date range
+*TradePublicationFrameworkApi* | [**get_tpf_transaction_history_search**](docs/TradePublicationFrameworkApi.md#get_tpf_transaction_history_search) | **POST** /api/trade-publication-framework/transactions/search | [EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR'd within each filter, AND'd between filters).
 *TradePublicationFrameworkApi* | [**get_transaction_payload**](docs/TradePublicationFrameworkApi.md#get_transaction_payload) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs/{runId}/transactions/payload | [EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.
 *TradePublicationFrameworkApi* | [**list_failed_deliveries**](docs/TradePublicationFrameworkApi.md#list_failed_deliveries) | **GET** /api/trade-publication-framework/instances/{instanceId}/failed | [EXPERIMENTAL] ListFailedDeliveries: List failed deliveries for a given TPF instance, filtered by resolved state, with pagination support.
 *TradePublicationFrameworkApi* | [**list_instance_run_history**](docs/TradePublicationFrameworkApi.md#list_instance_run_history) | **GET** /api/trade-publication-framework/instances/{instanceId}/runs | [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.
@@ -169,6 +169,7 @@ Class | Method | HTTP request | Description
  - [TpfRetryElementResult](docs/TpfRetryElementResult.md)
  - [TpfRetryFailedDeliveryRequest](docs/TpfRetryFailedDeliveryRequest.md)
  - [TpfRetrySftpResponse](docs/TpfRetrySftpResponse.md)
+ - [TpfTransactionSearchRequest](docs/TpfTransactionSearchRequest.md)
  - [TpfTransactionSearchResponse](docs/TpfTransactionSearchResponse.md)
  - [TransactionPayload](docs/TransactionPayload.md)
  - [TransactionResponse](docs/TransactionResponse.md)
