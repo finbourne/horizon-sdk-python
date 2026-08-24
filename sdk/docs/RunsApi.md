@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**cancel_instance**](RunsApi.md#cancel_instance) | **PUT** /api/runs/cancel | [EXPERIMENTAL] CancelInstance: Cancels multiple instance executions.
 [**get_run_results**](RunsApi.md#get_run_results) | **GET** /api/runs | [EXPERIMENTAL] GetRunResults: Get run results
+[**get_workflow_run_results**](RunsApi.md#get_workflow_run_results) | **GET** /api/runs/{runId}/workflow/results | [EXPERIMENTAL] GetWorkflowRunResults: Get the status and published result values of an integration run
 [**rerun_instance**](RunsApi.md#rerun_instance) | **PUT** /api/runs/{runId}/rerun | [EXPERIMENTAL] RerunInstance: Reruns a single instance execution.
 [**stop_instance_execution**](RunsApi.md#stop_instance_execution) | **PUT** /api/runs/{instanceId}/{runId}/stop | [EXPERIMENTAL] StopInstanceExecution: Stops a single instance execution.
 
@@ -203,6 +204,99 @@ Name | Type | Description  | Notes
 **200** | OK |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | Not Found |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_workflow_run_results**
+> WorkflowRunResultsResponse get_workflow_run_results(run_id)
+
+[EXPERIMENTAL] GetWorkflowRunResults: Get the status and published result values of an integration run
+
+Returns the run's status alongside the result values the run published, so a caller waiting on an integration it started can poll one route rather than combining a status call with a results call. The response carries one entry per field the instance declares, matching the shape the instance reported when the caller discovered it, and a declared field the run published nothing for carries a null value. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    RunsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RunsApi)
+    run_id = 'run_id_example' # str | Run identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_workflow_run_results(run_id, opts=opts)
+
+        # [EXPERIMENTAL] GetWorkflowRunResults: Get the status and published result values of an integration run
+        api_response = api_instance.get_workflow_run_results(run_id)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RunsApi->get_workflow_run_results: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_id** | **str**| Run identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | 
+
+### Return type
+
+[**WorkflowRunResultsResponse**](WorkflowRunResultsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The run status and its published result values. |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | The run does not exist. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

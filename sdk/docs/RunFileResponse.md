@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **encrypted** | **bool** |  | 
 **destinations** | [**List[FileDestinationResponse]**](FileDestinationResponse.md) |  | 
 **transaction_ids** | **List[str]** |  | 
+**file_uuid** | **str** |  | 
+**failed_transaction_ids** | **List[str]** |  | 
 ## Example
 
 ```python
@@ -29,7 +31,9 @@ encrypted: StrictBool
 encrypted:StrictBool = True
 destinations: List[FileDestinationResponse]
 transaction_ids: List[StrictStr] = # Replace with your value
-run_file_response_instance = RunFileResponse(file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, encrypted=encrypted, destinations=destinations, transaction_ids=transaction_ids)
+file_uuid: StrictStr = "example_file_uuid"
+failed_transaction_ids: List[StrictStr] = # Replace with your value
+run_file_response_instance = RunFileResponse(file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, encrypted=encrypted, destinations=destinations, transaction_ids=transaction_ids, file_uuid=file_uuid, failed_transaction_ids=failed_transaction_ids)
 
 ```
 

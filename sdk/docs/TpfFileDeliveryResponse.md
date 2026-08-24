@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **destination_status** | **str** |  | 
 **destination_error** | **str** |  | [optional] 
 **destination_name** | **str** |  | [optional] 
+**file_uuid** | **str** |  | 
 ## Example
 
 ```python
@@ -36,7 +37,8 @@ destination_path: Optional[StrictStr] = "example_destination_path"
 destination_status: StrictStr = "example_destination_status"
 destination_error: Optional[StrictStr] = "example_destination_error"
 destination_name: Optional[StrictStr] = "example_destination_name"
-tpf_file_delivery_response_instance = TpfFileDeliveryResponse(run_id=run_id, run_start_time=run_start_time, file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, destination_type=destination_type, destination_path=destination_path, destination_status=destination_status, destination_error=destination_error, destination_name=destination_name)
+file_uuid: StrictStr = "example_file_uuid"
+tpf_file_delivery_response_instance = TpfFileDeliveryResponse(run_id=run_id, run_start_time=run_start_time, file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, destination_type=destination_type, destination_path=destination_path, destination_status=destination_status, destination_error=destination_error, destination_name=destination_name, file_uuid=file_uuid)
 
 ```
 

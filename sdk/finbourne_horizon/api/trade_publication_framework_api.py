@@ -1955,27 +1955,27 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_id : Annotated[StrictInt, Field(description="File delivery ID to retry")], **kwargs) -> TpfRetrySftpResponse:  # noqa: E501
+    async def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], **kwargs) -> TpfRetrySftpResponse:  # noqa: E501
         ...
 
     @overload
-    def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_id : Annotated[StrictInt, Field(description="File delivery ID to retry")], async_req: Optional[bool]=True, **kwargs) -> TpfRetrySftpResponse:  # noqa: E501
+    def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], async_req: Optional[bool]=True, **kwargs) -> TpfRetrySftpResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_id : Annotated[StrictInt, Field(description="File delivery ID to retry")], async_req: Optional[bool]=None, **kwargs) -> Union[TpfRetrySftpResponse, Awaitable[TpfRetrySftpResponse]]:  # noqa: E501
+    def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], async_req: Optional[bool]=None, **kwargs) -> Union[TpfRetrySftpResponse, Awaitable[TpfRetrySftpResponse]]:  # noqa: E501
         """[EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.retry_tpf_sftp_delivery(instance_id, file_id, async_req=True)
+        >>> thread = api.retry_tpf_sftp_delivery(instance_id, file_uuid, async_req=True)
         >>> result = thread.get()
 
         :param instance_id: Integration instance ID (required)
         :type instance_id: str
-        :param file_id: File delivery ID to retry (required)
-        :type file_id: int
+        :param file_uuid: File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
+        :type file_uuid: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1992,22 +1992,22 @@ class TradePublicationFrameworkApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.retry_tpf_sftp_delivery_with_http_info(instance_id, file_id, **kwargs)  # noqa: E501
+        return self.retry_tpf_sftp_delivery_with_http_info(instance_id, file_uuid, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def retry_tpf_sftp_delivery_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_id : Annotated[StrictInt, Field(description="File delivery ID to retry")], **kwargs) -> ApiResponse:  # noqa: E501
+    def retry_tpf_sftp_delivery_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.retry_tpf_sftp_delivery_with_http_info(instance_id, file_id, async_req=True)
+        >>> thread = api.retry_tpf_sftp_delivery_with_http_info(instance_id, file_uuid, async_req=True)
         >>> result = thread.get()
 
         :param instance_id: Integration instance ID (required)
         :type instance_id: str
-        :param file_id: File delivery ID to retry (required)
-        :type file_id: int
+        :param file_uuid: File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
+        :type file_uuid: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2036,7 +2036,7 @@ class TradePublicationFrameworkApi:
 
         _all_params = [
             'instance_id',
-            'file_id'
+            'file_uuid'
         ]
         _all_params.extend(
             [
@@ -2068,8 +2068,8 @@ class TradePublicationFrameworkApi:
         if _params['instance_id']:
             _path_params['instanceId'] = _params['instance_id']
 
-        if _params['file_id']:
-            _path_params['fileId'] = _params['file_id']
+        if _params['file_uuid']:
+            _path_params['fileUuid'] = _params['file_uuid']
 
 
         # process the query parameters
@@ -2096,7 +2096,7 @@ class TradePublicationFrameworkApi:
         }
 
         return self.api_client.call_api(
-            '/api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp', 'POST',
+            '/api/trade-publication-framework/instances/{instanceId}/files/{fileUuid}/retry-sftp', 'POST',
             _path_params,
             _query_params,
             _header_params,

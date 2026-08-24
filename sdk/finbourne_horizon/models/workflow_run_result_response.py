@@ -23,17 +23,15 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class TpfFileDeliveryInfo(BaseModel):
+class WorkflowRunResultResponse(BaseModel):
     """
-    Information about a file delivery  # noqa: E501
+    A single declared field and the value this run published for it.  # noqa: E501
     """
-    file_uuid:  StrictStr = Field(...,alias="fileUuid", description="File delivery UUID — the identifier the retry endpoint accepts") 
-    file_name:  StrictStr = Field(...,alias="fileName", description="File name") 
-    file_hash:  StrictStr = Field(...,alias="fileHash", description="SHA-256 hash of the file content") 
-    destination_path:  StrictStr = Field(...,alias="destinationPath", description="SFTP destination path") 
-    status:  StrictStr = Field(...,alias="status", description="Delivery status") 
-    generated_at: datetime = Field(description="Timestamp when the file was originally generated", alias="generatedAt")
-    __properties = ["fileUuid", "fileName", "fileHash", "destinationPath", "status", "generatedAt"]
+    name:  StrictStr = Field(...,alias="name") 
+    type:  StrictStr = Field(...,alias="type", description="One of the Workflow field types: String, Decimal, DateTime, Boolean, LusidUserId.") 
+    value:  Optional[StrictStr] = Field(None,alias="value", description="The published value, or null when the run published nothing for this field.") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName") 
+    __properties = ["name", "type", "value", "displayName"]
 
     class Config:
         """Pydantic configuration"""
@@ -57,8 +55,8 @@ class TpfFileDeliveryInfo(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> TpfFileDeliveryInfo:
-        """Create an instance of TpfFileDeliveryInfo from a JSON string"""
+    def from_json(cls, json_str: str) -> WorkflowRunResultResponse:
+        """Create an instance of WorkflowRunResultResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,25 +65,33 @@ class TpfFileDeliveryInfo(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.value is None and "value" in self.__fields_set__:
+            _dict['value'] = None
+
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> TpfFileDeliveryInfo:
-        """Create an instance of TpfFileDeliveryInfo from a dict"""
+    def from_dict(cls, obj: dict) -> WorkflowRunResultResponse:
+        """Create an instance of WorkflowRunResultResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return TpfFileDeliveryInfo.parse_obj(obj)
+            return WorkflowRunResultResponse.parse_obj(obj)
 
-        _obj = TpfFileDeliveryInfo.parse_obj({
-            "file_uuid": obj.get("fileUuid"),
-            "file_name": obj.get("fileName"),
-            "file_hash": obj.get("fileHash"),
-            "destination_path": obj.get("destinationPath"),
-            "status": obj.get("status"),
-            "generated_at": obj.get("generatedAt")
+        _obj = WorkflowRunResultResponse.parse_obj({
+            "name": obj.get("name"),
+            "type": obj.get("type"),
+            "value": obj.get("value"),
+            "display_name": obj.get("displayName")
         })
         return _obj
 
-TpfFileDeliveryInfo.update_forward_refs()
+WorkflowRunResultResponse.update_forward_refs()

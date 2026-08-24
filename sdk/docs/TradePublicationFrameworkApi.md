@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**replay_transactions**](TradePublicationFrameworkApi.md#replay_transactions) | **POST** /api/trade-publication-framework/instances/{instanceId}/replay | [EXPERIMENTAL] ReplayTransactions: Replay one or more transactions through a TPF instance
 [**resolve_failed_delivery**](TradePublicationFrameworkApi.md#resolve_failed_delivery) | **PUT** /api/trade-publication-framework/instances/{instanceId}/failed/{batchReferenceId}/resolve | [EXPERIMENTAL] ResolveFailedDelivery: Resolve a failed delivery without retry
 [**retry_failed_delivery**](TradePublicationFrameworkApi.md#retry_failed_delivery) | **POST** /api/trade-publication-framework/instances/{instanceId}/failed/retry | [EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework
-[**retry_tpf_sftp_delivery**](TradePublicationFrameworkApi.md#retry_tpf_sftp_delivery) | **POST** /api/trade-publication-framework/instances/{instanceId}/files/{fileId}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
+[**retry_tpf_sftp_delivery**](TradePublicationFrameworkApi.md#retry_tpf_sftp_delivery) | **POST** /api/trade-publication-framework/instances/{instanceId}/files/{fileUuid}/retry-sftp | [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
 
 
 # **get_tpf_file_deliveries**
@@ -1086,7 +1086,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **retry_tpf_sftp_delivery**
-> TpfRetrySftpResponse retry_tpf_sftp_delivery(instance_id, file_id)
+> TpfRetrySftpResponse retry_tpf_sftp_delivery(instance_id, file_uuid)
 
 [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
 
@@ -1136,14 +1136,14 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TradePublicationFrameworkApi)
     instance_id = 'instance_id_example' # str | Integration instance ID
-    file_id = 56 # int | File delivery ID to retry
+    file_uuid = 'file_uuid_example' # str | File delivery UUID to retry, as returned by the run-files and file-deliveries listings
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.retry_tpf_sftp_delivery(instance_id, file_id, opts=opts)
+        # api_response =  api_instance.retry_tpf_sftp_delivery(instance_id, file_uuid, opts=opts)
 
         # [EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file
-        api_response = api_instance.retry_tpf_sftp_delivery(instance_id, file_id)
+        api_response = api_instance.retry_tpf_sftp_delivery(instance_id, file_uuid)
         pprint(api_response)
 
     except ApiException as e:
@@ -1157,7 +1157,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id** | **str**| Integration instance ID | 
- **file_id** | **int**| File delivery ID to retry | 
+ **file_uuid** | **str**| File delivery UUID to retry, as returned by the run-files and file-deliveries listings | 
 
 ### Return type
 

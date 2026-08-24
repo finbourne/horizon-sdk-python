@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**get_integration_configuration_fields**](IntegrationsApi.md#get_integration_configuration_fields) | **GET** /api/integrations/configuration/{integration}/fields | [EXPERIMENTAL] GetIntegrationConfigurationFields: Get the Field Mapping configuration for a given integration
 [**get_integration_configuration_properties**](IntegrationsApi.md#get_integration_configuration_properties) | **GET** /api/integrations/configuration/{integration}/properties | [EXPERIMENTAL] GetIntegrationConfigurationProperties: Get the Property Mapping configuration for a given integration
 [**get_schema**](IntegrationsApi.md#get_schema) | **GET** /api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
+[**get_workflow_result_fields**](IntegrationsApi.md#get_workflow_result_fields) | **GET** /api/integrations/instances/{instanceId}/workflow/resultfields | [EXPERIMENTAL] GetWorkflowResultFields: Get the Workflow result fields an integration instance returns
 [**list_dataflow_processors**](IntegrationsApi.md#list_dataflow_processors) | **GET** /api/integrations/dataflow/processors | [EXPERIMENTAL] ListDataflowProcessors: List processor types.
 [**list_instances**](IntegrationsApi.md#list_instances) | **GET** /api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations.
 [**list_integrations**](IntegrationsApi.md#list_integrations) | **GET** /api/integrations | [EXPERIMENTAL] ListIntegrations: List available integrations.
@@ -1158,6 +1159,99 @@ Name | Type | Description  | Notes
 **200** | The system defined JSON schema for the details of a specified integration. |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | The integration type does not exist or is not enabled. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_workflow_result_fields**
+> WorkflowResultFieldsResponse get_workflow_result_fields(instance_id)
+
+[EXPERIMENTAL] GetWorkflowResultFields: Get the Workflow result fields an integration instance returns
+
+Returns the result fields this instance's `RunWorkflow` post-process tasks declare, so a caller can discover what a run will report back before starting one. An instance with no enabled `RunWorkflow` post-process task is not an error: the response has `reportsToWorkflow` false and no fields. Note that such an instance will not report back at all, even when a Workflow task starts the run — configuring a `RunWorkflow` post-process task is what closes that loop. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.
+
+### Example
+
+```python
+from finbourne_horizon.exceptions import ApiException
+from finbourne_horizon.extensions.configuration_options import ConfigurationOptions
+from finbourne_horizon.models import *
+from pprint import pprint
+from finbourne_horizon import (
+    SyncApiClientFactory,
+    IntegrationsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "horizonUrl":"https://<your-domain>.lusid.com/horizon",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the finbourne_horizon SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(IntegrationsApi)
+    instance_id = 'instance_id_example' # str | Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_workflow_result_fields(instance_id, opts=opts)
+
+        # [EXPERIMENTAL] GetWorkflowResultFields: Get the Workflow result fields an integration instance returns
+        api_response = api_instance.get_workflow_result_fields(instance_id)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling IntegrationsApi->get_workflow_result_fields: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_id** | **str**| Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | 
+
+### Return type
+
+[**WorkflowResultFieldsResponse**](WorkflowResultFieldsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The declared result fields |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | The integration instance does not exist |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

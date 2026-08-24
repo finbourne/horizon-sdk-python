@@ -146,6 +146,11 @@ from finbourne_horizon.models.vendor_field import VendorField
 from finbourne_horizon.models.vendor_product import VendorProduct
 from finbourne_horizon.models.versioned_configuration_response import VersionedConfigurationResponse
 from finbourne_horizon.models.versioned_configuration_type_response import VersionedConfigurationTypeResponse
+from finbourne_horizon.models.workflow_result_field_response import WorkflowResultFieldResponse
+from finbourne_horizon.models.workflow_result_fields_response import WorkflowResultFieldsResponse
+from finbourne_horizon.models.workflow_result_fields_task_response import WorkflowResultFieldsTaskResponse
+from finbourne_horizon.models.workflow_run_result_response import WorkflowRunResultResponse
+from finbourne_horizon.models.workflow_run_results_response import WorkflowRunResultsResponse
 
 # import extensions into sdk package
 from finbourne_horizon.extensions import (
@@ -280,6 +285,11 @@ __all__ = [
     "VendorProduct",
     "VersionedConfigurationResponse",
     "VersionedConfigurationTypeResponse",
+    "WorkflowResultFieldResponse",
+    "WorkflowResultFieldsResponse",
+    "WorkflowResultFieldsTaskResponse",
+    "WorkflowRunResultResponse",
+    "WorkflowRunResultsResponse",
     "ApiClient",
     "Configuration",
     "OpenApiException",

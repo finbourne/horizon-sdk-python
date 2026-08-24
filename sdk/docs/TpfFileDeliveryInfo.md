@@ -4,7 +4,7 @@ Information about a file delivery
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | File delivery ID | 
+**file_uuid** | **str** | File delivery UUID — the identifier the retry endpoint accepts | 
 **file_name** | **str** | File name | 
 **file_hash** | **str** | SHA-256 hash of the file content | 
 **destination_path** | **str** | SFTP destination path | 
@@ -19,13 +19,13 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-id: StrictInt = # Replace with your value
+file_uuid: StrictStr = "example_file_uuid"
 file_name: StrictStr = "example_file_name"
 file_hash: StrictStr = "example_file_hash"
 destination_path: StrictStr = "example_destination_path"
 status: StrictStr = "example_status"
 generated_at: datetime = # Replace with your value
-tpf_file_delivery_info_instance = TpfFileDeliveryInfo(id=id, file_name=file_name, file_hash=file_hash, destination_path=destination_path, status=status, generated_at=generated_at)
+tpf_file_delivery_info_instance = TpfFileDeliveryInfo(file_uuid=file_uuid, file_name=file_name, file_hash=file_hash, destination_path=destination_path, status=status, generated_at=generated_at)
 
 ```
 
