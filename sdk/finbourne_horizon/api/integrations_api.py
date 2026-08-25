@@ -706,6 +706,7 @@ class IntegrationsApi:
     def get_dataflow_processor_schema(self, processor_type : Annotated[StrictStr, Field(..., description="")], async_req: Optional[bool]=None, **kwargs) -> Union[ProcessorSchemaResponse, Awaitable[ProcessorSchemaResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.  # noqa: E501
 
+        The user must be authenticated and the user's domain must be licensed for integration dataflow to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -736,6 +737,7 @@ class IntegrationsApi:
     def get_dataflow_processor_schema_with_http_info(self, processor_type : Annotated[StrictStr, Field(..., description="")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.  # noqa: E501
 
+        The user must be authenticated and the user's domain must be licensed for integration dataflow to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2163,7 +2165,7 @@ class IntegrationsApi:
     def list_dataflow_processors(self, async_req: Optional[bool]=None, **kwargs) -> Union[List[ProcessorDescription], Awaitable[List[ProcessorDescription]]]:  # noqa: E501
         """[EXPERIMENTAL] ListDataflowProcessors: List processor types.  # noqa: E501
 
-        The user must be authenticated to call this method.  # noqa: E501
+        The user must be authenticated and the user's domain must be licensed for integration dataflow to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2192,7 +2194,7 @@ class IntegrationsApi:
     def list_dataflow_processors_with_http_info(self, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListDataflowProcessors: List processor types.  # noqa: E501
 
-        The user must be authenticated to call this method.  # noqa: E501
+        The user must be authenticated and the user's domain must be licensed for integration dataflow to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
