@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **schedule_timezone** | **str** |  | [optional] 
 **last_run_at** | **datetime** |  | [optional] 
 **last_run_status** | **str** |  | [optional] 
-**latest_runs_in24_hours** | **str** |  | [optional] 
+**latest_runs_in24_hours** | [**LatestRunsResponse**](LatestRunsResponse.md) |  | [optional] 
 **destinations** | [**List[InstanceDestinations]**](InstanceDestinations.md) |  | 
 ## Example
 
@@ -32,7 +32,7 @@ schedule: Optional[StrictStr] = "example_schedule"
 schedule_timezone: Optional[StrictStr] = "example_schedule_timezone"
 last_run_at: Optional[datetime] = # Replace with your value
 last_run_status: Optional[StrictStr] = "example_last_run_status"
-latest_runs_in24_hours: Optional[StrictStr] = "example_latest_runs_in24_hours"
+latest_runs_in24_hours: Optional[LatestRunsResponse] = # Replace with your value
 destinations: List[InstanceDestinations]
 instance_response_instance = InstanceResponse(id=id, name=name, enabled=enabled, portfolios=portfolios, schedule=schedule, schedule_timezone=schedule_timezone, last_run_at=last_run_at, last_run_status=last_run_status, latest_runs_in24_hours=latest_runs_in24_hours, destinations=destinations)
 
