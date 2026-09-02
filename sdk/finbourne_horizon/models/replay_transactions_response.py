@@ -25,14 +25,14 @@ from datetime import datetime
 
 class ReplayTransactionsResponse(BaseModel):
     """
-    Response from a replay transactions operation containing the CSV output.  # noqa: E501
+    Response from a replay transactions operation. For DryRun, Finbourne.Horizon.Integrations.Web.Dto.Integrations.TradePublicationFramework.Response.ReplayTransactionsResponse.PayloadOutput carries the preview payload in the instance's configured output format (CSV or XML); for Committed it is empty.  # noqa: E501
     """
     batch_reference_id:  StrictStr = Field(...,alias="batchReferenceId") 
     mode:  StrictStr = Field(...,alias="mode") 
     transaction_count: StrictInt = Field(alias="transactionCount")
-    csv_output:  StrictStr = Field(...,alias="csvOutput") 
+    payload_output:  StrictStr = Field(...,alias="payloadOutput") 
     message:  StrictStr = Field(...,alias="message") 
-    __properties = ["batchReferenceId", "mode", "transactionCount", "csvOutput", "message"]
+    __properties = ["batchReferenceId", "mode", "transactionCount", "payloadOutput", "message"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,7 +81,7 @@ class ReplayTransactionsResponse(BaseModel):
             "batch_reference_id": obj.get("batchReferenceId"),
             "mode": obj.get("mode"),
             "transaction_count": obj.get("transactionCount"),
-            "csv_output": obj.get("csvOutput"),
+            "payload_output": obj.get("payloadOutput"),
             "message": obj.get("message")
         })
         return _obj

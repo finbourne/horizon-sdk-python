@@ -1,13 +1,13 @@
 # ReplayTransactionsResponse
 
-Response from a replay transactions operation containing the CSV output.
+Response from a replay transactions operation. For DryRun, Finbourne.Horizon.Integrations.Web.Dto.Integrations.TradePublicationFramework.Response.ReplayTransactionsResponse.PayloadOutput carries the preview payload in the instance's configured output format (CSV or XML); for Committed it is empty.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **batch_reference_id** | **str** |  | 
 **mode** | **str** |  | 
 **transaction_count** | **int** |  | 
-**csv_output** | **str** |  | 
+**payload_output** | **str** |  | 
 **message** | **str** |  | 
 ## Example
 
@@ -22,9 +22,9 @@ batch_reference_id: StrictStr = "example_batch_reference_id"
 mode: StrictStr = "example_mode"
 transaction_count: StrictInt = # Replace with your value
 transaction_count: StrictInt = 42
-csv_output: StrictStr = "example_csv_output"
+payload_output: StrictStr = "example_payload_output"
 message: StrictStr = "example_message"
-replay_transactions_response_instance = ReplayTransactionsResponse(batch_reference_id=batch_reference_id, mode=mode, transaction_count=transaction_count, csv_output=csv_output, message=message)
+replay_transactions_response_instance = ReplayTransactionsResponse(batch_reference_id=batch_reference_id, mode=mode, transaction_count=transaction_count, payload_output=payload_output, message=message)
 
 ```
 
