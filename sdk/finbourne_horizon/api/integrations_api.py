@@ -35,6 +35,7 @@ from finbourne_horizon.models.paged_resource_list_of_i_field_mapping import Page
 from finbourne_horizon.models.paged_resource_list_of_i_property_mapping import PagedResourceListOfIPropertyMapping
 from finbourne_horizon.models.processor_description import ProcessorDescription
 from finbourne_horizon.models.processor_schema_response import ProcessorSchemaResponse
+from finbourne_horizon.models.set_instance_optional_property_mapping_response import SetInstanceOptionalPropertyMappingResponse
 from finbourne_horizon.models.update_instance_request import UpdateInstanceRequest
 from finbourne_horizon.models.workflow_result_fields_response import WorkflowResultFieldsResponse
 
@@ -706,6 +707,7 @@ class IntegrationsApi:
     def get_dataflow_processor_schema(self, processor_type : Annotated[StrictStr, Field(..., description="")], async_req: Optional[bool]=None, **kwargs) -> Union[ProcessorSchemaResponse, Awaitable[ProcessorSchemaResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.  # noqa: E501
 
+        The user must be authenticated and the user's domain must be licensed for integration dataflow to call this method. An unlicensed domain is answered with a 404, as for an unknown processor type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -736,6 +738,7 @@ class IntegrationsApi:
     def get_dataflow_processor_schema_with_http_info(self, processor_type : Annotated[StrictStr, Field(..., description="")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.  # noqa: E501
 
+        The user must be authenticated and the user's domain must be licensed for integration dataflow to call this method. An unlicensed domain is answered with a 404, as for an unknown processor type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1160,15 +1163,15 @@ class IntegrationsApi:
 
 
     @overload
-    async def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], **kwargs) -> Dict[str, LusidPropertyDefinitionOverridesByType]:  # noqa: E501
+    async def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], **kwargs) -> SetInstanceOptionalPropertyMappingResponse:  # noqa: E501
         ...
 
     @overload
-    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=True, **kwargs) -> Dict[str, LusidPropertyDefinitionOverridesByType]:  # noqa: E501
+    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=True, **kwargs) -> SetInstanceOptionalPropertyMappingResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, LusidPropertyDefinitionOverridesByType], Awaitable[Dict[str, LusidPropertyDefinitionOverridesByType]]]:  # noqa: E501
+    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=None, **kwargs) -> Union[SetInstanceOptionalPropertyMappingResponse, Awaitable[SetInstanceOptionalPropertyMappingResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance  # noqa: E501
 
         Will return the full list of optional properties configured for this integration instance and any naming overrides  # noqa: E501
@@ -1190,7 +1193,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: Dict[str, LusidPropertyDefinitionOverridesByType]
+        :rtype: SetInstanceOptionalPropertyMappingResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -1236,7 +1239,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(Dict[str, LusidPropertyDefinitionOverridesByType], status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(SetInstanceOptionalPropertyMappingResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -1298,7 +1301,7 @@ class IntegrationsApi:
         _response_types_map = {
             '404': None,
             '400': "LusidValidationProblemDetails",
-            '200': "Dict[str, LusidPropertyDefinitionOverridesByType]",
+            '200': "SetInstanceOptionalPropertyMappingResponse",
         }
 
         return self.api_client.call_api(
@@ -2163,7 +2166,7 @@ class IntegrationsApi:
     def list_dataflow_processors(self, async_req: Optional[bool]=None, **kwargs) -> Union[List[ProcessorDescription], Awaitable[List[ProcessorDescription]]]:  # noqa: E501
         """[EXPERIMENTAL] ListDataflowProcessors: List processor types.  # noqa: E501
 
-        The user must be authenticated to call this method.  # noqa: E501
+        Any authenticated user can call this method. The processor list is empty unless the user's domain is licensed for integration dataflow.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2192,7 +2195,7 @@ class IntegrationsApi:
     def list_dataflow_processors_with_http_info(self, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListDataflowProcessors: List processor types.  # noqa: E501
 
-        The user must be authenticated to call this method.  # noqa: E501
+        Any authenticated user can call this method. The processor list is empty unless the user's domain is licensed for integration dataflow.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -2296,24 +2299,28 @@ class IntegrationsApi:
 
 
     @overload
-    async def list_instances(self, **kwargs) -> List[IntegrationInstance]:  # noqa: E501
+    async def list_instances(self, integration_types : Annotated[Optional[List[StrictStr]], Field(description="Restrict results to these integration types e.g. \"copp-clark\". Types the caller is not licensed and entitled for match nothing.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter over Name, Description and Enabled e.g. Name eq 'Market data'.")] = None, **kwargs) -> List[IntegrationInstance]:  # noqa: E501
         ...
 
     @overload
-    def list_instances(self, async_req: Optional[bool]=True, **kwargs) -> List[IntegrationInstance]:  # noqa: E501
+    def list_instances(self, integration_types : Annotated[Optional[List[StrictStr]], Field(description="Restrict results to these integration types e.g. \"copp-clark\". Types the caller is not licensed and entitled for match nothing.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter over Name, Description and Enabled e.g. Name eq 'Market data'.")] = None, async_req: Optional[bool]=True, **kwargs) -> List[IntegrationInstance]:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_instances(self, async_req: Optional[bool]=None, **kwargs) -> Union[List[IntegrationInstance], Awaitable[List[IntegrationInstance]]]:  # noqa: E501
+    def list_instances(self, integration_types : Annotated[Optional[List[StrictStr]], Field(description="Restrict results to these integration types e.g. \"copp-clark\". Types the caller is not licensed and entitled for match nothing.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter over Name, Description and Enabled e.g. Name eq 'Market data'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[List[IntegrationInstance], Awaitable[List[IntegrationInstance]]]:  # noqa: E501
         """[EXPERIMENTAL] ListInstances: List instances across all integrations.  # noqa: E501
 
         The user must be authenticated to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_instances(async_req=True)
+        >>> thread = api.list_instances(integration_types, filter, async_req=True)
         >>> result = thread.get()
 
+        :param integration_types: Restrict results to these integration types e.g. \"copp-clark\". Types the caller is not licensed and entitled for match nothing.
+        :type integration_types: List[str]
+        :param filter: A Finbourne filter over Name, Description and Enabled e.g. Name eq 'Market data'.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -2330,19 +2337,23 @@ class IntegrationsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_instances_with_http_info(**kwargs)  # noqa: E501
+        return self.list_instances_with_http_info(integration_types, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_instances_with_http_info(self, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_instances_with_http_info(self, integration_types : Annotated[Optional[List[StrictStr]], Field(description="Restrict results to these integration types e.g. \"copp-clark\". Types the caller is not licensed and entitled for match nothing.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter over Name, Description and Enabled e.g. Name eq 'Market data'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListInstances: List instances across all integrations.  # noqa: E501
 
         The user must be authenticated to call this method.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_instances_with_http_info(async_req=True)
+        >>> thread = api.list_instances_with_http_info(integration_types, filter, async_req=True)
         >>> result = thread.get()
 
+        :param integration_types: Restrict results to these integration types e.g. \"copp-clark\". Types the caller is not licensed and entitled for match nothing.
+        :type integration_types: List[str]
+        :param filter: A Finbourne filter over Name, Description and Enabled e.g. Name eq 'Market data'.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2370,6 +2381,8 @@ class IntegrationsApi:
         _params = locals()
 
         _all_params = [
+            'integration_types',
+            'filter'
         ]
         _all_params.extend(
             [
@@ -2401,6 +2414,13 @@ class IntegrationsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('integration_types') is not None:  # noqa: E501
+            _query_params.append(('integrationTypes', _params['integration_types']))
+            _collection_formats['integrationTypes'] = 'multi'
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -2417,6 +2437,7 @@ class IntegrationsApi:
 
         _response_types_map = {
             '200': "List[IntegrationInstance]",
+            '400': "LusidValidationProblemDetails",
             '404': None,
         }
 
@@ -2583,15 +2604,15 @@ class IntegrationsApi:
 
 
     @overload
-    async def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverridesByType]], Field(description="Properties to be included and any overrides")] = None, **kwargs) -> Dict[str, LusidPropertyDefinitionOverridesByType]:  # noqa: E501
+    async def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverridesByType]], Field(description="Properties to be included and any overrides")] = None, **kwargs) -> SetInstanceOptionalPropertyMappingResponse:  # noqa: E501
         ...
 
     @overload
-    def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverridesByType]], Field(description="Properties to be included and any overrides")] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, LusidPropertyDefinitionOverridesByType]:  # noqa: E501
+    def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverridesByType]], Field(description="Properties to be included and any overrides")] = None, async_req: Optional[bool]=True, **kwargs) -> SetInstanceOptionalPropertyMappingResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverridesByType]], Field(description="Properties to be included and any overrides")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, LusidPropertyDefinitionOverridesByType], Awaitable[Dict[str, LusidPropertyDefinitionOverridesByType]]]:  # noqa: E501
+    def set_instance_optional_property_mapping(self, instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], request_body : Annotated[Optional[Dict[str, LusidPropertyDefinitionOverridesByType]], Field(description="Properties to be included and any overrides")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[SetInstanceOptionalPropertyMappingResponse, Awaitable[SetInstanceOptionalPropertyMappingResponse]]:  # noqa: E501
         """[EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an integration instance  # noqa: E501
 
         The full list of properties must be supplied, the removal of a property from this list will remove it from the integration instance  # noqa: E501
@@ -2615,7 +2636,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: Dict[str, LusidPropertyDefinitionOverridesByType]
+        :rtype: SetInstanceOptionalPropertyMappingResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -2663,7 +2684,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(Dict[str, LusidPropertyDefinitionOverridesByType], status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(SetInstanceOptionalPropertyMappingResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -2736,7 +2757,7 @@ class IntegrationsApi:
         _response_types_map = {
             '404': None,
             '400': "LusidValidationProblemDetails",
-            '200': "Dict[str, LusidPropertyDefinitionOverridesByType]",
+            '200': "SetInstanceOptionalPropertyMappingResponse",
         }
 
         return self.api_client.call_api(

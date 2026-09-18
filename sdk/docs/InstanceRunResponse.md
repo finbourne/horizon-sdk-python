@@ -5,7 +5,7 @@ Response containing details of a single run for an instance.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **run_id** | **str** |  | 
-**batch_reference_id** | **str** |  | 
+**reference_id** | **str** |  | 
 **attempt** | **int** |  | [optional] 
 **start_time** | **datetime** |  | 
 **end_time** | **datetime** |  | [optional] 
@@ -27,7 +27,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 run_id: StrictStr = "example_run_id"
-batch_reference_id: StrictStr = "example_batch_reference_id"
+reference_id: StrictStr = "example_reference_id"
 attempt: Optional[StrictInt] = None
 attempt: Optional[StrictInt] = None
 start_time: datetime = # Replace with your value
@@ -42,7 +42,7 @@ skipped_count: StrictInt = # Replace with your value
 failed_count: StrictInt = # Replace with your value
 failed_files: StrictInt = # Replace with your value
 failed_files: StrictInt = 42
-instance_run_response_instance = InstanceRunResponse(run_id=run_id, batch_reference_id=batch_reference_id, attempt=attempt, start_time=start_time, end_time=end_time, duration=duration, status=status, triggered_by=triggered_by, total=total, sent_count=sent_count, skipped_count=skipped_count, failed_count=failed_count, failed_files=failed_files)
+instance_run_response_instance = InstanceRunResponse(run_id=run_id, reference_id=reference_id, attempt=attempt, start_time=start_time, end_time=end_time, duration=duration, status=status, triggered_by=triggered_by, total=total, sent_count=sent_count, skipped_count=skipped_count, failed_count=failed_count, failed_files=failed_files)
 
 ```
 

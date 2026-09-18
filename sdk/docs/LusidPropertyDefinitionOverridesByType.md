@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **entity_type** | **str** |  | [optional] 
 **entity_sub_type** | **List[str]** |  | [optional] 
 **vendor_package** | **List[str]** |  | [optional] 
+**effective_from_override** | **str** | ISO-8601 instant to use as the property value&#39;s effectiveFrom instead of the date the integration derives, e.g. \&quot;0001-01-01T00:00:00Z\&quot;. Only accepted for integrations reporting supportsEffectiveFromOverride, and only for TimeVariant property definitions. Omit to leave any stored value untouched; send an empty string to clear it. | [optional] 
 ## Example
 
 ```python
@@ -22,7 +23,8 @@ description_override: Optional[StrictStr] = "example_description_override"
 entity_type: Optional[StrictStr] = "example_entity_type"
 entity_sub_type: Optional[List[StrictStr]] = # Replace with your value
 vendor_package: Optional[List[StrictStr]] = # Replace with your value
-lusid_property_definition_overrides_by_type_instance = LusidPropertyDefinitionOverridesByType(display_name_override=display_name_override, description_override=description_override, entity_type=entity_type, entity_sub_type=entity_sub_type, vendor_package=vendor_package)
+effective_from_override: Optional[StrictStr] = "example_effective_from_override"
+lusid_property_definition_overrides_by_type_instance = LusidPropertyDefinitionOverridesByType(display_name_override=display_name_override, description_override=description_override, entity_type=entity_type, entity_sub_type=entity_sub_type, vendor_package=vendor_package, effective_from_override=effective_from_override)
 
 ```
 

@@ -32,7 +32,8 @@ class LusidPropertyDefinitionOverridesByType(BaseModel):
     entity_type:  Optional[StrictStr] = Field(None,alias="entityType") 
     entity_sub_type: Optional[List[StrictStr]] = Field(default=None, alias="entitySubType")
     vendor_package: Optional[List[StrictStr]] = Field(default=None, alias="vendorPackage")
-    __properties = ["displayNameOverride", "descriptionOverride", "entityType", "entitySubType", "vendorPackage"]
+    effective_from_override:  Optional[StrictStr] = Field(None,alias="effectiveFromOverride", description="ISO-8601 instant to use as the property value's effectiveFrom instead of the date the integration derives, e.g. \"0001-01-01T00:00:00Z\". Only accepted for integrations reporting supportsEffectiveFromOverride, and only for TimeVariant property definitions. Omit to leave any stored value untouched; send an empty string to clear it.") 
+    __properties = ["displayNameOverride", "descriptionOverride", "entityType", "entitySubType", "vendorPackage", "effectiveFromOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -91,6 +92,11 @@ class LusidPropertyDefinitionOverridesByType(BaseModel):
         if self.vendor_package is None and "vendor_package" in self.__fields_set__:
             _dict['vendorPackage'] = None
 
+        # set to None if effective_from_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_from_override is None and "effective_from_override" in self.__fields_set__:
+            _dict['effectiveFromOverride'] = None
+
         return _dict
 
     @classmethod
@@ -107,7 +113,8 @@ class LusidPropertyDefinitionOverridesByType(BaseModel):
             "description_override": obj.get("descriptionOverride"),
             "entity_type": obj.get("entityType"),
             "entity_sub_type": obj.get("entitySubType"),
-            "vendor_package": obj.get("vendorPackage")
+            "vendor_package": obj.get("vendorPackage"),
+            "effective_from_override": obj.get("effectiveFromOverride")
         })
         return _obj
 

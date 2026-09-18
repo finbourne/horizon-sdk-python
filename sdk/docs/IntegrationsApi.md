@@ -406,6 +406,8 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetDataflowProcessorSchema: Returns processor configuration schema for a given processor type. This is used by the UI to render the configuration form for a processortype.
 
+The user must be authenticated and the user's domain must be licensed for integration dataflow to call this method. An unlicensed domain is answered with a 404, as for an unknown processor type.
+
 ### Example
 
 ```python
@@ -487,7 +489,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **400** | The details of the input related failure |  -  |
 **200** | OK |  -  |
-**404** | The processor type does not exist. |  -  |
+**404** | The processor type does not exist, or your domain is not licensed for integration dataflow. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
@@ -681,7 +683,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_instance_optional_property_mapping**
-> Dict[str, LusidPropertyDefinitionOverridesByType] get_instance_optional_property_mapping(integration, instance_id)
+> SetInstanceOptionalPropertyMappingResponse get_instance_optional_property_mapping(integration, instance_id)
 
 [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance
 
@@ -758,7 +760,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Dict[str, LusidPropertyDefinitionOverridesByType]**](LusidPropertyDefinitionOverridesByType.md)
+[**SetInstanceOptionalPropertyMappingResponse**](SetInstanceOptionalPropertyMappingResponse.md)
 
 ### HTTP request headers
 
@@ -1261,7 +1263,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] ListDataflowProcessors: List processor types.
 
-The user must be authenticated to call this method.
+Any authenticated user can call this method. The processor list is empty unless the user's domain is licensed for integration dataflow.
 
 ### Example
 
@@ -1345,7 +1347,7 @@ This endpoint does not need any parameter.
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_instances**
-> List[IntegrationInstance] list_instances()
+> List[IntegrationInstance] list_instances(integration_types=integration_types, filter=filter)
 
 [EXPERIMENTAL] ListInstances: List instances across all integrations.
 
@@ -1396,13 +1398,15 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(IntegrationsApi)
+    integration_types = ['integration_types_example'] # List[str] | Restrict results to these integration types e.g. \"copp-clark\". Types the caller is not licensed and entitled for match nothing. (optional)
+    filter = 'filter_example' # str | A Finbourne filter over Name, Description and Enabled e.g. Name eq 'Market data'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_instances(opts=opts)
+        # api_response =  api_instance.list_instances(integration_types=integration_types, filter=filter, opts=opts)
 
         # [EXPERIMENTAL] ListInstances: List instances across all integrations.
-        api_response = api_instance.list_instances()
+        api_response = api_instance.list_instances(integration_types=integration_types, filter=filter)
         pprint(api_response)
 
     except ApiException as e:
@@ -1412,7 +1416,11 @@ main()
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **integration_types** | [**List[str]**](str.md)| Restrict results to these integration types e.g. \&quot;copp-clark\&quot;. Types the caller is not licensed and entitled for match nothing. | [optional] 
+ **filter** | **str**| A Finbourne filter over Name, Description and Enabled e.g. Name eq &#39;Market data&#39;. | [optional] 
 
 ### Return type
 
@@ -1427,6 +1435,7 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
 **404** | The requested instance(s) do not exist. |  -  |
 **0** | Error response |  -  |
 
@@ -1520,7 +1529,7 @@ This endpoint does not need any parameter.
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **set_instance_optional_property_mapping**
-> Dict[str, LusidPropertyDefinitionOverridesByType] set_instance_optional_property_mapping(instance_id, integration, request_body=request_body)
+> SetInstanceOptionalPropertyMappingResponse set_instance_optional_property_mapping(instance_id, integration, request_body=request_body)
 
 [EXPERIMENTAL] SetInstanceOptionalPropertyMapping: Set the Optional Property Mapping for an integration instance
 
@@ -1573,7 +1582,7 @@ def main():
     api_instance = api_client_factory.build(IntegrationsApi)
     instance_id = 'instance_id_example' # str | Identifier of the instance
     integration = 'integration_example' # str | The type of the integration e.g. \"copp-clark\".
-    request_body = {"Instrument/TestVendor/CreditRating":{"displayNameOverride":"Vendor Credit Rating","entityType":"Instrument","entitySubType":["Equity"],"vendorPackage":["Transaction"]}} # Dict[str, LusidPropertyDefinitionOverridesByType] | Properties to be included and any overrides (optional)
+    request_body = {"Instrument/TestVendor/CreditRating":{"displayNameOverride":"Vendor Credit Rating","entityType":"Instrument","entitySubType":["Equity"],"vendorPackage":["Transaction"],"effectiveFromOverride":"0001-01-01T00:00:00Z"},"Instrument/TestVendor/CouponRate":{"entityType":"Instrument","entitySubType":["Bond"],"vendorPackage":["Transaction"]}} # Dict[str, LusidPropertyDefinitionOverridesByType] | Properties to be included and any overrides (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1599,7 +1608,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Dict[str, LusidPropertyDefinitionOverridesByType]**](LusidPropertyDefinitionOverridesByType.md)
+[**SetInstanceOptionalPropertyMappingResponse**](SetInstanceOptionalPropertyMappingResponse.md)
 
 ### HTTP request headers
 

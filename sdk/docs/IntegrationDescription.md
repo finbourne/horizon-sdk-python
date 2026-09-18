@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **description** | **str** | Describes the purpose of the integration. | 
 **supported_trigger_types** | **List[str]** | Trigger types (Time, File) the integration supports. | 
 **licensed** | **bool** | True if your domain is licensed to use this integration, otherwise false. | 
+**supports_effective_from_override** | **bool** | True if this integration allows a per-property effectiveFromOverride to be set via the optional property mapping endpoints, otherwise false. | 
 ## Example
 
 ```python
@@ -24,7 +25,9 @@ description: StrictStr = "example_description"
 supported_trigger_types: List[StrictStr] = # Replace with your value
 licensed: StrictBool = # Replace with your value
 licensed:StrictBool = True
-integration_description_instance = IntegrationDescription(type=type, name=name, description=description, supported_trigger_types=supported_trigger_types, licensed=licensed)
+supports_effective_from_override: StrictBool = # Replace with your value
+supports_effective_from_override:StrictBool = True
+integration_description_instance = IntegrationDescription(type=type, name=name, description=description, supported_trigger_types=supported_trigger_types, licensed=licensed, supports_effective_from_override=supports_effective_from_override)
 
 ```
 

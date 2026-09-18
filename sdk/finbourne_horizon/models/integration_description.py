@@ -32,7 +32,8 @@ class IntegrationDescription(BaseModel):
     description:  StrictStr = Field(...,alias="description", description="Describes the purpose of the integration.") 
     supported_trigger_types: List[StrictStr] = Field(description="Trigger types (Time, File) the integration supports.", alias="supportedTriggerTypes")
     licensed: StrictBool = Field(description="True if your domain is licensed to use this integration, otherwise false.")
-    __properties = ["type", "name", "description", "supportedTriggerTypes", "licensed"]
+    supports_effective_from_override: StrictBool = Field(description="True if this integration allows a per-property effectiveFromOverride to be set via the optional property mapping endpoints, otherwise false.", alias="supportsEffectiveFromOverride")
+    __properties = ["type", "name", "description", "supportedTriggerTypes", "licensed", "supportsEffectiveFromOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,7 +83,8 @@ class IntegrationDescription(BaseModel):
             "name": obj.get("name"),
             "description": obj.get("description"),
             "supported_trigger_types": obj.get("supportedTriggerTypes"),
-            "licensed": obj.get("licensed")
+            "licensed": obj.get("licensed"),
+            "supports_effective_from_override": obj.get("supportsEffectiveFromOverride")
         })
         return _obj
 

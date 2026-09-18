@@ -28,7 +28,7 @@ class InstanceRunResponse(BaseModel):
     Response containing details of a single run for an instance.  # noqa: E501
     """
     run_id:  StrictStr = Field(...,alias="runId") 
-    batch_reference_id:  StrictStr = Field(...,alias="batchReferenceId") 
+    reference_id:  StrictStr = Field(...,alias="referenceId") 
     attempt: Optional[StrictInt] = None
     start_time: datetime = Field(alias="startTime")
     end_time: Optional[datetime] = Field(default=None, alias="endTime")
@@ -40,7 +40,7 @@ class InstanceRunResponse(BaseModel):
     skipped_count: StrictInt = Field(alias="skippedCount")
     failed_count: StrictInt = Field(alias="failedCount")
     failed_files: StrictInt = Field(alias="failedFiles")
-    __properties = ["runId", "batchReferenceId", "attempt", "startTime", "endTime", "duration", "status", "triggeredBy", "total", "sentCount", "skippedCount", "failedCount", "failedFiles"]
+    __properties = ["runId", "referenceId", "attempt", "startTime", "endTime", "duration", "status", "triggeredBy", "total", "sentCount", "skippedCount", "failedCount", "failedFiles"]
 
     class Config:
         """Pydantic configuration"""
@@ -107,7 +107,7 @@ class InstanceRunResponse(BaseModel):
 
         _obj = InstanceRunResponse.parse_obj({
             "run_id": obj.get("runId"),
-            "batch_reference_id": obj.get("batchReferenceId"),
+            "reference_id": obj.get("referenceId"),
             "attempt": obj.get("attempt"),
             "start_time": obj.get("startTime"),
             "end_time": obj.get("endTime"),

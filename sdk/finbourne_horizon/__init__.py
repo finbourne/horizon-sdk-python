@@ -130,6 +130,7 @@ from finbourne_horizon.models.resource_id import ResourceId
 from finbourne_horizon.models.row_details import RowDetails
 from finbourne_horizon.models.run_file_response import RunFileResponse
 from finbourne_horizon.models.run_status_count import RunStatusCount
+from finbourne_horizon.models.set_instance_optional_property_mapping_response import SetInstanceOptionalPropertyMappingResponse
 from finbourne_horizon.models.tpf_failed_delivery_response import TpfFailedDeliveryResponse
 from finbourne_horizon.models.tpf_file_delivery_info import TpfFileDeliveryInfo
 from finbourne_horizon.models.tpf_file_delivery_response import TpfFileDeliveryResponse
@@ -271,6 +272,7 @@ __all__ = [
     "RowDetails",
     "RunFileResponse",
     "RunStatusCount",
+    "SetInstanceOptionalPropertyMappingResponse",
     "TpfFailedDeliveryResponse",
     "TpfFileDeliveryInfo",
     "TpfFileDeliveryResponse",
