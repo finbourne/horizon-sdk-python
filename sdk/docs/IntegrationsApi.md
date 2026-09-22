@@ -683,7 +683,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_instance_optional_property_mapping**
-> SetInstanceOptionalPropertyMappingResponse get_instance_optional_property_mapping(integration, instance_id)
+> Dict[str, LusidPropertyDefinitionOverridesByType] get_instance_optional_property_mapping(integration, instance_id)
 
 [EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance
 
@@ -760,7 +760,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SetInstanceOptionalPropertyMappingResponse**](SetInstanceOptionalPropertyMappingResponse.md)
+[**Dict[str, LusidPropertyDefinitionOverridesByType]**](LusidPropertyDefinitionOverridesByType.md)
 
 ### HTTP request headers
 

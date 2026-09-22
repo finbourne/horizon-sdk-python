@@ -1163,15 +1163,15 @@ class IntegrationsApi:
 
 
     @overload
-    async def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], **kwargs) -> SetInstanceOptionalPropertyMappingResponse:  # noqa: E501
+    async def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], **kwargs) -> Dict[str, LusidPropertyDefinitionOverridesByType]:  # noqa: E501
         ...
 
     @overload
-    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=True, **kwargs) -> SetInstanceOptionalPropertyMappingResponse:  # noqa: E501
+    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=True, **kwargs) -> Dict[str, LusidPropertyDefinitionOverridesByType]:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=None, **kwargs) -> Union[SetInstanceOptionalPropertyMappingResponse, Awaitable[SetInstanceOptionalPropertyMappingResponse]]:  # noqa: E501
+    def get_instance_optional_property_mapping(self, integration : Annotated[StrictStr, Field(..., description="The type of the integration e.g. \"copp-clark\".")], instance_id : Annotated[StrictStr, Field(..., description="Identifier of the instance")], async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, LusidPropertyDefinitionOverridesByType], Awaitable[Dict[str, LusidPropertyDefinitionOverridesByType]]]:  # noqa: E501
         """[EXPERIMENTAL] GetInstanceOptionalPropertyMapping: Get the Optional Property Mapping for an integration instance  # noqa: E501
 
         Will return the full list of optional properties configured for this integration instance and any naming overrides  # noqa: E501
@@ -1193,7 +1193,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: SetInstanceOptionalPropertyMappingResponse
+        :rtype: Dict[str, LusidPropertyDefinitionOverridesByType]
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -1239,7 +1239,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(SetInstanceOptionalPropertyMappingResponse, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(Dict[str, LusidPropertyDefinitionOverridesByType], status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -1301,7 +1301,7 @@ class IntegrationsApi:
         _response_types_map = {
             '404': None,
             '400': "LusidValidationProblemDetails",
-            '200': "SetInstanceOptionalPropertyMappingResponse",
+            '200': "Dict[str, LusidPropertyDefinitionOverridesByType]",
         }
 
         return self.api_client.call_api(

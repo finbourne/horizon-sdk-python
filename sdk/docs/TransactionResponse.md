@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 **publication_status** | **str** |  | 
 **portfolio_scope** | **str** |  | [optional] 
 **portfolio_code** | **str** |  | [optional] 
-**instrument_id** | **str** |  | 
-**instrument_type** | **str** |  | 
-**instrument_name** | **str** |  | 
-**trade_date** | **datetime** |  | 
-**settlement_date** | **datetime** |  | 
+**instrument_id** | **str** |  | [optional] 
+**instrument_type** | **str** |  | [optional] 
+**instrument_name** | **str** |  | [optional] 
+**trade_date** | **datetime** |  | [optional] 
+**settlement_date** | **datetime** |  | [optional] 
 **status** | **str** |  | 
 **skip_reason** | **str** |  | [optional] 
 **failure_reason** | **str** |  | [optional] 
@@ -32,11 +32,11 @@ transaction_id: StrictStr = "example_transaction_id"
 publication_status: StrictStr = "example_publication_status"
 portfolio_scope: Optional[StrictStr] = "example_portfolio_scope"
 portfolio_code: Optional[StrictStr] = "example_portfolio_code"
-instrument_id: StrictStr = "example_instrument_id"
-instrument_type: StrictStr = "example_instrument_type"
-instrument_name: StrictStr = "example_instrument_name"
-trade_date: datetime = # Replace with your value
-settlement_date: datetime = # Replace with your value
+instrument_id: Optional[StrictStr] = "example_instrument_id"
+instrument_type: Optional[StrictStr] = "example_instrument_type"
+instrument_name: Optional[StrictStr] = "example_instrument_name"
+trade_date: Optional[datetime] = # Replace with your value
+settlement_date: Optional[datetime] = # Replace with your value
 status: StrictStr = "example_status"
 skip_reason: Optional[StrictStr] = "example_skip_reason"
 failure_reason: Optional[StrictStr] = "example_failure_reason"
