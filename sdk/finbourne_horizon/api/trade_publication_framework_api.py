@@ -21,7 +21,7 @@ from typing import overload, Optional, Union, Awaitable
 
 from datetime import datetime
 from pydantic.v1 import Field, StrictBool, StrictInt, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from finbourne_horizon.models.file_delivery_status import FileDeliveryStatus
 from finbourne_horizon.models.instances_response import InstancesResponse
@@ -781,29 +781,33 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def list_instance_run_history(self, instance_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> PagedResourceListOfInstanceRunResponse:  # noqa: E501
+    async def list_instance_run_history(self, instance_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Optional[StrictInt] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on any response field except duration, e.g. startTime gte '2026-04-01T00:00:00Z' and status eq 'Auto-retry'. status is the displayed status.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first.")] = None, **kwargs) -> PagedResourceListOfInstanceRunResponse:  # noqa: E501
         ...
 
     @overload
-    def list_instance_run_history(self, instance_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfInstanceRunResponse:  # noqa: E501
+    def list_instance_run_history(self, instance_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Optional[StrictInt] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on any response field except duration, e.g. startTime gte '2026-04-01T00:00:00Z' and status eq 'Auto-retry'. status is the displayed status.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfInstanceRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_instance_run_history(self, instance_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfInstanceRunResponse, Awaitable[PagedResourceListOfInstanceRunResponse]]:  # noqa: E501
+    def list_instance_run_history(self, instance_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Optional[StrictInt] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on any response field except duration, e.g. startTime gte '2026-04-01T00:00:00Z' and status eq 'Auto-retry'. status is the displayed status.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfInstanceRunResponse, Awaitable[PagedResourceListOfInstanceRunResponse]]:  # noqa: E501
         """[EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_instance_run_history(instance_id, page, page_size, async_req=True)
+        >>> thread = api.list_instance_run_history(instance_id, page, page_size, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
         :param instance_id: (required)
         :type instance_id: str
-        :param page:
+        :param page: The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.
         :type page: str
         :param page_size:
         :type page_size: int
+        :param filter: A Finbourne filter on any response field except duration, e.g. startTime gte '2026-04-01T00:00:00Z' and status eq 'Auto-retry'. status is the displayed status.
+        :type filter: str
+        :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first.
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -820,24 +824,28 @@ class TradePublicationFrameworkApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_instance_run_history_with_http_info(instance_id, page, page_size, **kwargs)  # noqa: E501
+        return self.list_instance_run_history_with_http_info(instance_id, page, page_size, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_instance_run_history_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_instance_run_history_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Optional[StrictInt] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on any response field except duration, e.g. startTime gte '2026-04-01T00:00:00Z' and status eq 'Auto-retry'. status is the displayed status.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_instance_run_history_with_http_info(instance_id, page, page_size, async_req=True)
+        >>> thread = api.list_instance_run_history_with_http_info(instance_id, page, page_size, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
         :param instance_id: (required)
         :type instance_id: str
-        :param page:
+        :param page: The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.
         :type page: str
         :param page_size:
         :type page_size: int
+        :param filter: A Finbourne filter on any response field except duration, e.g. startTime gte '2026-04-01T00:00:00Z' and status eq 'Auto-retry'. status is the displayed status.
+        :type filter: str
+        :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first.
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -867,7 +875,9 @@ class TradePublicationFrameworkApi:
         _all_params = [
             'instance_id',
             'page',
-            'page_size'
+            'page_size',
+            'filter',
+            'sort_by'
         ]
         _all_params.extend(
             [
@@ -907,6 +917,13 @@ class TradePublicationFrameworkApi:
 
         if _params.get('page_size') is not None:  # noqa: E501
             _query_params.append(('pageSize', _params['page_size']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

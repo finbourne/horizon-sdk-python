@@ -412,7 +412,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_instance_run_history**
-> PagedResourceListOfInstanceRunResponse list_instance_run_history(instance_id, page=page, page_size=page_size)
+> PagedResourceListOfInstanceRunResponse list_instance_run_history(instance_id, page=page, page_size=page_size, filter=filter, sort_by=sort_by)
 
 [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.
 
@@ -462,15 +462,17 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TradePublicationFrameworkApi)
     instance_id = 'instance_id_example' # str | 
-    page = '' # str |  (optional) (default to '')
+    page = '' # str | The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged. (optional) (default to '')
     page_size = 100 # int |  (optional) (default to 100)
+    filter = 'filter_example' # str | A Finbourne filter on any response field except duration, e.g. startTime gte '2026-04-01T00:00:00Z' and status eq 'Auto-retry'. status is the displayed status. (optional)
+    sort_by = ['sort_by_example'] # List[str] | Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_instance_run_history(instance_id, page=page, page_size=page_size, opts=opts)
+        # api_response =  api_instance.list_instance_run_history(instance_id, page=page, page_size=page_size, filter=filter, sort_by=sort_by, opts=opts)
 
         # [EXPERIMENTAL] ListInstanceRunHistory: List run history for a given TPF instance, with pagination support.
-        api_response = api_instance.list_instance_run_history(instance_id, page=page, page_size=page_size)
+        api_response = api_instance.list_instance_run_history(instance_id, page=page, page_size=page_size, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
     except ApiException as e:
@@ -484,8 +486,10 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id** | **str**|  | 
- **page** | **str**|  | [optional] [default to &#39;&#39;]
+ **page** | **str**| The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. | [optional] [default to &#39;&#39;]
  **page_size** | **int**|  | [optional] [default to 100]
+ **filter** | **str**| A Finbourne filter on any response field except duration, e.g. startTime gte &#39;2026-04-01T00:00:00Z&#39; and status eq &#39;Auto-retry&#39;. status is the displayed status. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first. | [optional] 
 
 ### Return type
 
