@@ -20,7 +20,7 @@ from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from pydantic.v1 import Field, StrictInt, StrictStr
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from finbourne_horizon.models.create_instance_request import CreateInstanceRequest
 from finbourne_horizon.models.execute_instance_response import ExecuteInstanceResponse
@@ -528,15 +528,15 @@ class IntegrationsApi:
 
 
     @overload
-    async def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(description="Dictionary(string,string) of runtime parameters passed to the integration instance")], **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
+    async def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, Any], Field(description="JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys.")], **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
         ...
 
     @overload
-    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(description="Dictionary(string,string) of runtime parameters passed to the integration instance")], async_req: Optional[bool]=True, **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
+    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, Any], Field(description="JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys.")], async_req: Optional[bool]=True, **kwargs) -> ExecuteInstanceResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(description="Dictionary(string,string) of runtime parameters passed to the integration instance")], async_req: Optional[bool]=None, **kwargs) -> Union[ExecuteInstanceResponse, Awaitable[ExecuteInstanceResponse]]:  # noqa: E501
+    def execute_instance_with_params(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, Any], Field(description="JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys.")], async_req: Optional[bool]=None, **kwargs) -> Union[ExecuteInstanceResponse, Awaitable[ExecuteInstanceResponse]]:  # noqa: E501
         """[EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters  # noqa: E501
 
         Starts execution of an instance, returning its execution identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -548,8 +548,8 @@ class IntegrationsApi:
 
         :param instance_id: Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
         :type instance_id: str
-        :param request_body: Dictionary(string,string) of runtime parameters passed to the integration instance (required)
-        :type request_body: Dict[str, str]
+        :param request_body: JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. (required)
+        :type request_body: Dict[str, object]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -569,7 +569,7 @@ class IntegrationsApi:
         return self.execute_instance_with_params_with_http_info(instance_id, request_body, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def execute_instance_with_params_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, StrictStr], Field(description="Dictionary(string,string) of runtime parameters passed to the integration instance")], **kwargs) -> ApiResponse:  # noqa: E501
+    def execute_instance_with_params_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], request_body : Annotated[Dict[str, Any], Field(description="JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ExecuteInstanceWithParams: Execute an integration instance with runtime parameters  # noqa: E501
 
         Starts execution of an instance, returning its execution identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -581,8 +581,8 @@ class IntegrationsApi:
 
         :param instance_id: Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\". (required)
         :type instance_id: str
-        :param request_body: Dictionary(string,string) of runtime parameters passed to the integration instance (required)
-        :type request_body: Dict[str, str]
+        :param request_body: JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. (required)
+        :type request_body: Dict[str, object]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will

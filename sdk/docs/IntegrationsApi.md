@@ -359,7 +359,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(IntegrationsApi)
     instance_id = 'instance_id_example' # str | Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".
-    request_body = {"para1":"val1","para2":"val2"} # Dict[str, str] | Dictionary(string,string) of runtime parameters passed to the integration instance
+    request_body = {"Ingest-1:batchSize":"500","requestId":"6f1c2d3e-9d1a-4b7e-8c21-0f3a5d6e7b89","filePath":"/inbound/settlements/SSI_20261020.txt","sourceInfo":{"useCaseId":"SETTLEMENT","channelId":"SWIFT","sourceId":"CUSTODY"}} # Dict[str, object] | JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys.
 
     try:
         # uncomment the below to set overrides at the request level
@@ -380,7 +380,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id** | **str**| Instance identifier e.g. \&quot;b64135e7-98a0-41af-a845-d86167d54cc7\&quot;. | 
- **request_body** | [**Dict[str, str]**](str.md)| Dictionary(string,string) of runtime parameters passed to the integration instance | 
+ **request_body** | [**Dict[str, object]**](object.md)| JSON object of runtime parameters passed to the integration instance. A processorName:configPath key overrides one processor config value for this run; any other key is a named run parameter. Nested objects are flattened to dotted keys. | 
 
 ### Return type
 
