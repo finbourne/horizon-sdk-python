@@ -1105,31 +1105,35 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def list_run_files(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> PagedResourceListOfRunFileResponse:  # noqa: E501
+    async def list_run_files(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, **kwargs) -> PagedResourceListOfRunFileResponse:  # noqa: E501
         ...
 
     @overload
-    def list_run_files(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRunFileResponse:  # noqa: E501
+    def list_run_files(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRunFileResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_run_files(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRunFileResponse, Awaitable[PagedResourceListOfRunFileResponse]]:  # noqa: E501
+    def list_run_files(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRunFileResponse, Awaitable[PagedResourceListOfRunFileResponse]]:  # noqa: E501
         """[EXPERIMENTAL] ListRunFiles: List Files in a run  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_run_files(instance_id, run_id, page, page_size, async_req=True)
+        >>> thread = api.list_run_files(instance_id, run_id, page, page_size, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param instance_id: (required)
+        :param instance_id: Integration instance ID. (required)
         :type instance_id: str
-        :param run_id: (required)
+        :param run_id: Run ID within the instance. (required)
         :type run_id: str
-        :param page:
+        :param page: The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.
         :type page: str
-        :param page_size:
+        :param page_size: Number of results per page.
         :type page_size: int
+        :param filter: A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.
+        :type filter: str
+        :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1146,26 +1150,30 @@ class TradePublicationFrameworkApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_run_files_with_http_info(instance_id, run_id, page, page_size, **kwargs)  # noqa: E501
+        return self.list_run_files_with_http_info(instance_id, run_id, page, page_size, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_run_files_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_run_files_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListRunFiles: List Files in a run  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_run_files_with_http_info(instance_id, run_id, page, page_size, async_req=True)
+        >>> thread = api.list_run_files_with_http_info(instance_id, run_id, page, page_size, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param instance_id: (required)
+        :param instance_id: Integration instance ID. (required)
         :type instance_id: str
-        :param run_id: (required)
+        :param run_id: Run ID within the instance. (required)
         :type run_id: str
-        :param page:
+        :param page: The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.
         :type page: str
-        :param page_size:
+        :param page_size: Number of results per page.
         :type page_size: int
+        :param filter: A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.
+        :type filter: str
+        :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1196,7 +1204,9 @@ class TradePublicationFrameworkApi:
             'instance_id',
             'run_id',
             'page',
-            'page_size'
+            'page_size',
+            'filter',
+            'sort_by'
         ]
         _all_params.extend(
             [
@@ -1240,6 +1250,13 @@ class TradePublicationFrameworkApi:
         if _params.get('page_size') is not None:  # noqa: E501
             _query_params.append(('pageSize', _params['page_size']))
 
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -1280,33 +1297,37 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> PagedResourceListOfTransactionResponse:  # noqa: E501
+    async def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], status : Annotated[Optional[StrictStr], Field( description="Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status= query parameter for that.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to Id ASC.")] = None, **kwargs) -> PagedResourceListOfTransactionResponse:  # noqa: E501
         ...
 
     @overload
-    def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionResponse:  # noqa: E501
+    def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], status : Annotated[Optional[StrictStr], Field( description="Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status= query parameter for that.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to Id ASC.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionResponse, Awaitable[PagedResourceListOfTransactionResponse]]:  # noqa: E501
+    def list_run_transactions(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], status : Annotated[Optional[StrictStr], Field( description="Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status= query parameter for that.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to Id ASC.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionResponse, Awaitable[PagedResourceListOfTransactionResponse]]:  # noqa: E501
         """[EXPERIMENTAL] ListRunTransactions: List Transactions in a run.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_run_transactions(instance_id, run_id, status, page, page_size, async_req=True)
+        >>> thread = api.list_run_transactions(instance_id, run_id, status, page, page_size, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param instance_id: (required)
+        :param instance_id: Integration instance ID. (required)
         :type instance_id: str
-        :param run_id: (required)
+        :param run_id: Run ID within the instance. (required)
         :type run_id: str
-        :param status:
+        :param status: Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status.
         :type status: str
-        :param page:
+        :param page: The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.
         :type page: str
-        :param page_size:
+        :param page_size: Number of results per page.
         :type page_size: int
+        :param filter: A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status= query parameter for that.
+        :type filter: str
+        :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to Id ASC.
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1323,28 +1344,32 @@ class TradePublicationFrameworkApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_run_transactions_with_http_info(instance_id, run_id, status, page, page_size, **kwargs)  # noqa: E501
+        return self.list_run_transactions_with_http_info(instance_id, run_id, status, page, page_size, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_run_transactions_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], status : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_run_transactions_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], status : Annotated[Optional[StrictStr], Field( description="Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status= query parameter for that.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to Id ASC.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListRunTransactions: List Transactions in a run.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_run_transactions_with_http_info(instance_id, run_id, status, page, page_size, async_req=True)
+        >>> thread = api.list_run_transactions_with_http_info(instance_id, run_id, status, page, page_size, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param instance_id: (required)
+        :param instance_id: Integration instance ID. (required)
         :type instance_id: str
-        :param run_id: (required)
+        :param run_id: Run ID within the instance. (required)
         :type run_id: str
-        :param status:
+        :param status: Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status.
         :type status: str
-        :param page:
+        :param page: The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.
         :type page: str
-        :param page_size:
+        :param page_size: Number of results per page.
         :type page_size: int
+        :param filter: A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status= query parameter for that.
+        :type filter: str
+        :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to Id ASC.
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1376,7 +1401,9 @@ class TradePublicationFrameworkApi:
             'run_id',
             'status',
             'page',
-            'page_size'
+            'page_size',
+            'filter',
+            'sort_by'
         ]
         _all_params.extend(
             [
@@ -1422,6 +1449,13 @@ class TradePublicationFrameworkApi:
 
         if _params.get('page_size') is not None:  # noqa: E501
             _query_params.append(('pageSize', _params['page_size']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

@@ -595,7 +595,7 @@ This endpoint does not need any parameter.
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_run_files**
-> PagedResourceListOfRunFileResponse list_run_files(instance_id, run_id, page=page, page_size=page_size)
+> PagedResourceListOfRunFileResponse list_run_files(instance_id, run_id, page=page, page_size=page_size, filter=filter, sort_by=sort_by)
 
 [EXPERIMENTAL] ListRunFiles: List Files in a run
 
@@ -644,17 +644,19 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(TradePublicationFrameworkApi)
-    instance_id = 'instance_id_example' # str | 
-    run_id = 'run_id_example' # str | 
-    page = '' # str |  (optional) (default to '')
-    page_size = 100 # int |  (optional) (default to 100)
+    instance_id = 'instance_id_example' # str | Integration instance ID.
+    run_id = 'run_id_example' # str | Run ID within the instance.
+    page = '' # str | The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged. (optional) (default to '')
+    page_size = 100 # int | Number of results per page. (optional) (default to 100)
+    filter = 'filter_example' # str | A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC). (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_run_files(instance_id, run_id, page=page, page_size=page_size, opts=opts)
+        # api_response =  api_instance.list_run_files(instance_id, run_id, page=page, page_size=page_size, filter=filter, sort_by=sort_by, opts=opts)
 
         # [EXPERIMENTAL] ListRunFiles: List Files in a run
-        api_response = api_instance.list_run_files(instance_id, run_id, page=page, page_size=page_size)
+        api_response = api_instance.list_run_files(instance_id, run_id, page=page, page_size=page_size, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
     except ApiException as e:
@@ -667,10 +669,12 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_id** | **str**|  | 
- **run_id** | **str**|  | 
- **page** | **str**|  | [optional] [default to &#39;&#39;]
- **page_size** | **int**|  | [optional] [default to 100]
+ **instance_id** | **str**| Integration instance ID. | 
+ **run_id** | **str**| Run ID within the instance. | 
+ **page** | **str**| The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. | [optional] [default to &#39;&#39;]
+ **page_size** | **int**| Number of results per page. | [optional] [default to 100]
+ **filter** | **str**| A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to newest first (GeneratedAt DESC, Id DESC). | [optional] 
 
 ### Return type
 
@@ -692,7 +696,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_run_transactions**
-> PagedResourceListOfTransactionResponse list_run_transactions(instance_id, run_id, status=status, page=page, page_size=page_size)
+> PagedResourceListOfTransactionResponse list_run_transactions(instance_id, run_id, status=status, page=page, page_size=page_size, filter=filter, sort_by=sort_by)
 
 [EXPERIMENTAL] ListRunTransactions: List Transactions in a run.
 
@@ -741,18 +745,20 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(TradePublicationFrameworkApi)
-    instance_id = 'instance_id_example' # str | 
-    run_id = 'run_id_example' # str | 
-    status = 'status_example' # str |  (optional)
-    page = '' # str |  (optional) (default to '')
-    page_size = 100 # int |  (optional) (default to 100)
+    instance_id = 'instance_id_example' # str | Integration instance ID.
+    run_id = 'run_id_example' # str | Run ID within the instance.
+    status = 'status_example' # str | Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status. (optional)
+    page = '' # str | The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged. (optional) (default to '')
+    page_size = 100 # int | Number of results per page. (optional) (default to 100)
+    filter = 'filter_example' # str | A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status= query parameter for that. (optional)
+    sort_by = ['sort_by_example'] # List[str] | Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to Id ASC. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_run_transactions(instance_id, run_id, status=status, page=page, page_size=page_size, opts=opts)
+        # api_response =  api_instance.list_run_transactions(instance_id, run_id, status=status, page=page, page_size=page_size, filter=filter, sort_by=sort_by, opts=opts)
 
         # [EXPERIMENTAL] ListRunTransactions: List Transactions in a run.
-        api_response = api_instance.list_run_transactions(instance_id, run_id, status=status, page=page, page_size=page_size)
+        api_response = api_instance.list_run_transactions(instance_id, run_id, status=status, page=page, page_size=page_size, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
     except ApiException as e:
@@ -765,11 +771,13 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instance_id** | **str**|  | 
- **run_id** | **str**|  | 
- **status** | **str**|  | [optional] 
- **page** | **str**|  | [optional] [default to &#39;&#39;]
- **page_size** | **int**|  | [optional] [default to 100]
+ **instance_id** | **str**| Integration instance ID. | 
+ **run_id** | **str**| Run ID within the instance. | 
+ **status** | **str**| Filter by publication status (Sent, Skipped, Failed). This is the publication outcome, not the batched-transaction status. | [optional] 
+ **page** | **str**| The pagination token from the previous response; &lt;i&gt;filter&lt;/i&gt; and &lt;i&gt;sortBy&lt;/i&gt; must be unchanged. | [optional] [default to &#39;&#39;]
+ **page_size** | **int**| Number of results per page. | [optional] [default to 100]
+ **filter** | **str**| A Finbourne filter on: transactionId, portfolioScope, portfolioCode, instrumentId, instrumentType, instrumentName, tradeDate, settlementDate, status, skipReason, failureReason, outputFileName, sentAt. The status field here is the batched-transaction status (Complete, Skipped, Failed), not the publication status — use the ?status&#x3D; query parameter for that. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| Up to two filterable fields, each suffixed \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to Id ASC. | [optional] 
 
 ### Return type
 

@@ -14,6 +14,7 @@
 
 
 # import models into model package
+from finbourne_horizon.models.alert_rule import AlertRule
 from finbourne_horizon.models.allowed_parameter_value import AllowedParameterValue
 from finbourne_horizon.models.audit_complete_request import AuditCompleteRequest
 from finbourne_horizon.models.audit_complete_response import AuditCompleteResponse
@@ -136,6 +137,7 @@ from finbourne_horizon.models.workflow_run_results_response import WorkflowRunRe
 
 
 __all__ = [
+    "AlertRule",
     "AllowedParameterValue",
     "AuditCompleteRequest",
     "AuditCompleteResponse",

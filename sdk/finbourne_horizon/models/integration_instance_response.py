@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from finbourne_horizon.models.alert_rule import AlertRule
 from finbourne_horizon.models.post_process_task import PostProcessTask
 from finbourne_horizon.models.trigger import Trigger
 
@@ -37,7 +38,8 @@ class IntegrationInstanceResponse(BaseModel):
     triggers: List[Trigger] = Field(description="The triggers associated with the integration instance.")
     details: Dict[str, Any] = Field(description="Base DTO type of an integration configuration specific to the integration type.              N.B. ASP.NET Core model validation is normally applied automatically when [ApiController] is added to a controller, however it doesn't work here with the polymorphic integration subtypes of this class (see https://github.com/dotnet/aspnetcore/issues/27882). The workaround here is to implement the IValidatableObject interface and each subtype must call Validate() or ValidateContents() on its properties (the validation is not recursive).  Located in Horizon.Integrations.Web so both specific integration projects and Horizon.WebApi can reference it.")
     post_process_tasks: List[PostProcessTask] = Field(description="The post process tasks associated with the integration instance.", alias="postProcessTasks")
-    __properties = ["id", "integrationType", "name", "description", "enabled", "triggers", "details", "postProcessTasks"]
+    alert_rules: List[AlertRule] = Field(description="The alert rules configured on the integration instance.", alias="alertRules")
+    __properties = ["id", "integrationType", "name", "description", "enabled", "triggers", "details", "postProcessTasks", "alertRules"]
 
     class Config:
         """Pydantic configuration"""
@@ -85,6 +87,13 @@ class IntegrationInstanceResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['postProcessTasks'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in alert_rules (list)
+        _items = []
+        if self.alert_rules:
+            for _item in self.alert_rules:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['alertRules'] = _items
         return _dict
 
     @classmethod
@@ -104,7 +113,8 @@ class IntegrationInstanceResponse(BaseModel):
             "enabled": obj.get("enabled"),
             "triggers": [Trigger.from_dict(_item) for _item in obj.get("triggers")] if obj.get("triggers") is not None else None,
             "details": obj.get("details"),
-            "post_process_tasks": [PostProcessTask.from_dict(_item) for _item in obj.get("postProcessTasks")] if obj.get("postProcessTasks") is not None else None
+            "post_process_tasks": [PostProcessTask.from_dict(_item) for _item in obj.get("postProcessTasks")] if obj.get("postProcessTasks") is not None else None,
+            "alert_rules": [AlertRule.from_dict(_item) for _item in obj.get("alertRules")] if obj.get("alertRules") is not None else None
         })
         return _obj
 

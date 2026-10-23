@@ -35,6 +35,7 @@ from finbourne_horizon.exceptions import ApiValueError
 from finbourne_horizon.exceptions import ApiKeyError
 from finbourne_horizon.exceptions import ApiException
 # import models into sdk package
+from finbourne_horizon.models.alert_rule import AlertRule
 from finbourne_horizon.models.allowed_parameter_value import AllowedParameterValue
 from finbourne_horizon.models.audit_complete_request import AuditCompleteRequest
 from finbourne_horizon.models.audit_complete_response import AuditCompleteResponse
@@ -177,6 +178,7 @@ __all__ = [
     "TradePublicationFrameworkApi",
     "VendorApi",
     "VersionedConfigurationsApi",
+    "AlertRule",
     "AllowedParameterValue",
     "AuditCompleteRequest",
     "AuditCompleteResponse",

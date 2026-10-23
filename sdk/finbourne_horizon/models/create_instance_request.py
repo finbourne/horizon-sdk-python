@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from finbourne_horizon.models.alert_rule import AlertRule
 from finbourne_horizon.models.lusid_property_definition_overrides_by_type import LusidPropertyDefinitionOverridesByType
 from finbourne_horizon.models.post_process_task import PostProcessTask
 from finbourne_horizon.models.trigger import Trigger
@@ -38,7 +39,8 @@ class CreateInstanceRequest(BaseModel):
     triggers: List[Trigger]
     details: Dict[str, Any] = Field(description="Base DTO type of an integration configuration specific to the integration type.              N.B. ASP.NET Core model validation is normally applied automatically when [ApiController] is added to a controller, however it doesn't work here with the polymorphic integration subtypes of this class (see https://github.com/dotnet/aspnetcore/issues/27882). The workaround here is to implement the IValidatableObject interface and each subtype must call Validate() or ValidateContents() on its properties (the validation is not recursive).  Located in Horizon.Integrations.Web so both specific integration projects and Horizon.WebApi can reference it.")
     post_process_tasks: List[PostProcessTask] = Field(alias="postProcessTasks")
-    __properties = ["instanceOptionalProps", "integrationType", "name", "description", "enabled", "triggers", "details", "postProcessTasks"]
+    alert_rules: Optional[List[AlertRule]] = Field(default=None, description="Alert rules for the instance. On update the stored rules are replaced by this set when it is present, an empty set clears them, and omitting the field leaves them unchanged.", alias="alertRules")
+    __properties = ["instanceOptionalProps", "integrationType", "name", "description", "enabled", "triggers", "details", "postProcessTasks", "alertRules"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,10 +95,22 @@ class CreateInstanceRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['postProcessTasks'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in alert_rules (list)
+        _items = []
+        if self.alert_rules:
+            for _item in self.alert_rules:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['alertRules'] = _items
         # set to None if instance_optional_props (nullable) is None
         # and __fields_set__ contains the field
         if self.instance_optional_props is None and "instance_optional_props" in self.__fields_set__:
             _dict['instanceOptionalProps'] = None
+
+        # set to None if alert_rules (nullable) is None
+        # and __fields_set__ contains the field
+        if self.alert_rules is None and "alert_rules" in self.__fields_set__:
+            _dict['alertRules'] = None
 
         return _dict
 
@@ -122,7 +136,8 @@ class CreateInstanceRequest(BaseModel):
             "enabled": obj.get("enabled"),
             "triggers": [Trigger.from_dict(_item) for _item in obj.get("triggers")] if obj.get("triggers") is not None else None,
             "details": obj.get("details"),
-            "post_process_tasks": [PostProcessTask.from_dict(_item) for _item in obj.get("postProcessTasks")] if obj.get("postProcessTasks") is not None else None
+            "post_process_tasks": [PostProcessTask.from_dict(_item) for _item in obj.get("postProcessTasks")] if obj.get("postProcessTasks") is not None else None,
+            "alert_rules": [AlertRule.from_dict(_item) for _item in obj.get("alertRules")] if obj.get("alertRules") is not None else None
         })
         return _obj
 
