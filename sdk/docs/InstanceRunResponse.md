@@ -1,6 +1,6 @@
 # InstanceRunResponse
 
-Response containing details of a single run for an instance.
+Response containing details of a single run for an instance. The transaction and file figures describe the batch as it stands now, so they are reported on the latest attempt only and are null on earlier attempts of a retried run. Message explains a failed attempt and what will happen or must be done next; it is null for completed, running and queued attempts.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,11 +12,12 @@ Name | Type | Description | Notes
 **duration** | **str** |  | [optional] 
 **status** | **str** |  | 
 **triggered_by** | **str** |  | [optional] 
-**total** | **int** |  | 
-**sent_count** | **int** |  | 
-**skipped_count** | **int** |  | 
-**failed_count** | **int** |  | 
-**failed_files** | **int** |  | 
+**total** | **int** |  | [optional] 
+**sent_count** | **int** |  | [optional] 
+**skipped_count** | **int** |  | [optional] 
+**failed_count** | **int** |  | [optional] 
+**failed_files** | **int** |  | [optional] 
+**message** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -35,14 +36,15 @@ end_time: Optional[datetime] = # Replace with your value
 duration: Optional[StrictStr] = "example_duration"
 status: StrictStr = "example_status"
 triggered_by: Optional[StrictStr] = "example_triggered_by"
-total: StrictInt
-total: StrictInt = 42
-sent_count: StrictInt = # Replace with your value
-skipped_count: StrictInt = # Replace with your value
-failed_count: StrictInt = # Replace with your value
-failed_files: StrictInt = # Replace with your value
-failed_files: StrictInt = 42
-instance_run_response_instance = InstanceRunResponse(run_id=run_id, reference_id=reference_id, attempt=attempt, start_time=start_time, end_time=end_time, duration=duration, status=status, triggered_by=triggered_by, total=total, sent_count=sent_count, skipped_count=skipped_count, failed_count=failed_count, failed_files=failed_files)
+total: Optional[StrictInt] = None
+total: Optional[StrictInt] = None
+sent_count: Optional[StrictInt] = # Replace with your value
+skipped_count: Optional[StrictInt] = # Replace with your value
+failed_count: Optional[StrictInt] = # Replace with your value
+failed_files: Optional[StrictInt] = # Replace with your value
+failed_files: Optional[StrictInt] = None
+message: Optional[StrictStr] = "example_message"
+instance_run_response_instance = InstanceRunResponse(run_id=run_id, reference_id=reference_id, attempt=attempt, start_time=start_time, end_time=end_time, duration=duration, status=status, triggered_by=triggered_by, total=total, sent_count=sent_count, skipped_count=skipped_count, failed_count=failed_count, failed_files=failed_files, message=message)
 
 ```
 

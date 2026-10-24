@@ -1,11 +1,11 @@
 # TransactionResponse
 
-Response containing details of a single transaction for a run.
+Response containing details of a single transaction for a run. A transaction built twice in one batch appears once per build. FailureStage says whether a failed transaction failed while being built (Build) or while its file was being delivered (Delivery).
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transaction_id** | **str** |  | 
-**publication_status** | **str** |  | 
+**publication_status** | **str** | The outcome the screens show for this row: Sent, Skipped or Failed. | 
 **portfolio_scope** | **str** |  | [optional] 
 **portfolio_code** | **str** |  | [optional] 
 **instrument_id** | **str** |  | [optional] 
@@ -13,12 +13,13 @@ Name | Type | Description | Notes
 **instrument_name** | **str** |  | [optional] 
 **trade_date** | **datetime** |  | [optional] 
 **settlement_date** | **datetime** |  | [optional] 
-**status** | **str** |  | 
+**status** | **str** | The batch element&#39;s processing state as the worker left it, not the outcome; read PublicationStatus for that. | 
 **skip_reason** | **str** |  | [optional] 
 **failure_reason** | **str** |  | [optional] 
 **output_file_name** | **str** |  | [optional] 
 **sent_at** | **datetime** |  | [optional] 
 **destinations** | [**List[DestinationResponse]**](DestinationResponse.md) |  | 
+**failure_stage** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -43,7 +44,8 @@ failure_reason: Optional[StrictStr] = "example_failure_reason"
 output_file_name: Optional[StrictStr] = "example_output_file_name"
 sent_at: Optional[datetime] = # Replace with your value
 destinations: List[DestinationResponse]
-transaction_response_instance = TransactionResponse(transaction_id=transaction_id, publication_status=publication_status, portfolio_scope=portfolio_scope, portfolio_code=portfolio_code, instrument_id=instrument_id, instrument_type=instrument_type, instrument_name=instrument_name, trade_date=trade_date, settlement_date=settlement_date, status=status, skip_reason=skip_reason, failure_reason=failure_reason, output_file_name=output_file_name, sent_at=sent_at, destinations=destinations)
+failure_stage: Optional[StrictStr] = "example_failure_stage"
+transaction_response_instance = TransactionResponse(transaction_id=transaction_id, publication_status=publication_status, portfolio_scope=portfolio_scope, portfolio_code=portfolio_code, instrument_id=instrument_id, instrument_type=instrument_type, instrument_name=instrument_name, trade_date=trade_date, settlement_date=settlement_date, status=status, skip_reason=skip_reason, failure_reason=failure_reason, output_file_name=output_file_name, sent_at=sent_at, destinations=destinations, failure_stage=failure_stage)
 
 ```
 

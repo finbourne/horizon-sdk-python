@@ -30,9 +30,8 @@ class ReplayTransactionsRequest(BaseModel):
     """
     transaction_ids: List[StrictStr] = Field(description="List of transaction IDs to replay.", alias="transactionIds")
     mode:  StrictStr = Field(...,alias="mode", description="Replay mode - DryRun (preview only) or Committed (real send).") 
-    destinations: Optional[List[StrictStr]] = Field(default=None, description="Target destinations for Committed mode. Required for Committed, forbidden for DryRun. Valid values: Drive, Sftp, S3, Local")
     options: Optional[ReplayOptions] = None
-    __properties = ["transactionIds", "mode", "destinations", "options"]
+    __properties = ["transactionIds", "mode", "options"]
 
     class Config:
         """Pydantic configuration"""
@@ -69,11 +68,6 @@ class ReplayTransactionsRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of options
         if self.options:
             _dict['options'] = self.options.to_dict()
-        # set to None if destinations (nullable) is None
-        # and __fields_set__ contains the field
-        if self.destinations is None and "destinations" in self.__fields_set__:
-            _dict['destinations'] = None
-
         return _dict
 
     @classmethod
@@ -88,7 +82,6 @@ class ReplayTransactionsRequest(BaseModel):
         _obj = ReplayTransactionsRequest.parse_obj({
             "transaction_ids": obj.get("transactionIds"),
             "mode": obj.get("mode"),
-            "destinations": obj.get("destinations"),
             "options": ReplayOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None
         })
         return _obj

@@ -1,6 +1,6 @@
 # TransactionPayload
 
-record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result.
+record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result. PublicationStatus is the row's outcome: Sent, or Failed when the file holding it reached no destination.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **columns** | **List[str]** |  | 
 **values** | **Dict[str, str]** |  | 
 **raw_csv_row** | **str** |  | 
+**publication_status** | **str** |  | 
 ## Example
 
 ```python
@@ -21,7 +22,8 @@ transaction_id: StrictStr = "example_transaction_id"
 columns: List[StrictStr]
 values: Dict[str, StrictStr]
 raw_csv_row: StrictStr = "example_raw_csv_row"
-transaction_payload_instance = TransactionPayload(transaction_id=transaction_id, columns=columns, values=values, raw_csv_row=raw_csv_row)
+publication_status: StrictStr = "example_publication_status"
+transaction_payload_instance = TransactionPayload(transaction_id=transaction_id, columns=columns, values=values, raw_csv_row=raw_csv_row, publication_status=publication_status)
 
 ```
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **message** | **str** | Status message describing the result | 
 **new_file_delivery_uuid** | **str** | UUID of the new file delivery record created for this retry (if successful) | [optional] 
 **retried_at** | **datetime** | Timestamp when the retry was executed | [optional] 
+**resend_run_id** | **str** | The run queued to resend the file; it appears in run history as a further attempt of the original run | [optional] 
 **original_file** | [**TpfFileDeliveryInfo**](TpfFileDeliveryInfo.md) |  | [optional] 
 **duplicate_file** | [**TpfFileDeliveryInfo**](TpfFileDeliveryInfo.md) |  | [optional] 
 ## Example
@@ -24,9 +25,10 @@ success:StrictBool = True
 message: StrictStr = "example_message"
 new_file_delivery_uuid: Optional[StrictStr] = "example_new_file_delivery_uuid"
 retried_at: Optional[datetime] = # Replace with your value
+resend_run_id: Optional[StrictStr] = "example_resend_run_id"
 original_file: Optional[TpfFileDeliveryInfo] = # Replace with your value
 duplicate_file: Optional[TpfFileDeliveryInfo] = # Replace with your value
-tpf_retry_sftp_response_instance = TpfRetrySftpResponse(success=success, message=message, new_file_delivery_uuid=new_file_delivery_uuid, retried_at=retried_at, original_file=original_file, duplicate_file=duplicate_file)
+tpf_retry_sftp_response_instance = TpfRetrySftpResponse(success=success, message=message, new_file_delivery_uuid=new_file_delivery_uuid, retried_at=retried_at, resend_run_id=resend_run_id, original_file=original_file, duplicate_file=duplicate_file)
 
 ```
 

@@ -31,7 +31,6 @@ from finbourne_horizon.models.external_log_insertion_request import ExternalLogI
 from finbourne_horizon.models.external_log_record import ExternalLogRecord
 from finbourne_horizon.models.failed_delivery_response import FailedDeliveryResponse
 from finbourne_horizon.models.field_mapping import FieldMapping
-from finbourne_horizon.models.file_delivery_status import FileDeliveryStatus
 from finbourne_horizon.models.file_destination_response import FileDestinationResponse
 from finbourne_horizon.models.file_details import FileDetails
 from finbourne_horizon.models.i_field_mapping import IFieldMapping
@@ -111,12 +110,10 @@ from finbourne_horizon.models.row_details import RowDetails
 from finbourne_horizon.models.run_file_response import RunFileResponse
 from finbourne_horizon.models.run_status_count import RunStatusCount
 from finbourne_horizon.models.set_instance_optional_property_mapping_response import SetInstanceOptionalPropertyMappingResponse
-from finbourne_horizon.models.tpf_failed_delivery_response import TpfFailedDeliveryResponse
+from finbourne_horizon.models.tpf_file_delivery_display_status import TpfFileDeliveryDisplayStatus
 from finbourne_horizon.models.tpf_file_delivery_info import TpfFileDeliveryInfo
 from finbourne_horizon.models.tpf_file_delivery_response import TpfFileDeliveryResponse
 from finbourne_horizon.models.tpf_portfolio import TpfPortfolio
-from finbourne_horizon.models.tpf_retry_element_result import TpfRetryElementResult
-from finbourne_horizon.models.tpf_retry_failed_delivery_request import TpfRetryFailedDeliveryRequest
 from finbourne_horizon.models.tpf_retry_sftp_response import TpfRetrySftpResponse
 from finbourne_horizon.models.tpf_transaction_search_request import TpfTransactionSearchRequest
 from finbourne_horizon.models.tpf_transaction_search_response import TpfTransactionSearchResponse
@@ -124,7 +121,9 @@ from finbourne_horizon.models.transaction_payload import TransactionPayload
 from finbourne_horizon.models.transaction_response import TransactionResponse
 from finbourne_horizon.models.trigger import Trigger
 from finbourne_horizon.models.update_instance_request import UpdateInstanceRequest
+from finbourne_horizon.models.update_instance_response import UpdateInstanceResponse
 from finbourne_horizon.models.update_versioned_configuration_draft_request import UpdateVersionedConfigurationDraftRequest
+from finbourne_horizon.models.validation_notice_response import ValidationNoticeResponse
 from finbourne_horizon.models.vendor_field import VendorField
 from finbourne_horizon.models.vendor_product import VendorProduct
 from finbourne_horizon.models.versioned_configuration_response import VersionedConfigurationResponse
@@ -154,7 +153,6 @@ __all__ = [
     "ExternalLogRecord",
     "FailedDeliveryResponse",
     "FieldMapping",
-    "FileDeliveryStatus",
     "FileDestinationResponse",
     "FileDetails",
     "IFieldMapping",
@@ -234,12 +232,10 @@ __all__ = [
     "RunFileResponse",
     "RunStatusCount",
     "SetInstanceOptionalPropertyMappingResponse",
-    "TpfFailedDeliveryResponse",
+    "TpfFileDeliveryDisplayStatus",
     "TpfFileDeliveryInfo",
     "TpfFileDeliveryResponse",
     "TpfPortfolio",
-    "TpfRetryElementResult",
-    "TpfRetryFailedDeliveryRequest",
     "TpfRetrySftpResponse",
     "TpfTransactionSearchRequest",
     "TpfTransactionSearchResponse",
@@ -247,7 +243,9 @@ __all__ = [
     "TransactionResponse",
     "Trigger",
     "UpdateInstanceRequest",
+    "UpdateInstanceResponse",
     "UpdateVersionedConfigurationDraftRequest",
+    "ValidationNoticeResponse",
     "VendorField",
     "VendorProduct",
     "VersionedConfigurationResponse",

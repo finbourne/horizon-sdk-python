@@ -23,12 +23,14 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class TpfRetryFailedDeliveryRequest(BaseModel):
+class ValidationNoticeResponse(BaseModel):
     """
-    Request to retry failed deliveries for multiple batch elements. The integration instance identifier is supplied via the route, not the body.  # noqa: E501
+    A non-blocking finding raised when an instance was saved. The save succeeded regardless.  # noqa: E501
     """
-    batch_element_reference_ids: List[StrictStr] = Field(description="Batch element reference identifiers to retry. No regex pattern is required as batch element IDs are vendor-defined strings with varying formats.", alias="batchElementReferenceIds")
-    __properties = ["batchElementReferenceIds"]
+    severity:  StrictStr = Field(...,alias="severity", description="\"Warning\" or \"Information\".") 
+    field:  StrictStr = Field(...,alias="field", description="The configuration field the finding relates to.") 
+    message:  StrictStr = Field(...,alias="message", description="What was found.") 
+    __properties = ["severity", "field", "message"]
 
     class Config:
         """Pydantic configuration"""
@@ -52,8 +54,8 @@ class TpfRetryFailedDeliveryRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> TpfRetryFailedDeliveryRequest:
-        """Create an instance of TpfRetryFailedDeliveryRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> ValidationNoticeResponse:
+        """Create an instance of ValidationNoticeResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -65,17 +67,19 @@ class TpfRetryFailedDeliveryRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> TpfRetryFailedDeliveryRequest:
-        """Create an instance of TpfRetryFailedDeliveryRequest from a dict"""
+    def from_dict(cls, obj: dict) -> ValidationNoticeResponse:
+        """Create an instance of ValidationNoticeResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return TpfRetryFailedDeliveryRequest.parse_obj(obj)
+            return ValidationNoticeResponse.parse_obj(obj)
 
-        _obj = TpfRetryFailedDeliveryRequest.parse_obj({
-            "batch_element_reference_ids": obj.get("batchElementReferenceIds")
+        _obj = ValidationNoticeResponse.parse_obj({
+            "severity": obj.get("severity"),
+            "field": obj.get("field"),
+            "message": obj.get("message")
         })
         return _obj
 
-TpfRetryFailedDeliveryRequest.update_forward_refs()
+ValidationNoticeResponse.update_forward_refs()

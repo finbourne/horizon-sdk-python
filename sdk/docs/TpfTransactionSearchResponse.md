@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **instance_id** | **str** | Integration instance ID where the transaction was processed | 
 **instance_name** | **str** | Integration instance name | 
 **batch_id** | **str** | Unique identifier of the batch | 
+**run_id** | **str** | The run that processed the transaction for this instance, as shown in run monitoring | 
 **run_start_time** | **datetime** | Timestamp when the batch/run started | 
 **publication_status** | **str** | Publication status of the transaction (Sent | Skipped | Failed) | 
 **instrument_name** | **str** | Instrument name | 
@@ -20,6 +21,8 @@ Name | Type | Description | Notes
 **portfolio_code** | **str** | PortfolioCode showing portfolio code | [optional] 
 **portfolio_scope** | **str** | PortfolioScope displaying portfolio scope | [optional] 
 **failure_reason** | **str** | FailureReason to show failure reason | [optional] 
+**failure_stage** | **str** | Stage at which a failed transaction failed: Build or Delivery | [optional] 
+**sent_at** | **datetime** | When the transaction was sent, which is when its file reached a destination. Empty for Skipped and Failed rows | [optional] 
 **instrument_id** | **str** | InstrumentId showing instrument id of transaction | [optional] 
 ## Example
 
@@ -34,6 +37,7 @@ transaction_id: StrictStr = "example_transaction_id"
 instance_id: StrictStr = "example_instance_id"
 instance_name: StrictStr = "example_instance_name"
 batch_id: StrictStr = "example_batch_id"
+run_id: StrictStr = "example_run_id"
 run_start_time: datetime = # Replace with your value
 publication_status: StrictStr = "example_publication_status"
 instrument_name: StrictStr = "example_instrument_name"
@@ -46,8 +50,10 @@ destinations: Optional[List[StrictStr]] = # Replace with your value
 portfolio_code: Optional[StrictStr] = "example_portfolio_code"
 portfolio_scope: Optional[StrictStr] = "example_portfolio_scope"
 failure_reason: Optional[StrictStr] = "example_failure_reason"
+failure_stage: Optional[StrictStr] = "example_failure_stage"
+sent_at: Optional[datetime] = # Replace with your value
 instrument_id: Optional[StrictStr] = "example_instrument_id"
-tpf_transaction_search_response_instance = TpfTransactionSearchResponse(transaction_id=transaction_id, instance_id=instance_id, instance_name=instance_name, batch_id=batch_id, run_start_time=run_start_time, publication_status=publication_status, instrument_name=instrument_name, instrument_type=instrument_type, trade_date=trade_date, settlement_date=settlement_date, skip_reason=skip_reason, file_name=file_name, destinations=destinations, portfolio_code=portfolio_code, portfolio_scope=portfolio_scope, failure_reason=failure_reason, instrument_id=instrument_id)
+tpf_transaction_search_response_instance = TpfTransactionSearchResponse(transaction_id=transaction_id, instance_id=instance_id, instance_name=instance_name, batch_id=batch_id, run_id=run_id, run_start_time=run_start_time, publication_status=publication_status, instrument_name=instrument_name, instrument_type=instrument_type, trade_date=trade_date, settlement_date=settlement_date, skip_reason=skip_reason, file_name=file_name, destinations=destinations, portfolio_code=portfolio_code, portfolio_scope=portfolio_scope, failure_reason=failure_reason, failure_stage=failure_stage, sent_at=sent_at, instrument_id=instrument_id)
 
 ```
 

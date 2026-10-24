@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **transaction_ids** | **List[str]** |  | 
 **file_uuid** | **str** |  | 
 **failed_transaction_ids** | **List[str]** |  | 
+**can_resend** | **bool** | Whether the data the file is rebuilt from is still retained, so a resend can be requested. | 
 ## Example
 
 ```python
@@ -33,7 +34,9 @@ destinations: List[FileDestinationResponse]
 transaction_ids: List[StrictStr] = # Replace with your value
 file_uuid: StrictStr = "example_file_uuid"
 failed_transaction_ids: List[StrictStr] = # Replace with your value
-run_file_response_instance = RunFileResponse(file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, encrypted=encrypted, destinations=destinations, transaction_ids=transaction_ids, file_uuid=file_uuid, failed_transaction_ids=failed_transaction_ids)
+can_resend: StrictBool = # Replace with your value
+can_resend:StrictBool = True
+run_file_response_instance = RunFileResponse(file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, encrypted=encrypted, destinations=destinations, transaction_ids=transaction_ids, file_uuid=file_uuid, failed_transaction_ids=failed_transaction_ids, can_resend=can_resend)
 
 ```
 

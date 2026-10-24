@@ -25,13 +25,14 @@ from datetime import datetime
 
 class TransactionPayload(BaseModel):
     """
-    record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result.  # noqa: E501
+    record containing the payload for a single transaction. Columns is compiled once from the TPF instance configuration and is identical across every item in the paginated result. PublicationStatus is the row's outcome: Sent, or Failed when the file holding it reached no destination.  # noqa: E501
     """
     transaction_id:  StrictStr = Field(...,alias="transactionId") 
     columns: List[StrictStr]
     values: Dict[str, StrictStr]
     raw_csv_row:  StrictStr = Field(...,alias="rawCsvRow") 
-    __properties = ["transactionId", "columns", "values", "rawCsvRow"]
+    publication_status:  StrictStr = Field(...,alias="publicationStatus") 
+    __properties = ["transactionId", "columns", "values", "rawCsvRow", "publicationStatus"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,7 +81,8 @@ class TransactionPayload(BaseModel):
             "transaction_id": obj.get("transactionId"),
             "columns": obj.get("columns"),
             "values": obj.get("values"),
-            "raw_csv_row": obj.get("rawCsvRow")
+            "raw_csv_row": obj.get("rawCsvRow"),
+            "publication_status": obj.get("publicationStatus")
         })
         return _obj
 

@@ -22,13 +22,15 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from finbourne_horizon.models.validation_notice_response import ValidationNoticeResponse
 
 class InstanceIdentifier(BaseModel):
     """
     Identifies a single instance of an integration.  # noqa: E501
     """
     id:  StrictStr = Field(...,alias="id", description="Instance identifier.") 
-    __properties = ["id"]
+    warnings: Optional[List[ValidationNoticeResponse]] = Field(default=None, description="Non-blocking findings about the saved configuration. Empty when there are none.")
+    __properties = ["id", "warnings"]
 
     class Config:
         """Pydantic configuration"""
@@ -62,6 +64,18 @@ class InstanceIdentifier(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in warnings (list)
+        _items = []
+        if self.warnings:
+            for _item in self.warnings:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['warnings'] = _items
+        # set to None if warnings (nullable) is None
+        # and __fields_set__ contains the field
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
+
         return _dict
 
     @classmethod
@@ -74,7 +88,8 @@ class InstanceIdentifier(BaseModel):
             return InstanceIdentifier.parse_obj(obj)
 
         _obj = InstanceIdentifier.parse_obj({
-            "id": obj.get("id")
+            "id": obj.get("id"),
+            "warnings": [ValidationNoticeResponse.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None
         })
         return _obj
 

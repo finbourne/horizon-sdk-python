@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transaction_ids** | **List[str]** | List of transaction IDs to replay. | 
 **mode** | **str** | Replay mode - DryRun (preview only) or Committed (real send). | 
-**destinations** | **List[str]** | Target destinations for Committed mode. Required for Committed, forbidden for DryRun. Valid values: Drive, Sftp, S3, Local | [optional] 
 **options** | [**ReplayOptions**](ReplayOptions.md) |  | [optional] 
 ## Example
 
@@ -19,9 +18,8 @@ from datetime import datetime
 
 transaction_ids: List[StrictStr] = # Replace with your value
 mode: StrictStr = "example_mode"
-destinations: Optional[List[StrictStr]] = # Replace with your value
 options: Optional[ReplayOptions] = None
-replay_transactions_request_instance = ReplayTransactionsRequest(transaction_ids=transaction_ids, mode=mode, destinations=destinations, options=options)
+replay_transactions_request_instance = ReplayTransactionsRequest(transaction_ids=transaction_ids, mode=mode, options=options)
 
 ```
 

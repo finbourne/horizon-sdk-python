@@ -1626,7 +1626,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_instance**
-> update_instance(instance_id, update_instance_request)
+> UpdateInstanceResponse update_instance(instance_id, update_instance_request)
 
 [EXPERIMENTAL] UpdateInstance: Update a single integration instance.
 
@@ -1687,10 +1687,12 @@ def main():
 
     try:
         # uncomment the below to set overrides at the request level
-        #  api_instance.update_instance(instance_id, update_instance_request, opts=opts)
+        # api_response =  api_instance.update_instance(instance_id, update_instance_request, opts=opts)
 
         # [EXPERIMENTAL] UpdateInstance: Update a single integration instance.
-        api_instance.update_instance(instance_id, update_instance_request)
+        api_response = api_instance.update_instance(instance_id, update_instance_request)
+        pprint(api_response)
+
     except ApiException as e:
         print("Exception when calling IntegrationsApi->update_instance: %s\n" % e)
 
@@ -1706,7 +1708,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UpdateInstanceResponse**](UpdateInstanceResponse.md)
 
 ### HTTP request headers
 
@@ -1716,7 +1718,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
+**200** | The instance was updated. Warnings describe non-blocking findings about the saved configuration. |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | The instance does not exist. |  -  |
 **0** | Error response |  -  |

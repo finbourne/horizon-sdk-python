@@ -22,15 +22,14 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from finbourne_horizon.models.tpf_retry_element_result import TpfRetryElementResult
+from finbourne_horizon.models.validation_notice_response import ValidationNoticeResponse
 
-class TpfFailedDeliveryResponse(BaseModel):
+class UpdateInstanceResponse(BaseModel):
     """
-    Response for bulk retry operation of failed deliveries  # noqa: E501
+    The outcome of updating an instance.  # noqa: E501
     """
-    submitted: StrictInt = Field(description="Number of batch elements submitted for retry")
-    results: List[TpfRetryElementResult] = Field(description="Per-element retry results")
-    __properties = ["submitted", "results"]
+    warnings: Optional[List[ValidationNoticeResponse]] = Field(default=None, description="Non-blocking findings about the saved configuration. Empty when there are none.")
+    __properties = ["warnings"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,8 +53,8 @@ class TpfFailedDeliveryResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> TpfFailedDeliveryResponse:
-        """Create an instance of TpfFailedDeliveryResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> UpdateInstanceResponse:
+        """Create an instance of UpdateInstanceResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -64,28 +63,32 @@ class TpfFailedDeliveryResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in warnings (list)
         _items = []
-        if self.results:
-            for _item in self.results:
+        if self.warnings:
+            for _item in self.warnings:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['results'] = _items
+            _dict['warnings'] = _items
+        # set to None if warnings (nullable) is None
+        # and __fields_set__ contains the field
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> TpfFailedDeliveryResponse:
-        """Create an instance of TpfFailedDeliveryResponse from a dict"""
+    def from_dict(cls, obj: dict) -> UpdateInstanceResponse:
+        """Create an instance of UpdateInstanceResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return TpfFailedDeliveryResponse.parse_obj(obj)
+            return UpdateInstanceResponse.parse_obj(obj)
 
-        _obj = TpfFailedDeliveryResponse.parse_obj({
-            "submitted": obj.get("submitted"),
-            "results": [TpfRetryElementResult.from_dict(_item) for _item in obj.get("results")] if obj.get("results") is not None else None
+        _obj = UpdateInstanceResponse.parse_obj({
+            "warnings": [ValidationNoticeResponse.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None
         })
         return _obj
 
-TpfFailedDeliveryResponse.update_forward_refs()
+UpdateInstanceResponse.update_forward_refs()

@@ -23,7 +23,6 @@ from datetime import datetime
 from pydantic.v1 import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
-from finbourne_horizon.models.file_delivery_status import FileDeliveryStatus
 from finbourne_horizon.models.instances_response import InstancesResponse
 from finbourne_horizon.models.paged_resource_list_of_failed_delivery_response import PagedResourceListOfFailedDeliveryResponse
 from finbourne_horizon.models.paged_resource_list_of_instance_run_response import PagedResourceListOfInstanceRunResponse
@@ -36,8 +35,7 @@ from finbourne_horizon.models.replay_transactions_request import ReplayTransacti
 from finbourne_horizon.models.replay_transactions_response import ReplayTransactionsResponse
 from finbourne_horizon.models.resolve_failed_delivery_request import ResolveFailedDeliveryRequest
 from finbourne_horizon.models.resolve_failed_delivery_response import ResolveFailedDeliveryResponse
-from finbourne_horizon.models.tpf_failed_delivery_response import TpfFailedDeliveryResponse
-from finbourne_horizon.models.tpf_retry_failed_delivery_request import TpfRetryFailedDeliveryRequest
+from finbourne_horizon.models.tpf_file_delivery_display_status import TpfFileDeliveryDisplayStatus
 from finbourne_horizon.models.tpf_retry_sftp_response import TpfRetrySftpResponse
 from finbourne_horizon.models.tpf_transaction_search_request import TpfTransactionSearchRequest
 
@@ -68,15 +66,15 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery status (Completed, Error, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
+    async def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery outcome (Delivered, Failed, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
         ...
 
     @overload
-    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery status (Completed, Error, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
+    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery outcome (Delivered, Failed, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery status (Completed, Error, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTpfFileDeliveryResponse, Awaitable[PagedResourceListOfTpfFileDeliveryResponse]]:  # noqa: E501
+    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery outcome (Delivered, Failed, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTpfFileDeliveryResponse, Awaitable[PagedResourceListOfTpfFileDeliveryResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance  # noqa: E501
 
         Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.  # noqa: E501
@@ -88,8 +86,8 @@ class TradePublicationFrameworkApi:
 
         :param instance_id: Integration instance ID (required)
         :type instance_id: str
-        :param status: Filter by delivery status (Completed, Error, Pending)
-        :type status: FileDeliveryStatus
+        :param status: Filter by delivery outcome (Delivered, Failed, Pending)
+        :type status: TpfFileDeliveryDisplayStatus
         :param date_from: Filter deliveries from this time (inclusive)
         :type date_from: datetime
         :param date_to: Filter deliveries to this time (inclusive)
@@ -117,7 +115,7 @@ class TradePublicationFrameworkApi:
         return self.get_tpf_file_deliveries_with_http_info(instance_id, status, date_from, date_to, limit, page, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_tpf_file_deliveries_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery status (Completed, Error, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_tpf_file_deliveries_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery outcome (Delivered, Failed, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance  # noqa: E501
 
         Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.  # noqa: E501
@@ -129,8 +127,8 @@ class TradePublicationFrameworkApi:
 
         :param instance_id: Integration instance ID (required)
         :type instance_id: str
-        :param status: Filter by delivery status (Completed, Error, Pending)
-        :type status: FileDeliveryStatus
+        :param status: Filter by delivery outcome (Delivered, Failed, Pending)
+        :type status: TpfFileDeliveryDisplayStatus
         :param date_from: Filter deliveries from this time (inclusive)
         :type date_from: datetime
         :param date_to: Filter deliveries to this time (inclusive)
@@ -1838,195 +1836,29 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def retry_failed_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance identifier")], tpf_retry_failed_delivery_request : Annotated[TpfRetryFailedDeliveryRequest, Field(description="Request containing batch element reference identifiers to retry")], **kwargs) -> TpfFailedDeliveryResponse:  # noqa: E501
+    async def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], confirm_duplicate : Annotated[Optional[StrictBool], Field(description="Resend even though the file already reached this destination")] = None, **kwargs) -> TpfRetrySftpResponse:  # noqa: E501
         ...
 
     @overload
-    def retry_failed_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance identifier")], tpf_retry_failed_delivery_request : Annotated[TpfRetryFailedDeliveryRequest, Field(description="Request containing batch element reference identifiers to retry")], async_req: Optional[bool]=True, **kwargs) -> TpfFailedDeliveryResponse:  # noqa: E501
+    def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], confirm_duplicate : Annotated[Optional[StrictBool], Field(description="Resend even though the file already reached this destination")] = None, async_req: Optional[bool]=True, **kwargs) -> TpfRetrySftpResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def retry_failed_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance identifier")], tpf_retry_failed_delivery_request : Annotated[TpfRetryFailedDeliveryRequest, Field(description="Request containing batch element reference identifiers to retry")], async_req: Optional[bool]=None, **kwargs) -> Union[TpfFailedDeliveryResponse, Awaitable[TpfFailedDeliveryResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework  # noqa: E501
-
-        Re-runs the delivery task only (payload already built - skips build task). Always committed - no preview mode. Increments attempt count on failure, sets resolved to true on success. Uses existing ReplayBatchElement on ITradeTrackingRepository. Requires entitlement to execute integrations.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.retry_failed_delivery(instance_id, tpf_retry_failed_delivery_request, async_req=True)
-        >>> result = thread.get()
-
-        :param instance_id: Integration instance identifier (required)
-        :type instance_id: str
-        :param tpf_retry_failed_delivery_request: Request containing batch element reference identifiers to retry (required)
-        :type tpf_retry_failed_delivery_request: TpfRetryFailedDeliveryRequest
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
-        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
-        :param opts: Configuration options for this request
-        :type opts: ConfigurationOptions, optional
-        :return: Returns the result object.
-                 If the method is called asynchronously,
-                 returns the request thread.
-        :rtype: TpfFailedDeliveryResponse
-        """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
-            message = "Error! Please call the retry_failed_delivery_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
-            raise ValueError(message)
-        if async_req is not None:
-            kwargs['async_req'] = async_req
-        return self.retry_failed_delivery_with_http_info(instance_id, tpf_retry_failed_delivery_request, **kwargs)  # noqa: E501
-
-    @validate_arguments
-    def retry_failed_delivery_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance identifier")], tpf_retry_failed_delivery_request : Annotated[TpfRetryFailedDeliveryRequest, Field(description="Request containing batch element reference identifiers to retry")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] RetryFailedDelivery: Retry failed deliveries for Trade Publication Framework  # noqa: E501
-
-        Re-runs the delivery task only (payload already built - skips build task). Always committed - no preview mode. Increments attempt count on failure, sets resolved to true on success. Uses existing ReplayBatchElement on ITradeTrackingRepository. Requires entitlement to execute integrations.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.retry_failed_delivery_with_http_info(instance_id, tpf_retry_failed_delivery_request, async_req=True)
-        >>> result = thread.get()
-
-        :param instance_id: Integration instance identifier (required)
-        :type instance_id: str
-        :param tpf_retry_failed_delivery_request: Request containing batch element reference identifiers to retry (required)
-        :type tpf_retry_failed_delivery_request: TpfRetryFailedDeliveryRequest
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
-        :param _preload_content: if False, the ApiResponse.data will
-                                 be set to none and raw_data will store the
-                                 HTTP response body without reading/decoding.
-                                 Default is True.
-        :type _preload_content: bool, optional
-        :param _return_http_data_only: response data instead of ApiResponse
-                                       object with status code, headers, etc
-        :type _return_http_data_only: bool, optional
-        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
-        :param opts: Configuration options for this request
-        :type opts: ConfigurationOptions, optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :type _content_type: string, optional: force content-type for the request
-        :return: Returns the result object.
-                 If the method is called asynchronously,
-                 returns the request thread.
-        :rtype: tuple(TpfFailedDeliveryResponse, status_code(int), headers(HTTPHeaderDict))
-        """
-
-        _params = locals()
-
-        _all_params = [
-            'instance_id',
-            'tpf_retry_failed_delivery_request'
-        ]
-        _all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers',
-                'opts'
-            ]
-        )
-
-        # validate the arguments
-        for _key, _val in _params['kwargs'].items():
-            if _key not in _all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method retry_failed_delivery" % _key
-                )
-            _params[_key] = _val
-        del _params['kwargs']
-
-        _collection_formats = {}
-
-        # process the path parameters
-        _path_params = {}
-        if _params['instance_id']:
-            _path_params['instanceId'] = _params['instance_id']
-
-
-        # process the query parameters
-        _query_params = []
-        # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
-        # process the form parameters
-        _form_params = []
-        _files = {}
-        # process the body parameter
-        _body_params = None
-        if _params['tpf_retry_failed_delivery_request'] is not None:
-            _body_params = _params['tpf_retry_failed_delivery_request']
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # set the HTTP header `Content-Type`
-        _content_types_list = _params.get('_content_type',
-            self.api_client.select_header_content_type(
-                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
-        if _content_types_list:
-                _header_params['Content-Type'] = _content_types_list
-
-        # authentication setting
-        _auth_settings = ['oauth2']  # noqa: E501
-
-        _response_types_map = {
-            '200': "TpfFailedDeliveryResponse",
-            '400': "LusidValidationProblemDetails",
-            '404': None,
-        }
-
-        return self.api_client.call_api(
-            '/api/trade-publication-framework/instances/{instanceId}/failed/retry', 'POST',
-            _path_params,
-            _query_params,
-            _header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            response_types_map=_response_types_map,
-            auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
-            opts=_params.get('opts'),
-            collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
-
-
-    @overload
-    async def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], **kwargs) -> TpfRetrySftpResponse:  # noqa: E501
-        ...
-
-    @overload
-    def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], async_req: Optional[bool]=True, **kwargs) -> TpfRetrySftpResponse:  # noqa: E501
-        ...
-
-    @validate_arguments
-    def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], async_req: Optional[bool]=None, **kwargs) -> Union[TpfRetrySftpResponse, Awaitable[TpfRetrySftpResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file  # noqa: E501
+    def retry_tpf_sftp_delivery(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], confirm_duplicate : Annotated[Optional[StrictBool], Field(description="Resend even though the file already reached this destination")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TpfRetrySftpResponse, Awaitable[TpfRetrySftpResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] RetryTpfSftpDelivery: Resend a TPF file to the destination it was delivered to or failed to reach (SFTP or Drive)  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.retry_tpf_sftp_delivery(instance_id, file_uuid, async_req=True)
+        >>> thread = api.retry_tpf_sftp_delivery(instance_id, file_uuid, confirm_duplicate, async_req=True)
         >>> result = thread.get()
 
         :param instance_id: Integration instance ID (required)
         :type instance_id: str
         :param file_uuid: File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
         :type file_uuid: str
+        :param confirm_duplicate: Resend even though the file already reached this destination
+        :type confirm_duplicate: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -2043,22 +1875,24 @@ class TradePublicationFrameworkApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.retry_tpf_sftp_delivery_with_http_info(instance_id, file_uuid, **kwargs)  # noqa: E501
+        return self.retry_tpf_sftp_delivery_with_http_info(instance_id, file_uuid, confirm_duplicate, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def retry_tpf_sftp_delivery_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] RetryTpfSftpDelivery: Retry SFTP delivery for a previously sent TPF file  # noqa: E501
+    def retry_tpf_sftp_delivery_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID to retry, as returned by the run-files and file-deliveries listings")], confirm_duplicate : Annotated[Optional[StrictBool], Field(description="Resend even though the file already reached this destination")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] RetryTpfSftpDelivery: Resend a TPF file to the destination it was delivered to or failed to reach (SFTP or Drive)  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.retry_tpf_sftp_delivery_with_http_info(instance_id, file_uuid, async_req=True)
+        >>> thread = api.retry_tpf_sftp_delivery_with_http_info(instance_id, file_uuid, confirm_duplicate, async_req=True)
         >>> result = thread.get()
 
         :param instance_id: Integration instance ID (required)
         :type instance_id: str
         :param file_uuid: File delivery UUID to retry, as returned by the run-files and file-deliveries listings (required)
         :type file_uuid: str
+        :param confirm_duplicate: Resend even though the file already reached this destination
+        :type confirm_duplicate: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2087,7 +1921,8 @@ class TradePublicationFrameworkApi:
 
         _all_params = [
             'instance_id',
-            'file_uuid'
+            'file_uuid',
+            'confirm_duplicate'
         ]
         _all_params.extend(
             [
@@ -2125,6 +1960,9 @@ class TradePublicationFrameworkApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('confirm_duplicate') is not None:  # noqa: E501
+            _query_params.append(('confirmDuplicate', _params['confirm_duplicate']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

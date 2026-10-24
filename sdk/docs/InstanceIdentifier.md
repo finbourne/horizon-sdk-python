@@ -5,6 +5,7 @@ Identifies a single instance of an integration.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | Instance identifier. | 
+**warnings** | [**List[ValidationNoticeResponse]**](ValidationNoticeResponse.md) | Non-blocking findings about the saved configuration. Empty when there are none. | [optional] 
 ## Example
 
 ```python
@@ -15,7 +16,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 id: StrictStr = "example_id"
-instance_identifier_instance = InstanceIdentifier(id=id)
+warnings: Optional[List[ValidationNoticeResponse]] = # Replace with your value
+instance_identifier_instance = InstanceIdentifier(id=id, warnings=warnings)
 
 ```
 

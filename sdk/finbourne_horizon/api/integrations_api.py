@@ -37,6 +37,7 @@ from finbourne_horizon.models.processor_description import ProcessorDescription
 from finbourne_horizon.models.processor_schema_response import ProcessorSchemaResponse
 from finbourne_horizon.models.set_instance_optional_property_mapping_response import SetInstanceOptionalPropertyMappingResponse
 from finbourne_horizon.models.update_instance_request import UpdateInstanceRequest
+from finbourne_horizon.models.update_instance_response import UpdateInstanceResponse
 from finbourne_horizon.models.workflow_result_fields_response import WorkflowResultFieldsResponse
 
 from finbourne_horizon.api_client import ApiClient
@@ -2780,15 +2781,15 @@ class IntegrationsApi:
 
 
     @overload
-    async def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], **kwargs) -> None:  # noqa: E501
+    async def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], **kwargs) -> UpdateInstanceResponse:  # noqa: E501
         ...
 
     @overload
-    def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], async_req: Optional[bool]=True, **kwargs) -> None:  # noqa: E501
+    def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], async_req: Optional[bool]=True, **kwargs) -> UpdateInstanceResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], async_req: Optional[bool]=None, **kwargs) -> Union[None, Awaitable[None]]:  # noqa: E501
+    def update_instance(self, instance_id : Annotated[StrictStr, Field(..., description="Instance identifier e.g. \"b64135e7-98a0-41af-a845-d86167d54cc7\".")], update_instance_request : Annotated[UpdateInstanceRequest, Field(description="The new integration instance.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpdateInstanceResponse, Awaitable[UpdateInstanceResponse]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateInstance: Update a single integration instance.  # noqa: E501
 
         Updates an existing instance of an integration, returning its identifier. The user must be authenticated, entitled to call this method, and the user's domain must be licensed for the integration.  # noqa: E501
@@ -2810,7 +2811,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: None
+        :rtype: UpdateInstanceResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -2856,7 +2857,7 @@ class IntegrationsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: None
+        :rtype: tuple(UpdateInstanceResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -2922,7 +2923,11 @@ class IntegrationsApi:
         # authentication setting
         _auth_settings = ['oauth2']  # noqa: E501
 
-        _response_types_map = {}
+        _response_types_map = {
+            '200': "UpdateInstanceResponse",
+            '400': "LusidValidationProblemDetails",
+            '404': None,
+        }
 
         return self.api_client.call_api(
             '/api/integrations/instances/{instanceId}', 'PUT',

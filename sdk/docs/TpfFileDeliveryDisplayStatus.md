@@ -1,4 +1,4 @@
-# FileDeliveryStatus
+# TpfFileDeliveryDisplayStatus
 
 ## Properties
 Name | Type | Description | Notes

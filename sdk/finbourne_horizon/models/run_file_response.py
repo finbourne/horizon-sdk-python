@@ -37,7 +37,8 @@ class RunFileResponse(BaseModel):
     transaction_ids: List[StrictStr] = Field(alias="transactionIds")
     file_uuid:  StrictStr = Field(...,alias="fileUuid") 
     failed_transaction_ids: List[StrictStr] = Field(alias="failedTransactionIds")
-    __properties = ["fileName", "generatedAt", "rowCount", "fileHash", "encrypted", "destinations", "transactionIds", "fileUuid", "failedTransactionIds"]
+    can_resend: StrictBool = Field(description="Whether the data the file is rebuilt from is still retained, so a resend can be requested.", alias="canResend")
+    __properties = ["fileName", "generatedAt", "rowCount", "fileHash", "encrypted", "destinations", "transactionIds", "fileUuid", "failedTransactionIds", "canResend"]
 
     class Config:
         """Pydantic configuration"""
@@ -98,7 +99,8 @@ class RunFileResponse(BaseModel):
             "destinations": [FileDestinationResponse.from_dict(_item) for _item in obj.get("destinations")] if obj.get("destinations") is not None else None,
             "transaction_ids": obj.get("transactionIds"),
             "file_uuid": obj.get("fileUuid"),
-            "failed_transaction_ids": obj.get("failedTransactionIds")
+            "failed_transaction_ids": obj.get("failedTransactionIds"),
+            "can_resend": obj.get("canResend")
         })
         return _obj
 
