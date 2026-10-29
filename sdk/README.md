@@ -23,6 +23,7 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**get_integration_configuration_fields**](docs/IntegrationsApi.md#get_integration_configuration_fields) | **GET** /api/integrations/configuration/{integration}/fields | [EXPERIMENTAL] GetIntegrationConfigurationFields: Get the Field Mapping configuration for a given integration
 *IntegrationsApi* | [**get_integration_configuration_properties**](docs/IntegrationsApi.md#get_integration_configuration_properties) | **GET** /api/integrations/configuration/{integration}/properties | [EXPERIMENTAL] GetIntegrationConfigurationProperties: Get the Property Mapping configuration for a given integration
 *IntegrationsApi* | [**get_schema**](docs/IntegrationsApi.md#get_schema) | **GET** /api/integrations/schema/{integration} | [EXPERIMENTAL] GetSchema: Get the JSON schema for the details section of an integration instance.
+*IntegrationsApi* | [**get_workflow_execute_parameters**](docs/IntegrationsApi.md#get_workflow_execute_parameters) | **GET** /api/integrations/instances/{instanceId}/workflow/executeparameters | [EXPERIMENTAL] GetWorkflowExecuteParameters: Get the execute parameters a Workflow-driven integration instance accepts
 *IntegrationsApi* | [**get_workflow_result_fields**](docs/IntegrationsApi.md#get_workflow_result_fields) | **GET** /api/integrations/instances/{instanceId}/workflow/resultfields | [EXPERIMENTAL] GetWorkflowResultFields: Get the Workflow result fields an integration instance returns
 *IntegrationsApi* | [**list_dataflow_processors**](docs/IntegrationsApi.md#list_dataflow_processors) | **GET** /api/integrations/dataflow/processors | [EXPERIMENTAL] ListDataflowProcessors: List processor types.
 *IntegrationsApi* | [**list_instances**](docs/IntegrationsApi.md#list_instances) | **GET** /api/integrations/instances | [EXPERIMENTAL] ListInstances: List instances across all integrations.
@@ -184,6 +185,9 @@ Class | Method | HTTP request | Description
  - [VendorProduct](docs/VendorProduct.md)
  - [VersionedConfigurationResponse](docs/VersionedConfigurationResponse.md)
  - [VersionedConfigurationTypeResponse](docs/VersionedConfigurationTypeResponse.md)
+ - [WorkflowExecuteParameterResponse](docs/WorkflowExecuteParameterResponse.md)
+ - [WorkflowExecuteParametersResponse](docs/WorkflowExecuteParametersResponse.md)
+ - [WorkflowExecuteStageResponse](docs/WorkflowExecuteStageResponse.md)
  - [WorkflowResultFieldResponse](docs/WorkflowResultFieldResponse.md)
  - [WorkflowResultFieldsResponse](docs/WorkflowResultFieldsResponse.md)
  - [WorkflowResultFieldsTaskResponse](docs/WorkflowResultFieldsTaskResponse.md)
