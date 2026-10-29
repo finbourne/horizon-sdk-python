@@ -20,8 +20,8 @@ from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from datetime import datetime
-from pydantic.v1 import Field, StrictBool, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic.v1 import Field, StrictBool, StrictBytes, StrictInt, StrictStr
+from typing import List, Optional, Union
 from typing_extensions import Annotated
 from finbourne_horizon.models.instances_response import InstancesResponse
 from finbourne_horizon.models.paged_resource_list_of_failed_delivery_response import PagedResourceListOfFailedDeliveryResponse
@@ -63,6 +63,176 @@ class TradePublicationFrameworkApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @overload
+    async def get_run_file_content(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance, or any retry attempt of it.")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID, as returned by the run-files listing.")], **kwargs) -> bytearray:  # noqa: E501
+        ...
+
+    @overload
+    def get_run_file_content(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance, or any retry attempt of it.")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID, as returned by the run-files listing.")], async_req: Optional[bool]=True, **kwargs) -> bytearray:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_run_file_content(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance, or any retry attempt of it.")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID, as returned by the run-files listing.")], async_req: Optional[bool]=None, **kwargs) -> Union[bytearray, Awaitable[bytearray]]:  # noqa: E501
+        """[EXPERIMENTAL] GetRunFileContent: Download a file a run delivered, rebuilt from the run's retained build rows in the instance's output format  # noqa: E501
+
+        Returns the file exactly as the instance built it, so it can be pushed by hand when Horizon cannot. The content is rebuilt the way a resend rebuilds it, so it is only available while the build rows are retained and the response is 410 once retention has purged them. An encrypted instance's file is returned as plaintext.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_run_file_content(instance_id, run_id, file_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: Integration instance ID. (required)
+        :type instance_id: str
+        :param run_id: Run ID within the instance, or any retry attempt of it. (required)
+        :type run_id: str
+        :param file_uuid: File delivery UUID, as returned by the run-files listing. (required)
+        :type file_uuid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: bytearray
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_run_file_content_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_run_file_content_with_http_info(instance_id, run_id, file_uuid, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_run_file_content_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance, or any retry attempt of it.")], file_uuid : Annotated[StrictStr, Field(..., description="File delivery UUID, as returned by the run-files listing.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetRunFileContent: Download a file a run delivered, rebuilt from the run's retained build rows in the instance's output format  # noqa: E501
+
+        Returns the file exactly as the instance built it, so it can be pushed by hand when Horizon cannot. The content is rebuilt the way a resend rebuilds it, so it is only available while the build rows are retained and the response is 410 once retention has purged them. An encrypted instance's file is returned as plaintext.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_run_file_content_with_http_info(instance_id, run_id, file_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param instance_id: Integration instance ID. (required)
+        :type instance_id: str
+        :param run_id: Run ID within the instance, or any retry attempt of it. (required)
+        :type run_id: str
+        :param file_uuid: File delivery UUID, as returned by the run-files listing. (required)
+        :type file_uuid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(bytearray, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'instance_id',
+            'run_id',
+            'file_uuid'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_run_file_content" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['instance_id']:
+            _path_params['instanceId'] = _params['instance_id']
+
+        if _params['run_id']:
+            _path_params['runId'] = _params['run_id']
+
+        if _params['file_uuid']:
+            _path_params['fileUuid'] = _params['file_uuid']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/csv', 'application/xml', 'application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "bytearray",
+            '400': "LusidValidationProblemDetails",
+            '404': "LusidProblemDetails",
+            '410': "LusidProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/trade-publication-framework/instances/{instanceId}/runs/{runId}/files/{fileUuid}/content', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
 
 
     @overload
@@ -264,16 +434,16 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def get_tpf_transaction_history_search(self, tpf_transaction_search_request : Annotated[Optional[TpfTransactionSearchRequest], Field(description="Search filters and pagination options.")] = None, **kwargs) -> PagedResourceListOfTpfTransactionSearchResponse:  # noqa: E501
+    async def get_tpf_transaction_history_search(self, tpf_transaction_search_request : Annotated[Optional[TpfTransactionSearchRequest], Field(description="Search filters, sort order, and pagination options.")] = None, **kwargs) -> PagedResourceListOfTpfTransactionSearchResponse:  # noqa: E501
         ...
 
     @overload
-    def get_tpf_transaction_history_search(self, tpf_transaction_search_request : Annotated[Optional[TpfTransactionSearchRequest], Field(description="Search filters and pagination options.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTpfTransactionSearchResponse:  # noqa: E501
+    def get_tpf_transaction_history_search(self, tpf_transaction_search_request : Annotated[Optional[TpfTransactionSearchRequest], Field(description="Search filters, sort order, and pagination options.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTpfTransactionSearchResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_tpf_transaction_history_search(self, tpf_transaction_search_request : Annotated[Optional[TpfTransactionSearchRequest], Field(description="Search filters and pagination options.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTpfTransactionSearchResponse, Awaitable[PagedResourceListOfTpfTransactionSearchResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR'd within each filter, AND'd between filters).  # noqa: E501
+    def get_tpf_transaction_history_search(self, tpf_transaction_search_request : Annotated[Optional[TpfTransactionSearchRequest], Field(description="Search filters, sort order, and pagination options.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTpfTransactionSearchResponse, Awaitable[PagedResourceListOfTpfTransactionSearchResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, publication status, and a Finbourne Filtering expression. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR'd within each filter, AND'd between filters). Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -281,7 +451,7 @@ class TradePublicationFrameworkApi:
         >>> thread = api.get_tpf_transaction_history_search(tpf_transaction_search_request, async_req=True)
         >>> result = thread.get()
 
-        :param tpf_transaction_search_request: Search filters and pagination options.
+        :param tpf_transaction_search_request: Search filters, sort order, and pagination options.
         :type tpf_transaction_search_request: TpfTransactionSearchRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -302,8 +472,8 @@ class TradePublicationFrameworkApi:
         return self.get_tpf_transaction_history_search_with_http_info(tpf_transaction_search_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_tpf_transaction_history_search_with_http_info(self, tpf_transaction_search_request : Annotated[Optional[TpfTransactionSearchRequest], Field(description="Search filters and pagination options.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, and publication status. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR'd within each filter, AND'd between filters).  # noqa: E501
+    def get_tpf_transaction_history_search_with_http_info(self, tpf_transaction_search_request : Annotated[Optional[TpfTransactionSearchRequest], Field(description="Search filters, sort order, and pagination options.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetTpfTransactionHistorySearch: Search TPF transactions by transaction ID(s) and/or instrument identifier(s), with optional filtering by instance, date range, publication status, and a Finbourne Filtering expression. Accepts multiple values in TransactionIds and InstrumentIdentifiers (OR'd within each filter, AND'd between filters). Instrument identifiers are matched exactly against the stored instrument id; Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values are also resolved against LUSID instruments in the default scope. Filterable properties (via the filter body field): transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, publicationStatus, skipReason, failureReason, fileName, portfolioScope, portfolioCode. Sortable by the same properties. RunStartTime DESC is the default tiebreaker.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -311,7 +481,7 @@ class TradePublicationFrameworkApi:
         >>> thread = api.get_tpf_transaction_history_search_with_http_info(tpf_transaction_search_request, async_req=True)
         >>> result = thread.get()
 
-        :param tpf_transaction_search_request: Search filters and pagination options.
+        :param tpf_transaction_search_request: Search filters, sort order, and pagination options.
         :type tpf_transaction_search_request: TpfTransactionSearchRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -421,33 +591,37 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def get_transaction_payload(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], transaction_id : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> PagedResourceListOfTransactionPayload:  # noqa: E501
+    async def get_transaction_payload(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], transaction_id : Annotated[Optional[StrictStr], Field( description="Return only this transaction's payload. Applied together with <i>filter</i>.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance's own output columns, e.g. SIDE eq 'B'. Values are compared as text, range operators included, so QTY gt '50' is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC.")] = None, **kwargs) -> PagedResourceListOfTransactionPayload:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_payload(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], transaction_id : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionPayload:  # noqa: E501
+    def get_transaction_payload(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], transaction_id : Annotated[Optional[StrictStr], Field( description="Return only this transaction's payload. Applied together with <i>filter</i>.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance's own output columns, e.g. SIDE eq 'B'. Values are compared as text, range operators included, so QTY gt '50' is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTransactionPayload:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_payload(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], transaction_id : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionPayload, Awaitable[PagedResourceListOfTransactionPayload]]:  # noqa: E501
+    def get_transaction_payload(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], transaction_id : Annotated[Optional[StrictStr], Field( description="Return only this transaction's payload. Applied together with <i>filter</i>.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance's own output columns, e.g. SIDE eq 'B'. Values are compared as text, range operators included, so QTY gt '50' is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTransactionPayload, Awaitable[PagedResourceListOfTransactionPayload]]:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_payload(instance_id, run_id, transaction_id, page, page_size, async_req=True)
+        >>> thread = api.get_transaction_payload(instance_id, run_id, transaction_id, page, page_size, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param instance_id: (required)
+        :param instance_id: Integration instance ID. (required)
         :type instance_id: str
-        :param run_id: (required)
+        :param run_id: Run ID within the instance. (required)
         :type run_id: str
-        :param transaction_id:
+        :param transaction_id: Return only this transaction's payload. Applied together with <i>filter</i>.
         :type transaction_id: str
-        :param page:
+        :param page: The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.
         :type page: str
-        :param page_size:
+        :param page_size: Number of results per page.
         :type page_size: int
+        :param filter: A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance's own output columns, e.g. SIDE eq 'B'. Values are compared as text, range operators included, so QTY gt '50' is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts.
+        :type filter: str
+        :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC.
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -464,28 +638,32 @@ class TradePublicationFrameworkApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_transaction_payload_with_http_info(instance_id, run_id, transaction_id, page, page_size, **kwargs)  # noqa: E501
+        return self.get_transaction_payload_with_http_info(instance_id, run_id, transaction_id, page, page_size, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_payload_with_http_info(self, instance_id : Annotated[StrictStr, Field(...)], run_id : Annotated[StrictStr, Field(...)], transaction_id : Annotated[Optional[StrictStr], Field()] = None, page : Annotated[Optional[StrictStr], Field()] = None, page_size : Optional[StrictInt] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_transaction_payload_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], transaction_id : Annotated[Optional[StrictStr], Field( description="Return only this transaction's payload. Applied together with <i>filter</i>.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance's own output columns, e.g. SIDE eq 'B'. Values are compared as text, range operators included, so QTY gt '50' is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionPayload: Transaction payloads for a run, with pagination support. When transactionId is supplied the single matching payload is returned; otherwise all payloads for the instance/run are returned.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_payload_with_http_info(instance_id, run_id, transaction_id, page, page_size, async_req=True)
+        >>> thread = api.get_transaction_payload_with_http_info(instance_id, run_id, transaction_id, page, page_size, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
-        :param instance_id: (required)
+        :param instance_id: Integration instance ID. (required)
         :type instance_id: str
-        :param run_id: (required)
+        :param run_id: Run ID within the instance. (required)
         :type run_id: str
-        :param transaction_id:
+        :param transaction_id: Return only this transaction's payload. Applied together with <i>filter</i>.
         :type transaction_id: str
-        :param page:
+        :param page: The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.
         :type page: str
-        :param page_size:
+        :param page_size: Number of results per page.
         :type page_size: int
+        :param filter: A Finbourne filter on: transactionId, publicationStatus (Sent, Failed) and the instance's own output columns, e.g. SIDE eq 'B'. Values are compared as text, range operators included, so QTY gt '50' is a text comparison, and null is not accepted. Only output columns named with letters, digits and underscores can be filtered on; the rest can still be sorted. An unknown field is rejected with the fields the run accepts.
+        :type filter: str
+        :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Output columns order nulls, then numbers by value, then the rest as text. Defaults to transactionId ASC.
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -517,7 +695,9 @@ class TradePublicationFrameworkApi:
             'run_id',
             'transaction_id',
             'page',
-            'page_size'
+            'page_size',
+            'filter',
+            'sort_by'
         ]
         _all_params.extend(
             [
@@ -563,6 +743,13 @@ class TradePublicationFrameworkApi:
 
         if _params.get('page_size') is not None:  # noqa: E501
             _query_params.append(('pageSize', _params['page_size']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -1103,16 +1290,16 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def list_run_files(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, **kwargs) -> PagedResourceListOfRunFileResponse:  # noqa: E501
+    async def list_run_files(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, **kwargs) -> PagedResourceListOfRunFileResponse:  # noqa: E501
         ...
 
     @overload
-    def list_run_files(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRunFileResponse:  # noqa: E501
+    def list_run_files(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRunFileResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_run_files(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRunFileResponse, Awaitable[PagedResourceListOfRunFileResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] ListRunFiles: List Files in a run  # noqa: E501
+    def list_run_files(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRunFileResponse, Awaitable[PagedResourceListOfRunFileResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] ListRunFiles: List the file deliveries of a run, one row per file and destination. Each row's destinations list holds exactly one element; key rows on fileUuid.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -1128,7 +1315,7 @@ class TradePublicationFrameworkApi:
         :type page: str
         :param page_size: Number of results per page.
         :type page_size: int
-        :param filter: A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.
+        :param filter: A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt.
         :type filter: str
         :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).
         :type sort_by: List[str]
@@ -1151,8 +1338,8 @@ class TradePublicationFrameworkApi:
         return self.list_run_files_with_http_info(instance_id, run_id, page, page_size, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_run_files_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListRunFiles: List Files in a run  # noqa: E501
+    def list_run_files_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID.")], run_id : Annotated[StrictStr, Field(..., description="Run ID within the instance.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token from the previous response; <i>filter</i> and <i>sortBy</i> must be unchanged.")] = None, page_size : Annotated[Optional[StrictInt], Field(description="Number of results per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListRunFiles: List the file deliveries of a run, one row per file and destination. Each row's destinations list holds exactly one element; key rows on fileUuid.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -1168,7 +1355,7 @@ class TradePublicationFrameworkApi:
         :type page: str
         :param page_size: Number of results per page.
         :type page_size: int
-        :param filter: A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, status, fileUuid.
+        :param filter: A Finbourne filter on: fileName, generatedAt, rowCount, fileHash, encrypted, destinationType, destinationPath, destinationName, status, fileUuid, deliveredAt.
         :type filter: str
         :param sort_by: Up to two filterable fields, each suffixed \" ASC\" or \" DESC\". Defaults to newest first (GeneratedAt DESC, Id DESC).
         :type sort_by: List[str]

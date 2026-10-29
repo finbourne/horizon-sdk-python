@@ -44,7 +44,8 @@ class TransactionResponse(BaseModel):
     sent_at: Optional[datetime] = Field(default=None, alias="sentAt")
     destinations: List[DestinationResponse]
     failure_stage:  Optional[StrictStr] = Field(None,alias="failureStage") 
-    __properties = ["transactionId", "publicationStatus", "portfolioScope", "portfolioCode", "instrumentId", "instrumentType", "instrumentName", "tradeDate", "settlementDate", "status", "skipReason", "failureReason", "outputFileName", "sentAt", "destinations", "failureStage"]
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope the build resolved the instrument in; null for rows built before it was recorded.") 
+    __properties = ["transactionId", "publicationStatus", "portfolioScope", "portfolioCode", "instrumentId", "instrumentType", "instrumentName", "tradeDate", "settlementDate", "status", "skipReason", "failureReason", "outputFileName", "sentAt", "destinations", "failureStage", "instrumentScope"]
 
     class Config:
         """Pydantic configuration"""
@@ -145,6 +146,11 @@ class TransactionResponse(BaseModel):
         if self.failure_stage is None and "failure_stage" in self.__fields_set__:
             _dict['failureStage'] = None
 
+        # set to None if instrument_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
+            _dict['instrumentScope'] = None
+
         return _dict
 
     @classmethod
@@ -172,7 +178,8 @@ class TransactionResponse(BaseModel):
             "output_file_name": obj.get("outputFileName"),
             "sent_at": obj.get("sentAt"),
             "destinations": [DestinationResponse.from_dict(_item) for _item in obj.get("destinations")] if obj.get("destinations") is not None else None,
-            "failure_stage": obj.get("failureStage")
+            "failure_stage": obj.get("failureStage"),
+            "instrument_scope": obj.get("instrumentScope")
         })
         return _obj
 

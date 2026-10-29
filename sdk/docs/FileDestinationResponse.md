@@ -1,6 +1,6 @@
 # FileDestinationResponse
 
-record containing details of a single file destination for a run.
+The destination a file delivery row describes. A Failed row carries the per-transaction FailureReason when one was recorded, falling back to the raw Error text.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **status** | **str** |  | 
 **error** | **str** |  | [optional] 
 **failure_reason** | **str** |  | [optional] 
+**name** | **str** | The configured destination name, such as the SFTP host, when one was recorded. | [optional] 
+**delivered_at** | **datetime** | When the file reached the destination; null for a Failed or Pending row. | [optional] 
 ## Example
 
 ```python
@@ -23,7 +25,9 @@ path: StrictStr = "example_path"
 status: StrictStr = "example_status"
 error: Optional[StrictStr] = "example_error"
 failure_reason: Optional[StrictStr] = "example_failure_reason"
-file_destination_response_instance = FileDestinationResponse(type=type, path=path, status=status, error=error, failure_reason=failure_reason)
+name: Optional[StrictStr] = "example_name"
+delivered_at: Optional[datetime] = # Replace with your value
+file_destination_response_instance = FileDestinationResponse(type=type, path=path, status=status, error=error, failure_reason=failure_reason, name=name, delivered_at=delivered_at)
 
 ```
 

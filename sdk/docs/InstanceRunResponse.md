@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **failed_count** | **int** |  | [optional] 
 **failed_files** | **int** |  | [optional] 
 **message** | **str** |  | [optional] 
+**file_count** | **int** | The number of rows ListRunFiles returns for the run, every delivery attempt included; latest attempt only. | [optional] 
 ## Example
 
 ```python
@@ -44,7 +45,9 @@ failed_count: Optional[StrictInt] = # Replace with your value
 failed_files: Optional[StrictInt] = # Replace with your value
 failed_files: Optional[StrictInt] = None
 message: Optional[StrictStr] = "example_message"
-instance_run_response_instance = InstanceRunResponse(run_id=run_id, reference_id=reference_id, attempt=attempt, start_time=start_time, end_time=end_time, duration=duration, status=status, triggered_by=triggered_by, total=total, sent_count=sent_count, skipped_count=skipped_count, failed_count=failed_count, failed_files=failed_files, message=message)
+file_count: Optional[StrictInt] = # Replace with your value
+file_count: Optional[StrictInt] = None
+instance_run_response_instance = InstanceRunResponse(run_id=run_id, reference_id=reference_id, attempt=attempt, start_time=start_time, end_time=end_time, duration=duration, status=status, triggered_by=triggered_by, total=total, sent_count=sent_count, skipped_count=skipped_count, failed_count=failed_count, failed_files=failed_files, message=message, file_count=file_count)
 
 ```
 

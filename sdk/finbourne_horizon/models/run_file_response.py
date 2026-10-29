@@ -26,10 +26,10 @@ from finbourne_horizon.models.file_destination_response import FileDestinationRe
 
 class RunFileResponse(BaseModel):
     """
-    record containing details of a single file for a run.  # noqa: E501
+    One delivery of a file to one destination within a run, keyed by FileUuid. A file sent to two destinations appears as two rows, so Destinations always holds exactly one element.  # noqa: E501
     """
     file_name:  StrictStr = Field(...,alias="fileName") 
-    generated_at: datetime = Field(alias="generatedAt")
+    generated_at: datetime = Field(description="When the file was built, or when the attempt failed before a file was built.", alias="generatedAt")
     row_count: StrictInt = Field(alias="rowCount")
     file_hash:  StrictStr = Field(...,alias="fileHash") 
     encrypted: StrictBool

@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **sent_at** | **datetime** |  | [optional] 
 **destinations** | [**List[DestinationResponse]**](DestinationResponse.md) |  | 
 **failure_stage** | **str** |  | [optional] 
+**instrument_scope** | **str** | The scope the build resolved the instrument in; null for rows built before it was recorded. | [optional] 
 ## Example
 
 ```python
@@ -45,7 +46,8 @@ output_file_name: Optional[StrictStr] = "example_output_file_name"
 sent_at: Optional[datetime] = # Replace with your value
 destinations: List[DestinationResponse]
 failure_stage: Optional[StrictStr] = "example_failure_stage"
-transaction_response_instance = TransactionResponse(transaction_id=transaction_id, publication_status=publication_status, portfolio_scope=portfolio_scope, portfolio_code=portfolio_code, instrument_id=instrument_id, instrument_type=instrument_type, instrument_name=instrument_name, trade_date=trade_date, settlement_date=settlement_date, status=status, skip_reason=skip_reason, failure_reason=failure_reason, output_file_name=output_file_name, sent_at=sent_at, destinations=destinations, failure_stage=failure_stage)
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+transaction_response_instance = TransactionResponse(transaction_id=transaction_id, publication_status=publication_status, portfolio_scope=portfolio_scope, portfolio_code=portfolio_code, instrument_id=instrument_id, instrument_type=instrument_type, instrument_name=instrument_name, trade_date=trade_date, settlement_date=settlement_date, status=status, skip_reason=skip_reason, failure_reason=failure_reason, output_file_name=output_file_name, sent_at=sent_at, destinations=destinations, failure_stage=failure_stage, instrument_scope=instrument_scope)
 
 ```
 

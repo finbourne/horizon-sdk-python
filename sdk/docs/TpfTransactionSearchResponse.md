@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **failure_stage** | **str** | Stage at which a failed transaction failed: Build or Delivery | [optional] 
 **sent_at** | **datetime** | When the transaction was sent, which is when its file reached a destination. Empty for Skipped and Failed rows | [optional] 
 **instrument_id** | **str** | InstrumentId showing instrument id of transaction | [optional] 
+**instrument_scope** | **str** | The scope the build resolved the instrument in; null for rows built before it was recorded | [optional] 
 ## Example
 
 ```python
@@ -53,7 +54,8 @@ failure_reason: Optional[StrictStr] = "example_failure_reason"
 failure_stage: Optional[StrictStr] = "example_failure_stage"
 sent_at: Optional[datetime] = # Replace with your value
 instrument_id: Optional[StrictStr] = "example_instrument_id"
-tpf_transaction_search_response_instance = TpfTransactionSearchResponse(transaction_id=transaction_id, instance_id=instance_id, instance_name=instance_name, batch_id=batch_id, run_id=run_id, run_start_time=run_start_time, publication_status=publication_status, instrument_name=instrument_name, instrument_type=instrument_type, trade_date=trade_date, settlement_date=settlement_date, skip_reason=skip_reason, file_name=file_name, destinations=destinations, portfolio_code=portfolio_code, portfolio_scope=portfolio_scope, failure_reason=failure_reason, failure_stage=failure_stage, sent_at=sent_at, instrument_id=instrument_id)
+instrument_scope: Optional[StrictStr] = "example_instrument_scope"
+tpf_transaction_search_response_instance = TpfTransactionSearchResponse(transaction_id=transaction_id, instance_id=instance_id, instance_name=instance_name, batch_id=batch_id, run_id=run_id, run_start_time=run_start_time, publication_status=publication_status, instrument_name=instrument_name, instrument_type=instrument_type, trade_date=trade_date, settlement_date=settlement_date, skip_reason=skip_reason, file_name=file_name, destinations=destinations, portfolio_code=portfolio_code, portfolio_scope=portfolio_scope, failure_reason=failure_reason, failure_stage=failure_stage, sent_at=sent_at, instrument_id=instrument_id, instrument_scope=instrument_scope)
 
 ```
 

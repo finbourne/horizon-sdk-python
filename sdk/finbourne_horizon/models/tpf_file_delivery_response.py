@@ -30,7 +30,7 @@ class TpfFileDeliveryResponse(BaseModel):
     run_id:  Optional[StrictStr] = Field(None,alias="runId") 
     run_start_time: Optional[datetime] = Field(default=None, alias="runStartTime")
     file_name:  StrictStr = Field(...,alias="fileName") 
-    generated_at: datetime = Field(alias="generatedAt")
+    generated_at: datetime = Field(description="When the file was built, or when the attempt failed before a file was built.", alias="generatedAt")
     row_count: StrictInt = Field(alias="rowCount")
     file_hash:  Optional[StrictStr] = Field(None,alias="fileHash") 
     destination_type:  StrictStr = Field(...,alias="destinationType") 
@@ -40,7 +40,8 @@ class TpfFileDeliveryResponse(BaseModel):
     destination_name:  Optional[StrictStr] = Field(None,alias="destinationName") 
     file_uuid:  StrictStr = Field(...,alias="fileUuid") 
     can_resend: StrictBool = Field(description="Whether the data the file is rebuilt from is still retained, so a resend can be requested.", alias="canResend")
-    __properties = ["runId", "runStartTime", "fileName", "generatedAt", "rowCount", "fileHash", "destinationType", "destinationPath", "destinationStatus", "destinationError", "destinationName", "fileUuid", "canResend"]
+    delivered_at: Optional[datetime] = Field(default=None, description="When the file reached the destination; null for a Failed or Pending row.", alias="deliveredAt")
+    __properties = ["runId", "runStartTime", "fileName", "generatedAt", "rowCount", "fileHash", "destinationType", "destinationPath", "destinationStatus", "destinationError", "destinationName", "fileUuid", "canResend", "deliveredAt"]
 
     class Config:
         """Pydantic configuration"""
@@ -104,6 +105,11 @@ class TpfFileDeliveryResponse(BaseModel):
         if self.destination_name is None and "destination_name" in self.__fields_set__:
             _dict['destinationName'] = None
 
+        # set to None if delivered_at (nullable) is None
+        # and __fields_set__ contains the field
+        if self.delivered_at is None and "delivered_at" in self.__fields_set__:
+            _dict['deliveredAt'] = None
+
         return _dict
 
     @classmethod
@@ -128,7 +134,8 @@ class TpfFileDeliveryResponse(BaseModel):
             "destination_error": obj.get("destinationError"),
             "destination_name": obj.get("destinationName"),
             "file_uuid": obj.get("fileUuid"),
-            "can_resend": obj.get("canResend")
+            "can_resend": obj.get("canResend"),
+            "delivered_at": obj.get("deliveredAt")
         })
         return _obj
 

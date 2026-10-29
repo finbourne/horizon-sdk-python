@@ -38,7 +38,7 @@ class CreateInstanceRequest(BaseModel):
     enabled: StrictBool
     triggers: List[Trigger]
     details: Dict[str, Any] = Field(description="Base DTO type of an integration configuration specific to the integration type.              N.B. ASP.NET Core model validation is normally applied automatically when [ApiController] is added to a controller, however it doesn't work here with the polymorphic integration subtypes of this class (see https://github.com/dotnet/aspnetcore/issues/27882). The workaround here is to implement the IValidatableObject interface and each subtype must call Validate() or ValidateContents() on its properties (the validation is not recursive).  Located in Horizon.Integrations.Web so both specific integration projects and Horizon.WebApi can reference it.")
-    post_process_tasks: List[PostProcessTask] = Field(alias="postProcessTasks")
+    post_process_tasks: Optional[List[PostProcessTask]] = Field(default=None, description="Post-process tasks for the instance. On update the stored tasks are replaced by this set when it is present, an empty set clears them, and omitting the field leaves them unchanged.", alias="postProcessTasks")
     alert_rules: Optional[List[AlertRule]] = Field(default=None, description="Alert rules for the instance. On update the stored rules are replaced by this set when it is present, an empty set clears them, and omitting the field leaves them unchanged.", alias="alertRules")
     __properties = ["instanceOptionalProps", "integrationType", "name", "description", "enabled", "triggers", "details", "postProcessTasks", "alertRules"]
 
@@ -106,6 +106,11 @@ class CreateInstanceRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.instance_optional_props is None and "instance_optional_props" in self.__fields_set__:
             _dict['instanceOptionalProps'] = None
+
+        # set to None if post_process_tasks (nullable) is None
+        # and __fields_set__ contains the field
+        if self.post_process_tasks is None and "post_process_tasks" in self.__fields_set__:
+            _dict['postProcessTasks'] = None
 
         # set to None if alert_rules (nullable) is None
         # and __fields_set__ contains the field

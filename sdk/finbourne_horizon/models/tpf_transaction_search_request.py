@@ -28,14 +28,16 @@ class TpfTransactionSearchRequest(BaseModel):
     Request body for the POST transaction-search endpoint. Multiple values in TransactionIds and InstrumentIdentifiers are OR'd within each filter; both filters together are AND'd.  # noqa: E501
     """
     transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="One or more LUSID transaction IDs to search for (max 50). Values are OR'd.", alias="transactionIds")
-    instrument_identifiers: Optional[List[StrictStr]] = Field(default=None, description="One or more instrument identifiers in any supported format (ISIN, CUSIP, LUID, etc.) to search for (max 50). Values are OR'd.", alias="instrumentIdentifiers")
+    instrument_identifiers: Optional[List[StrictStr]] = Field(default=None, description="One or more instrument identifiers to search for (max 50). Values are OR'd. Accepts LusidInstrumentId, Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values. Every value is matched exactly against the stored instrument id; non-LUID values are also resolved against LUSID instruments in the default scope, whose own matching rules (including case) apply.", alias="instrumentIdentifiers")
     instance_id:  Optional[StrictStr] = Field(None,alias="instanceId", description="Instance ID to filter by. Omit or leave null to search all instances the caller has access to.") 
     var_from: Optional[datetime] = Field(default=None, description="Start of the date range (inclusive). Defaults to 30 days ago if neither From nor To is provided.", alias="from")
     to: Optional[datetime] = Field(default=None, description="End of the date range (inclusive). Defaults to now if not provided.")
     limit: Optional[StrictInt] = Field(default=None, description="Maximum number of results to return per page.")
     page:  Optional[StrictStr] = Field(None,alias="page", description="Pagination token from a previous response NextPage or PreviousPage. Omit for the first page.") 
     status:  Optional[StrictStr] = Field(None,alias="status", description="Publication status to filter by. Valid values: Sent, Skipped, Failed. Optional.") 
-    __properties = ["transactionIds", "instrumentIdentifiers", "instanceId", "from", "to", "limit", "page", "status"]
+    filter:  Optional[StrictStr] = Field(None,alias="filter", description="Filter expression to apply to the results, in the format \"property operator value\" (e.g., eq, ne, gt, lt), combined with \"and\"/\"or\" as needed. Filterable properties are transactionId, instanceName, runStartTime, instrumentName, instrumentType, instrumentId, tradeDate, settlementDate, skipReason, failureReason, fileName, portfolioScope, portfolioCode, and runId. PublicationStatus is not filterable here — use the Status body parameter instead. Dates are quoted ISO-8601. Destinations is not filterable. Must remain the same across pages — the page token includes a hash of both filter and sortBy.") 
+    sort_by: Optional[List[StrictStr]] = Field(default=None, description="Up to two sortable fields, each optionally suffixed \" ASC\" or \" DESC\". Deterministic tiebreakers are appended automatically: RunStartTime DESC, TransactionId ASC, BatchUuid ASC, FileName ASC. Must remain the same across pages — the page token includes a hash of both filter and sortBy.", alias="sortBy")
+    __properties = ["transactionIds", "instrumentIdentifiers", "instanceId", "from", "to", "limit", "page", "status", "filter", "sortBy"]
 
     class Config:
         """Pydantic configuration"""
@@ -109,6 +111,16 @@ class TpfTransactionSearchRequest(BaseModel):
         if self.status is None and "status" in self.__fields_set__:
             _dict['status'] = None
 
+        # set to None if filter (nullable) is None
+        # and __fields_set__ contains the field
+        if self.filter is None and "filter" in self.__fields_set__:
+            _dict['filter'] = None
+
+        # set to None if sort_by (nullable) is None
+        # and __fields_set__ contains the field
+        if self.sort_by is None and "sort_by" in self.__fields_set__:
+            _dict['sortBy'] = None
+
         return _dict
 
     @classmethod
@@ -128,7 +140,9 @@ class TpfTransactionSearchRequest(BaseModel):
             "to": obj.get("to"),
             "limit": obj.get("limit"),
             "page": obj.get("page"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "filter": obj.get("filter"),
+            "sort_by": obj.get("sortBy")
         })
         return _obj
 

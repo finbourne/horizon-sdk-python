@@ -40,7 +40,8 @@ class InstanceResponse(BaseModel):
     last_run_status:  Optional[StrictStr] = Field(None,alias="lastRunStatus") 
     latest_runs_in24_hours: Optional[LatestRunsResponse] = Field(default=None, alias="latestRunsIn24Hours")
     destinations: List[InstanceDestinations]
-    __properties = ["id", "name", "enabled", "portfolios", "schedule", "scheduleTimezone", "lastRunAt", "lastRunStatus", "latestRunsIn24Hours", "destinations"]
+    output_format:  Optional[StrictStr] = Field(None,alias="outputFormat") 
+    __properties = ["id", "name", "enabled", "portfolios", "schedule", "scheduleTimezone", "lastRunAt", "lastRunStatus", "latestRunsIn24Hours", "destinations", "outputFormat"]
 
     class Config:
         """Pydantic configuration"""
@@ -111,6 +112,11 @@ class InstanceResponse(BaseModel):
         if self.last_run_status is None and "last_run_status" in self.__fields_set__:
             _dict['lastRunStatus'] = None
 
+        # set to None if output_format (nullable) is None
+        # and __fields_set__ contains the field
+        if self.output_format is None and "output_format" in self.__fields_set__:
+            _dict['outputFormat'] = None
+
         return _dict
 
     @classmethod
@@ -132,7 +138,8 @@ class InstanceResponse(BaseModel):
             "last_run_at": obj.get("lastRunAt"),
             "last_run_status": obj.get("lastRunStatus"),
             "latest_runs_in24_hours": LatestRunsResponse.from_dict(obj.get("latestRunsIn24Hours")) if obj.get("latestRunsIn24Hours") is not None else None,
-            "destinations": [InstanceDestinations.from_dict(_item) for _item in obj.get("destinations")] if obj.get("destinations") is not None else None
+            "destinations": [InstanceDestinations.from_dict(_item) for _item in obj.get("destinations")] if obj.get("destinations") is not None else None,
+            "output_format": obj.get("outputFormat")
         })
         return _obj
 

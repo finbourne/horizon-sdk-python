@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **enabled** | **bool** |  | 
 **triggers** | [**List[Trigger]**](Trigger.md) |  | 
 **details** | **object** | Base DTO type of an integration configuration specific to the integration type.              N.B. ASP.NET Core model validation is normally applied automatically when [ApiController] is added to a controller, however it doesn&#39;t work here with the polymorphic integration subtypes of this class (see https://github.com/dotnet/aspnetcore/issues/27882). The workaround here is to implement the IValidatableObject interface and each subtype must call Validate() or ValidateContents() on its properties (the validation is not recursive).  Located in Horizon.Integrations.Web so both specific integration projects and Horizon.WebApi can reference it. | 
-**post_process_tasks** | [**List[PostProcessTask]**](PostProcessTask.md) |  | 
+**post_process_tasks** | [**List[PostProcessTask]**](PostProcessTask.md) | Post-process tasks for the instance. On update the stored tasks are replaced by this set when it is present, an empty set clears them, and omitting the field leaves them unchanged. | [optional] 
 **alert_rules** | [**List[AlertRule]**](AlertRule.md) | Alert rules for the instance. On update the stored rules are replaced by this set when it is present, an empty set clears them, and omitting the field leaves them unchanged. | [optional] 
 ## Example
 
@@ -30,7 +30,7 @@ enabled: StrictBool
 enabled:StrictBool = True
 triggers: List[Trigger]
 details: Dict[str, Any] = # Replace with your value
-post_process_tasks: List[PostProcessTask] = # Replace with your value
+post_process_tasks: Optional[List[PostProcessTask]] = # Replace with your value
 alert_rules: Optional[List[AlertRule]] = # Replace with your value
 update_instance_request_instance = UpdateInstanceRequest(id=id, integration_type=integration_type, name=name, description=description, enabled=enabled, triggers=triggers, details=details, post_process_tasks=post_process_tasks, alert_rules=alert_rules)
 

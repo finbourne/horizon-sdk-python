@@ -1,11 +1,11 @@
 # RunFileResponse
 
-record containing details of a single file for a run.
+One delivery of a file to one destination within a run, keyed by FileUuid. A file sent to two destinations appears as two rows, so Destinations always holds exactly one element.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **file_name** | **str** |  | 
-**generated_at** | **datetime** |  | 
+**generated_at** | **datetime** | When the file was built, or when the attempt failed before a file was built. | 
 **row_count** | **int** |  | 
 **file_hash** | **str** |  | 
 **encrypted** | **bool** |  | 

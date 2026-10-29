@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **run_id** | **str** |  | [optional] 
 **run_start_time** | **datetime** |  | [optional] 
 **file_name** | **str** |  | 
-**generated_at** | **datetime** |  | 
+**generated_at** | **datetime** | When the file was built, or when the attempt failed before a file was built. | 
 **row_count** | **int** |  | 
 **file_hash** | **str** |  | [optional] 
 **destination_type** | **str** |  | 
@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **destination_name** | **str** |  | [optional] 
 **file_uuid** | **str** |  | 
 **can_resend** | **bool** | Whether the data the file is rebuilt from is still retained, so a resend can be requested. | 
+**delivered_at** | **datetime** | When the file reached the destination; null for a Failed or Pending row. | [optional] 
 ## Example
 
 ```python
@@ -41,7 +42,8 @@ destination_name: Optional[StrictStr] = "example_destination_name"
 file_uuid: StrictStr = "example_file_uuid"
 can_resend: StrictBool = # Replace with your value
 can_resend:StrictBool = True
-tpf_file_delivery_response_instance = TpfFileDeliveryResponse(run_id=run_id, run_start_time=run_start_time, file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, destination_type=destination_type, destination_path=destination_path, destination_status=destination_status, destination_error=destination_error, destination_name=destination_name, file_uuid=file_uuid, can_resend=can_resend)
+delivered_at: Optional[datetime] = # Replace with your value
+tpf_file_delivery_response_instance = TpfFileDeliveryResponse(run_id=run_id, run_start_time=run_start_time, file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, destination_type=destination_type, destination_path=destination_path, destination_status=destination_status, destination_error=destination_error, destination_name=destination_name, file_uuid=file_uuid, can_resend=can_resend, delivered_at=delivered_at)
 
 ```
 

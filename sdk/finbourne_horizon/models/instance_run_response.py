@@ -41,7 +41,8 @@ class InstanceRunResponse(BaseModel):
     failed_count: Optional[StrictInt] = Field(default=None, alias="failedCount")
     failed_files: Optional[StrictInt] = Field(default=None, alias="failedFiles")
     message:  Optional[StrictStr] = Field(None,alias="message") 
-    __properties = ["runId", "referenceId", "attempt", "startTime", "endTime", "duration", "status", "triggeredBy", "total", "sentCount", "skippedCount", "failedCount", "failedFiles", "message"]
+    file_count: Optional[StrictInt] = Field(default=None, description="The number of rows ListRunFiles returns for the run, every delivery attempt included; latest attempt only.", alias="fileCount")
+    __properties = ["runId", "referenceId", "attempt", "startTime", "endTime", "duration", "status", "triggeredBy", "total", "sentCount", "skippedCount", "failedCount", "failedFiles", "message", "fileCount"]
 
     class Config:
         """Pydantic configuration"""
@@ -125,6 +126,11 @@ class InstanceRunResponse(BaseModel):
         if self.message is None and "message" in self.__fields_set__:
             _dict['message'] = None
 
+        # set to None if file_count (nullable) is None
+        # and __fields_set__ contains the field
+        if self.file_count is None and "file_count" in self.__fields_set__:
+            _dict['fileCount'] = None
+
         return _dict
 
     @classmethod
@@ -150,7 +156,8 @@ class InstanceRunResponse(BaseModel):
             "skipped_count": obj.get("skippedCount"),
             "failed_count": obj.get("failedCount"),
             "failed_files": obj.get("failedFiles"),
-            "message": obj.get("message")
+            "message": obj.get("message"),
+            "file_count": obj.get("fileCount")
         })
         return _obj
 

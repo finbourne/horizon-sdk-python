@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **last_run_status** | **str** |  | [optional] 
 **latest_runs_in24_hours** | [**LatestRunsResponse**](LatestRunsResponse.md) |  | [optional] 
 **destinations** | [**List[InstanceDestinations]**](InstanceDestinations.md) |  | 
+**output_format** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -34,7 +35,8 @@ last_run_at: Optional[datetime] = # Replace with your value
 last_run_status: Optional[StrictStr] = "example_last_run_status"
 latest_runs_in24_hours: Optional[LatestRunsResponse] = # Replace with your value
 destinations: List[InstanceDestinations]
-instance_response_instance = InstanceResponse(id=id, name=name, enabled=enabled, portfolios=portfolios, schedule=schedule, schedule_timezone=schedule_timezone, last_run_at=last_run_at, last_run_status=last_run_status, latest_runs_in24_hours=latest_runs_in24_hours, destinations=destinations)
+output_format: Optional[StrictStr] = "example_output_format"
+instance_response_instance = InstanceResponse(id=id, name=name, enabled=enabled, portfolios=portfolios, schedule=schedule, schedule_timezone=schedule_timezone, last_run_at=last_run_at, last_run_status=last_run_status, latest_runs_in24_hours=latest_runs_in24_hours, destinations=destinations, output_format=output_format)
 
 ```
 
