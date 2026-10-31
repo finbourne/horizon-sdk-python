@@ -27,7 +27,7 @@ class TpfTransactionSearchRequest(BaseModel):
     """
     Request body for the POST transaction-search endpoint. Multiple values in TransactionIds and InstrumentIdentifiers are OR'd within each filter; both filters together are AND'd.  # noqa: E501
     """
-    transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="One or more LUSID transaction IDs to search for (max 50). Values are OR'd.", alias="transactionIds")
+    transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="One or more LUSID transaction IDs to search for (max 50, each 1 to 256 characters). Values are OR'd. An empty ID, or one with leading or trailing whitespace, is rejected with 400, as LUSID never stores one.", alias="transactionIds")
     instrument_identifiers: Optional[List[StrictStr]] = Field(default=None, description="One or more instrument identifiers to search for (max 50). Values are OR'd. Accepts LusidInstrumentId, Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values. Every value is matched exactly against the stored instrument id; non-LUID values are also resolved against LUSID instruments in the default scope, whose own matching rules (including case) apply.", alias="instrumentIdentifiers")
     instance_id:  Optional[StrictStr] = Field(None,alias="instanceId", description="Instance ID to filter by. Omit or leave null to search all instances the caller has access to.") 
     var_from: Optional[datetime] = Field(default=None, description="Start of the date range (inclusive). Defaults to 30 days ago if neither From nor To is provided.", alias="from")

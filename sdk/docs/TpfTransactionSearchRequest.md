@@ -4,7 +4,7 @@ Request body for the POST transaction-search endpoint. Multiple values in Transa
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**transaction_ids** | **List[str]** | One or more LUSID transaction IDs to search for (max 50). Values are OR&#39;d. | [optional] 
+**transaction_ids** | **List[str]** | One or more LUSID transaction IDs to search for (max 50, each 1 to 256 characters). Values are OR&#39;d. An empty ID, or one with leading or trailing whitespace, is rejected with 400, as LUSID never stores one. | [optional] 
 **instrument_identifiers** | **List[str]** | One or more instrument identifiers to search for (max 50). Values are OR&#39;d. Accepts LusidInstrumentId, Isin, Figi, Ticker, Cusip, Sedol or ClientInternal values. Every value is matched exactly against the stored instrument id; non-LUID values are also resolved against LUSID instruments in the default scope, whose own matching rules (including case) apply. | [optional] 
 **instance_id** | **str** | Instance ID to filter by. Omit or leave null to search all instances the caller has access to. | [optional] 
 **var_from** | **datetime** | Start of the date range (inclusive). Defaults to 30 days ago if neither From nor To is provided. | [optional] 
