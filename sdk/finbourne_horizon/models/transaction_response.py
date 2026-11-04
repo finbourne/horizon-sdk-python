@@ -29,7 +29,7 @@ class TransactionResponse(BaseModel):
     Response containing details of a single transaction for a run. A transaction built twice in one batch appears once per build. FailureStage says whether a failed transaction failed while being built (Build) or while its file was being delivered (Delivery).  # noqa: E501
     """
     transaction_id:  StrictStr = Field(...,alias="transactionId") 
-    publication_status:  StrictStr = Field(...,alias="publicationStatus", description="The outcome the screens show for this row: Sent, Skipped or Failed.") 
+    publication_status:  StrictStr = Field(...,alias="publicationStatus", description="The outcome the screens show for this row: Sent, Skipped or Failed, or the element status for an element not yet built.") 
     portfolio_scope:  Optional[StrictStr] = Field(None,alias="portfolioScope") 
     portfolio_code:  Optional[StrictStr] = Field(None,alias="portfolioCode") 
     instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId") 
@@ -45,7 +45,9 @@ class TransactionResponse(BaseModel):
     destinations: List[DestinationResponse]
     failure_stage:  Optional[StrictStr] = Field(None,alias="failureStage") 
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope the build resolved the instrument in; null for rows built before it was recorded.") 
-    __properties = ["transactionId", "publicationStatus", "portfolioScope", "portfolioCode", "instrumentId", "instrumentType", "instrumentName", "tradeDate", "settlementDate", "status", "skipReason", "failureReason", "outputFileName", "sentAt", "destinations", "failureStage", "instrumentScope"]
+    outcome:  StrictStr = Field(...,alias="outcome", description="The same value as PublicationStatus under the name the screens use; PublicationStatus stays for existing clients.") 
+    event_type:  Optional[StrictStr] = Field(None,alias="eventType", description="The TPF event type that triggered this publication (New, Amended, Cancelled, ...); Queued for an element not yet built; null otherwise.") 
+    __properties = ["transactionId", "publicationStatus", "portfolioScope", "portfolioCode", "instrumentId", "instrumentType", "instrumentName", "tradeDate", "settlementDate", "status", "skipReason", "failureReason", "outputFileName", "sentAt", "destinations", "failureStage", "instrumentScope", "outcome", "eventType"]
 
     class Config:
         """Pydantic configuration"""
@@ -151,6 +153,11 @@ class TransactionResponse(BaseModel):
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
             _dict['instrumentScope'] = None
 
+        # set to None if event_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.event_type is None and "event_type" in self.__fields_set__:
+            _dict['eventType'] = None
+
         return _dict
 
     @classmethod
@@ -179,7 +186,9 @@ class TransactionResponse(BaseModel):
             "sent_at": obj.get("sentAt"),
             "destinations": [DestinationResponse.from_dict(_item) for _item in obj.get("destinations")] if obj.get("destinations") is not None else None,
             "failure_stage": obj.get("failureStage"),
-            "instrument_scope": obj.get("instrumentScope")
+            "instrument_scope": obj.get("instrumentScope"),
+            "outcome": obj.get("outcome"),
+            "event_type": obj.get("eventType")
         })
         return _obj
 

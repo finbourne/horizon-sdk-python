@@ -10,7 +10,9 @@ Name | Type | Description | Notes
 **batch_id** | **str** | Unique identifier of the batch | 
 **run_id** | **str** | The run that processed the transaction for this instance, as shown in run monitoring | 
 **run_start_time** | **datetime** | Timestamp when the batch/run started | 
-**publication_status** | **str** | Publication status of the transaction (Sent | Skipped | Failed) | 
+**publication_status** | **str** | Outcome of the transaction&#39;s build (Sent | Skipped | Failed) | 
+**outcome** | **str** | The same value as PublicationStatus under the name the screens use; PublicationStatus stays for existing clients. | 
+**event_type** | **str** | The TPF event type that triggered this publication (New, Amended, Cancelled, NothingToDo, InstrumentMatured, InstrumentPartialClosure, InstrumentFullClosure, InstrumentInterestPayment, LastSentPropertyUpdated). Null for rows persisted before it was recorded, for transactions skipped as excluded, and for rows written before the build computed it (for example a transaction not found in LUSID). Never Queued: the search returns built rows only. Distinct from PublicationStatus, which says what happened to the row. | [optional] 
 **instrument_name** | **str** | Instrument name | 
 **instrument_type** | **str** | Instrument type | 
 **trade_date** | **datetime** | Trade date of the transaction | 
@@ -41,6 +43,8 @@ batch_id: StrictStr = "example_batch_id"
 run_id: StrictStr = "example_run_id"
 run_start_time: datetime = # Replace with your value
 publication_status: StrictStr = "example_publication_status"
+outcome: StrictStr = "example_outcome"
+event_type: Optional[StrictStr] = "example_event_type"
 instrument_name: StrictStr = "example_instrument_name"
 instrument_type: StrictStr = "example_instrument_type"
 trade_date: datetime = # Replace with your value
@@ -55,7 +59,7 @@ failure_stage: Optional[StrictStr] = "example_failure_stage"
 sent_at: Optional[datetime] = # Replace with your value
 instrument_id: Optional[StrictStr] = "example_instrument_id"
 instrument_scope: Optional[StrictStr] = "example_instrument_scope"
-tpf_transaction_search_response_instance = TpfTransactionSearchResponse(transaction_id=transaction_id, instance_id=instance_id, instance_name=instance_name, batch_id=batch_id, run_id=run_id, run_start_time=run_start_time, publication_status=publication_status, instrument_name=instrument_name, instrument_type=instrument_type, trade_date=trade_date, settlement_date=settlement_date, skip_reason=skip_reason, file_name=file_name, destinations=destinations, portfolio_code=portfolio_code, portfolio_scope=portfolio_scope, failure_reason=failure_reason, failure_stage=failure_stage, sent_at=sent_at, instrument_id=instrument_id, instrument_scope=instrument_scope)
+tpf_transaction_search_response_instance = TpfTransactionSearchResponse(transaction_id=transaction_id, instance_id=instance_id, instance_name=instance_name, batch_id=batch_id, run_id=run_id, run_start_time=run_start_time, publication_status=publication_status, outcome=outcome, event_type=event_type, instrument_name=instrument_name, instrument_type=instrument_type, trade_date=trade_date, settlement_date=settlement_date, skip_reason=skip_reason, file_name=file_name, destinations=destinations, portfolio_code=portfolio_code, portfolio_scope=portfolio_scope, failure_reason=failure_reason, failure_stage=failure_stage, sent_at=sent_at, instrument_id=instrument_id, instrument_scope=instrument_scope)
 
 ```
 

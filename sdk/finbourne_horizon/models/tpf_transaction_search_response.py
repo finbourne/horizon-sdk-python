@@ -33,7 +33,9 @@ class TpfTransactionSearchResponse(BaseModel):
     batch_id:  StrictStr = Field(...,alias="batchId", description="Unique identifier of the batch") 
     run_id:  StrictStr = Field(...,alias="runId", description="The run that processed the transaction for this instance, as shown in run monitoring") 
     run_start_time: datetime = Field(description="Timestamp when the batch/run started", alias="runStartTime")
-    publication_status:  StrictStr = Field(...,alias="publicationStatus", description="Publication status of the transaction (Sent | Skipped | Failed)") 
+    publication_status:  StrictStr = Field(...,alias="publicationStatus", description="Outcome of the transaction's build (Sent | Skipped | Failed)") 
+    outcome:  StrictStr = Field(...,alias="outcome", description="The same value as PublicationStatus under the name the screens use; PublicationStatus stays for existing clients.") 
+    event_type:  Optional[StrictStr] = Field(None,alias="eventType", description="The TPF event type that triggered this publication (New, Amended, Cancelled, NothingToDo, InstrumentMatured, InstrumentPartialClosure, InstrumentFullClosure, InstrumentInterestPayment, LastSentPropertyUpdated). Null for rows persisted before it was recorded, for transactions skipped as excluded, and for rows written before the build computed it (for example a transaction not found in LUSID). Never Queued: the search returns built rows only. Distinct from PublicationStatus, which says what happened to the row.") 
     instrument_name:  StrictStr = Field(...,alias="instrumentName", description="Instrument name") 
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Instrument type") 
     trade_date: datetime = Field(description="Trade date of the transaction", alias="tradeDate")
@@ -48,7 +50,7 @@ class TpfTransactionSearchResponse(BaseModel):
     sent_at: Optional[datetime] = Field(default=None, description="When the transaction was sent, which is when its file reached a destination. Empty for Skipped and Failed rows", alias="sentAt")
     instrument_id:  Optional[StrictStr] = Field(None,alias="instrumentId", description="InstrumentId showing instrument id of transaction") 
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope the build resolved the instrument in; null for rows built before it was recorded") 
-    __properties = ["transactionId", "instanceId", "instanceName", "batchId", "runId", "runStartTime", "publicationStatus", "instrumentName", "instrumentType", "tradeDate", "settlementDate", "skipReason", "fileName", "destinations", "portfolioCode", "portfolioScope", "failureReason", "failureStage", "sentAt", "instrumentId", "instrumentScope"]
+    __properties = ["transactionId", "instanceId", "instanceName", "batchId", "runId", "runStartTime", "publicationStatus", "outcome", "eventType", "instrumentName", "instrumentType", "tradeDate", "settlementDate", "skipReason", "fileName", "destinations", "portfolioCode", "portfolioScope", "failureReason", "failureStage", "sentAt", "instrumentId", "instrumentScope"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,6 +84,11 @@ class TpfTransactionSearchResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if event_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.event_type is None and "event_type" in self.__fields_set__:
+            _dict['eventType'] = None
+
         # set to None if settlement_date (nullable) is None
         # and __fields_set__ contains the field
         if self.settlement_date is None and "settlement_date" in self.__fields_set__:
@@ -156,6 +163,8 @@ class TpfTransactionSearchResponse(BaseModel):
             "run_id": obj.get("runId"),
             "run_start_time": obj.get("runStartTime"),
             "publication_status": obj.get("publicationStatus"),
+            "outcome": obj.get("outcome"),
+            "event_type": obj.get("eventType"),
             "instrument_name": obj.get("instrumentName"),
             "instrument_type": obj.get("instrumentType"),
             "trade_date": obj.get("tradeDate"),
