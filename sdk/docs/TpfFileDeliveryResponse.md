@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **file_uuid** | **str** |  | 
 **can_resend** | **bool** | Whether the data the file is rebuilt from is still retained, so a resend can be requested. | 
 **delivered_at** | **datetime** | When the file reached the destination; null for a Failed or Pending row. | [optional] 
+**attempt** | **int** | The highest attempt number (1-based) made for this delivery&#39;s run, including automatic retries and resends. | [optional] 
 ## Example
 
 ```python
@@ -43,7 +44,9 @@ file_uuid: StrictStr = "example_file_uuid"
 can_resend: StrictBool = # Replace with your value
 can_resend:StrictBool = True
 delivered_at: Optional[datetime] = # Replace with your value
-tpf_file_delivery_response_instance = TpfFileDeliveryResponse(run_id=run_id, run_start_time=run_start_time, file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, destination_type=destination_type, destination_path=destination_path, destination_status=destination_status, destination_error=destination_error, destination_name=destination_name, file_uuid=file_uuid, can_resend=can_resend, delivered_at=delivered_at)
+attempt: Optional[StrictInt] = # Replace with your value
+attempt: Optional[StrictInt] = None
+tpf_file_delivery_response_instance = TpfFileDeliveryResponse(run_id=run_id, run_start_time=run_start_time, file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, destination_type=destination_type, destination_path=destination_path, destination_status=destination_status, destination_error=destination_error, destination_name=destination_name, file_uuid=file_uuid, can_resend=can_resend, delivered_at=delivered_at, attempt=attempt)
 
 ```
 

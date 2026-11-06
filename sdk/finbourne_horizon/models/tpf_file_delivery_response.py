@@ -41,7 +41,8 @@ class TpfFileDeliveryResponse(BaseModel):
     file_uuid:  StrictStr = Field(...,alias="fileUuid") 
     can_resend: StrictBool = Field(description="Whether the data the file is rebuilt from is still retained, so a resend can be requested.", alias="canResend")
     delivered_at: Optional[datetime] = Field(default=None, description="When the file reached the destination; null for a Failed or Pending row.", alias="deliveredAt")
-    __properties = ["runId", "runStartTime", "fileName", "generatedAt", "rowCount", "fileHash", "destinationType", "destinationPath", "destinationStatus", "destinationError", "destinationName", "fileUuid", "canResend", "deliveredAt"]
+    attempt: Optional[StrictInt] = Field(default=None, description="The highest attempt number (1-based) made for this delivery's run, including automatic retries and resends.")
+    __properties = ["runId", "runStartTime", "fileName", "generatedAt", "rowCount", "fileHash", "destinationType", "destinationPath", "destinationStatus", "destinationError", "destinationName", "fileUuid", "canResend", "deliveredAt", "attempt"]
 
     class Config:
         """Pydantic configuration"""
@@ -110,6 +111,11 @@ class TpfFileDeliveryResponse(BaseModel):
         if self.delivered_at is None and "delivered_at" in self.__fields_set__:
             _dict['deliveredAt'] = None
 
+        # set to None if attempt (nullable) is None
+        # and __fields_set__ contains the field
+        if self.attempt is None and "attempt" in self.__fields_set__:
+            _dict['attempt'] = None
+
         return _dict
 
     @classmethod
@@ -135,7 +141,8 @@ class TpfFileDeliveryResponse(BaseModel):
             "destination_name": obj.get("destinationName"),
             "file_uuid": obj.get("fileUuid"),
             "can_resend": obj.get("canResend"),
-            "delivered_at": obj.get("deliveredAt")
+            "delivered_at": obj.get("deliveredAt"),
+            "attempt": obj.get("attempt")
         })
         return _obj
 

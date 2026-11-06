@@ -19,7 +19,6 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from datetime import datetime
 from pydantic.v1 import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Union
 from typing_extensions import Annotated
@@ -35,7 +34,6 @@ from finbourne_horizon.models.replay_transactions_request import ReplayTransacti
 from finbourne_horizon.models.replay_transactions_response import ReplayTransactionsResponse
 from finbourne_horizon.models.resolve_failed_delivery_request import ResolveFailedDeliveryRequest
 from finbourne_horizon.models.resolve_failed_delivery_response import ResolveFailedDeliveryResponse
-from finbourne_horizon.models.tpf_file_delivery_display_status import TpfFileDeliveryDisplayStatus
 from finbourne_horizon.models.tpf_retry_sftp_response import TpfRetrySftpResponse
 from finbourne_horizon.models.tpf_transaction_search_request import TpfTransactionSearchRequest
 
@@ -236,32 +234,30 @@ class TradePublicationFrameworkApi:
 
 
     @overload
-    async def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery outcome (Delivered, Failed, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
+    async def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], filter : Annotated[Optional[StrictStr], Field( description="Filter expression (e.g. \"DestinationStatus eq 'Delivered'\"). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Sort fields (e.g. \"generatedAt DESC\"). Up to 2 fields allowed")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
         ...
 
     @overload
-    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery outcome (Delivered, Failed, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
+    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], filter : Annotated[Optional[StrictStr], Field( description="Filter expression (e.g. \"DestinationStatus eq 'Delivered'\"). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Sort fields (e.g. \"generatedAt DESC\"). Up to 2 fields allowed")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTpfFileDeliveryResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery outcome (Delivered, Failed, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTpfFileDeliveryResponse, Awaitable[PagedResourceListOfTpfFileDeliveryResponse]]:  # noqa: E501
+    def get_tpf_file_deliveries(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], filter : Annotated[Optional[StrictStr], Field( description="Filter expression (e.g. \"DestinationStatus eq 'Delivered'\"). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Sort fields (e.g. \"generatedAt DESC\"). Up to 2 fields allowed")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTpfFileDeliveryResponse, Awaitable[PagedResourceListOfTpfFileDeliveryResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance  # noqa: E501
 
-        Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.  # noqa: E501
+        Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable via a Finbourne Filtering DSL expression and sortable. Supports pagination for large result sets.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_tpf_file_deliveries(instance_id, status, date_from, date_to, limit, page, async_req=True)
+        >>> thread = api.get_tpf_file_deliveries(instance_id, filter, sort_by, limit, page, async_req=True)
         >>> result = thread.get()
 
         :param instance_id: Integration instance ID (required)
         :type instance_id: str
-        :param status: Filter by delivery outcome (Delivered, Failed, Pending)
-        :type status: TpfFileDeliveryDisplayStatus
-        :param date_from: Filter deliveries from this time (inclusive)
-        :type date_from: datetime
-        :param date_to: Filter deliveries to this time (inclusive)
-        :type date_to: datetime
+        :param filter: Filter expression (e.g. \"DestinationStatus eq 'Delivered'\"). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt
+        :type filter: str
+        :param sort_by: Sort fields (e.g. \"generatedAt DESC\"). Up to 2 fields allowed
+        :type sort_by: List[str]
         :param limit: Page size for pagination (default 50, max 500)
         :type limit: int
         :param page: Pagination token from previous response
@@ -282,27 +278,25 @@ class TradePublicationFrameworkApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_tpf_file_deliveries_with_http_info(instance_id, status, date_from, date_to, limit, page, **kwargs)  # noqa: E501
+        return self.get_tpf_file_deliveries_with_http_info(instance_id, filter, sort_by, limit, page, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_tpf_file_deliveries_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], status : Annotated[Optional[str], Field( description="Filter by delivery outcome (Delivered, Failed, Pending)")] = None, date_from : Annotated[Optional[datetime], Field(description="Filter deliveries from this time (inclusive)")] = None, date_to : Annotated[Optional[datetime], Field(description="Filter deliveries to this time (inclusive)")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_tpf_file_deliveries_with_http_info(self, instance_id : Annotated[StrictStr, Field(..., description="Integration instance ID")], filter : Annotated[Optional[StrictStr], Field( description="Filter expression (e.g. \"DestinationStatus eq 'Delivered'\"). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="Sort fields (e.g. \"generatedAt DESC\"). Up to 2 fields allowed")] = None, limit : Annotated[Optional[StrictInt], Field(description="Page size for pagination (default 50, max 500)")] = None, page : Annotated[Optional[StrictStr], Field( description="Pagination token from previous response")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance  # noqa: E501
 
-        Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.  # noqa: E501
+        Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable via a Finbourne Filtering DSL expression and sortable. Supports pagination for large result sets.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_tpf_file_deliveries_with_http_info(instance_id, status, date_from, date_to, limit, page, async_req=True)
+        >>> thread = api.get_tpf_file_deliveries_with_http_info(instance_id, filter, sort_by, limit, page, async_req=True)
         >>> result = thread.get()
 
         :param instance_id: Integration instance ID (required)
         :type instance_id: str
-        :param status: Filter by delivery outcome (Delivered, Failed, Pending)
-        :type status: TpfFileDeliveryDisplayStatus
-        :param date_from: Filter deliveries from this time (inclusive)
-        :type date_from: datetime
-        :param date_to: Filter deliveries to this time (inclusive)
-        :type date_to: datetime
+        :param filter: Filter expression (e.g. \"DestinationStatus eq 'Delivered'\"). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt
+        :type filter: str
+        :param sort_by: Sort fields (e.g. \"generatedAt DESC\"). Up to 2 fields allowed
+        :type sort_by: List[str]
         :param limit: Page size for pagination (default 50, max 500)
         :type limit: int
         :param page: Pagination token from previous response
@@ -335,9 +329,8 @@ class TradePublicationFrameworkApi:
 
         _all_params = [
             'instance_id',
-            'status',
-            'date_from',
-            'date_to',
+            'filter',
+            'sort_by',
             'limit',
             'page'
         ]
@@ -374,20 +367,12 @@ class TradePublicationFrameworkApi:
 
         # process the query parameters
         _query_params = []
-        if _params.get('status') is not None:  # noqa: E501
-            _query_params.append(('status', _params['status']))
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
 
-        if _params.get('date_from') is not None:  # noqa: E501
-            if isinstance(_params['date_from'], datetime):
-                _query_params.append(('dateFrom', _params['date_from'].strftime(self.api_client.configuration.datetime_format)))
-            else:
-                _query_params.append(('dateFrom', _params['date_from']))
-
-        if _params.get('date_to') is not None:  # noqa: E501
-            if isinstance(_params['date_to'], datetime):
-                _query_params.append(('dateTo', _params['date_to'].strftime(self.api_client.configuration.datetime_format)))
-            else:
-                _query_params.append(('dateTo', _params['date_to']))
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))

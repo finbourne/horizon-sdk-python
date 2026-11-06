@@ -117,11 +117,11 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_tpf_file_deliveries**
-> PagedResourceListOfTpfFileDeliveryResponse get_tpf_file_deliveries(instance_id, status=status, date_from=date_from, date_to=date_to, limit=limit, page=page)
+> PagedResourceListOfTpfFileDeliveryResponse get_tpf_file_deliveries(instance_id, filter=filter, sort_by=sort_by, limit=limit, page=page)
 
 [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
 
-Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable by delivery status and date range. Supports pagination for large result sets.
+Retrieve file delivery records for a Trade Publication Framework instance. Returns an aggregated view of file delivery outcomes across all runs. Filterable via a Finbourne Filtering DSL expression and sortable. Supports pagination for large result sets.
 
 ### Example
 
@@ -169,18 +169,17 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TradePublicationFrameworkApi)
     instance_id = 'instance_id_example' # str | Integration instance ID
-    status = finbourne_horizon.TpfFileDeliveryDisplayStatus() # TpfFileDeliveryDisplayStatus | Filter by delivery outcome (Delivered, Failed, Pending) (optional)
-    date_from = '2013-10-20T19:20:30+01:00' # datetime | Filter deliveries from this time (inclusive) (optional)
-    date_to = '2013-10-20T19:20:30+01:00' # datetime | Filter deliveries to this time (inclusive) (optional)
+    filter = 'filter_example' # str | Filter expression (e.g. \"DestinationStatus eq 'Delivered'\"). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional)
+    sort_by = ['sort_by_example'] # List[str] | Sort fields (e.g. \"generatedAt DESC\"). Up to 2 fields allowed (optional)
     limit = 50 # int | Page size for pagination (default 50, max 500) (optional) (default to 50)
     page = '' # str | Pagination token from previous response (optional) (default to '')
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_tpf_file_deliveries(instance_id, status=status, date_from=date_from, date_to=date_to, limit=limit, page=page, opts=opts)
+        # api_response =  api_instance.get_tpf_file_deliveries(instance_id, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
 
         # [EXPERIMENTAL] GetTpfFileDeliveries: Search TPF file deliveries for a specific instance
-        api_response = api_instance.get_tpf_file_deliveries(instance_id, status=status, date_from=date_from, date_to=date_to, limit=limit, page=page)
+        api_response = api_instance.get_tpf_file_deliveries(instance_id, filter=filter, sort_by=sort_by, limit=limit, page=page)
         pprint(api_response)
 
     except ApiException as e:
@@ -194,9 +193,8 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id** | **str**| Integration instance ID | 
- **status** | [**TpfFileDeliveryDisplayStatus**](.md)| Filter by delivery outcome (Delivered, Failed, Pending) | [optional] 
- **date_from** | **datetime**| Filter deliveries from this time (inclusive) | [optional] 
- **date_to** | **datetime**| Filter deliveries to this time (inclusive) | [optional] 
+ **filter** | **str**| Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt | [optional] 
+ **sort_by** | [**List[str]**](str.md)| Sort fields (e.g. \&quot;generatedAt DESC\&quot;). Up to 2 fields allowed | [optional] 
  **limit** | **int**| Page size for pagination (default 50, max 500) | [optional] [default to 50]
  **page** | **str**| Pagination token from previous response | [optional] [default to &#39;&#39;]
 
