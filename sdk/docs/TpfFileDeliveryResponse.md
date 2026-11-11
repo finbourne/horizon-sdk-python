@@ -4,8 +4,8 @@ Response model for TPF file delivery search results
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**run_id** | **str** |  | [optional] 
-**run_start_time** | **datetime** |  | [optional] 
+**run_id** | **str** | The run id of the latest execution attempt in this row&#39;s run chain (the root run, its automatic retries and resends); equals referenceId when the chain has a single attempt or no recorded execution. | [optional] 
+**run_start_time** | **datetime** | When the row&#39;s root run started (the batch start), not the latest attempt&#39;s start. | [optional] 
 **file_name** | **str** |  | 
 **generated_at** | **datetime** | When the file was built, or when the attempt failed before a file was built. | 
 **row_count** | **int** |  | 
@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **can_resend** | **bool** | Whether the data the file is rebuilt from is still retained, so a resend can be requested. | 
 **delivered_at** | **datetime** | When the file reached the destination; null for a Failed or Pending row. | [optional] 
 **attempt** | **int** | The highest attempt number (1-based) made for this delivery&#39;s run, including automatic retries and resends. | [optional] 
+**reference_id** | **str** | The root run id of this row&#39;s run chain, the same value run history reports as referenceId. | [optional] 
 ## Example
 
 ```python
@@ -46,7 +47,8 @@ can_resend:StrictBool = True
 delivered_at: Optional[datetime] = # Replace with your value
 attempt: Optional[StrictInt] = # Replace with your value
 attempt: Optional[StrictInt] = None
-tpf_file_delivery_response_instance = TpfFileDeliveryResponse(run_id=run_id, run_start_time=run_start_time, file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, destination_type=destination_type, destination_path=destination_path, destination_status=destination_status, destination_error=destination_error, destination_name=destination_name, file_uuid=file_uuid, can_resend=can_resend, delivered_at=delivered_at, attempt=attempt)
+reference_id: Optional[StrictStr] = "example_reference_id"
+tpf_file_delivery_response_instance = TpfFileDeliveryResponse(run_id=run_id, run_start_time=run_start_time, file_name=file_name, generated_at=generated_at, row_count=row_count, file_hash=file_hash, destination_type=destination_type, destination_path=destination_path, destination_status=destination_status, destination_error=destination_error, destination_name=destination_name, file_uuid=file_uuid, can_resend=can_resend, delivered_at=delivered_at, attempt=attempt, reference_id=reference_id)
 
 ```
 

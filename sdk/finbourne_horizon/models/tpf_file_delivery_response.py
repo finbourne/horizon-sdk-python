@@ -27,8 +27,8 @@ class TpfFileDeliveryResponse(BaseModel):
     """
     Response model for TPF file delivery search results  # noqa: E501
     """
-    run_id:  Optional[StrictStr] = Field(None,alias="runId") 
-    run_start_time: Optional[datetime] = Field(default=None, alias="runStartTime")
+    run_id:  Optional[StrictStr] = Field(None,alias="runId", description="The run id of the latest execution attempt in this row's run chain (the root run, its automatic retries and resends); equals referenceId when the chain has a single attempt or no recorded execution.") 
+    run_start_time: Optional[datetime] = Field(default=None, description="When the row's root run started (the batch start), not the latest attempt's start.", alias="runStartTime")
     file_name:  StrictStr = Field(...,alias="fileName") 
     generated_at: datetime = Field(description="When the file was built, or when the attempt failed before a file was built.", alias="generatedAt")
     row_count: StrictInt = Field(alias="rowCount")
@@ -42,7 +42,8 @@ class TpfFileDeliveryResponse(BaseModel):
     can_resend: StrictBool = Field(description="Whether the data the file is rebuilt from is still retained, so a resend can be requested.", alias="canResend")
     delivered_at: Optional[datetime] = Field(default=None, description="When the file reached the destination; null for a Failed or Pending row.", alias="deliveredAt")
     attempt: Optional[StrictInt] = Field(default=None, description="The highest attempt number (1-based) made for this delivery's run, including automatic retries and resends.")
-    __properties = ["runId", "runStartTime", "fileName", "generatedAt", "rowCount", "fileHash", "destinationType", "destinationPath", "destinationStatus", "destinationError", "destinationName", "fileUuid", "canResend", "deliveredAt", "attempt"]
+    reference_id:  Optional[StrictStr] = Field(None,alias="referenceId", description="The root run id of this row's run chain, the same value run history reports as referenceId.") 
+    __properties = ["runId", "runStartTime", "fileName", "generatedAt", "rowCount", "fileHash", "destinationType", "destinationPath", "destinationStatus", "destinationError", "destinationName", "fileUuid", "canResend", "deliveredAt", "attempt", "referenceId"]
 
     class Config:
         """Pydantic configuration"""
@@ -116,6 +117,11 @@ class TpfFileDeliveryResponse(BaseModel):
         if self.attempt is None and "attempt" in self.__fields_set__:
             _dict['attempt'] = None
 
+        # set to None if reference_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reference_id is None and "reference_id" in self.__fields_set__:
+            _dict['referenceId'] = None
+
         return _dict
 
     @classmethod
@@ -142,7 +148,8 @@ class TpfFileDeliveryResponse(BaseModel):
             "file_uuid": obj.get("fileUuid"),
             "can_resend": obj.get("canResend"),
             "delivered_at": obj.get("deliveredAt"),
-            "attempt": obj.get("attempt")
+            "attempt": obj.get("attempt"),
+            "reference_id": obj.get("referenceId")
         })
         return _obj
 

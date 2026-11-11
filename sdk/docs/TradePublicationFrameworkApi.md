@@ -169,7 +169,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TradePublicationFrameworkApi)
     instance_id = 'instance_id_example' # str | Integration instance ID
-    filter = 'filter_example' # str | Filter expression (e.g. \"DestinationStatus eq 'Delivered'\"). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional)
+    filter = 'filter_example' # str | Filter expression (e.g. \"DestinationStatus eq 'Delivered'\"). Filterable properties: runId, referenceId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt (optional)
     sort_by = ['sort_by_example'] # List[str] | Sort fields (e.g. \"generatedAt DESC\"). Up to 2 fields allowed (optional)
     limit = 50 # int | Page size for pagination (default 50, max 500) (optional) (default to 50)
     page = '' # str | Pagination token from previous response (optional) (default to '')
@@ -193,7 +193,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id** | **str**| Integration instance ID | 
- **filter** | **str**| Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt | [optional] 
+ **filter** | **str**| Filter expression (e.g. \&quot;DestinationStatus eq &#39;Delivered&#39;\&quot;). Filterable properties: runId, referenceId, runStartTime, fileName, generatedAt, rowCount, fileHash, destinationType, destinationPath, destinationName, deliveredAt, destinationStatus, destinationError, attempt | [optional] 
  **sort_by** | [**List[str]**](str.md)| Sort fields (e.g. \&quot;generatedAt DESC\&quot;). Up to 2 fields allowed | [optional] 
  **limit** | **int**| Page size for pagination (default 50, max 500) | [optional] [default to 50]
  **page** | **str**| Pagination token from previous response | [optional] [default to &#39;&#39;]
